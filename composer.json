@@ -1,0 +1,33 @@
+{
+    "name": "reliqui/ambulatory",
+    "description": "An open source ambulatory care system",
+    "keywords": ["laravel", "outpatient care", "ambulatory care"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David H. Sianturi",
+            "email": "davidhsianturi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "laravel/framework": "~5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reliqui\\Ambulatory\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Reliqui\\Ambulatory\\AmbulatoryServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

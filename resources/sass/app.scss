@@ -1,0 +1,41 @@
+$font-family-sans-serif: "Maven Pro", sans-serif;
+$font-family-base: Nunito;
+
+$font-size-base: 1rem;
+$badge-font-size: 0.95rem;
+
+$body-bg: #EDF1F3;
+
+$header-border-color: #d5dfe9;
+
+$primary: #40a6c8;
+$secondary: #DAE1E7;
+$success: #51D88A;
+$info: #6CB2EB;
+$warning: #FFF382;
+$danger: #EF5753;
+$dark: #20504F;
+$light: #f1f5f8;
+
+$sidebar-nav-color: #B8C2CC;
+$sidebar-icon-color: #c3cbd3;
+$sidebar-heading-color: #8795A1;
+
+$border-color: #EFEFEF;
+
+$table-headers-color: #F3F4F6;
+$table-border-color: #EFEFEF;
+$table-hover-bg: #f1f7fa;
+
+$card-cap-bg: #fff;
+$card-bg-secondary: #f1f7fa;
+$card-shadow-color: #cdd8df;
+$card-border-radius: .5rem;
+
+$control-action-icon-color: #ccd2df;
+
+$pill-link-active: $primary;
+
+$paginator-button-color: #9ea7ac;
+
+@import "base";
