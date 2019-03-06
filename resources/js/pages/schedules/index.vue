@@ -20,8 +20,8 @@
                     {{slotProps.entry.work_location.name}}
                 </router-link>
             </td>
-            <td class="table-fit">{{scheduleTime(slotProps.entry.start_date_time)}}</td>
-            <td class="table-fit">{{scheduleTime(slotProps.entry.end_date_time)}}</td>
+            <td class="table-fit">{{localTime(slotProps.entry.start_date_time)}}</td>
+            <td class="table-fit">{{localTime(slotProps.entry.end_date_time)}}</td>
         </template>
     </index-page>
 </template>

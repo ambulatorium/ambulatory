@@ -15,7 +15,7 @@
 
 <body class="mb-5">
     <div class="mt-5">
-        <a href="/" class="text-center text-primary">
+        <a href="/" class="text-center text-dark">
             <h1>RELIQUI</h1>
         </a>
 

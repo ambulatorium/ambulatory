@@ -26,7 +26,7 @@ const webpack = require('webpack');
      .js('resources/js/app.js', 'public')
      .sass('resources/sass/app.scss', 'public')
      .version()
-     .copy('public', '../../reliquitest/public/vendor/reliqui')
+     .copy('public', '../reliqui/public/vendor/reliqui')
      .webpackConfig({
          resolve: {
              symlinks: false,

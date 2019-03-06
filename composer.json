@@ -1,6 +1,6 @@
 {
     "name": "reliqui/ambulatory",
-    "description": "An open source ambulatory care system",
+    "description": "An open source ambulatory care services",
     "keywords": ["laravel", "outpatient care", "ambulatory care"],
     "license": "MIT",
     "authors": [

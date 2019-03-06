@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex align-items-center py-4">
-        <h4 class="mb-0 text-primary">
-            <strong>RELIQUI</strong>
+        <h4 class="mb-0">
+            <strong><a href="/">RELIQUI</a></strong>
         </h4>
 
         <div class="media ml-auto">

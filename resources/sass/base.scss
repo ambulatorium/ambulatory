@@ -36,6 +36,17 @@ svg.icon {
     }
 }
 
+.list-group {
+    a {
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 9px;
+            fill: $dark;
+        }
+    }
+}
+
 .sidebar-heading {
     font-size: .9rem;
     font-weight: bold;
@@ -166,7 +177,7 @@ button:hover {
         &.table-sm {
             th,
             td {
-                padding: 1rem 2rem;
+                padding: 0.9rem 1.2rem;
             }
         }
 
@@ -204,6 +215,10 @@ button:hover {
         padding: 0.75rem 1.25rem;
         color: $body-color;
     }
+}
+
+.card-bg-light {
+    background: $card-bg-light;
 }
 
 .form-title-section {

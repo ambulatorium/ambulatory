@@ -14,7 +14,7 @@ export default {
         /**
          * Show the schedule time.
          */
-        scheduleTime(time) {
+        localTime(time) {
             return moment(time).format('MMMM Do YYYY, h:mm A');
         },
 
