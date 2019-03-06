@@ -21,7 +21,7 @@ class Doctor
     {
         $user = auth('reliqui')->user();
 
-        if (!$user->isDoctor()) {
+        if (! $user->isDoctor()) {
             throw new HttpException(403, 'Sorry, you are forbidden from accessing this page.');
         }
 

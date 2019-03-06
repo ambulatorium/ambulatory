@@ -7,8 +7,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class ReliquiUsers extends ReliquiModel implements Authenticatable
 {
     const DEFAULT = 1;
-    const DOCTOR  = 2;
-    const ADMIN   = 3;
+    const DOCTOR = 2;
+    const ADMIN = 3;
 
     /**
      * The attributes that aren't mass assignable.
@@ -79,7 +79,7 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
     /**
      * Type of users is a doctor.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDoctor()
     {
@@ -89,7 +89,7 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
     /**
      * Type of users is an admin.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAdmin()
     {
@@ -211,8 +211,8 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
      */
     public function getRememberToken()
     {
-        if (!empty($this->getRememberTokenName())) {
-            return (string)$this->{$this->getRememberTokenName()};
+        if (! empty($this->getRememberTokenName())) {
+            return (string) $this->{$this->getRememberTokenName()};
         }
     }
 
@@ -224,7 +224,7 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
      */
     public function setRememberToken($value)
     {
-        if (!empty($this->getRememberTokenName())) {
+        if (! empty($this->getRememberTokenName())) {
             $this->{$this->getRememberTokenName()} = $value;
         }
     }

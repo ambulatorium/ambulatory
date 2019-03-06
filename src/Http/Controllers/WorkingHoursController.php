@@ -35,7 +35,7 @@ class WorkingHoursController extends Controller
     }
 
     /**
-     * Show doctor's schedule
+     * Show doctor's schedule.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
@@ -60,7 +60,7 @@ class WorkingHoursController extends Controller
     }
 
     /**
-     * Store the doctor's schedule
+     * Store the doctor's schedule.
      *
      * @param WorkingHoursRequest $request
      * @param string $id

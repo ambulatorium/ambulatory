@@ -4,8 +4,8 @@ namespace Reliqui\Ambulatory\Console;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Hash;
+use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Schema;
 
 class MigrateCommand extends Command

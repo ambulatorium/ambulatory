@@ -17,7 +17,7 @@ class MedicalFormController
         $entries = auth('reliqui')->user()->medicalForm()->paginate(25);
 
         return response()->json([
-            'entries' => $entries
+            'entries' => $entries,
         ]);
     }
 
