@@ -19,7 +19,7 @@ class DoctorProfileController extends Controller
      */
     public function show($id)
     {
-        $user  = ReliquiUsers::findOrFail($id);
+        $user = ReliquiUsers::findOrFail($id);
         $entry = $user->doctor()->first();
 
         if (blank($entry)) {

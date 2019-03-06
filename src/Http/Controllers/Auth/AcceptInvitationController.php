@@ -4,8 +4,8 @@ namespace Reliqui\Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Mail;
+use Reliqui\Ambulatory\ReliquiUsers;
 use Reliqui\Ambulatory\ReliquiInvitation;
 use Reliqui\Ambulatory\Mail\CredentialEmail;
 

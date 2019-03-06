@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     public function redirectPath()
     {
-        return '/'.config('reliqui.path');;
+        return '/'.config('reliqui.path');
     }
 
     /**

@@ -5,17 +5,17 @@ Route::get('/api/inbox', 'InboxController@index')->name('inbox');
 Route::get('/api/inbox/{id}', 'InboxController@show')->name('inbox.show');
 
 // Medical Form.
-Route::get('/api/medical-form' , 'MedicalFormController@index')->name('medical-form.index');
+Route::get('/api/medical-form', 'MedicalFormController@index')->name('medical-form.index');
 Route::get('/api/medical-form/{id?}', 'MedicalFormController@show')->name('medical-form.show');
 Route::post('/api/medical-form/{id}', 'MedicalFormController@store')->name('medical-form.store');
 Route::delete('/api/medical-form/{id}', 'MedicalFormController@destroy')->name('medical-form.destroy');
 
-Route::get('/api/working-hours' , 'WorkingHoursController@index')->name('working-hours.index');
+Route::get('/api/working-hours', 'WorkingHoursController@index')->name('working-hours.index');
 Route::get('/api/working-hours/{id?}', 'WorkingHoursController@show')->name('working-hours.show');
 Route::post('/api/working-hours/{id}', 'WorkingHoursController@store')->name('working-hours.store');
 
 // Specialities.
-Route::get('/api/specialities' , 'SpecialityController@index')->name('specialities.index');
+Route::get('/api/specialities', 'SpecialityController@index')->name('specialities.index');
 Route::get('/api/specialities/{id?}', 'SpecialityController@show')->name('specialities.show');
 Route::post('/api/specialities/{id}', 'SpecialityController@store')->name('specialities.store');
 Route::delete('/api/specialities/{id}', 'SpecialityController@destroy')->name('specialities.destroy');
@@ -24,14 +24,14 @@ Route::delete('/api/specialities/{id}', 'SpecialityController@destroy')->name('s
 Route::get('/api/staff', 'StaffController@index')->name('staff.index');
 
 // Locations.
-Route::get('/api/healthcare-locations' , 'HealthcareLocationController@index')->name('locations.index');
+Route::get('/api/healthcare-locations', 'HealthcareLocationController@index')->name('locations.index');
 Route::get('/api/healthcare-locations/{id?}', 'HealthcareLocationController@show')->name('locations.show');
 Route::post('/api/healthcare-locations/{id}', 'HealthcareLocationController@store')->name('locations.store');
 Route::delete('/api/healthcare-locations/{id}', 'HealthcareLocationController@destroy')->name('locations.destroy');
 
 // Invitations.
-Route::get('/api/invitations' , 'InvitationController@index')->name('invitations.index');
-Route::get('/api/invitations/{id?}' , 'InvitationController@show')->name('invitations.show');
+Route::get('/api/invitations', 'InvitationController@index')->name('invitations.index');
+Route::get('/api/invitations/{id?}', 'InvitationController@show')->name('invitations.show');
 Route::post('/api/invitations/{id}', 'InvitationController@store')->name('invitations.store');
 Route::delete('/api/invitations/{id}', 'InvitationController@destroy')->name('invitations.destroy');
 

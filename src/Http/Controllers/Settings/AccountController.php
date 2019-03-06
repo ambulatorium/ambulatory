@@ -3,8 +3,8 @@
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
 use Illuminate\Validation\Rule;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Hash;
+use Reliqui\Ambulatory\ReliquiUsers;
 
 class AccountController
 {
@@ -34,7 +34,7 @@ class AccountController
         $data = [
             'avatar' => request('avatar'),
             'name'   => request('name'),
-            'email'  => request('email')
+            'email'  => request('email'),
         ];
 
         validator($data, [

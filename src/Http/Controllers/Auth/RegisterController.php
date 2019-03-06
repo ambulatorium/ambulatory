@@ -3,9 +3,9 @@
 namespace Reliqui\Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Reliqui\Ambulatory\ReliquiUsers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Reliqui\Ambulatory\Http\Controllers\Controller;

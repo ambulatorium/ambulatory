@@ -4,7 +4,6 @@ namespace Reliqui\Ambulatory\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
 class RedirectIfAuthenticated
