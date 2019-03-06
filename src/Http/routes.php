@@ -1,5 +1,9 @@
 <?php
 
+// Inbox.
+Route::get('/api/inbox', 'InboxController@index')->name('inbox');
+Route::get('/api/inbox/{id}', 'InboxController@show')->name('inbox.show');
+
 // Medical Form.
 Route::get('/api/medical-form' , 'MedicalFormController@index')->name('medical-form.index');
 Route::get('/api/medical-form/{id?}', 'MedicalFormController@show')->name('medical-form.show');

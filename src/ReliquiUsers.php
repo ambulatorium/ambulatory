@@ -117,6 +117,35 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
     }
 
     /**
+     * Get all user appointments.
+     *
+     * @return \Illuminate\Database\Eloquenst\Relations\HasMany
+     */
+    public function appointments()
+    {
+        return $this->hasMany(ReliquiAppointment::class, 'user_id');
+    }
+
+    /**
+     * Get all appointments that the user has access to.
+     *
+     * @return mixed
+     */
+    public function inbox()
+    {
+        return ReliquiAppointment::with('patient', 'scheduled.workLocation')
+            ->when($this->isDoctor(), function ($query) {
+                $query->whereHas('scheduled', function ($schedule) {
+                    $schedule->where('doctor_id', $this->doctor->id);
+                });
+            })
+            ->orWhereHas('patient', function ($query) {
+                $query->whereUserId($this->id);
+            })
+            ->paginate(25);
+    }
+
+    /**
      * Get user role.
      *
      * @return string

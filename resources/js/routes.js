@@ -7,6 +7,11 @@ export default [
         name: 'inbox',
         component: require('./pages/inbox/index').default
     },
+    {
+        path: '/inbox/:id',
+        name: 'inbox-preview',
+        component: require('./pages/inbox/preview').default
+    },
 
     // Medical form.
     {

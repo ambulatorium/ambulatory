@@ -97,6 +97,14 @@ class CreateTables extends Migration
             $table->uuid('location_id')->index();
             $table->timestamps();
         });
+
+        Schema::create('reliqui_appointments', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('patient_id')->index();
+            $table->dateTime('preferred_date_time');
+            $table->boolean('scheduled')->default(1);
+            $table->uuid('schedule_id')->index();
+        });
     }
 
     /**
@@ -114,5 +122,6 @@ class CreateTables extends Migration
         Schema::dropIfExists('reliqui_office_locations');
         Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('reliqui_working_hours');
+        Schema::dropIfExists('reliqui_appointments');
     }
 }

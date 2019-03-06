@@ -40,8 +40,6 @@ Reliqui is still under heavy development, I decided to ship it in this early sta
 
 Here's the plan for what's coming:
 
-- [ ] Inbox @davidhsianturi
-- [ ] Make an appointments (inside the dashboard) @davidhsianturi
 - [ ] Design a better logo
 - [ ] Optimize CSS
 - [ ] Add text search inside listings
