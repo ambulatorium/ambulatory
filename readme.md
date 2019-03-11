@@ -1,8 +1,8 @@
-# THIS IS WIP
-
 ## Introduction
 
 Reliqui ambulatory is outpatient care platform carefully designed to meet the needs of outpatient services in health care facilities.
+
+<p align="center"><img src="https://res.cloudinary.com/dave24hwj8/image/upload/v1552329523/Screen_Shot_2019-03-12_at_01.21.34.png"></p>
 
 ## Installation
 
