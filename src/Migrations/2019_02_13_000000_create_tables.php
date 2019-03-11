@@ -104,6 +104,7 @@ class CreateTables extends Migration
             $table->dateTime('preferred_date_time');
             $table->boolean('scheduled')->default(1);
             $table->uuid('schedule_id')->index();
+            $table->timestamps();
         });
     }
 
