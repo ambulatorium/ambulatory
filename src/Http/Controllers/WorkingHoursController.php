@@ -5,7 +5,6 @@ namespace Reliqui\Ambulatory\Http\Controllers;
 use Illuminate\Support\Str;
 use Reliqui\Ambulatory\ReliquiWorkingHours;
 use Reliqui\Ambulatory\Http\Middleware\Doctor;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
 use Reliqui\Ambulatory\Http\Requests\WorkingHoursRequest;
 
 class WorkingHoursController extends Controller
