@@ -42,8 +42,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return Reliqui\Ambulatory\ReliquiUsers;
+     * @param array $data
+     * @return \Reliqui\Ambulatory\ReliquiUsers
      */
     protected function create(array $data)
     {

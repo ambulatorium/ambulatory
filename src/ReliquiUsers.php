@@ -119,7 +119,7 @@ class ReliquiUsers extends ReliquiModel implements Authenticatable
     /**
      * Get all user appointments.
      *
-     * @return \Illuminate\Database\Eloquenst\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function appointments()
     {

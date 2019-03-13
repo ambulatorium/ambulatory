@@ -4,11 +4,11 @@ namespace Reliqui\Ambulatory\Http\Controllers\Auth;
 
 use Throwable;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Reliqui\Ambulatory\ReliquiUsers;
 use Reliqui\Ambulatory\Mail\ResetPasswordEmail;
+use Reliqui\Ambulatory\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
