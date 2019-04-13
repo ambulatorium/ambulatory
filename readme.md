@@ -44,6 +44,7 @@ Here's the plan for what's coming:
 - [ ] Optimize CSS
 - [ ] Add text search inside listings
 - [ ] Enhance date-time picker component
+- [ ] Add markdown mail template
 - [ ] Add tests
 
 Ideas that need to be discussed:
