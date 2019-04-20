@@ -6,9 +6,9 @@ Reliqui ambulatory is outpatient care platform carefully designed to meet the ne
 
 ## Installation
 
-Reliqui runs on any Laravel application, it uses a separate database connection and authentication system so that you don't have to modify any of your project code.
+Reliqui ambulatory runs on any Laravel application, it uses a separate database connection and authentication system so that you don't have to modify any of your project code. [Learn more about ambulatory care](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
 
-Install Reliqui via Composer:
+Install Reliqui ambulatory via Composer:
 
 ```
 composer require reliqui/ambulatory
@@ -36,10 +36,11 @@ Head to `yourproject.test/reliqui` and use the provided email and password to lo
 
 ## Road map
 
-Reliqui is still under heavy development, I decided to ship it in this early stage so you can help me make it better.
+Reliqui ambulatory is still under heavy development, I decided to ship it in this early stage so you can help me make it better.
 
 Here's the plan for what's coming:
 
+- [ ] Improve the flow of doctor's schedule (@davidhsianturi)
 - [ ] Design a better logo
 - [ ] Optimize CSS
 - [ ] Add text search inside listings
@@ -62,4 +63,4 @@ And here are some ideas I'm still not sure about:
 
 ## License
 
-Reliqui is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Reliqui ambulatory is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
