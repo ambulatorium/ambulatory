@@ -38,11 +38,9 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next)
     {
         if ($this->auth->guard('reliqui')->check()) {
-            $this->auth->shouldUse('reliqui');
-        } else {
-            return $next($request);
+            return redirect('/'.config('reliqui.path'));
         }
 
-        return redirect('/'.config('reliqui.path'));
+        return $next($request);
     }
 }
