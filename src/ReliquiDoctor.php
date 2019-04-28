@@ -64,7 +64,7 @@ class ReliquiDoctor extends ReliquiModel
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function schedule()
+    public function schedules()
     {
         return $this->hasMany(ReliquiWorkingHours::class, 'doctor_id');
     }

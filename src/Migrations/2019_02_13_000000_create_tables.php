@@ -120,7 +120,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('reliqui_specialities');
         Schema::dropIfExists('reliqui_doctors_specialities');
         Schema::dropIfExists('reliqui_patients');
-        Schema::dropIfExists('reliqui_office_locations');
+        Schema::dropIfExists('reliqui_healthcare_locations');
         Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('reliqui_working_hours');
         Schema::dropIfExists('reliqui_appointments');
