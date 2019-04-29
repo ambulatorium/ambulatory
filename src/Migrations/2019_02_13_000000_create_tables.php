@@ -93,9 +93,11 @@ class CreateTables extends Migration
             $table->integer('estimated_service_time_in_minutes')->nullable();
             $table->boolean('repeat')->default(0);
             $table->text('recurrence')->nullable();
-            $table->uuid('doctor_id')->index();
-            $table->uuid('location_id')->index();
             $table->timestamps();
+
+            $table->uuid('doctor_id');
+            $table->uuid('location_id');
+            $table->unique(['doctor_id', 'location_id']);
         });
 
         Schema::create('reliqui_appointments', function (Blueprint $table) {

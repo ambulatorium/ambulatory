@@ -4,6 +4,7 @@ namespace Reliqui\Ambulatory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Reliqui\Ambulatory\ReliquiWorkingHours;
+use Illuminate\Validation\Rule;
 
 class WorkingHoursRequest extends FormRequest
 {
@@ -26,8 +27,8 @@ class WorkingHoursRequest extends FormRequest
     {
         return [
             'id' => 'required|string',
-            'location' => 'required|string|exists:reliqui_healthcare_locations,id',
-            'doctor' => 'required|string|exists:reliqui_doctors,id',
+            'location' => 'required|string|exists:'.config('reliqui.database_connection').'.reliqui_healthcare_locations,'.$this->id,
+            'location' => 'required|string|unique:'.config('reliqui.database_connection').'.reliqui_working_hours,location_id,'.$this->id.',id,doctor_id,'.auth('reliqui')->user()->doctor->id,
             'start_date_time' => 'required|date',
             'end_date_time' => 'required|date|after:start_date_time',
             'service_time' => 'nullable|integer',
@@ -45,7 +46,7 @@ class WorkingHoursRequest extends FormRequest
             'start_date_time' => $this->start_date_time,
             'end_date_time' => $this->end_date_time,
             'estimated_service_time_in_minutes' => $serviceTime,
-            'doctor_id' => $this->doctor,
+            'doctor_id' => auth('reliqui')->user()->doctor->id,
             'location_id' => $this->location,
         ];
     }
