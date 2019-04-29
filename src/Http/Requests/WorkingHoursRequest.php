@@ -4,7 +4,6 @@ namespace Reliqui\Ambulatory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Reliqui\Ambulatory\ReliquiWorkingHours;
-use Illuminate\Validation\Rule;
 
 class WorkingHoursRequest extends FormRequest
 {
