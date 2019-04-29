@@ -29,7 +29,7 @@ class DoctorProfileRequest extends FormRequest
             'years_of_experience' => 'required|numeric',
             'qualification' => 'required|string|max:255',
             'bio' => 'nullable|string|max:255',
-            'specialities' => 'array',
+            'specialities' => 'required|array',
             'specialities.*.id' => 'exists:reliqui_specialities,id',
         ];
     }
