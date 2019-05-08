@@ -2,7 +2,7 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\ReliquiUsers;
+use Reliqui\Ambulatory\User;
 use Reliqui\Ambulatory\Http\Middleware\Admin;
 
 class StaffController extends Controller
@@ -22,7 +22,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $entries = ReliquiUsers::whereNotIn('type', [ReliquiUsers::DEFAULT])->paginate(25);
+        $entries = User::whereNotIn('type', [User::DEFAULT])->paginate(25);
 
         return response()->json([
             'entries' => $entries,

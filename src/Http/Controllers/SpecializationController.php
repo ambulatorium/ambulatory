@@ -3,28 +3,28 @@
 namespace Reliqui\Ambulatory\Http\Controllers;
 
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\Invitation;
+use Reliqui\Ambulatory\Specialization;
 use Reliqui\Ambulatory\Http\Middleware\Admin;
-use Reliqui\Ambulatory\Http\Requests\InvitationRequest;
+use Reliqui\Ambulatory\Http\Requests\SpecializationRequest;
 
-class InvitationController extends Controller
+class SpecializationController extends Controller
 {
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->middleware(Admin::class);
+        $this->middleware(Admin::class)->except('index');
     }
 
     /**
-     * Get all invitations.
+     * Get all specializations.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = Invitation::latest()->paginate(25);
+        $entries = Specialization::latest()->paginate(25);
 
         return response()->json([
             'entries' => $entries,
@@ -32,7 +32,7 @@ class InvitationController extends Controller
     }
 
     /**
-     * Show the invitation.
+     * Show the specialization.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
@@ -41,11 +41,11 @@ class InvitationController extends Controller
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => Invitation::make(['id' => Str::uuid()]),
+                'entry' => Specialization::make(['id' => Str::uuid()]),
             ]);
         }
 
-        $entry = Invitation::findOrFail($id);
+        $entry = Specialization::findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -53,17 +53,16 @@ class InvitationController extends Controller
     }
 
     /**
-     * Store the invitation.
+     * Store the specialization.
      *
-     * @param InvitationRequest $request
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(InvitationRequest $request, $id)
+    public function store(SpecializationRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? Invitation::findOrFail($id)
-            : new Invitation(['id' => $request->validatedFields(['id'])]);
+            ? Specialization::findOrFail($id)
+            : new Specialization(['id' => $request->validatedFields(['id'])]);
 
         $entry->fill($request->validatedFields());
         $entry->save();
@@ -74,14 +73,14 @@ class InvitationController extends Controller
     }
 
     /**
-     * Destroy the invitation.
+     * Destroy the specialization.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $entry = Invitation::findOrFail($id);
+        $entry = Specialization::findOrFail($id);
 
         $entry->delete();
     }

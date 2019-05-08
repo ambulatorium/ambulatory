@@ -2,21 +2,21 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
+use Reliqui\Ambulatory\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\ReliquiUsers;
 
 class AccountController
 {
     /**
-     * Show account.
+     * Show the user account.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $entry = ReliquiUsers::findOrFail($id);
+        $entry = User::findOrFail($id);
 
         return response()->json([
             'entry' => $entry->only('id', 'name', 'email', 'avatar'),
@@ -24,7 +24,7 @@ class AccountController
     }
 
     /**
-     * Update account.
+     * Update the user account.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
@@ -33,16 +33,16 @@ class AccountController
     {
         $data = [
             'avatar' => request('avatar'),
-            'name'   => request('name'),
-            'email'  => request('email'),
+            'name' => request('name'),
+            'email' => request('email'),
         ];
 
         validator($data, [
-            'name'  => 'required|string|min:3',
-            'email' => 'required|email|'.Rule::unique(config('reliqui.database_connection').'.reliqui_users', 'email')->ignore(request('id')),
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|'.Rule::unique(config('ambulatory.database_connection').'.ambulatory_users', 'email')->ignore(request('id')),
         ])->validate();
 
-        $entry = ReliquiUsers::findOrFail($id);
+        $entry = User::findOrFail($id);
 
         if (request('password')) {
             $entry->password = Hash::make(request('password'));

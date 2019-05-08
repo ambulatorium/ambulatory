@@ -3,38 +3,38 @@
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\ReliquiUsers;
-use Reliqui\Ambulatory\ReliquiDoctor;
-use Reliqui\Ambulatory\ReliquiSpeciality;
+use Reliqui\Ambulatory\User;
+use Reliqui\Ambulatory\Doctor;
+use Reliqui\Ambulatory\Specialization;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
 use Reliqui\Ambulatory\Http\Requests\DoctorProfileRequest;
 
 class DoctorProfileController extends Controller
 {
     /**
-     * Get doctor's profile.
+     * Get doctors' profile.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $user = ReliquiUsers::findOrFail($id);
-        $entry = $user->doctor()->first();
+        $user = User::findOrFail($id);
+        $doctorExists = $user->doctorProfile()->first();
 
-        if (blank($entry)) {
+        if (blank($doctorExists)) {
             return response()->json([
-                'entry' => ReliquiDoctor::make(['id' => Str::uuid()]),
+                'entry' => Doctor::make(['id' => Str::uuid()]),
             ]);
         }
 
         return response()->json([
-            'entry' => $entry->load('specialties'),
+            'entry' => $doctorExists->load('specializations'),
         ]);
     }
 
     /**
-     * Store doctor's profile.
+     * Store doctors' profile.
      *
      * @param DoctorProfileRequest $request
      * @param string $id
@@ -42,10 +42,10 @@ class DoctorProfileController extends Controller
      */
     public function store(DoctorProfileRequest $request, $id)
     {
-        $entry = ReliquiDoctor::updateOrCreate(['user_id' => $id], $request->formDoctor());
+        $entry = Doctor::updateOrCreate(['user_id' => $id], $request->validatedFields());
 
-        $entry->specialties()->sync(
-            $this->collectSpecialties(request('specialities'))
+        $entry->specializations()->sync(
+            $this->collectSpecializations(request('specializations'))
         );
 
         return response()->json([
@@ -54,17 +54,17 @@ class DoctorProfileController extends Controller
     }
 
     /**
-     * Specialities incoming from the request.
+     * Specializations incoming from the request.
      *
-     * @param array $requestSpecialities
+     * @param array $requestSpecializations
      * @return array
      */
-    private function collectSpecialties($requestSpecialities)
+    private function collectSpecializations($requestSpecializations)
     {
-        $allSpecialities = ReliquiSpeciality::all();
+        $allSpecializations = Specialization::all();
 
-        return collect($requestSpecialities)->map(function ($requestSpeciality) use ($allSpecialities) {
-            $speciality = $allSpecialities->where('id', $requestSpeciality['id'])->first();
+        return collect($requestSpecializations)->map(function ($requestSpeciality) use ($allSpecializations) {
+            $speciality = $allSpecializations->where('id', $requestSpeciality['id'])->first();
 
             return (string) $speciality->id;
         })->toArray();

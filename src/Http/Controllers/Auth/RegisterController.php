@@ -3,9 +3,9 @@
 namespace Reliqui\Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
+use Reliqui\Ambulatory\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
@@ -21,7 +21,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('reliqui::auth.register');
+        return view('ambulatory::auth.register');
     }
 
     /**
@@ -33,8 +33,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:reliqui_users'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:ambulatory_users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -43,14 +43,14 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return \Reliqui\Ambulatory\ReliquiUsers
+     * @return \Reliqui\Ambulatory\User
      */
     protected function create(array $data)
     {
-        return ReliquiUsers::create([
-            'id'       => Str::uuid(),
-            'name'     => $data['name'],
-            'email'    => $data['email'],
+        return User::create([
+            'id' => Str::uuid(),
+            'name' => $data['name'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -62,7 +62,7 @@ class RegisterController extends Controller
      */
     public function redirectPath()
     {
-        return '/'.config('reliqui.path');
+        return '/'.config('ambulatory.path');
     }
 
     /**
@@ -72,6 +72,6 @@ class RegisterController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('reliqui');
+        return Auth::guard('ambulatory');
     }
 }

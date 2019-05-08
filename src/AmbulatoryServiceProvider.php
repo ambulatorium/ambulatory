@@ -21,22 +21,22 @@ class AmbulatoryServiceProvider extends ServiceProvider
         $this->registerPublishing();
 
         $this->loadViewsFrom(
-            __DIR__.'/../resources/views', 'reliqui'
+            __DIR__.'/../resources/views', 'ambulatory'
         );
     }
 
     /**
-     * Register the reliqui routes.
+     * Register the ambulatory routes.
      *
      * @return void
      */
     private function registerRoutes()
     {
-        $path = config('reliqui.path');
+        $path = config('ambulatory.path');
 
         Route::namespace('Reliqui\Ambulatory\Http\Controllers\Auth')
             ->middleware(['web', RedirectIfAuthenticated::class])
-            ->as('reliqui.')
+            ->as('ambulatory.')
             ->prefix($path)
             ->group(function () {
                 Route::get('/login', 'LoginController@showLoginForm')->name('auth.login');
@@ -54,7 +54,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
 
         Route::namespace('Reliqui\Ambulatory\Http\Controllers')
             ->middleware(['web', Authenticate::class])
-            ->as('reliqui.')
+            ->as('ambulatory.')
             ->prefix($path)
             ->group(function () {
                 $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
@@ -62,25 +62,25 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register reliqui authentication guard.
+     * Register ambulatory authentication guard.
      *
      * @return void
      */
     private function registerAuthGuard()
     {
-        $this->app['config']->set('auth.providers.reliqui_users', [
+        $this->app['config']->set('auth.providers.ambulatory_users', [
             'driver' => 'eloquent',
-            'model'  => ReliquiUsers::class,
+            'model'  => User::class,
         ]);
 
-        $this->app['config']->set('auth.guards.reliqui', [
+        $this->app['config']->set('auth.guards.ambulatory', [
             'driver'   => 'session',
-            'provider' => 'reliqui_users',
+            'provider' => 'ambulatory_users',
         ]);
     }
 
     /**
-     * Register the reliqui resources.
+     * Register the ambulatory resources.
      *
      * @return void
      */
@@ -88,12 +88,12 @@ class AmbulatoryServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../public' => public_path('vendor/reliqui'),
-            ], 'reliqui-assets');
+                __DIR__.'/../public' => public_path('vendor/ambulatory'),
+            ], 'ambulatory-assets');
 
             $this->publishes([
-                __DIR__.'/../config/ambulatory.php' => config_path('reliqui.php'),
-            ], 'reliqui-config');
+                __DIR__.'/../config/ambulatory.php' => config_path('ambulatory.php'),
+            ], 'ambulatory-config');
         }
     }
 
@@ -105,7 +105,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/ambulatory.php', 'reliqui'
+            __DIR__.'/../config/ambulatory.php', 'ambulatory'
         );
 
         $this->commands([

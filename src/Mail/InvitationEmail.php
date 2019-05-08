@@ -3,22 +3,22 @@
 namespace Reliqui\Ambulatory\Mail;
 
 use Illuminate\Mail\Mailable;
-use Reliqui\Ambulatory\ReliquiInvitation;
+use Reliqui\Ambulatory\Invitation;
 
 class InvitationEmail extends Mailable
 {
     /**
-     * @var \Reliqui\Ambulatory\ReliquiInvitation
+     * @var \Reliqui\Ambulatory\Invitation
      */
     public $invitation;
 
     /**
      * New instance.
      *
-     * @param string $inviation
+     * @param string $invitation
      * @return void
      */
-    public function __construct(ReliquiInvitation $invitation)
+    public function __construct(Invitation $invitation)
     {
         $this->invitation = $invitation;
     }
@@ -31,8 +31,8 @@ class InvitationEmail extends Mailable
     public function build()
     {
         return $this->subject(config('app.name').': Invitation')
-            ->view('reliqui::emails.invitation', [
-                'link'  => route('reliqui.accept.invitation.show', ['token' => $this->invitation->token]),
+            ->view('ambulatory::emails.invitation', [
+                'link'  => route('ambulatory.accept.invitation.show', ['token' => $this->invitation->token]),
                 'role'  => $this->invitation->role,
             ]);
     }

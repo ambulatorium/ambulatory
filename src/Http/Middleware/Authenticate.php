@@ -38,11 +38,11 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($this->auth->guard('reliqui')->check()) {
-            $this->auth->shouldUse('reliqui');
+        if ($this->auth->guard('ambulatory')->check()) {
+            $this->auth->shouldUse('ambulatory');
         } else {
             throw new AuthenticationException(
-                'Unauthenticated.', ['reliqui'], route('reliqui.auth.login')
+                'Unauthenticated.', ['ambulatory'], route('ambulatory.auth.login')
             );
         }
 

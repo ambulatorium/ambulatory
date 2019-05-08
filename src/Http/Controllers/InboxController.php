@@ -2,18 +2,21 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\ReliquiAppointment;
+use Reliqui\Ambulatory\Booking;
 
 class InboxController extends Controller
 {
     /**
-     * Get appointments.
+     * Get appointments to the user inbox.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = auth('reliqui')->user()->inbox();
+        $entries = auth('ambulatory')->user()
+            ->inbox()
+            ->with('schedule.doctor', 'schedule.healthFacility')
+            ->paginate(25);
 
         return response()->json([
             'entries' => $entries,
@@ -21,14 +24,17 @@ class InboxController extends Controller
     }
 
     /**
-     * Show appointment.
+     * Show the appointment to the user inbox.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $entry = ReliquiAppointment::with('patient', 'scheduled.workLocation')->findOrFail($id);
+        $entry = auth('ambulatory')->user()
+            ->inbox()
+            ->with('schedule.doctor', 'schedule.healthFacility', 'medicalForm')
+            ->findOrFail($id);
 
         return response()->json([
             'entry' => $entry,

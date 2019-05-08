@@ -12,7 +12,7 @@ class UploadUserAvatarController
     public function create()
     {
         $path = str_replace('public/', 'storage/',
-            request()->image->store('/public/reliqui/images', config('reliqui.storage_disk'))
+            request()->image->store('/public/ambulatory/images', config('ambulatory.storage_disk'))
         );
 
         return response()->json([

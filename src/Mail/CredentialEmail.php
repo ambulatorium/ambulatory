@@ -30,7 +30,7 @@ class CredentialEmail extends Mailable
     public function build()
     {
         return $this->subject(config('app.name').' [credential]')
-            ->view('reliqui::emails.credential', [
+            ->view('ambulatory::emails.credential', [
                 'password' => $this->password,
             ]);
     }

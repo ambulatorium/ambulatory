@@ -13,7 +13,7 @@ class CreateTables extends Migration
      */
     public function up()
     {
-        Schema::create('reliqui_users', function (Blueprint $table) {
+        Schema::create('ambulatory_users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
@@ -24,35 +24,39 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_doctors', function (Blueprint $table) {
+        Schema::create('ambulatory_doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('full_name');
-            $table->string('years_of_experience');
-            $table->string('qualification');
-            $table->string('bio')->nullable();
-            $table->boolean('is_active')->default(1);
             $table->uuid('user_id')->index();
+            $table->string('slug')->unique();
+            $table->string('full_name');
+            $table->string('qualification');
+            $table->date('practicing_from');
+            $table->text('professional_statement')->nullable();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
 
-        Schema::create('reliqui_specialities', function (Blueprint $table) {
+        Schema::create('ambulatory_specializations', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('slug')->unique();
             $table->string('name');
             $table->string('description')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('reliqui_doctors_specialities', function (Blueprint $table) {
+        Schema::create('ambulatory_doctors_specializations', function (Blueprint $table) {
             $table->uuid('doctor_id');
-            $table->uuid('speciality_id');
+            $table->uuid('specialization_id');
 
-            $table->unique(['doctor_id', 'speciality_id']);
+            $table->unique(['doctor_id', 'specialization_id'], 'doctor_id_specialization_id_unique');
         });
 
-        Schema::create('reliqui_patients', function (Blueprint $table) {
+        Schema::create('ambulatory_medical_forms', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('user_id')->index();
+            $table->string('slug')->unique();
             $table->string('form_name')->index();
-            $table->string('patient_full_name');
+            $table->string('full_name');
             $table->date('dob');
             $table->string('gender');
             $table->text('address');
@@ -62,13 +66,13 @@ class CreateTables extends Migration
             $table->string('home_phone')->nullable();
             $table->string('cell_phone');
             $table->string('marital_status');
-            $table->boolean('is_verified')->default(0);
-            $table->uuid('user_id')->index();
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('reliqui_healthcare_locations', function (Blueprint $table) {
+        Schema::create('ambulatory_health_facilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('slug')->unique();
             $table->string('name');
             $table->string('address');
             $table->string('city');
@@ -78,7 +82,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_invitations', function (Blueprint $table) {
+        Schema::create('ambulatory_invitations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('role');
@@ -86,27 +90,29 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_working_hours', function (Blueprint $table) {
+        Schema::create('ambulatory_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('doctor_id');
+            $table->uuid('health_facility_id');
             $table->dateTime('start_date_time');
             $table->dateTime('end_date_time');
             $table->integer('estimated_service_time_in_minutes')->nullable();
-            $table->boolean('repeat')->default(0);
-            $table->text('recurrence')->nullable();
             $table->timestamps();
 
-            $table->uuid('doctor_id');
-            $table->uuid('location_id');
-            $table->unique(['doctor_id', 'location_id']);
+            $table->unique(['doctor_id', 'health_facility_id']);
         });
 
-        Schema::create('reliqui_appointments', function (Blueprint $table) {
+        Schema::create('ambulatory_bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('patient_id')->index();
+            $table->uuid('schedule_id');
+            $table->uuid('medical_form_id');
             $table->dateTime('preferred_date_time');
-            $table->boolean('scheduled')->default(1);
-            $table->uuid('schedule_id')->index();
+            $table->dateTime('actual_end_date_time')->nullable();
+            $table->string('description')->nullable();
+            $table->smallInteger('status', false, true)->default(2);
             $table->timestamps();
+
+            $table->index(['schedule_id', 'medical_form_id']);
         });
     }
 
@@ -117,14 +123,14 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reliqui_users');
-        Schema::dropIfExists('reliqui_doctors');
-        Schema::dropIfExists('reliqui_specialities');
-        Schema::dropIfExists('reliqui_doctors_specialities');
-        Schema::dropIfExists('reliqui_patients');
-        Schema::dropIfExists('reliqui_healthcare_locations');
-        Schema::dropIfExists('reliqui_invitations');
-        Schema::dropIfExists('reliqui_working_hours');
-        Schema::dropIfExists('reliqui_appointments');
+        Schema::dropIfExists('ambulatory_users');
+        Schema::dropIfExists('ambulatory_doctors');
+        Schema::dropIfExists('ambulatory_specializations');
+        Schema::dropIfExists('ambulatory_doctors_specializations');
+        Schema::dropIfExists('ambulatory_medical_forms');
+        Schema::dropIfExists('ambulatory_health_facilities');
+        Schema::dropIfExists('ambulatory_invitations');
+        Schema::dropIfExists('ambulatory_schedules');
+        Schema::dropIfExists('ambulatory_bookings');
     }
 }

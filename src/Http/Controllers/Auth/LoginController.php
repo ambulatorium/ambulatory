@@ -18,7 +18,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('reliqui::auth.login');
+        return view('ambulatory::auth.login');
     }
 
     /**
@@ -28,7 +28,7 @@ class LoginController extends Controller
      */
     public function redirectPath()
     {
-        return '/'.config('reliqui.path');
+        return '/'.config('ambulatory.path');
     }
 
     /**
@@ -43,7 +43,7 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect()->route('reliqui.auth.login')->with('loggedOut', true);
+        return redirect()->route('ambulatory.auth.login')->with('loggedOut', true);
     }
 
     /**
@@ -53,6 +53,6 @@ class LoginController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('reliqui');
+        return Auth::guard('ambulatory');
     }
 }

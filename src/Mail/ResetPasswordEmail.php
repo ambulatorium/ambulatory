@@ -32,8 +32,8 @@ class ResetPasswordEmail extends Mailable
     public function build()
     {
         return $this->subject(config('app.name').': Reset Password Notification')
-            ->view('reliqui::emails.forgot-password', [
-                'link' => route('reliqui.password.reset', ['token' => $this->token]),
+            ->view('ambulatory::emails.forgot-password', [
+                'link' => route('ambulatory.password.reset', ['token' => $this->token]),
             ]);
     }
 }

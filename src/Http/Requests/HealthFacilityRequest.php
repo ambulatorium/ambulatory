@@ -2,10 +2,9 @@
 
 namespace Reliqui\Ambulatory\Http\Requests;
 
-use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
 
-class InvitationRequest extends FormRequest
+class HealthFacilityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +25,12 @@ class InvitationRequest extends FormRequest
     {
         return [
             'id' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:ambulatory_invitations|unique:ambulatory_users',
-            'role' => 'required|string',
+            'name' => 'required|string|min:2|max:255',
+            'address' => 'required|string|min:2|max:255',
+            'city' => 'required|string|min:2|max:255',
+            'state' => 'nullable|string|min:2|max:255',
+            'country' => 'required|string|max:255',
+            'zip_code' => 'required|string|min:2|max:255',
         ];
     }
 
@@ -40,9 +43,13 @@ class InvitationRequest extends FormRequest
     {
         return [
             'id' => $this->id,
-            'email' => $this->email,
-            'role' => $this->role,
-            'token' => Str::limit(md5($this->email.Str::random()), 25, ''),
+            'name' => $this->name,
+            'slug' => $this->name,
+            'address' => $this->address,
+            'city' => $this->city,
+            'state' => $this->state,
+            'country' => $this->country,
+            'zip_code' => $this->zip_code,
         ];
     }
 }

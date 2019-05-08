@@ -1,6 +1,6 @@
 ## Introduction
 
-Reliqui ambulatory is outpatient care platform carefully designed to meet the needs of outpatient services in health care facilities. [Learn more about ambulatory care](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
+Reliqui ambulatory is outpatient care platform carefully designed to meet the needs of outpatient services in health facilities. [Learn more about ambulatory care](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
 
 <p align="center"><img src="https://res.cloudinary.com/dave24hwj8/image/upload/v1552329523/Screen_Shot_2019-03-12_at_01.21.34.png"></p>
 
@@ -17,7 +17,7 @@ composer require reliqui/ambulatory
 Once Composer is done, run the following command.
 
 ```
-php artisan reliqui:install
+php artisan ambulatory:install
 ```
 
 Create a symbolic link to ensure file uploads are publicly accessible from the web:
@@ -26,13 +26,13 @@ Create a symbolic link to ensure file uploads are publicly accessible from the w
 php artisan storage:link
 ```
 
-Check `config/reliqui.php` and configure the database connection reliqui is going to be using, after that go run:
+Check `config/ambulatory.php` and configure the database connection Reliqui ambulatory is going to be using, after that go run:
 
 ```
-php artisan reliqui:migrate
+php artisan ambulatory:migrate
 ```
 
-Head to `yourproject.test/reliqui` and use the provided email and password to log in.
+Head to `yourproject.test/ambulatory` and use the provided email and password to log in.
 
 ## Road map
 
@@ -40,9 +40,8 @@ Reliqui ambulatory is still under heavy development, I decided to ship it in thi
 
 Here's the plan for what's coming:
 
-- [ ] Improve the flow of doctor's schedule (@davidhsianturi)
 - [ ] Design a better logo
-- [ ] Optimize CSS
+- [ ] Optimize CSS, move to TailwindCSS ?
 - [ ] Add text search inside listings
 - [ ] Enhance date-time picker component
 - [ ] Add markdown mail template
@@ -56,7 +55,6 @@ Ideas that need to be discussed:
 
 And here are some ideas I'm still not sure about:
 
-- [ ] Convert to TailwindCSS
 - [ ] Localization
 - [ ] Health records
 

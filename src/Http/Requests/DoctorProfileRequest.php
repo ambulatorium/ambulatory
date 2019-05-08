@@ -24,24 +24,30 @@ class DoctorProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required',
+            'id' => 'required|string',
             'full_name' => 'required|string|max:255',
-            'years_of_experience' => 'required|numeric',
             'qualification' => 'required|string|max:255',
-            'bio' => 'nullable|string|max:255',
-            'specialities' => 'required|array',
-            'specialities.*.id' => 'exists:reliqui_specialities,id',
+            'practicing_from' => 'nullable|date|max:255',
+            'professional_statement' => 'nullable|string|min:2|max:255',
+            'specializations' => 'required|array',
+            'specializations.*.id' => 'exists:ambulatory_specializations,id',
         ];
     }
 
-    public function formDoctor()
+    /**
+     * Set the validated fields request that apply to the model.
+     *
+     * @return array
+     */
+    public function validatedFields()
     {
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'years_of_experience' => $this->years_of_experience,
+            'slug' => $this->full_name,
             'qualification' => $this->qualification,
-            'bio' => $this->bio,
+            'practicing_from' => $this->practicing_from,
+            'professional_statement' => $this->professional_statement,
         ];
     }
 }

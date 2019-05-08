@@ -11,14 +11,14 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'reliqui:install';
+    protected $signature = 'ambulatory:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install all of the reliqui resources';
+    protected $description = 'Install all of the ambulatory resources';
 
     /**
      * Execute the console command.
@@ -27,12 +27,12 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->comment('Publishing Reliqui Assets...');
-        $this->callSilent('vendor:publish', ['--tag' => 'reliqui-assets']);
+        $this->comment('Publishing Ambulatory Assets...');
+        $this->callSilent('vendor:publish', ['--tag' => 'ambulatory-assets']);
 
-        $this->comment('Publishing Reliqui Configuration...');
-        $this->callSilent('vendor:publish', ['--tag' => 'reliqui-config']);
+        $this->comment('Publishing Ambulatory Configuration...');
+        $this->callSilent('vendor:publish', ['--tag' => 'ambulatory-config']);
 
-        $this->info('Reliqui was installed successfully.');
+        $this->info('Ambulatory was installed successfully.');
     }
 }

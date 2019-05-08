@@ -4,9 +4,9 @@ namespace Reliqui\Ambulatory\Http\Controllers\Auth;
 
 use Throwable;
 use Illuminate\Support\Str;
+use Reliqui\Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Reliqui\Ambulatory\Mail\ResetPasswordEmail;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
 
@@ -19,7 +19,7 @@ class ForgotPasswordController extends Controller
      */
     public function showResetRequestForm()
     {
-        return view('reliqui::auth.request-password-reset');
+        return view('ambulatory::auth.request-password-reset');
     }
 
     /**
@@ -33,7 +33,7 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email',
         ])->validate();
 
-        if ($user = ReliquiUsers::whereEmail(request('email'))->first()) {
+        if ($user = User::whereEmail(request('email'))->first()) {
             cache(['password.reset.'.$user->id => $token = Str::random()],
                 now()->addMinutes(60)
             );
@@ -43,7 +43,7 @@ class ForgotPasswordController extends Controller
             ));
         }
 
-        return redirect()->route('reliqui.password.forgot')->with('passwordResetLinkSent', true);
+        return redirect()->route('ambulatory.password.forgot')->with('passwordResetLinkSent', true);
     }
 
     /**
@@ -59,13 +59,13 @@ class ForgotPasswordController extends Controller
 
             [$userId, $token] = explode('|', $token);
 
-            $user = ReliquiUsers::findOrFail($userId);
+            $user = User::findOrFail($userId);
         } catch (Throwable $e) {
-            return redirect()->route('reliqui.password.forgot')->with('invalidResetToken', true);
+            return redirect()->route('ambulatory.password.forgot')->with('invalidResetToken', true);
         }
 
         if (cache('password.reset.'.$userId) != $token) {
-            return redirect()->route('reliqui.password.forgot')->with('invalidResetToken', true);
+            return redirect()->route('ambulatory.password.forgot')->with('invalidResetToken', true);
         }
 
         cache()->forget('password.reset.'.$userId);
@@ -74,7 +74,7 @@ class ForgotPasswordController extends Controller
 
         $user->save();
 
-        return view('reliqui::auth.reset-password', [
+        return view('ambulatory::auth.reset-password', [
             'password' => $password,
         ]);
     }

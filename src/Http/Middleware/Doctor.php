@@ -19,14 +19,14 @@ class Doctor
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = auth('reliqui')->user();
+        $user = auth('ambulatory')->user();
 
         if (! $user->isDoctor()) {
-            throw new HttpException(403, 'Sorry, you are forbidden from accessing this page.');
+            throw new HttpException(403, 'Sorry, you are forbidden from accessing this resources.');
         }
 
-        if (blank($user->doctor()->first())) {
-            throw new HttpException(403, 'Sorry, you do not have permission to create schedule yet. Please complete your profile as a doctor and create schedule again');
+        if (blank($user->doctorProfile)) {
+            throw new HttpException(403, 'Sorry, you are forbidden from accessing this resources. Please complete your doctor profile first');
         }
 
         return $next($request);

@@ -3,27 +3,29 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Reliqui Database Connection
+    | Ambulatory database connection name
     |--------------------------------------------------------------------------
+    |
     */
 
-    'database_connection' => env('RELIQUI_DB_CONNECTION', 'mysql'),
+    'database_connection' => env('AMBULATORY_DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
-    | Reliqui Uploads Disk
+    | Ambulatory Uploads Disk
     |--------------------------------------------------------------------------
-     */
+    |
+    */
 
-    'storage_disk' => env('RELIQUI_STORAGE_DISK', 'local'),
+    'storage_disk' => env('AMBULATORY_STORAGE_DISK', 'local'),
 
-    'storage_path' => env('RELIQUI_STORAGE_PATH', 'public/reliqui/images'),
+    'storage_path' => env('AMBULATORY_STORAGE_PATH', 'public/ambulatory'),
 
     /*
     |--------------------------------------------------------------------------
-    | Reliqui Path
+    | Ambulatory Path
     |--------------------------------------------------------------------------
-     */
-
-    'path' => env('RELIQUI_PATH', 'reliqui'),
+    |
+    */
+    'path' => env('AMBULATORY_PATH', 'ambulatory'),
 ];

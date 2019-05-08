@@ -4,30 +4,18 @@
 Route::get('/api/inbox', 'InboxController@index')->name('inbox');
 Route::get('/api/inbox/{id}', 'InboxController@show')->name('inbox.show');
 
+// Schedules.
+Route::get('/api/schedules', 'ScheduleController@index')->name('schedules.index');
+Route::get('/api/schedules/{id?}', 'ScheduleController@show')->name('schedules.show');
+Route::post('/api/schedules/{id}', 'ScheduleController@store')->name('schedules.store');
+
 // Medical Form.
 Route::get('/api/medical-form', 'MedicalFormController@index')->name('medical-form.index');
 Route::get('/api/medical-form/{id?}', 'MedicalFormController@show')->name('medical-form.show');
 Route::post('/api/medical-form/{id}', 'MedicalFormController@store')->name('medical-form.store');
-Route::delete('/api/medical-form/{id}', 'MedicalFormController@destroy')->name('medical-form.destroy');
-
-Route::get('/api/working-hours', 'WorkingHoursController@index')->name('working-hours.index');
-Route::get('/api/working-hours/{id?}', 'WorkingHoursController@show')->name('working-hours.show');
-Route::post('/api/working-hours/{id}', 'WorkingHoursController@store')->name('working-hours.store');
-
-// Specialities.
-Route::get('/api/specialities', 'SpecialityController@index')->name('specialities.index');
-Route::get('/api/specialities/{id?}', 'SpecialityController@show')->name('specialities.show');
-Route::post('/api/specialities/{id}', 'SpecialityController@store')->name('specialities.store');
-Route::delete('/api/specialities/{id}', 'SpecialityController@destroy')->name('specialities.destroy');
 
 // Staff.
 Route::get('/api/staff', 'StaffController@index')->name('staff.index');
-
-// Locations.
-Route::get('/api/healthcare-locations', 'HealthcareLocationController@index')->name('locations.index');
-Route::get('/api/healthcare-locations/{id?}', 'HealthcareLocationController@show')->name('locations.show');
-Route::post('/api/healthcare-locations/{id}', 'HealthcareLocationController@store')->name('locations.store');
-Route::delete('/api/healthcare-locations/{id}', 'HealthcareLocationController@destroy')->name('locations.destroy');
 
 // Invitations.
 Route::get('/api/invitations', 'InvitationController@index')->name('invitations.index');
@@ -35,17 +23,28 @@ Route::get('/api/invitations/{id?}', 'InvitationController@show')->name('invitat
 Route::post('/api/invitations/{id}', 'InvitationController@store')->name('invitations.store');
 Route::delete('/api/invitations/{id}', 'InvitationController@destroy')->name('invitations.destroy');
 
+// Health Facilities.
+Route::get('/api/health-facilities', 'HealthFacilityController@index')->name('health-facilities.index');
+Route::get('/api/health-facilities/{id?}', 'HealthFacilityController@show')->name('health-facilities.show');
+Route::post('/api/health-facilities/{id}', 'HealthFacilityController@store')->name('health-facilities.store');
+
+// Specializations.
+Route::get('/api/specializations', 'SpecializationController@index')->name('specializations.index');
+Route::get('/api/specializations/{id?}', 'SpecializationController@show')->name('specializations.show');
+Route::post('/api/specializations/{id}', 'SpecializationController@store')->name('specializations.store');
+Route::delete('/api/specializations/{id}', 'SpecializationController@destroy')->name('specializations.destroy');
+
 // Settings.
 Route::namespace('Settings')->group(function () {
-    // Account
+    // Account.
     Route::get('/api/account/{id}', 'AccountController@show')->name('account.show');
     Route::post('/api/account/{id}', 'AccountController@update')->name('account.update');
 
-    // Doctor
+    // Doctor.
     Route::get('/api/doctor-profile/{id}', 'DoctorProfileController@show')->name('doctor-profile.show');
     Route::post('/api/doctor-profile/{id}', 'DoctorProfileController@store')->name('doctor-profile.store');
 
-    // Avatar
+    // User Avatar.
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
 });
 
@@ -53,4 +52,4 @@ Route::namespace('Settings')->group(function () {
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 // Catch-all Route.
-Route::get('/{view?}', 'ReliquiController')->where('view', '(.*)')->name('reliqui');
+Route::get('/{view?}', 'AmbulatoryController')->where('view', '(.*)')->name('ambulatory');

@@ -1,7 +1,7 @@
 {
     "name": "reliqui/ambulatory",
-    "description": "An open source ambulatory care services",
-    "keywords": ["laravel", "outpatient care", "ambulatory care"],
+    "description": "An open source ambulatory care platform",
+    "keywords": ["laravel", "outpatient care", "ambulatory care", "scheduling appointment"],
     "license": "MIT",
     "authors": [
         {

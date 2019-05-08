@@ -37,8 +37,8 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($this->auth->guard('reliqui')->check()) {
-            return redirect('/'.config('reliqui.path'));
+        if ($this->auth->guard('ambulatory')->check()) {
+            return redirect('/'.config('ambulatory.path'));
         }
 
         return $next($request);

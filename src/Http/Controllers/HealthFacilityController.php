@@ -3,21 +3,28 @@
 namespace Reliqui\Ambulatory\Http\Controllers;
 
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\MedicalForm;
-use Reliqui\Ambulatory\Http\Requests\MedicalFormRequest;
+use Reliqui\Ambulatory\HealthFacility;
+use Reliqui\Ambulatory\Http\Middleware\Admin;
+use Reliqui\Ambulatory\Http\Requests\HealthFacilityRequest;
 
-class MedicalFormController
+class HealthFacilityController extends Controller
 {
     /**
-     * Get all medical forms.
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware(Admin::class)->except('index');
+    }
+
+    /**
+     * Get all health facilities.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $user = auth('ambulatory')->user();
-
-        $entries = $user->medicalForms()->paginate(25);
+        $entries = HealthFacility::latest()->paginate(25);
 
         return response()->json([
             'entries' => $entries,
@@ -25,7 +32,7 @@ class MedicalFormController
     }
 
     /**
-     * Show the medical form.
+     * Show the health facility.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
@@ -34,11 +41,11 @@ class MedicalFormController
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => MedicalForm::make(['id' => Str::uuid()]),
+                'entry' => HealthFacility::make(['id' => Str::uuid()]),
             ]);
         }
 
-        $entry = MedicalForm::findOrFail($id);
+        $entry = HealthFacility::findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -46,17 +53,17 @@ class MedicalFormController
     }
 
     /**
-     * Store the medical form.
+     * Store the health facility.
      *
-     * @param MedicalFormRequest $request
+     * @param HealthFacilityRequest $request
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(MedicalFormRequest $request, $id)
+    public function store(HealthFacilityRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? MedicalForm::findOrFail($id)
-            : new MedicalForm(['id' => $request->validatedFields(['id'])]);
+            ? HealthFacility::findOrFail($id)
+            : new HealthFacility(['id' => $request->validatedFields(['id'])]);
 
         $entry->fill($request->validatedFields());
         $entry->save();

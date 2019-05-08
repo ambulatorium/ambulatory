@@ -19,10 +19,10 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth('reliqui')->user()->isAdmin()) {
+        if (auth('ambulatory')->user()->isAdmin()) {
             return $next($request);
         }
 
-        throw new HttpException(403, 'Sorry, you are forbidden from accessing this page.');
+        throw new HttpException(403, 'Sorry, you are forbidden from accessing this resources.');
     }
 }

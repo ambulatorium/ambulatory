@@ -3,9 +3,9 @@
 namespace Reliqui\Ambulatory\Console;
 
 use Illuminate\Support\Str;
+use Reliqui\Ambulatory\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\ReliquiUsers;
 use Illuminate\Support\Facades\Schema;
 
 class MigrateCommand extends Command
@@ -15,14 +15,14 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'reliqui:migrate';
+    protected $signature = 'ambulatory:migrate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Run database migrations for Reliqui';
+    protected $description = 'Run database migrations for Ambulatory';
 
     /**
      * Execute the console command.
@@ -32,25 +32,25 @@ class MigrateCommand extends Command
     public function handle()
     {
         $shouldCreateNewUser =
-            ! Schema::connection(config('reliqui.database_connection'))->hasTable('reliqui_users') ||
-            ! ReliquiUsers::count();
+            ! Schema::connection(config('ambulatory.database_connection'))->hasTable('ambulatory_users') ||
+            ! User::count();
 
         $this->call('migrate', [
-            '--database' => config('reliqui.database_connection'),
+            '--database' => config('ambulatory.database_connection'),
             '--path' => 'vendor/reliqui/ambulatory/src/Migrations',
         ]);
 
         if ($shouldCreateNewUser) {
-            ReliquiUsers::create([
+            User::create([
                'id'       => (string) Str::uuid(),
                'name'     => 'James Bell',
                'email'    => 'admin@mail.com',
-               'type'     => 3,
+               'type'     => User::ADMIN,
                'password' => Hash::make($password = Str::random()),
             ]);
 
             $this->line('');
-            $this->line('Reliqui is ready for use');
+            $this->line('Ambulatory is ready for use');
             $this->line('You may log in using <info>admin@mail.com</info> and password: <info>'.$password.'</info>');
         }
     }
