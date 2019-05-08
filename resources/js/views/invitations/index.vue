@@ -8,18 +8,14 @@
             New
         </router-link>
 
-        <tr slot="table-header">
-            <th scope="col">E-mail Address</th>
-            <th scope="col">Role</th>
-        </tr>
-
-        <template slot="table-row" slot-scope="slotProps">
-            <td class="table-fit">
-                <router-link :to="{name:'invitations-edit', params:{id: slotProps.entry.id}}">
-                    {{slotProps.entry.email}}
-                </router-link>
-            </td>
-            <td class="table-fit">{{slotProps.entry.role}}</td>
+        <template slot="group-item" slot-scope="slotProps">
+            <router-link :to="{name:'invitations-edit', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{slotProps.entry.email}}</h5>
+                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                </div>
+                <p class="mb-1">{{slotProps.entry.role}}</p>
+            </router-link>
         </template>
     </index-view>
 </template>

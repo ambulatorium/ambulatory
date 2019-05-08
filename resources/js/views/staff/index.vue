@@ -8,18 +8,14 @@
             Invite staff
         </router-link>
 
-        <tr slot="table-header">
-            <th scope="col">Name</th>
-            <th scope="col">Role</th>
-        </tr>
-
-        <template slot="table-row" slot-scope="slotProps">
-            <td class="table-fit">{{slotProps.entry.name}}</td>
-            <td class="table-fit">
-                <span class="badge badge-light border">
-                    {{slotProps.entry.role}}
-                </span>
-            </td>
+        <template slot="group-item" slot-scope="slotProps">
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{slotProps.entry.name}}</h5>
+                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                </div>
+                <p class="mb-1">{{slotProps.entry.role}}</p>
+            </div>
         </template>
     </index-view>
 </template>

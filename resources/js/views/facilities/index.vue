@@ -8,26 +8,20 @@
             New
         </router-link>
 
-        <tr slot="table-header">
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">City</th>
-            <th scope="col">State</th>
-            <th scope="col">Country</th>
-            <th scope="col">ZIP Code</th>
-        </tr>
-
-        <template slot="table-row" slot-scope="slotProps">
-            <td class="table-fit">
-                <router-link :to="{name:'health-facilities-edit', params:{id: slotProps.entry.id}}" class="badge badge-info">
-                    {{slotProps.entry.name}}
-                </router-link>
-            </td>
-            <td class="table-fit">{{slotProps.entry.address}}</td>
-            <td class="table-fit">{{slotProps.entry.city}}</td>
-            <td class="table-fit">{{slotProps.entry.state}}</td>
-            <td class="table-fit">{{slotProps.entry.country}}</td>
-            <td class="table-fit">{{slotProps.entry.zip_code}}</td>
+        <template slot="group-item" slot-scope="slotProps">
+            <router-link :to="{name:'health-facilities-edit', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{slotProps.entry.name}}</h5>
+                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                </div>
+                <p class="mb-1">
+                    {{slotProps.entry.address}}
+                    {{slotProps.entry.city}}
+                    {{slotProps.entry.state}}
+                    {{slotProps.entry.country}}
+                    {{slotProps.entry.zip_code}}
+                </p>
+            </router-link>
         </template>
     </index-view>
 </template>

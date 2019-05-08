@@ -71,28 +71,12 @@
             <p class="text-center">No data were found</p>
         </div>
 
-        <table id="indexView" class="table table-hover table-sm mb-0" v-if="ready && entries.length > 0">
-            <thead>
-                <slot name="table-header"></slot>
-            </thead>
-
-            <transition-group tag="tbody" name="list">
-                <tr v-for="entry in entries" :key="entry.id">
-                    <slot name="table-row" :entry="entry"></slot>
-                </tr>
-
-                <tr v-if="hasMoreEntries" key="olderEntries">
-                    <td colspan="100" class="text-center py-1">
-                        <small>
-                            <a href="#" v-on:click.prevent="loadOlderEntries" v-if="!loadingMoreEntries">
-                                Load Older Pages
-                            </a>
-                        </small>
-
-                        <small v-if="loadingMoreEntries">Loading...</small>
-                    </td>
-                </tr>
+        <div id="indexView" class="list-group list-group-flush" v-if="ready && entries.length > 0">
+            <transition-group name="list">
+                <div v-for="entry in entries" :key="entry.id">
+                    <slot name="group-item" :entry="entry"></slot>
+                </div>
             </transition-group>
-        </table>
+        </div>
     </div>
 </template>

@@ -26,6 +26,7 @@ class ScheduleController extends Controller
     {
         $entries = Schedule::with('healthFacility')
             ->where('doctor_id', auth('ambulatory')->user()->doctorProfile->id)
+            ->latest()
             ->paginate(25);
 
         return response()->json([

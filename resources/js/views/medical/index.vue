@@ -8,22 +8,14 @@
             New
         </router-link>
 
-        <tr slot="table-header">
-            <th scope="col">Form name</th>
-            <th scope="col">Patient full name</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Address</th>
-        </tr>
-
-        <template slot="table-row" slot-scope="slotProps">
-            <td class="table-fit">
-                <router-link :to="{name:'medical-form-edit', params:{id: slotProps.entry.id}}" class="badge badge-light font-weight-light">
-                    {{slotProps.entry.form_name}}
-                </router-link>
-            </td>
-            <td class="table-fit">{{slotProps.entry.full_name}}</td>
-            <td class="table-fit">{{slotProps.entry.gender}}</td>
-            <td class="table-fit">{{slotProps.entry.address}}</td>
+        <template slot="group-item" slot-scope="slotProps">
+            <router-link :to="{name:'medical-form-edit', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{slotProps.entry.form_name}}</h5>
+                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                </div>
+                <p class="mb-1">{{slotProps.entry.full_name}} - {{slotProps.entry.address}}</p>
+            </router-link>
         </template>
     </index-view>
 </template>
