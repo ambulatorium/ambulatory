@@ -56,7 +56,7 @@ class Booking extends AmbulatoryModel
     /**
      * Status of booking is done.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDone()
     {
@@ -66,7 +66,7 @@ class Booking extends AmbulatoryModel
     /**
      * Status of booking is active.
      *
-     * @return boolean
+     * @return bool
      */
     public function isActive()
     {
@@ -76,7 +76,7 @@ class Booking extends AmbulatoryModel
     /**
      * Status of booking is expired.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired()
     {

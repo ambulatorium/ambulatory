@@ -40,7 +40,7 @@ trait HasSlug
      *
      * @param string $slug
      * @param string $ignoreId
-     * @return boolean
+     * @return bool
      */
     private function slugExists(string $slug, string $ignoreId = null)
     {
