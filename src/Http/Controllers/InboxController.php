@@ -2,8 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Booking;
-
 class InboxController extends Controller
 {
     /**
