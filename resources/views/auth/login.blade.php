@@ -10,80 +10,82 @@
     <!-- Style sheets-->
     <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-<body>
-    <div class="mt-5">
-        <a href="/" class="text-center text-dark">
-            <h1>RELIQUI</h1>
-        </a>
+<body class="auth-body"">
+    <div class="form-auth">
+        <div class="text-center mb-5">
+            <h1 class="text-uppercase">
+                <a href="/" class="text-dark">{{ config('app.name') }}</a>
+            </h1>
 
-        <div class="col-md-4 offset-md-4">
             @if(session()->has('loggedOut'))
                 <p class="font-weight-bold text-success text-center">
                     You've been logged out.
                 </p>
-            @else
-                <p class="font-weight-bold text-center">
-                    Sign In with email
-                </p>
             @endif
+        </div>
 
-            <p class="text-muted">
-                Don't have an account? <a href="{{route('ambulatory.auth.register')}}">Sign Up</a>
-            </p>
-
-            @if ($errors->any())
-                <div class="font-weight-bold text-danger text-center mb-4">
-                    @if ($errors->has('email'))
-                        {{ $errors->first('email') }}
-                    @else
-                        {{ $errors->first('password') }}
-                    @endif
-                </div>
-            @endif
-
-            @if (session()->has('invitationAccepted'))
-                <div class="alert alert-success">
-                    <strong>
-                        Invitation successfully verified.
-                        We have e-mailed your login account!
-                    </strong>
-                </div>
-            @endif
-
-            <form method="POST" action="{{route('ambulatory.auth.attempt')}}" class="form-horizontal">
+        <div class="form-card">
+            <form method="POST" action="{{ route('ambulatory.auth.attempt') }}" class="form-horizontal">
                 @csrf
 
-                <div class="form-group">
-                    <input type="email"
-                        class="form-control {{ $errors->first('email', 'is-invalid') }}"
-                        name="email"
-                        value="{{ old('email') }}"
-                        placeholder="email address"
-                        autofocus>
+                <div class="d-flex w-100 justify-content-between mb-3">
+                    <h4>Sign in</h4>
+
+                    <a href="{{ route('ambulatory.password.forgot') }}"> Forgot?</a>
                 </div>
 
                 <div class="form-group">
-                    <input type="password"
-                        class="form-control {{ $errors->first('password', 'is-invalid') }}"
+                    <label for="email" class="text-muted">E-mail address</label>
+
+                    <input id="email"
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('email', 'is-invalid') }}"
+                        autofocus>
+
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="text-muted">Password</label>
+
+                    <input id="password"
+                        type="password"
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('password', 'is-invalid') }}"
                         name="password"
                         placeholder="******">
+
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
 
                 <div class="form-group">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+
                             <label class="custom-control-label" for="remember">
                                 Remember me
                             </label>
                         </div>
-
-                        <a href="{{ route('ambulatory.password.forgot') }}"> Forgot Password?</a>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-block btn-primary" type="submit">Sign In</button>
+
+                <div class="forn-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
                 </div>
+
+                <p class="text-center text-muted mt-5">
+                    Don't have an account? <a href="{{ route('ambulatory.auth.register') }}">Sign Up</a>
+                </p>
             </form>
         </div>
     </div>

@@ -10,16 +10,20 @@
     <!-- Style sheets-->
     <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-<body class="mb-5">
-    <div class="mt-5">
-        <a href="/" class="text-center text-dark">
-            <h1>RELIQUI</h1>
-        </a>
+<body class="auth-body">
+    <div class="form-auth">
+        <div class="text-center mb-5">
+            <h1 class="text-uppercase">
+                <a href="/" class="text-dark">{{ config('app.name') }}</a>
+            </h1>
+        </div>
 
-        <div class="col-md-4 offset-md-4">
-            <p class="font-weight-bold text-center">
-                — Your New Password
-            </p>
+        <div class="form-card">
+            <div class="d-flex w-100 justify-content-between mb-3">
+                <h4>New password</h4>
+
+                <a href="{{ route('ambulatory.auth.login') }}"> Sign in?</a>
+            </div>
 
             <div class="alert alert-success">
                 Copy your new password, use it for your

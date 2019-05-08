@@ -1,8 +1,28 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-html {
-    min-width: 1140px;
+.auth-body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 100%;
+}
+
+.form-auth {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-card {
+    border-radius: 9px !important;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .12) !important;
+    padding: 40px 32px 12px;
+    background-color: #fff;
 }
 
 [v-cloak] {

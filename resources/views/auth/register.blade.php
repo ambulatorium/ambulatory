@@ -10,32 +10,34 @@
     <!-- Style sheets-->
     <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-<body class="mb-5">
-    <div class="mt-5">
-        <a href="/" class="text-center text-dark">
-            <h1>RELIQUI</h1>
-        </a>
+<body class="auth-body">
+    <div class="form-auth">
+        <div class="text-center mb-5">
+            <h1 class="text-uppercase">
+                <a href="/" class="text-dark">{{ config('app.name') }}</a>
+            </h1>
+        </div>
 
-        <div class="col-md-4 offset-md-4">
-            <p class="font-weight-bold text-center">
-                Create your {{config('app.name')}} account
-            </p>
-
-            <p class="text-muted">
-                Already have an account? <a href="{{route('ambulatory.auth.login')}}">Sign In</a>
-            </p>
-
-            <form method="POST" action="{{route('ambulatory.auth.register.post')}}" class="form-horizontal">
+        <div class="form-card">
+            <form method="POST" action="{{ route('ambulatory.auth.register.post') }}" class="form-horizontal">
                 @csrf
 
+                <div class="d-flex w-100 justify-content-between mb-3">
+                    <h4>Sign up</h4>
+
+                    <a href="{{ route('ambulatory.auth.login') }}"> Sign in?</a>
+                </div>
+
                 <div class="form-group">
-                    <input type="text"
-                        class="form-control {{ $errors->first('name', 'is-invalid') }}"
+                    <label for="name" class="text-muted">Name</label>
+
+                    <input id="name"
+                        type="text"
                         name="name"
                         value="{{ old('name') }}"
-                        placeholder="name"
-                        required
-                        autofocus>
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('name', 'is-invalid') }}"
+                        autofocus
+                        required>
 
                     @if ($errors->has('name'))
                         <span class="invalid-feedback" role="alert">
@@ -45,11 +47,12 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="email"
-                        class="form-control {{ $errors->first('email', 'is-invalid') }}"
+                    <label for="email" class="text-muted">E-mail address</label>
+
+                    <input id="email"
+                        type="email"
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('email', 'is-invalid') }}"
                         name="email"
-                        value="{{ old('email') }}"
-                        placeholder="email address"
                         required>
 
                     @if ($errors->has('email'))
@@ -60,10 +63,13 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="password"
-                        class="form-control {{ $errors->first('password', 'is-invalid') }}"
+                    <label for="password" class="text-muted">Password</label>
+
+                    <input id="password"
+                        type="password"
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('password', 'is-invalid') }}"
                         name="password"
-                        placeholder="password"
+                        placeholder="******"
                         required>
 
                     @if ($errors->has('password'))
@@ -74,16 +80,24 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="password"
-                        class="form-control"
+                    <label for="password-confirm" class="text-muted">Confirm password</label>
+
+                    <input id="password-confirm"
+                        type="password"
+                        class="form-control form-control-lg border-0 bg-light"
                         name="password_confirmation"
-                        placeholder="confirm password"
+                        placeholder="******"
                         required>
                 </div>
 
-                <div class="form-group">
-                    <button class="btn btn-block btn-primary" type="submit">Register</button>
+                <div class="forn-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
                 </div>
+
+                <p class="text-center text-muted mt-5">
+                    Forgot your password?
+                    <a href="{{ route('ambulatory.password.forgot') }}"> Reset!</a>
+                </p>
             </form>
         </div>
     </div>

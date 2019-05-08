@@ -10,54 +10,60 @@
     <!-- Style sheets-->
     <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-<body class="mb-5">
-    <div class="mt-5">
-        <a href="/" class="text-center text-dark">
-            <h1>RELIQUI</h1>
-        </a>
+<body class="auth-body">
+    <div class="form-auth">
+        <div class="text-center mb-5">
+            <h1 class="text-uppercase">
+                <a href="/" class="text-dark">{{ config('app.name') }}</a>
+            </h1>
+        </div>
 
-        <div class="col-md-4 offset-md-4">
-            <p class="font-weight-bold text-center">
-                Reset your password
-            </p>
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <strong>
-                        @if ($errors->has('email'))
-                            {{ $errors->first('email') }}
-                        @endif
-                    </strong>
-                </div>
-            @endif
-
-            @if (session()->has('invalidResetToken'))
-                <div class="alert alert-danger">
-                    Invalid reset token.
-                </div>
-            @endif
-
-            @if (session()->has('passwordResetLinkSent'))
-                <div class="alert alert-success">
-                    We have e-mailed your password reset link!
-                </div>
-            @endif
-
+        <div class="form-card">
             <form method="POST" action="{{ route('ambulatory.password.email') }}" class="form-horizontal">
                 @csrf
 
-                <div class="form-group">
-                    <input type="email"
-                        class="form-control {{ $errors->first('email', 'is-invalid') }}"
-                        name="email"
-                        value="{{ old('email') }}"
-                        placeholder="Email address"
-                        autofocus>
+                <div class="d-flex w-100 justify-content-between mb-3">
+                    <h4>Reset password</h4>
+
+                    <a href="{{ route('ambulatory.auth.login') }}"> Sign in?</a>
                 </div>
 
+                @if (session()->has('invalidResetToken'))
+                    <div class="alert alert-danger">
+                        Invalid reset token.
+                    </div>
+                @endif
+
+                @if (session()->has('passwordResetLinkSent'))
+                    <div class="alert alert-success">
+                        We have e-mailed your password reset link!
+                    </div>
+                @endif
+
                 <div class="form-group">
-                    <button class="btn btn-block btn-primary" type="submit">Send Password Reset Link</button>
+                    <label for="email" class="text-muted">E-mail address</label>
+
+                    <input id="email"
+                        type="email"
+                        name="email"
+                        value="{{ old('email') }}"
+                        class="form-control form-control-lg border-0 bg-light {{ $errors->first('email', 'is-invalid') }}"
+                        autofocus>
+
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
+
+                <div class="forn-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Reset</button>
+                </div>
+
+                <p class="text-center text-muted mt-5">
+                    Don't have an account? <a href="{{ route('ambulatory.auth.register') }}">Sign Up</a>
+                </p>
             </form>
         </div>
     </div>
