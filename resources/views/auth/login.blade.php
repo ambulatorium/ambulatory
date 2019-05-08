@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Meta Information -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Reliqui - Login</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reliqui Ambulatory - Login</title>
 
     <!-- Style sheets-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href='{{mix('app.css', 'vendor/reliqui')}}' rel='stylesheet' type='text/css'>
+    <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-
-<body class="mb-5">
+<body>
     <div class="mt-5">
         <a href="/" class="text-center text-dark">
             <h1>RELIQUI</h1>
@@ -31,7 +28,7 @@
             @endif
 
             <p class="text-muted">
-                Don't have an account? <a href="{{route('reliqui.auth.register')}}">Sign Up</a>
+                Don't have an account? <a href="{{route('ambulatory.auth.register')}}">Sign Up</a>
             </p>
 
             @if ($errors->any())
@@ -53,7 +50,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{route('reliqui.auth.attempt')}}" class="form-horizontal">
+            <form method="POST" action="{{route('ambulatory.auth.attempt')}}" class="form-horizontal">
                 @csrf
 
                 <div class="form-group">
@@ -81,7 +78,7 @@
                             </label>
                         </div>
 
-                        <a href="{{ route('reliqui.password.forgot') }}"> Forgot Password?</a>
+                        <a href="{{ route('ambulatory.password.forgot') }}"> Forgot Password?</a>
                     </div>
                 </div>
                 <div class="form-group">

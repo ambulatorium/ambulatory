@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Meta Information -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Reliqui - Reset Password</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reliqui Ambulatory - Reset Password</title>
 
     <!-- Style sheets-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href='{{mix('app.css', 'vendor/reliqui')}}' rel='stylesheet' type='text/css'>
+    <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-
 <body class="mb-5">
     <div class="mt-5">
         <a href="/" class="text-center text-dark">
@@ -26,7 +23,7 @@
 
             <div class="alert alert-success">
                 Copy your new password, use it for your
-                <a href="{{route('reliqui.auth.login')}}">next login</a>,
+                <a href="{{route('ambulatory.auth.login')}}">next login</a>,
                 and then reset it.
 
                 <strong><mark>{{$password}}</mark></strong>

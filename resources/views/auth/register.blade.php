@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Meta Information -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Reliqui - Register</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reliqui Ambulatory - Register</title>
 
     <!-- Style sheets-->
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href='{{mix('app.css', 'vendor/reliqui')}}' rel='stylesheet' type='text/css'>
+    <link href='{{ mix('app.css', 'vendor/ambulatory') }}' rel='stylesheet' type='text/css'>
 </head>
-
 <body class="mb-5">
     <div class="mt-5">
         <a href="/" class="text-center text-dark">
@@ -25,10 +22,10 @@
             </p>
 
             <p class="text-muted">
-                Already have an account? <a href="{{route('reliqui.auth.login')}}">Sign In</a>
+                Already have an account? <a href="{{route('ambulatory.auth.login')}}">Sign In</a>
             </p>
 
-            <form method="POST" action="{{route('reliqui.auth.register.post')}}" class="form-horizontal">
+            <form method="POST" action="{{route('ambulatory.auth.register.post')}}" class="form-horizontal">
                 @csrf
 
                 <div class="form-group">
