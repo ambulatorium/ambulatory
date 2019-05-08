@@ -1,5 +1,5 @@
 @import "node_modules/bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,700');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 html {
     min-width: 1140px;
@@ -14,16 +14,24 @@ svg.icon {
     height: 1rem;
 }
 
+.side-content {
+    border: 1px $border-color;
+    min-height: 100vh;
+    background-color: white;
+}
+
 .sidebar .nav-item {
     a {
         color: $sidebar-nav-color;
-        padding: 0.5rem 0rem;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
 
         svg {
-            width: 1.2rem;
-            height: 1.2rem;
-            margin-right: 15px;
-            fill: $sidebar-icon-color;
+            width: 1.3rem;
+            height: 1.3rem;
+            margin-right: 20px;
+            fill: $dark;
         }
 
         &.active {
@@ -115,8 +123,9 @@ button:hover {
 }
 
 .card {
-    box-shadow: 0 16px 33px $card-shadow-color;
-    border: none;
+    // box-shadow: 0 16px 33px $card-shadow-color;
+    // border: none;
+    min-height: 100vh;
 
     .bottom-radius {
         border-bottom-left-radius: $card-border-radius;
@@ -141,7 +150,7 @@ button:hover {
     }
 
     .card-header {
-        padding: 2rem 2rem;
+        padding: 1rem 1rem;
         background-color: $card-cap-bg;
         border-color: $border-color;
 
@@ -150,11 +159,11 @@ button:hover {
         }
 
         h1 {
-            font-size: 1.125rem;
+            font-size: 1.3rem;
             color: $dark;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: .1em;
+            // text-transform: uppercase;
+            font-weight: bold;
+            // letter-spacing: .1em;
             margin: 0;
         }
     }

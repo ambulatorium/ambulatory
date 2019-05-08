@@ -5,17 +5,50 @@ import {Bus} from './bus.js';
 
 export default {
     computed: {
-        Reliqui() {
-            return Reliqui;
+        Ambulatory() {
+            return Ambulatory;
         }
     },
 
     methods: {
         /**
-         * Show the schedule time.
+         * Show the time in local time.
          */
         localTime(time) {
-            return moment(time).format('MMMM Do YYYY, h:mm A');
+            return moment(time + ' Z')
+                .utc()
+                .local()
+                .format('h:mm:ss A');
+        },
+
+        /**
+         * Show the date in local date.
+         */
+        localDate(date) {
+            return moment(date + ' Z')
+                .utc()
+                .local()
+                .format('MMMM Do YYYY');
+        },
+
+        /**
+         * Show the date time in local date time.
+         */
+        localDateTime(dateTime) {
+            return moment(dateTime + ' Z')
+                .utc()
+                .local()
+                .format('MMMM Do YYYY, h:mm:ss A');
+        },
+
+        /**
+         * Show the time ago format for the given time.
+         */
+        timeAgo(time) {
+            return moment(time + ' Z')
+                .utc()
+                .local()
+                .fromNow();
         },
 
         /**
@@ -39,7 +72,7 @@ export default {
         http() {
             let instance = axios.create();
 
-            instance.defaults.baseURL = '/' + Reliqui.path;
+            instance.defaults.baseURL = '/' + Ambulatory.path;
 
             instance.interceptors.response.use(
                 response => response,
@@ -52,7 +85,7 @@ export default {
                             Bus.$emit('httpForbidden', error.response.data.message);
                             break;
                         case 401:
-                            window.location.href = '/' + Reliqui.path + '/logout';
+                            window.location.href = '/' + Ambulatory.path + '/logout';
                             break;
                     }
 

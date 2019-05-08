@@ -13,12 +13,11 @@ window.Popper = require('popper.js').default;
 const router = new VueRouter({
     routes: Routes,
     mode: 'history',
-    base: '/' + Reliqui.path,
+    base: '/' + Ambulatory.path,
 });
 
-Vue.component('reliqui-header', require('./layouts/Header.vue').default);
-Vue.component('reliqui-sidebar', require('./layouts/Sidebar.vue').default);
-Vue.component('index-page', require('./components/IndexPage.vue').default);
+Vue.component('sidebar-menu', require('./components/SidebarMenu.vue').default);
+Vue.component('index-view', require('./components/IndexView.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('form-errors', require('./components/FormErrors.vue').default);
@@ -27,7 +26,7 @@ Vue.component('date-time-picker', require('./components/DateTimePicker.vue').def
 Vue.mixin(Base);
 
 new Vue({
-    el: '#reliqui',
+    el: '#ambulatory',
 
     router,
 
@@ -52,7 +51,5 @@ new Vue({
     mounted() {
         Bus.$on('httpError', message => this.alertError(message));
         Bus.$on('httpForbidden', message => this.alertError(message));
-    },
-
-    methods: {}
+    }
 });
