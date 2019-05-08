@@ -4,18 +4,6 @@
         components: {},
 
         props: ['errors'],
-
-        data(){
-            return {}
-        },
-
-
-        mounted() {
-
-        },
-
-
-        methods: {}
     }
 </script>
 

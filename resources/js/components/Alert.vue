@@ -8,7 +8,6 @@
             }
         },
 
-
         mounted() {
             if (this.autoClose) {
                 this.timeout = setTimeout(() => {
@@ -16,7 +15,6 @@
                 }, this.autoClose);
             }
         },
-
 
         methods: {
             /**
@@ -32,7 +30,6 @@
                 this.$root.alert.confirmationCancel = null;
             },
 
-
             /**
              * Confirm and close the alert.
              */
@@ -41,7 +38,6 @@
 
                 this.close();
             },
-
 
             /**
              * Cancel and close the alert.
@@ -76,22 +72,19 @@
                 <p class="mt-3 mb-0">{{message}}</p>
             </div>
 
-
             <div class="d-flex align-items-center justify-content-center">
                 <button v-if="type == 'error'" class="btn btn-primary" @click="close">
-                    Ok
+                    OK
                 </button>
-
                 <button v-if="type == 'success' && !$root.alert.autoClose" class="btn btn-primary" @click="close">
-                    Ok
+                    OK
                 </button>
 
                 <button v-if="type == 'confirmation'" class="btn btn-primary" @click="confirm">
-                    Yes
+                    YES
                 </button>
-
                 <button v-if="type == 'confirmation'" class="btn btn-light ml-1" @click="cancel">
-                    No
+                    NO
                 </button>
             </div>
         </div>
@@ -114,7 +107,7 @@
         height: 4rem;
     }
 
-    #alert .dialog{
+    #alert .dialog {
         background: #fff;
         width: 400px;
         margin: 40px auto;

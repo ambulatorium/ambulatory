@@ -8,13 +8,11 @@
             }
         },
 
-
         mounted() {
             this.timeout = setTimeout(() => {
                 this.close();
             }, this.autoClose);
         },
-
 
         methods: {
             /**
@@ -32,8 +30,8 @@
 </script>
 
 <template>
-    <div id="flashBody" class="alert alert-success">
-        {{message}}
+    <div id="flashBody" class="alert alert-primary border-0 rounded shadow-sm">
+        <strong>{{message}}</strong>
     </div>
 </template>
 
@@ -42,6 +40,6 @@
         z-index: 99999;
         position: fixed;
         bottom: 20px;
-        left: 10px;
+        right: 10px;
     }
 </style>
