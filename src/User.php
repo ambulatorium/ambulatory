@@ -8,7 +8,7 @@ class User extends AmbulatoryModel implements Authenticatable
 {
     const ADMIN = 3;
     const DOCTOR = 2;
-    const DEFAULT = 1;
+    const PATIENT = 1;
 
     /**
      * The attributes that aren't mass assignable.
@@ -97,6 +97,16 @@ class User extends AmbulatoryModel implements Authenticatable
     }
 
     /**
+     * Type of user is patient.
+     *
+     * @return bool
+     */
+    public function isPatient()
+    {
+        return $this->type() === self::PATIENT;
+    }
+
+    /**
      * Doctors' profile.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -155,7 +165,7 @@ class User extends AmbulatoryModel implements Authenticatable
             return $this->type = 'doctor';
         }
 
-        return 'default';
+        return 'patient';
     }
 
     /**

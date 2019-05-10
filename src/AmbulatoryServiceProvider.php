@@ -17,6 +17,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerRoutes();
+        $this->registerMigrations();
         $this->registerAuthGuard();
         $this->registerPublishing();
 
@@ -26,7 +27,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the ambulatory routes.
+     * Register ambulatory routes.
      *
      * @return void
      */
@@ -62,6 +63,18 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register ambulatory migrations.
+     *
+     * @return void
+     */
+    private function registerMigrations()
+    {
+        $this->loadMigrationsFrom(
+            __DIR__.'/Migrations'
+        );
+    }
+
+    /**
      * Register ambulatory authentication guard.
      *
      * @return void
@@ -80,7 +93,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the ambulatory resources.
+     * Register ambulatory resources.
      *
      * @return void
      */

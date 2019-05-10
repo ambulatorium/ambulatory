@@ -8,7 +8,7 @@ return [
     |
     */
 
-    'database_connection' => env('AMBULATORY_DB_CONNECTION', 'mysql'),
+    'database_connection' => env('AMBULATORY_DB_CONNECTION', 'ambulatory'),
 
     /*
     |--------------------------------------------------------------------------
