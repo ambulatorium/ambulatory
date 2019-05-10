@@ -10,15 +10,21 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.1.3",
         "laravel/framework": "~5.7"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.3.15"
+        "nunomaduro/larastan": "^0.3.15",
+        "orchestra/testbench": "^3.7"
     },
     "autoload": {
         "psr-4": {
             "Reliqui\\Ambulatory\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Reliqui\\Ambulatory\\Tests\\": "tests/"
         }
     },
     "extra": {
