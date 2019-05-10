@@ -97,6 +97,16 @@ class User extends AmbulatoryModel implements Authenticatable
     }
 
     /**
+     * Type of user is patient.
+     *
+     * @return bool
+     */
+    public function isPatient()
+    {
+        return $this->type() === self::PATIENT;
+    }
+
+    /**
      * Doctors' profile.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
