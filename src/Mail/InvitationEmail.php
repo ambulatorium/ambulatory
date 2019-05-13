@@ -32,7 +32,7 @@ class InvitationEmail extends Mailable
     {
         return $this->subject(config('app.name').': Invitation')
             ->view('ambulatory::emails.invitation', [
-                'link'  => route('ambulatory.accept.invitation.show', ['token' => $this->invitation->token]),
+                'link'  => route('ambulatory.accept.invitation', ['token' => $this->invitation->token]),
                 'role'  => $this->invitation->role,
             ]);
     }

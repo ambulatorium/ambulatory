@@ -24,7 +24,6 @@ class MedicalFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|string',
             'form_name' => 'required|string|min:2|max:225',
             'full_name' => 'required|string|min:2|max:225',
             'dob' => 'required|date',
@@ -36,31 +35,6 @@ class MedicalFormRequest extends FormRequest
             'home_phone' => 'nullable|string|min:2|max:225',
             'cell_phone' => 'required|string|min:2|max:225',
             'marital_status' => 'required|string|min:2|max:225',
-        ];
-    }
-
-    /**
-     * Set the validated fields request that apply to the model.
-     *
-     * @return array
-     */
-    public function validatedFields()
-    {
-        return [
-            'id' => $this->id,
-            'user_id' => auth('ambulatory')->id(),
-            'form_name' => $this->form_name,
-            'full_name' => $this->full_name,
-            'slug' => $this->form_name.'-'.$this->full_name,
-            'dob' => $this->dob,
-            'gender' => $this->gender,
-            'address' => $this->address,
-            'city' => $this->city,
-            'state' => $this->state,
-            'zip_code' => $this->zip_code,
-            'home_phone' => $this->home_phone,
-            'cell_phone' => $this->cell_phone,
-            'marital_status' => $this->marital_status,
         ];
     }
 }

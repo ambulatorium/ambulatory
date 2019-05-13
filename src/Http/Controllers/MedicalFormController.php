@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Reliqui\Ambulatory\MedicalForm;
 use Reliqui\Ambulatory\Http\Requests\MedicalFormRequest;
 
@@ -34,11 +33,11 @@ class MedicalFormController
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => MedicalForm::make(['id' => Str::uuid()]),
+                'entry' => [],
             ]);
         }
 
-        $entry = MedicalForm::findOrFail($id);
+        $entry = auth('ambulatory')->user()->medicalForms()->findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -55,10 +54,10 @@ class MedicalFormController
     public function store(MedicalFormRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? MedicalForm::findOrFail($id)
-            : new MedicalForm(['id' => $request->validatedFields(['id'])]);
+            ? auth('ambulatory')->user()->medicalForms()->findOrFail($id)
+            : new MedicalForm();
 
-        $entry->fill($request->validatedFields());
+        $entry->fill($request->validated() + ['user_id' => auth('ambulatory')->id()]);
         $entry->save();
 
         return response()->json([

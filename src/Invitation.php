@@ -2,11 +2,16 @@
 
 namespace Reliqui\Ambulatory;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Reliqui\Ambulatory\Mail\CredentialEmail;
 use Reliqui\Ambulatory\Mail\InvitationEmail;
 
 class Invitation extends AmbulatoryModel
 {
+    use HasUuid;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -49,15 +54,46 @@ class Invitation extends AmbulatoryModel
     {
         parent::boot();
 
-        static::created(function ($invitation) {
+        static::saved(function ($invitation) {
             Mail::to($invitation->email)->send(new InvitationEmail($invitation));
         });
     }
 
     /**
+     * Accept the invitation.
+     *
+     * @return mixed
+     */
+    public function accepted()
+    {
+        $credential = Str::random();
+
+        tap($this->createNewUser($credential), function ($user) use ($credential) {
+            Mail::to($user->email)->send(new CredentialEmail($credential));
+        });
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @param string $credential
+     * @return User
+     */
+    protected function createNewUser(string $credential)
+    {
+        return User::create([
+            'id' => Str::uuid(),
+            'name' => $this->email,
+            'email' => $this->email,
+            'password' => Hash::make($credential),
+            'type' => $this->findUserType(),
+        ]);
+    }
+
+    /**
      * Get the user type.
      */
-    public function findUserType()
+    protected function findUserType()
     {
         if ($this->role === 'admin') {
             return User::ADMIN;

@@ -40,17 +40,17 @@ class AmbulatoryServiceProvider extends ServiceProvider
             ->as('ambulatory.')
             ->prefix($path)
             ->group(function () {
-                Route::get('/login', 'LoginController@showLoginForm')->name('auth.login');
-                Route::post('/login', 'LoginController@login')->name('auth.attempt');
+                Route::get('/login', 'LoginController@showLoginForm')->name('login');
+                Route::post('/login', 'LoginController@login')->name('login.attempt');
 
-                Route::get('/register', 'RegisterController@showRegistrationForm')->name('auth.register');
-                Route::post('/register', 'RegisterController@register')->name('auth.register.post');
+                Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
+                Route::post('/register', 'RegisterController@register')->name('register.attempt');
 
                 Route::get('/password/forgot', 'ForgotPasswordController@showResetRequestForm')->name('password.forgot');
                 Route::post('/password/forgot', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
                 Route::get('/password/reset/{token}', 'ForgotPasswordController@showNewPassword')->name('password.reset');
 
-                Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation.show');
+                Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation');
             });
 
         Route::namespace('Reliqui\Ambulatory\Http\Controllers')

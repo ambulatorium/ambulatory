@@ -61,7 +61,7 @@ class CreateTables extends Migration
             $table->string('gender');
             $table->text('address');
             $table->string('city');
-            $table->string('state');
+            $table->string('state')->nullable();
             $table->string('zip_code');
             $table->string('home_phone')->nullable();
             $table->string('cell_phone');

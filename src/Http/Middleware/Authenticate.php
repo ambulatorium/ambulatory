@@ -42,7 +42,7 @@ class Authenticate
             $this->auth->shouldUse('ambulatory');
         } else {
             throw new AuthenticationException(
-                'Unauthenticated.', ['ambulatory'], route('ambulatory.auth.login')
+                'Unauthenticated.', ['ambulatory'], route('ambulatory.login')
             );
         }
 

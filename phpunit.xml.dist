@@ -25,5 +25,8 @@
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_KEY" value="base64:fuEo6DspsZSCNMhZwLVHy+KTqXOacARTWKbDJ91KY3E="/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="MAIL_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
     </php>
 </phpunit>

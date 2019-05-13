@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Reliqui\Ambulatory\Invitation;
 use Reliqui\Ambulatory\Http\Middleware\Admin;
 use Reliqui\Ambulatory\Http\Requests\InvitationRequest;
@@ -41,7 +40,7 @@ class InvitationController extends Controller
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => Invitation::make(['id' => Str::uuid()]),
+                'entry' => [],
             ]);
         }
 
@@ -63,7 +62,7 @@ class InvitationController extends Controller
     {
         $entry = $id !== 'new'
             ? Invitation::findOrFail($id)
-            : new Invitation(['id' => $request->validatedFields(['id'])]);
+            : new Invitation();
 
         $entry->fill($request->validatedFields());
         $entry->save();

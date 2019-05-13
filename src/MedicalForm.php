@@ -4,7 +4,7 @@ namespace Reliqui\Ambulatory;
 
 class MedicalForm extends AmbulatoryModel
 {
-    use HasSlug;
+    use HasUuid, HasSlug;
 
     /**
      * The attributes that aren't mass assignable.
@@ -42,6 +42,13 @@ class MedicalForm extends AmbulatoryModel
     public $incrementing = false;
 
     /**
+     * Get the fields for generating the slug.
+     *
+     * @var array
+     */
+    protected static $slugFieldsFrom = ['form_name', 'full_name'];
+
+    /**
      * Medical form appointments.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -49,5 +56,15 @@ class MedicalForm extends AmbulatoryModel
     public function appointments()
     {
         return $this->hasMany(Booking::class, 'medical_form_id');
+    }
+
+    /**
+     * The medical forms belongs to a user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

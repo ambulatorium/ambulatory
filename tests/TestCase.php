@@ -3,6 +3,7 @@
 namespace Reliqui\Ambulatory\Tests;
 
 use Reliqui\Ambulatory\User;
+use Reliqui\Ambulatory\Doctor;
 use Reliqui\Ambulatory\AmbulatoryServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -45,6 +46,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function signInAsDoctor($doctor = null)
     {
         $doctor = $doctor ?: factory(User::class)->create(['type' => User::DOCTOR]);
+
+        factory(Doctor::class)->create(['user_id' => $doctor->id]);
 
         $this->actingAs($doctor, 'ambulatory');
 

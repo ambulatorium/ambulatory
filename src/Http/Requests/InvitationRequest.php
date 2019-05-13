@@ -25,7 +25,6 @@ class InvitationRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|string',
             'email' => 'required|string|email|max:255|unique:ambulatory_invitations|unique:ambulatory_users',
             'role' => 'required|string',
         ];
@@ -39,7 +38,6 @@ class InvitationRequest extends FormRequest
     public function validatedFields()
     {
         return [
-            'id' => $this->id,
             'email' => $this->email,
             'role' => $this->role,
             'token' => Str::limit(md5($this->email.Str::random()), 25, ''),

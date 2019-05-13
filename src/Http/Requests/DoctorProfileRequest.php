@@ -24,7 +24,6 @@ class DoctorProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|string',
             'full_name' => 'required|string|max:255',
             'qualification' => 'required|string|max:255',
             'practicing_from' => 'nullable|date|max:255',
@@ -42,9 +41,7 @@ class DoctorProfileRequest extends FormRequest
     public function validatedFields()
     {
         return [
-            'id' => $this->id,
             'full_name' => $this->full_name,
-            'slug' => $this->full_name,
             'qualification' => $this->qualification,
             'practicing_from' => $this->practicing_from,
             'professional_statement' => $this->professional_statement,

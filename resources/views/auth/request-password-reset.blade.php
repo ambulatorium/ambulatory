@@ -25,7 +25,7 @@
                 <div class="d-flex w-100 justify-content-between mb-3">
                     <h4>Reset password</h4>
 
-                    <a href="{{ route('ambulatory.auth.login') }}"> Sign in?</a>
+                    <a href="{{ route('ambulatory.login') }}"> Sign in?</a>
                 </div>
 
                 @if (session()->has('invalidResetToken'))
@@ -62,7 +62,7 @@
                 </div>
 
                 <p class="text-center text-muted mt-5">
-                    Don't have an account? <a href="{{ route('ambulatory.auth.register') }}">Sign Up</a>
+                    Don't have an account? <a href="{{ route('ambulatory.register') }}">Sign Up</a>
                 </p>
             </form>
         </div>

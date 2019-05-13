@@ -4,6 +4,8 @@ namespace Reliqui\Ambulatory;
 
 class Booking extends AmbulatoryModel
 {
+    use HasUuid;
+
     const DONE = 1;
     const ACTIVE = 2;
     const EXPIRED = 3;

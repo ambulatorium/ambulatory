@@ -19,13 +19,13 @@
         </div>
 
         <div class="form-card">
-            <form method="POST" action="{{ route('ambulatory.auth.register.post') }}" class="form-horizontal">
+            <form method="POST" action="{{ route('ambulatory.register.attempt') }}" class="form-horizontal">
                 @csrf
 
                 <div class="d-flex w-100 justify-content-between mb-3">
                     <h4>Sign up</h4>
 
-                    <a href="{{ route('ambulatory.auth.login') }}"> Sign in?</a>
+                    <a href="{{ route('ambulatory.login') }}"> Sign in?</a>
                 </div>
 
                 <div class="form-group">

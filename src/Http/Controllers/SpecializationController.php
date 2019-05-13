@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Reliqui\Ambulatory\Specialization;
 use Reliqui\Ambulatory\Http\Middleware\Admin;
 use Reliqui\Ambulatory\Http\Requests\SpecializationRequest;
@@ -41,7 +40,7 @@ class SpecializationController extends Controller
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => Specialization::make(['id' => Str::uuid()]),
+                'entry' => [],
             ]);
         }
 
@@ -55,6 +54,7 @@ class SpecializationController extends Controller
     /**
      * Store the specialization.
      *
+     * @param SpecializationRequest $request
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
@@ -62,9 +62,9 @@ class SpecializationController extends Controller
     {
         $entry = $id !== 'new'
             ? Specialization::findOrFail($id)
-            : new Specialization(['id' => $request->validatedFields(['id'])]);
+            : new Specialization();
 
-        $entry->fill($request->validatedFields());
+        $entry->fill($request->validated());
         $entry->save();
 
         return response()->json([
