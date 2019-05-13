@@ -4,7 +4,7 @@ namespace Reliqui\Ambulatory;
 
 class Specialization extends AmbulatoryModel
 {
-    use HasSlug;
+    use HasUuid, HasSlug;
 
     /**
      * The attributes that aren't mass assignable.
@@ -40,6 +40,13 @@ class Specialization extends AmbulatoryModel
      * @var bool
      */
     public $incrementing = false;
+
+    /**
+     * Get the fields for generating the slug.
+     *
+     * @var array
+     */
+    protected static $slugFieldsFrom = ['name'];
 
     /**
      * The doctors that has the specializations.
