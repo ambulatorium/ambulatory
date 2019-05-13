@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Reliqui\Ambulatory\HealthFacility;
 use Reliqui\Ambulatory\Http\Middleware\Admin;
 use Reliqui\Ambulatory\Http\Requests\HealthFacilityRequest;
@@ -41,7 +40,7 @@ class HealthFacilityController extends Controller
     {
         if ($id === 'new') {
             return response()->json([
-                'entry' => HealthFacility::make(['id' => Str::uuid()]),
+                'entry' => [],
             ]);
         }
 
@@ -63,9 +62,9 @@ class HealthFacilityController extends Controller
     {
         $entry = $id !== 'new'
             ? HealthFacility::findOrFail($id)
-            : new HealthFacility(['id' => $request->validatedFields(['id'])]);
+            : new HealthFacility();
 
-        $entry->fill($request->validatedFields());
+        $entry->fill($request->validated());
         $entry->save();
 
         return response()->json([
