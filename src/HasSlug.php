@@ -7,23 +7,52 @@ use Illuminate\Support\Str;
 trait HasSlug
 {
     /**
-     * Set slug for the model.
-     *
-     * @param string $slug
-     * @return void
+     * Boot up the trait.
      */
-    public function setSlugAttribute(string $slug)
+    public static function bootHasSlug()
     {
-        $this->attributes['slug'] = $this->addUniqueSlug($slug);
+        static::saving(function ($model) {
+            $model->addSlug();
+        });
     }
 
     /**
-     * Add unique slug.
+     * Add slug to the model.
+     */
+    protected function addSlug()
+    {
+        $slugSource = $this->generateSlugFrom();
+
+        $slug = $this->generateUniqueSlug($slugSource);
+
+        $this->slug = $slug;
+    }
+
+    /**
+     * Generate slug from slug fields.
+     *
+     * @return string
+     */
+    protected function generateSlugFrom()
+    {
+        $slugFields = static::$slugFieldsFrom;
+
+        $slugSource = collect($slugFields)
+            ->map(function (string $fieldName) {
+                return data_get($this, $fieldName, '');
+            })
+            ->implode('-');
+
+        return substr($slugSource, 0, 100);
+    }
+
+    /**
+     * Generate unique slug.
      *
      * @param string $value
      * @return string
      */
-    private function addUniqueSlug(string $value)
+    protected function generateUniqueSlug(string $value)
     {
         $slug = $originalSlug = Str::slug($value);
         $i = 0;
@@ -42,7 +71,7 @@ trait HasSlug
      * @param string $ignoreId
      * @return bool
      */
-    private function slugExists(string $slug, string $ignoreId = null)
+    protected function slugExists(string $slug, string $ignoreId = null)
     {
         $query = $this->where('slug', $slug);
 
