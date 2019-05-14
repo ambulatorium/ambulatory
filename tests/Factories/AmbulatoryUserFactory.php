@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'id' => $faker->uuid,
-        'name' => $faker->title,
+        'name' => $faker->name,
         'email' => $faker->unique()->safeEmail(),
         'password' => $faker->password(),
     ];
