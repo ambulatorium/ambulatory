@@ -4,6 +4,8 @@ namespace Reliqui\Ambulatory;
 
 class Schedule extends AmbulatoryModel
 {
+    use HasUuid;
+
     const ESTIMATED_SERVICE_TIME = 15; // minutes
 
     /**
@@ -51,6 +53,11 @@ class Schedule extends AmbulatoryModel
         return $this->belongsTo(HealthFacility::class, 'health_facility_id');
     }
 
+    /**
+     * The schedules belongs to a doctor.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');

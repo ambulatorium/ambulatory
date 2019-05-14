@@ -25,7 +25,6 @@ class ScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|string',
             'location' => 'required|string|exists:'.config('ambulatory.database_connection').'.ambulatory_health_facilities,id|unique:'.config('ambulatory.database_connection').'.ambulatory_schedules,health_facility_id,'.$this->id.',id,doctor_id,'.auth('ambulatory')->user()->doctorProfile->id,
             'start_date_time' => 'required|date',
             'end_date_time' => 'required|date|after:start_date_time',
@@ -45,7 +44,6 @@ class ScheduleRequest extends FormRequest
             : $this->service_time;
 
         return [
-            'id' => $this->id,
             'doctor_id' => auth('ambulatory')->user()->doctorProfile->id,
             'health_facility_id' => $this->location,
             'start_date_time' => $this->start_date_time,

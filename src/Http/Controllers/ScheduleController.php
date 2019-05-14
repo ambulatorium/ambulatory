@@ -45,14 +45,13 @@ class ScheduleController extends Controller
         if ($id === 'new') {
             return response()->json([
                 'entry' => Schedule::make([
-                    'id' => Str::uuid(),
                     'start_date_time' => now()->format('Y-m-d H:i:00'),
                     'end_date_time' => now()->format('Y-m-d H:i:00'),
                 ]),
             ]);
         }
 
-        $entry = Schedule::findOrFail($id);
+        $entry = auth('ambulatory')->user()->doctorProfile->schedules()->findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -69,8 +68,8 @@ class ScheduleController extends Controller
     public function store(ScheduleRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? Schedule::findOrFail($id)
-            : new Schedule(['id' => $request->validatedFields(['id'])]);
+            ? auth('ambulatory')->user()->doctorProfile->schedules()->findOrFail($id)
+            : new Schedule();
 
         $entry->fill($request->validatedFields());
         $entry->save();

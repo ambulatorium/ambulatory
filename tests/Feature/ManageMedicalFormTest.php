@@ -21,7 +21,7 @@ class ManageMedicalFormTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_create_a_new_their_medical_form()
+    public function a_user_can_create_a_new_medical_form()
     {
         $user = $this->signInAsPatient();
 
