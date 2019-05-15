@@ -50,7 +50,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
                 Route::post('/password/forgot', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
                 Route::get('/password/reset/{token}', 'ForgotPasswordController@showNewPassword')->name('password.reset');
 
-                Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation.show');
+                Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation');
             });
 
         Route::namespace('Reliqui\Ambulatory\Http\Controllers')
