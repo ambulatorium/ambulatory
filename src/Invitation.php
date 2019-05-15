@@ -5,8 +5,8 @@ namespace Reliqui\Ambulatory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Reliqui\Ambulatory\Mail\InvitationEmail;
 use Reliqui\Ambulatory\Mail\CredentialEmail;
+use Reliqui\Ambulatory\Mail\InvitationEmail;
 
 class Invitation extends AmbulatoryModel
 {
@@ -81,7 +81,7 @@ class Invitation extends AmbulatoryModel
      */
     protected function createNewUser(string $credential)
     {
-       return User::create([
+        return User::create([
             'id' => Str::uuid(),
             'name' => $this->email,
             'email' => $this->email,
