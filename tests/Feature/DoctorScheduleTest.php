@@ -3,8 +3,8 @@
 namespace Reliqui\Ambulatory\Tests\Feature;
 
 use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\Tests\TestCase;
 use Reliqui\Ambulatory\HealthFacility;
+use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorScheduleTest extends TestCase
@@ -37,7 +37,7 @@ class DoctorScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         tap(factory(HealthFacility::class)->create(), function ($location) {
-            $attrributes =  factory(Schedule::class)->raw(['location' => $location->id]);
+            $attrributes = factory(Schedule::class)->raw(['location' => $location->id]);
 
             $this->postJson(route('ambulatory.schedules.store', 'new'), $attrributes)->assertOk();
 
@@ -50,14 +50,14 @@ class DoctorScheduleTest extends TestCase
     {
         $this->signInAsDoctor();
 
-        $attrributes =  factory(Schedule::class)->raw(['location' => 'not-a-location']);
+        $attrributes = factory(Schedule::class)->raw(['location' => 'not-a-location']);
 
         $this->postJson(route('ambulatory.schedules.store', 'new'), $attrributes)
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
-                    'location' => ["The selected location is invalid."],
-                ]
+                    'location' => ['The selected location is invalid.'],
+                ],
             ]);
 
         $this->assertDatabaseMissing('ambulatory_schedules', $attrributes);
@@ -68,18 +68,17 @@ class DoctorScheduleTest extends TestCase
     {
         $user = $this->signInAsDoctor();
 
-        $attrributes =  factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
+        $attrributes = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
 
         $this->postJson(route('ambulatory.schedules.store', 'new'), [
-            'location' => $attrributes->health_facility_id
+            'location' => $attrributes->health_facility_id,
         ])
         ->assertStatus(422)
         ->assertJson([
             'errors' => [
-                'location' => ["The location has already been taken."],
-            ]
+                'location' => ['The location has already been taken.'],
+            ],
         ]);
-
     }
 
     /** @test */
@@ -101,7 +100,7 @@ class DoctorScheduleTest extends TestCase
 
         $this->getJson(route('ambulatory.schedules.show', $schedule->id))
             ->assertOk()
-            ->assertJson(["entry" => $schedule->toArray()]);
+            ->assertJson(['entry' => $schedule->toArray()]);
     }
 
     /** @test */

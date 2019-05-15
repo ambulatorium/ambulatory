@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Reliqui\Ambulatory\Schedule;
 use Reliqui\Ambulatory\Http\Middleware\Doctor;
 use Reliqui\Ambulatory\Http\Requests\ScheduleRequest;
