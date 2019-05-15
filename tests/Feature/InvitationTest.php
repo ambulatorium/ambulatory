@@ -59,8 +59,8 @@ class InvitationTest extends TestCase
                 ->assertStatus(422)
                 ->assertJson([
                     'errors' => [
-                        'email' => ["The email has already been taken."],
-                    ]
+                        'email' => ['The email has already been taken.'],
+                    ],
                 ]);
         });
 
