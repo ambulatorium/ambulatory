@@ -2,8 +2,8 @@
 
 namespace Reliqui\Ambulatory\Tests\Feature;
 
-use Reliqui\Ambulatory\Tests\TestCase;
 use Reliqui\Ambulatory\HealthFacility;
+use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageHealthFacilityTest extends TestCase
@@ -39,7 +39,7 @@ class ManageHealthFacilityTest extends TestCase
 
         $this->postJson(route('ambulatory.health-facilities.store', 'new'), $attrributes)
             ->assertOk()
-            ->assertJson(["entry" => $attrributes]);
+            ->assertJson(['entry' => $attrributes]);
 
         $this->assertDatabaseHas('ambulatory_health_facilities', $attrributes);
     }
@@ -53,11 +53,11 @@ class ManageHealthFacilityTest extends TestCase
 
         $this->getJson(route('ambulatory.health-facilities.show', $healthFacility->id))
             ->assertOk()
-            ->assertJson(["entry" => $healthFacility->toArray()]);
+            ->assertJson(['entry' => $healthFacility->toArray()]);
 
         $this->getJson(route('ambulatory.health-facilities.show', 'new'))
             ->assertOk()
-            ->assertJson(["entry" => []]);
+            ->assertJson(['entry' => []]);
     }
 
     /** @test */
@@ -84,7 +84,7 @@ class ManageHealthFacilityTest extends TestCase
                 'city' => 'City Changed',
             ]))
             ->assertOk()
-            ->assertJson(["entry" => $attributes]);
+            ->assertJson(['entry' => $attributes]);
 
         $this->assertNotSame($healthFacility->slug, 'name-changed-city-changed');
 

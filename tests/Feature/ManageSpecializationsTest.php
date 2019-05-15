@@ -2,8 +2,8 @@
 
 namespace Reliqui\Ambulatory\Tests\Feature;
 
-use Reliqui\Ambulatory\Tests\TestCase;
 use Reliqui\Ambulatory\Specialization;
+use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageSpecializationsTest extends TestCase
@@ -40,7 +40,7 @@ class ManageSpecializationsTest extends TestCase
 
         $this->postJson(route('ambulatory.specializations.store', 'new'), $attrributes)
             ->assertOk()
-            ->assertJson(["entry" => $attrributes]);
+            ->assertJson(['entry' => $attrributes]);
 
         $this->assertDatabaseHas('ambulatory_specializations', $attrributes);
     }
@@ -55,8 +55,8 @@ class ManageSpecializationsTest extends TestCase
         $this->postJson(route('ambulatory.specializations.store', 'new'), $attributes)
             ->assertJson([
                 'errors' => [
-                    'name' => ["The name field is required."],
-                ]
+                    'name' => ['The name field is required.'],
+                ],
             ]);
 
         $this->assertDatabaseMissing('ambulatory_specializations', $attributes);
@@ -71,7 +71,7 @@ class ManageSpecializationsTest extends TestCase
 
         $this->getJson(route('ambulatory.specializations.show', $specialization->id))
             ->assertOk()
-            ->assertJson(["entry" => $specialization->toArray()]);
+            ->assertJson(['entry' => $specialization->toArray()]);
     }
 
     /** @test */
@@ -95,7 +95,7 @@ class ManageSpecializationsTest extends TestCase
 
         $this->postJson(route('ambulatory.specializations.store', $specialization->id), $attributes = factory(Specialization::class)->raw(['name' => 'Name Changed']))
             ->assertOk()
-            ->assertJson(["entry" => $attributes]);
+            ->assertJson(['entry' => $attributes]);
 
         $this->assertNotSame($specialization->slug, 'name-changed');
 

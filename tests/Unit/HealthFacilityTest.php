@@ -2,8 +2,8 @@
 
 namespace Reliqui\Ambulatory\Tests\Unit;
 
-use Reliqui\Ambulatory\Tests\TestCase;
 use Reliqui\Ambulatory\HealthFacility;
+use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HealthFacilityTest extends TestCase
