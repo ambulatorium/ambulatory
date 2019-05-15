@@ -29,7 +29,7 @@ class ManageMedicalFormTest extends TestCase
 
         $this->post(route('ambulatory.medical-form.store', 'new'), $medicalForm)
             ->assertOk()
-            ->assertJson(["entry" => $medicalForm]);
+            ->assertJson(['entry' => $medicalForm]);
 
         $this->assertDatabaseHas('ambulatory_medical_forms', $medicalForm);
     }
@@ -43,11 +43,11 @@ class ManageMedicalFormTest extends TestCase
 
         $this->getJson(route('ambulatory.medical-form.show', $medicalForm->id))
             ->assertOk()
-            ->assertJson(["entry" => $medicalForm->toArray()]);
+            ->assertJson(['entry' => $medicalForm->toArray()]);
 
         $this->getJson(route('ambulatory.medical-form.show', 'new'))
             ->assertOk()
-            ->assertJson(["entry" => []]);
+            ->assertJson(['entry' => []]);
     }
 
     /** @test */
@@ -83,7 +83,7 @@ class ManageMedicalFormTest extends TestCase
             'full_name' => 'Full Name Changed',
         ]))
         ->assertOk()
-        ->assertJson(["entry" => $attributes]);
+        ->assertJson(['entry' => $attributes]);
 
         $this->assertNotSame($medicalForm->slug, 'form-name-changed-full-name-changed');
 

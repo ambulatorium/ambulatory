@@ -3,8 +3,8 @@
 namespace Reliqui\Ambulatory\Tests\Unit;
 
 use Illuminate\Support\Collection;
-use Reliqui\Ambulatory\Tests\TestCase;
 use Reliqui\Ambulatory\Specialization;
+use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpecializationTest extends TestCase
