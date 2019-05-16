@@ -81,7 +81,7 @@ class InvitationTest extends TestCase
         $invitation = factory(Invitation::class)->create();
 
         $this->get(route('ambulatory.accept.invitation', $invitation->token))
-            ->assertRedirect(route('ambulatory.auth.login'))
+            ->assertRedirect(route('ambulatory.login'))
             ->assertSessionHas('invitationAccepted', true);
 
         $this->assertDatabaseHas('ambulatory_users', ['email' => $invitation->email]);

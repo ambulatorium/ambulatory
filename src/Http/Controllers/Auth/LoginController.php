@@ -43,7 +43,7 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect()->route('ambulatory.auth.login')->with('loggedOut', true);
+        return redirect()->route('ambulatory.login')->with('loggedOut', true);
     }
 
     /**

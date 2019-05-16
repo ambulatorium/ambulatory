@@ -14,6 +14,6 @@ class AcceptInvitationController
             $invitation->delete();
         });
 
-        return redirect()->route('ambulatory.auth.login')->with('invitationAccepted', true);
+        return redirect()->route('ambulatory.login')->with('invitationAccepted', true);
     }
 }
