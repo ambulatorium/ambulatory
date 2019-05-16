@@ -14,16 +14,11 @@ class InvitationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Mail::fake();
-    }
-
     /** @test */
     public function only_admin_can_invite_users()
     {
+        Mail::fake();
+
         $this->signInAsDoctor();
         $this->postJson(route('ambulatory.invitations.store', 'new'), [])->assertStatus(403);
 
@@ -36,6 +31,8 @@ class InvitationTest extends TestCase
     /** @test */
     public function admin_can_invite_user_via_email()
     {
+        Mail::fake();
+
         $this->signInAsAdmin();
 
         tap(factory(Invitation::class)->raw(), function ($attributes) {
@@ -50,6 +47,8 @@ class InvitationTest extends TestCase
     /** @test */
     public function admin_cannot_invite_user_when_email_is_already_use()
     {
+        Mail::fake();
+
         $this->signInAsAdmin();
 
         $user = factory(User::class)->create();
@@ -70,6 +69,8 @@ class InvitationTest extends TestCase
     /** @test */
     public function guest_cannot_confirm_their_invitation_with_invalid_token()
     {
+        Mail::fake();
+
         $this->get(route('ambulatory.accept.invitation', 'invalid-token'))->assertStatus(404);
 
         Mail::assertNotSent(CredentialEmail::class);
@@ -78,6 +79,8 @@ class InvitationTest extends TestCase
     /** @test */
     public function guest_can_confirm_their_invitation_with_valid_token()
     {
+        Mail::fake();
+
         $invitation = factory(Invitation::class)->create();
 
         $this->get(route('ambulatory.accept.invitation', $invitation->token))
