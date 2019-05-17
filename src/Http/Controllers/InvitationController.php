@@ -38,12 +38,6 @@ class InvitationController extends Controller
      */
     public function show($id)
     {
-        if ($id === 'new') {
-            return response()->json([
-                'entry' => [],
-            ]);
-        }
-
         $entry = Invitation::findOrFail($id);
 
         return response()->json([

@@ -44,10 +44,6 @@ class ManageMedicalFormTest extends TestCase
         $this->getJson(route('ambulatory.medical-form.show', $medicalForm->id))
             ->assertOk()
             ->assertJson(['entry' => $medicalForm->toArray()]);
-
-        $this->getJson(route('ambulatory.medical-form.show', 'new'))
-            ->assertOk()
-            ->assertJson(['entry' => []]);
     }
 
     /** @test */

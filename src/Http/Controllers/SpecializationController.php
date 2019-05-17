@@ -38,12 +38,6 @@ class SpecializationController extends Controller
      */
     public function show($id)
     {
-        if ($id === 'new') {
-            return response()->json([
-                'entry' => [],
-            ]);
-        }
-
         $entry = Specialization::findOrFail($id);
 
         return response()->json([

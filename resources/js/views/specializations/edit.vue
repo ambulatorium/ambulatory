@@ -7,7 +7,6 @@
                 id: this.$route.params.id || 'new',
                 form: {
                     errors: [],
-                    id: '',
                     name: '',
                     description: ''
                 }
@@ -17,28 +16,22 @@
         mounted() {
             document.title = "Specializations — Reliqui Ambulatory";
 
-            this.http().get('/api/specializations/' + this.id).then(response => {
-                this.entry = response.data.entry;
-
-                this.form.id = response.data.entry.id;
-
-                if (this.id != 'new') {
-                    this.form.name = response.data.entry.name;
-                    this.form.description = response.data.entry.description;
-                }
-
-                this.ready = true;
-            }).catch(error => {
-                this.ready = true;
-            });
+            this.id != 'new'
+                ? this.getSpecialization()
+                : this.entry = [], this.ready = true;
         },
 
         methods: {
-            deleteSpecialization() {
-                this.alertConfirm("Are you sure you want to delete this specialization?", () => {
-                    this.http().delete('/api/specializations/' + this.id, this.form).then(response => {
-                        this.$router.push({name: 'specializations'})
-                    })
+            getSpecialization() {
+                this.http().get('/api/specializations/' + this.id).then(response => {
+                    this.entry = response.data.entry;
+
+                    this.form.name = response.data.entry.name;
+                    this.form.description = response.data.entry.description;
+
+                    this.ready = true;
+                }).catch(error => {
+                    this.ready = true;
                 });
             },
 
@@ -52,7 +45,15 @@
                 }).catch(error => {
                     this.form.errors = error.response.data.errors;
                 });
-            }
+            },
+
+            deleteSpecialization() {
+                this.alertConfirm("Are you sure you want to delete this specialization?", () => {
+                    this.http().delete('/api/specializations/' + this.id, this.form).then(response => {
+                        this.$router.push({name: 'specializations'})
+                    })
+                });
+            },
         }
     }
 </script>

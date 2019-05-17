@@ -8,7 +8,6 @@
                 form: {
                     errors: [],
                     working: false,
-                    id: '',
                     email: '',
                     role: ''
                 }
@@ -18,28 +17,22 @@
         mounted() {
             document.title = "Invitation — Reliqui Ambulatory";
 
-            this.http().get('/api/invitations/' + this.id).then(response => {
-                this.entry = response.data.entry;
-
-                this.form.id = response.data.entry.id;
-
-                if (this.id != 'new') {
-                    this.form.email = response.data.entry.email;
-                    this.form.role = response.data.entry.role;
-                }
-
-                this.ready = true;
-            }).catch(error => {
-                this.ready = true;
-            });
+            this.id != 'new'
+                ? this.getInvitation()
+                : this.entry = [], this.ready = true;
         },
 
         methods: {
-            deleteInvitation(){
-                this.alertConfirm("Are you sure you want to delete this invitation?", () => {
-                    this.http().delete('/api/invitations/' + this.id, this.form).then(response => {
-                        this.$router.push({name: 'invitations'})
-                    })
+            getInvitation() {
+                this.http().get('/api/invitations/' + this.id).then(response => {
+                    this.entry = response.data.entry;
+
+                    this.form.email = response.data.entry.email;
+                    this.form.role = response.data.entry.role;
+
+                    this.ready = true;
+                }).catch(error => {
+                    this.ready = true;
                 });
             },
 
@@ -58,7 +51,15 @@
 
                     this.form.working = false;
                 });
-            }
+            },
+
+            deleteInvitation(){
+                this.alertConfirm("Are you sure you want to delete this invitation?", () => {
+                    this.http().delete('/api/invitations/' + this.id, this.form).then(response => {
+                        this.$router.push({name: 'invitations'})
+                    })
+                });
+            },
         }
     }
 </script>

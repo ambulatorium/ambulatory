@@ -14,9 +14,10 @@ class MedicalFormController
      */
     public function index()
     {
-        $user = auth('ambulatory')->user();
-
-        $entries = $user->medicalForms()->paginate(25);
+        $entries = auth('ambulatory')
+            ->user()
+            ->medicalForms()
+            ->paginate(25);
 
         return response()->json([
             'entries' => $entries,
@@ -31,13 +32,10 @@ class MedicalFormController
      */
     public function show($id)
     {
-        if ($id === 'new') {
-            return response()->json([
-                'entry' => [],
-            ]);
-        }
-
-        $entry = auth('ambulatory')->user()->medicalForms()->findOrFail($id);
+        $entry = auth('ambulatory')
+            ->user()
+            ->medicalForms()
+            ->findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -54,7 +52,10 @@ class MedicalFormController
     public function store(MedicalFormRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? auth('ambulatory')->user()->medicalForms()->findOrFail($id)
+            ? auth('ambulatory')
+                ->user()
+                ->medicalForms()
+                ->findOrFail($id)
             : new MedicalForm();
 
         $entry->fill($request->validated() + ['user_id' => auth('ambulatory')->id()]);

@@ -7,7 +7,6 @@
                 id: this.$route.params.id || 'new',
                 form: {
                     errors: [],
-                    id: '',
                     form_name: '',
                     full_name: '',
                     dob: '',
@@ -26,37 +25,35 @@
         mounted() {
             document.title = "Medical Form — Reliqui Ambulatory";
 
-            this.http().get('/api/medical-form/' + this.id).then(response => {
-                this.entry = _.cloneDeep(response.data.entry);
-
-                this.fillForm(response.data.entry);
-
-                this.ready = true;
-            }).catch(error => {
-                this.ready = true;
-            });
+            this.id != 'new'
+                ? this.getMedicalForm()
+                : this.entry = [], this.ready = true;
         },
 
         methods: {
-            fillForm(data) {
-                this.form.id = data.id;
+            getMedicalForm() {
+                this.http().get('/api/medical-form/' + this.id).then(response => {
+                    this.entry = response.data.entry;
 
-                if (this.id != 'new') {
-                    this.form.form_name = data.form_name;
-                    this.form.full_name = data.full_name;
-                    this.form.dob = data.dob;
-                    this.form.gender = data.gender;
-                    this.form.address = data.address;
-                    this.form.city = data.city;
-                    this.form.state = data.state;
-                    this.form.zip_code = data.zip_code;
-                    this.form.home_phone = data.home_phone;
-                    this.form.cell_phone = data.cell_phone;
-                    this.form.marital_status = data.marital_status;
-                }
+                    this.form.form_name = response.data.entry.form_name;
+                    this.form.full_name = response.data.entry.full_name;
+                    this.form.dob = response.data.entry.dob;
+                    this.form.gender = response.data.entry.gender;
+                    this.form.address = response.data.entry.address;
+                    this.form.city = response.data.entry.city;
+                    this.form.state = response.data.entry.state;
+                    this.form.zip_code = response.data.entry.zip_code;
+                    this.form.home_phone = response.data.entry.home_phone;
+                    this.form.cell_phone = response.data.entry.cell_phone;
+                    this.form.marital_status = response.data.entry.marital_status;
+
+                    this.ready = true;
+                }).catch(error => {
+                    this.ready = true;
+                });
             },
 
-            saveResource() {
+            saveMedicalForm() {
                 this.form.errors = [];
 
                 this.http().post('/api/medical-form/' + this.id, this.form).then(response => {
@@ -247,7 +244,7 @@
                         Once you have the medical form, you can select the form when making an appointment.
                     </p>
 
-                    <button type="submit" class="btn btn-primary" @click="saveResource">Save</button>
+                    <button type="submit" class="btn btn-primary" @click="saveMedicalForm">Save</button>
                 </div>
             </div>
         </div>

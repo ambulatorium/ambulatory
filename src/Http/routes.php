@@ -11,7 +11,7 @@ Route::post('/api/schedules/{id}', 'ScheduleController@store')->name('schedules.
 
 // Medical Form.
 Route::get('/api/medical-form', 'MedicalFormController@index')->name('medical-form.index');
-Route::get('/api/medical-form/{id?}', 'MedicalFormController@show')->name('medical-form.show');
+Route::get('/api/medical-form/{id}', 'MedicalFormController@show')->name('medical-form.show');
 Route::post('/api/medical-form/{id}', 'MedicalFormController@store')->name('medical-form.store');
 
 // Staff.
@@ -19,18 +19,18 @@ Route::get('/api/staff', 'StaffController@index')->name('staff.index');
 
 // Invitations.
 Route::get('/api/invitations', 'InvitationController@index')->name('invitations.index');
-Route::get('/api/invitations/{id?}', 'InvitationController@show')->name('invitations.show');
+Route::get('/api/invitations/{id}', 'InvitationController@show')->name('invitations.show');
 Route::post('/api/invitations/{id}', 'InvitationController@store')->name('invitations.store');
 Route::delete('/api/invitations/{id}', 'InvitationController@destroy')->name('invitations.destroy');
 
 // Health Facilities.
 Route::get('/api/health-facilities', 'HealthFacilityController@index')->name('health-facilities.index');
-Route::get('/api/health-facilities/{id?}', 'HealthFacilityController@show')->name('health-facilities.show');
+Route::get('/api/health-facilities/{id}', 'HealthFacilityController@show')->name('health-facilities.show');
 Route::post('/api/health-facilities/{id}', 'HealthFacilityController@store')->name('health-facilities.store');
 
 // Specializations.
 Route::get('/api/specializations', 'SpecializationController@index')->name('specializations.index');
-Route::get('/api/specializations/{id?}', 'SpecializationController@show')->name('specializations.show');
+Route::get('/api/specializations/{id}', 'SpecializationController@show')->name('specializations.show');
 Route::post('/api/specializations/{id}', 'SpecializationController@store')->name('specializations.store');
 Route::delete('/api/specializations/{id}', 'SpecializationController@destroy')->name('specializations.destroy');
 

@@ -38,12 +38,6 @@ class HealthFacilityController extends Controller
      */
     public function show($id)
     {
-        if ($id === 'new') {
-            return response()->json([
-                'entry' => [],
-            ]);
-        }
-
         $entry = HealthFacility::findOrFail($id);
 
         return response()->json([

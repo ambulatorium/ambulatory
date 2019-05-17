@@ -7,7 +7,6 @@
                 id: this.$route.params.id || 'new',
                 form: {
                     errors: [],
-                    id: '',
                     name: '',
                     address: '',
                     city: '',
@@ -21,27 +20,29 @@
         mounted() {
             document.title = "Health Facility — Reliqui Ambulatory";
 
-            this.http().get('/api/health-facilities/' + this.id).then(response => {
-                this.entry = response.data.entry;
+            this.id != 'new'
+                ? this.getHealthFacility()
+                : this.entry = [], this.ready = true;
+        },
 
-                this.form.id = response.data.entry.id;
+        methods: {
+            getHealthFacility() {
+                this.http().get('/api/health-facilities/' + this.id).then(response => {
+                    this.entry = response.data.entry;
 
-                if (this.id != 'new') {
                     this.form.name = response.data.entry.name;
                     this.form.address = response.data.entry.address;
                     this.form.city = response.data.entry.city;
                     this.form.state = response.data.entry.state;
                     this.form.country = response.data.entry.country;
                     this.form.zip_code = response.data.entry.zip_code;
-                }
 
-                this.ready = true;
-            }).catch(error => {
-                this.ready = true;
-            });
-        },
+                    this.ready = true;
+                }).catch(error => {
+                    this.ready = true;
+                });
+            },
 
-        methods: {
             saveHealthFacility() {
                 this.form.errors = [];
 
@@ -52,7 +53,7 @@
                 }).catch(error => {
                     this.form.errors = error.response.data.errors;
                 });
-            }
+            },
         }
     }
 </script>

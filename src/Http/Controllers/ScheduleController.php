@@ -50,7 +50,11 @@ class ScheduleController extends Controller
             ]);
         }
 
-        $entry = auth('ambulatory')->user()->doctorProfile->schedules()->findOrFail($id);
+        $entry = auth('ambulatory')
+            ->user()
+            ->doctorProfile
+            ->schedules()
+            ->findOrFail($id);
 
         return response()->json([
             'entry' => $entry,
@@ -67,7 +71,11 @@ class ScheduleController extends Controller
     public function store(ScheduleRequest $request, $id)
     {
         $entry = $id !== 'new'
-            ? auth('ambulatory')->user()->doctorProfile->schedules()->findOrFail($id)
+            ? auth('ambulatory')
+                ->user()
+                ->doctorProfile
+                ->schedules()
+                ->findOrFail($id)
             : new Schedule();
 
         $entry->fill($request->validatedFields());

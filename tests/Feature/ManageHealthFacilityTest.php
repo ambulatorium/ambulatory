@@ -54,10 +54,6 @@ class ManageHealthFacilityTest extends TestCase
         $this->getJson(route('ambulatory.health-facilities.show', $healthFacility->id))
             ->assertOk()
             ->assertJson(['entry' => $healthFacility->toArray()]);
-
-        $this->getJson(route('ambulatory.health-facilities.show', 'new'))
-            ->assertOk()
-            ->assertJson(['entry' => []]);
     }
 
     /** @test */
