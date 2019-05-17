@@ -22,16 +22,15 @@ const webpack = require('webpack');
              }
          }
      })
+     .webpackConfig({
+         plugins: [
+             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+         ],
+     });
+
+mix
      .setPublicPath('public')
      .js('resources/js/app.js', 'public')
      .sass('resources/sass/app.scss', 'public')
      .version()
-     .copy('public', '../reliquitest/public/vendor/ambulatory')
-     .webpackConfig({
-         resolve: {
-             symlinks: false,
-             alias: {
-                 '@': path.resolve(__dirname, 'resources/js/'),
-             }
-         },
-     });
+     .copy('public', '../reliquitest/public/vendor/ambulatory');
