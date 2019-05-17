@@ -71,12 +71,22 @@
             <p class="text-center">No data were found</p>
         </div>
 
-        <div id="indexView" class="list-group list-group-flush" v-if="ready && entries.length > 0">
+        <div class="list-group list-group-flush" v-if="ready && entries.length > 0">
             <transition-group name="list">
                 <div v-for="entry in entries" :key="entry.id">
                     <slot name="group-item" :entry="entry"></slot>
                 </div>
             </transition-group>
+
+            <div v-if="hasMoreEntries">
+                <div class="text-center">
+                    <a href="#" v-on:click.prevent="loadOlderEntries" v-if="!loadingMoreEntries" class="list-group-item list-group-item-action">
+                        Load Older Entries
+                    </a>
+                </div>
+
+                <span v-if="loadingMoreEntries">Loading...</span>
+            </div>
         </div>
     </div>
 </template>

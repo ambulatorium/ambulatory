@@ -265,18 +265,6 @@ button:hover {
     border: 0rem;
 }
 
-.control-action {
-    svg {
-        fill: $control-action-icon-color;
-        width: 1.2rem;
-        height: 1.2rem;
-
-        &:hover {
-            fill: $primary;
-        }
-    }
-}
-
 select::-ms-expand {
     display: none;
 }
@@ -284,4 +272,12 @@ select::-ms-expand {
 select {
     -webkit-appearance: none;
     appearance: none;
+}
+
+.list-enter-active {
+    transition: background 2s linear;
+}
+
+.list-enter, .list-leave-to {
+    background: $secondary;
 }
