@@ -4,9 +4,6 @@
             'resource', 'title'
         ],
 
-        /**
-         * The component's data.
-         */
         data() {
             return {
                 entries: [],

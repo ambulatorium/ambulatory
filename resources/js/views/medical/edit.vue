@@ -1,104 +1,24 @@
 <script type="text/ecmascript-6">
-    export default {
-        data() {
-            return {
-                entry: null,
-                ready: false,
-                id: this.$route.params.id || 'new',
-                form: {
-                    errors: [],
-                    form_name: '',
-                    full_name: '',
-                    dob: '',
-                    gender: '',
-                    address: '',
-                    city: '',
-                    state: '',
-                    zip_code: '',
-                    home_phone: '',
-                    cell_phone: '',
-                    marital_status: '',
-                }
-            };
-        },
-
-        mounted() {
-            document.title = "Medical Form — Reliqui Ambulatory";
-
-            this.id != 'new'
-                ? this.getMedicalForm()
-                : this.entry = [], this.ready = true;
-        },
-
-        methods: {
-            getMedicalForm() {
-                this.http().get('/api/medical-form/' + this.id).then(response => {
-                    this.entry = response.data.entry;
-
-                    this.form.form_name = response.data.entry.form_name;
-                    this.form.full_name = response.data.entry.full_name;
-                    this.form.dob = response.data.entry.dob;
-                    this.form.gender = response.data.entry.gender;
-                    this.form.address = response.data.entry.address;
-                    this.form.city = response.data.entry.city;
-                    this.form.state = response.data.entry.state;
-                    this.form.zip_code = response.data.entry.zip_code;
-                    this.form.home_phone = response.data.entry.home_phone;
-                    this.form.cell_phone = response.data.entry.cell_phone;
-                    this.form.marital_status = response.data.entry.marital_status;
-
-                    this.ready = true;
-                }).catch(error => {
-                    this.ready = true;
-                });
-            },
-
-            saveMedicalForm() {
-                this.form.errors = [];
-
-                this.http().post('/api/medical-form/' + this.id, this.form).then(response => {
-                    this.$router.push({name: 'medical-form'});
-
-                    this.flashSuccess('Medical form saved successfully!', 2000);
-                }).catch(error => {
-                    this.form.errors = error.response.data.errors;
-                });
-            }
-        }
-    }
+    export default {}
 </script>
 
 <template>
-    <div class="card">
-        <div class="card-header">
-            <h1>Medical form</h1>
-        </div>
-
-        <div class="alert alert-info form-title-section d-flex rounded-0">
+    <form-entry title="Medical Form" resource="medical-form" okToSave>
+        <div slot="form-information" class="alert alert-info form-title-section d-flex rounded-0">
             <div class="mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-info">
                     <path d="M10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0-2c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm-.5-5h1c.276 0 .5.224.5.5v1c0 .276-.224.5-.5.5h-1c-.276 0-.5-.224-.5-.5v-1c0-.276.224-.5.5-.5zm0-8h1c.276 0 .5.224.5.5V8l-.5 3-1 .5L9 8V5.5c0-.276.224-.5.5-.5z"></path>
                 </svg>
             </div>
 
-            <div>
+            <span>
                 This Medical form is about the patient's biodata,
                 you can have more than one form for your family,
                 so please answer thoughtfully and carefully.
-            </div>
+            </span>
         </div>
 
-        <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-
-        <div v-if="ready && !entry" class="text-center">
-            404 — Medical form not found
-        </div>
-
-        <div v-if="ready && entry" class="card-body">
+        <template slot="entry-data" slot-scope="slotProps">
             <div class="row mb-4 border-bottom pb-4">
                 <div class="col-sm-4">
                     <h6 class="text-dark"><strong>Medical form name</strong></h6>
@@ -112,11 +32,11 @@
                         <div class="col-sm-12">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.form_name"
+                                v-model="slotProps.formData.form_name"
                                 placeholder="my-form"
                                 autofocus>
 
-                            <form-errors :errors="form.errors.form_name"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.form_name"></form-errors>
                         </div>
                     </div>
                 </div>
@@ -134,102 +54,103 @@
                         <div class="col-sm-12 pb-2">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.full_name"
+                                v-model="slotProps.formData.full_name"
                                 placeholder="Patient form name">
 
-                            <form-errors :errors="form.errors.full_name"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.full_name"></form-errors>
                         </div>
+
                         <div class="col-sm-6">
                             <input type="date"
                                 class="form-control bg-light border-0"
-                                v-model="form.dob">
+                                v-model="slotProps.formData.dob">
 
                             <small class="form-text text-muted">date of birth</small>
 
-                            <form-errors :errors="form.errors.dob"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.dob"></form-errors>
                         </div>
+
                         <div class="col-sm-6">
-                            <select v-model="form.gender" id="gender" class="custom-select bg-light border-0">
-                                <option value="Male">
-                                    Male
-                                </option>
-                                <option value="Female">
-                                    Female
-                                </option>
+                            <select v-model="slotProps.formData.gender" class="custom-select bg-light border-0">
+                                <option disabled value="">Please select one gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
                             </select>
 
-                            <form-errors :errors="form.errors.gender"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.gender"></form-errors>
                         </div>
                     </div>
+
                     <div class="row pb-2">
                         <div class="col-sm-6">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.city"
+                                v-model="slotProps.formData.city"
                                 placeholder="city">
 
-                            <form-errors :errors="form.errors.city"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.city"></form-errors>
                         </div>
+
                         <div class="col-sm-6">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.state"
+                                v-model="slotProps.formData.state"
                                 placeholder="state">
 
-                            <form-errors :errors="form.errors.state"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.state"></form-errors>
                         </div>
                     </div>
+
                     <div class="row pb-2">
                         <div class="col-sm-6">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.address"
+                                v-model="slotProps.formData.address"
                                 placeholder="address">
 
-                            <form-errors :errors="form.errors.address"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.address"></form-errors>
                         </div>
+
                         <div class="col-sm-6">
                             <input type="text"
                                 class="form-control bg-light border-0"
-                                v-model="form.zip_code"
+                                v-model="slotProps.formData.zip_code"
                                 placeholder="zip code">
 
-                            <form-errors :errors="form.errors.zip_code"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.zip_code"></form-errors>
                         </div>
                     </div>
+
                     <div class="row pb-2">
                         <div class="col-sm-6">
                             <input type="number"
                                 class="form-control bg-light border-0"
-                                v-model="form.home_phone"
+                                v-model="slotProps.formData.home_phone"
                                 placeholder="home phone">
 
-                            <form-errors :errors="form.errors.home_phone"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.home_phone"></form-errors>
                         </div>
+
                         <div class="col-sm-6">
                             <input type="number"
                                 class="form-control bg-light border-0"
-                                v-model="form.cell_phone"
+                                v-model="slotProps.formData.cell_phone"
                                 placeholder="cell phone">
 
-                            <form-errors :errors="form.errors.cell_phone"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.cell_phone"></form-errors>
                         </div>
                     </div>
+
                     <div class="row pb-2">
                         <div class="col-sm-6">
-                            <select v-model="form.marital_status" id="marital_status" class="custom-select bg-light border-0">
-                                <option value="Married">
-                                    Married
-                                </option>
-                                <option value="Single">
-                                    Single
-                                </option>
-                                <option value="Divorced">
-                                    Divorced
-                                </option>
+                            <select v-model="slotProps.formData.marital_status" class="custom-select bg-light border-0">
+                                <option disabled value="">Marital status</option>
+                                <option>Married</option>
+                                <option>Single</option>
+                                <option>Divorced</option>
                             </select>
 
-                            <form-errors :errors="form.errors.marital_status"></form-errors>
+                            <form-errors :errors="slotProps.formErrors.marital_status"></form-errors>
                         </div>
                     </div>
                 </div>
@@ -241,12 +162,10 @@
                 </div>
                 <div class="col-sm-8">
                     <p class="text-dark">
-                        Once you have the medical form, you can select the form when making an appointment.
+                        Once you have the medical form, you can select the form when book an appointment.
                     </p>
-
-                    <button type="submit" class="btn btn-primary" @click="saveMedicalForm">Save</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </form-entry>
 </template>
