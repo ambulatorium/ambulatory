@@ -20,7 +20,6 @@ Vue.component('sidebar-menu', require('./components/SidebarMenu.vue').default);
 Vue.component('index-view', require('./components/IndexView.vue').default);
 Vue.component('form-entry', require('./components/FormEntry.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
-Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('form-errors', require('./components/FormErrors.vue').default);
 Vue.component('date-time-picker', require('./components/DateTimePicker.vue').default);
 
@@ -34,17 +33,12 @@ new Vue({
     data() {
         return {
             alert: {
+                mode: null,
                 type: null,
                 autoClose: 0,
                 message: '',
                 confirmationProceed: null,
                 confirmationCancel: null,
-            },
-
-            flash: {
-                type: null,
-                autoClose: 0,
-                message: ''
             }
         }
     },

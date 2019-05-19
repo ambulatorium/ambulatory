@@ -52,6 +52,38 @@ export default {
         },
 
         /**
+         * Show a success message.
+         */
+        alertSuccess(message, autoClose) {
+            this.$root.alert.mode = 'flash';
+            this.$root.alert.type = 'success';
+            this.$root.alert.autoClose = autoClose;
+            this.$root.alert.message = message;
+        },
+
+        /**
+         * Show an error message.
+         */
+        alertError(message) {
+            this.$root.alert.mode = 'dialog';
+            this.$root.alert.type = 'error';
+            this.$root.alert.autoClose = false;
+            this.$root.alert.message = message;
+        },
+
+        /**
+         * Show confirmation message.
+         */
+        alertConfirm(message, success, failure) {
+            this.$root.alert.mode = 'dialog';
+            this.$root.alert.type = 'confirmation';
+            this.$root.alert.autoClose = false;
+            this.$root.alert.message = message;
+            this.$root.alert.confirmationProceed = success;
+            this.$root.alert.confirmationCancel = failure;
+        },
+
+        /**
          * Truncate the given string.
          */
         truncate(string, length = 70) {
@@ -89,36 +121,6 @@ export default {
             );
 
             return instance;
-        },
-
-        /**
-         * Show a success message.
-         */
-        flashSuccess(message, autoClose) {
-            this.$root.flash.type = 'success';
-            this.$root.flash.autoClose = autoClose;
-            this.$root.flash.message = message;
-        },
-
-        /**
-         * Show an error message.
-         */
-        alertError(message) {
-            this.$root.alert.type = 'error';
-            this.$root.alert.autoClose = false;
-            this.$root.alert.message = message;
-        },
-
-
-        /**
-         * Show confirmation message.
-         */
-        alertConfirm(message, success, failure) {
-            this.$root.alert.type = 'confirmation';
-            this.$root.alert.autoClose = false;
-            this.$root.alert.message = message;
-            this.$root.alert.confirmationProceed = success;
-            this.$root.alert.confirmationCancel = failure;
         },
     }
 };

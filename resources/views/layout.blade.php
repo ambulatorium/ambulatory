@@ -12,17 +12,15 @@
 </head>
 <body>
 <div id="ambulatory" v-cloak>
-    <alert :message="alert.message"
+    <alert
+        :message="alert.message"
+        :mode="alert.mode"
         :type="alert.type"
         :auto-close="alert.autoClose"
         :confirmation-proceed="alert.confirmationProceed"
         :confirmation-cancel="alert.confirmationCancel"
-        v-if="alert.type"></alert>
-
-    <flash :message="flash.message"
-        :type="flash.type"
-        :auto-close="flash.autoClose"
-        v-if="flash.type"></flash>
+        v-if="alert.type">
+    </alert>
 
     <div class="container">
         <div class="row">

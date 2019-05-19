@@ -42,7 +42,7 @@
                 this.http().post('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
                     this.$router.push({name: this.resource});
 
-                    this.flashSuccess('Entry saved successfully!', 3000);
+                    this.alertSuccess('Entry saved successfully!', 3000);
                 }).catch(error => {
                     this.formErrors = error.response.data.errors;
                 });
@@ -51,8 +51,10 @@
             deleteEntry() {
                 this.alertConfirm("Are you sure you want to delete this entry?", () => {
                     this.http().delete('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
-                        this.$router.push({name: this.resource})
-                    })
+                        this.$router.push({name: this.resource});
+
+                        this.alertSuccess('Enrty deleted successfully!', 3000);
+                    });
                 });
             },
         }
