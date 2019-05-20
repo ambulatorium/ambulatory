@@ -5,10 +5,12 @@
             resource: String,
             okToSave: Boolean,
             okToDelete: Boolean,
+            redirectTo: String,
         },
 
         data() {
             return {
+                routerName: null,
                 entry: null,
                 ready: false,
                 formData: {},
@@ -23,6 +25,8 @@
             this.id != 'new'
                 ? this.getEntry()
                 : this.entry = [], this.ready = true;
+
+            this.redirect();
         },
 
         methods: {
@@ -40,7 +44,7 @@
 
             saveEntry() {
                 this.http().post('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
-                    this.$router.push({name: this.resource});
+                    this.$router.push({name: this.routerName});
 
                     this.alertSuccess('Entry saved successfully!', 3000);
                 }).catch(error => {
@@ -51,11 +55,17 @@
             deleteEntry() {
                 this.alertConfirm("Are you sure you want to delete this entry?", () => {
                     this.http().delete('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
-                        this.$router.push({name: this.resource});
+                        this.$router.push({name: this.routerName});
 
                         this.alertSuccess('Enrty deleted successfully!', 3000);
                     });
                 });
+            },
+
+            redirect() {
+                this.redirectTo != null
+                    ? this.routerName = this.redirectTo
+                    : this.routerName = this.resource ;
             },
         }
     }
