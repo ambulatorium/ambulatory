@@ -41,15 +41,6 @@ class ScheduleController extends Controller
      */
     public function show($id)
     {
-        if ($id === 'new') {
-            return response()->json([
-                'entry' => Schedule::make([
-                    'start_date_time' => now()->format('Y-m-d H:i:00'),
-                    'end_date_time' => now()->format('Y-m-d H:i:00'),
-                ]),
-            ]);
-        }
-
         $entry = auth('ambulatory')
             ->user()
             ->doctorProfile

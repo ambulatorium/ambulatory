@@ -6,7 +6,7 @@ Route::get('/api/inbox/{id}', 'InboxController@show')->name('inbox.show');
 
 // Schedules.
 Route::get('/api/schedules', 'ScheduleController@index')->name('schedules.index');
-Route::get('/api/schedules/{id?}', 'ScheduleController@show')->name('schedules.show');
+Route::get('/api/schedules/{id}', 'ScheduleController@show')->name('schedules.show');
 Route::post('/api/schedules/{id}', 'ScheduleController@store')->name('schedules.store');
 
 // Medical Form.
