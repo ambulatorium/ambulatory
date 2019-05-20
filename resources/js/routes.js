@@ -107,9 +107,14 @@ export default [
 
     // Settings.
     {
-        path: '/settings/:id',
-        name: 'settings',
-        component: require('./views/settings/account').default
+        path: '/settings/account',
+        name: 'settings-account',
+        component: require('./views/accounts/edit').default
+    },
+    {
+        path: '/settings/doctor-profile',
+        name: 'settings-doctor-profile',
+        component: require('./views/doctors/edit').default
     },
 
     // Catch All.
