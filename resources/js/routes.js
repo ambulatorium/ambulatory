@@ -112,6 +112,11 @@ export default [
         component: require('./views/accounts/edit').default
     },
     {
+        path: '/settings/password',
+        name: 'new-password',
+        component: require('./views/password/new').default
+    },
+    {
         path: '/settings/doctor-profile',
         name: 'settings-doctor-profile',
         component: require('./views/doctors/edit').default

@@ -31,6 +31,15 @@
             </router-link>
 
             <router-link
+                active-class="active"
+                class="nav-link"
+                :to="{name:'new-password'}"
+                :class="{active: activeTab=='newPassword'}">
+
+                <span>Password</span>
+            </router-link>
+
+            <router-link
                 v-if="userIsDoctor"
                 active-class="active"
                 class="nav-link"

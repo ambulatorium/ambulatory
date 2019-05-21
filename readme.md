@@ -40,16 +40,16 @@ Reliqui ambulatory is still under heavy development, I decided to ship it in thi
 
 Here's the plan for what's coming:
 
-- [ ] Design a better logo
+- [x] Add tests.
+- [ ] Design a better logo. @davidhsianturi
 - [ ] Optimize CSS, move to TailwindCSS ?
-- [ ] Add text search inside listings
-- [ ] Enhance date-time picker component
-- [ ] Add markdown mail template
-- [ ] Add tests
+- [ ] Health check services. @davidhsianturi
+- [ ] Add text search inside listings.
+- [ ] Enhance date-time picker component.
+- [ ] Add markdown mail template.
 
 Ideas that need to be discussed:
 
-- [ ] Health check services
 - [ ] Consult online services
 - [ ] Home care services
 

@@ -40,12 +40,15 @@ Route::namespace('Settings')->group(function () {
     Route::get('/api/account/{id}', 'AccountController@show')->name('account.show');
     Route::post('/api/account/{id}', 'AccountController@update')->name('account.update');
 
-    // Doctor.
+    // Doctor profile.
     Route::get('/api/doctor-profile/{id}', 'DoctorProfileController@show')->name('doctor-profile.show');
     Route::post('/api/doctor-profile/{id}', 'DoctorProfileController@store')->name('doctor-profile.store');
 
     // User Avatar.
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
+
+    // New password.
+    Route::post('/api/password/new', 'NewPasswordController@update')->name('new-password');
 });
 
 // Logout Route.
