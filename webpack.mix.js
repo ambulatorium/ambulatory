@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const webpack = require('webpack');
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ const webpack = require('webpack');
                      drop_console: true,
                  }
              }
-         }
+         },
+         processCssUrls: false,
      })
      .webpackConfig({
          plugins: [
@@ -31,6 +33,6 @@ const webpack = require('webpack');
 mix
      .setPublicPath('public')
      .js('resources/js/app.js', 'public')
-     .sass('resources/sass/app.scss', 'public')
+     .sass('resources/sass/app.scss', 'public', {}, [tailwindcss('./tailwind.config.js')])
      .version()
      .copy('public', '../reliquitest/public/vendor/ambulatory');
