@@ -60,6 +60,7 @@ class DoctorTest extends TestCase
         $this->assertInstanceOf(User::class, $doctor->user);
 
         $this->assertSame($doctor->user->type(), User::DOCTOR);
+        $this->assertTrue($doctor->user->isVerifiedDoctor());
     }
 
     /** @test */

@@ -107,6 +107,16 @@ class User extends AmbulatoryModel implements Authenticatable
     }
 
     /**
+     * The user is a verified doctor.
+     *
+     * @return bool
+     */
+    public function isVerifiedDoctor()
+    {
+        return $this->doctorProfile != null;
+    }
+
+    /**
      * Doctors' profile.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

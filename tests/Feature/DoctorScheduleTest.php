@@ -2,6 +2,7 @@
 
 namespace Reliqui\Ambulatory\Tests\Feature;
 
+use Reliqui\Ambulatory\User;
 use Reliqui\Ambulatory\Schedule;
 use Reliqui\Ambulatory\HealthFacility;
 use Reliqui\Ambulatory\Tests\TestCase;
@@ -29,6 +30,17 @@ class DoctorScheduleTest extends TestCase
 
         $this->signInAsPatient();
         $this->postJson(route('ambulatory.schedules.store', 'new'), [])->assertStatus(403);
+    }
+
+    /** @test */
+    public function unverified_user_as_a_doctor_cannot_create_a_new_schedule()
+    {
+        $user = factory(User::class)->create(['type' => User::DOCTOR]);
+
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->postJson(route('ambulatory.schedules.store', 'new'), [])
+            ->assertStatus(403);
     }
 
     /** @test */
@@ -92,7 +104,7 @@ class DoctorScheduleTest extends TestCase
     }
 
     /** @test */
-    public function a_doctor_cannot_view_their_schedules()
+    public function a_doctor_can_view_their_schedule()
     {
         $user = $this->signInAsDoctor();
 
@@ -110,7 +122,11 @@ class DoctorScheduleTest extends TestCase
 
         $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedules.store', $schedule->id), factory(Schedule::class)->raw(['location' => $schedule->health_facility_id]))->assertStatus(404);
+        $this->postJson(route('ambulatory.schedules.store', $schedule->id),
+            factory(Schedule::class)->raw([
+                'location' => $schedule->health_facility_id
+            ])
+        )->assertStatus(404);
     }
 
     /** @test */
@@ -120,10 +136,12 @@ class DoctorScheduleTest extends TestCase
 
         $schedule = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
 
-        $this->postJson(route('ambulatory.schedules.store', $schedule->id), $attributes = factory(Schedule::class)->raw([
-            'location' => $schedule->health_facility_id,
-            'start_date_time' => now()->addDays(2)->toDateTimeString(),
-        ]))->assertOk();
+        $this->postJson(route('ambulatory.schedules.store', $schedule->id),
+            $attributes = factory(Schedule::class)->raw([
+                'location' => $schedule->health_facility_id,
+                'start_date_time' => now()->addDays(2)->toDateTimeString(),
+            ])
+        )->assertOk();
 
         $this->assertNotSame($schedule->start_date_time, $attributes['start_date_time']);
 
