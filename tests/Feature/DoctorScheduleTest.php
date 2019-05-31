@@ -124,7 +124,7 @@ class DoctorScheduleTest extends TestCase
 
         $this->postJson(route('ambulatory.schedules.store', $schedule->id),
             factory(Schedule::class)->raw([
-                'location' => $schedule->health_facility_id
+                'location' => $schedule->health_facility_id,
             ])
         )->assertStatus(404);
     }
