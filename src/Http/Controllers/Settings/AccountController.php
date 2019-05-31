@@ -4,7 +4,6 @@ namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
 use Reliqui\Ambulatory\User;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
 
 class AccountController
 {
@@ -43,10 +42,6 @@ class AccountController
         ])->validate();
 
         $entry = User::findOrFail($id);
-
-        if (request('password')) {
-            $entry->password = Hash::make(request('password'));
-        }
 
         $entry->fill($data);
         $entry->save();

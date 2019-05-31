@@ -4,7 +4,6 @@ namespace Reliqui\Ambulatory\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Doctor
 {
@@ -19,16 +18,10 @@ class Doctor
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = auth('ambulatory')->user();
-
-        if (! $user->isDoctor()) {
-            throw new HttpException(403, 'Sorry, you are forbidden from accessing this resources.');
+        if (auth('ambulatory')->user()->isDoctor()) {
+            return $next($request);
         }
 
-        if (blank($user->doctorProfile)) {
-            throw new HttpException(403, 'Sorry, you are forbidden from accessing this resources. Please complete your doctor profile first');
-        }
-
-        return $next($request);
+        return abort(403, 'Sorry, you are forbidden from accessing this resources.');
     }
 }
