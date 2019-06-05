@@ -2,71 +2,76 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
-use Illuminate\Support\Str;
-use Reliqui\Ambulatory\User;
 use Reliqui\Ambulatory\Doctor;
-use Reliqui\Ambulatory\Specialization;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
 use Reliqui\Ambulatory\Http\Requests\DoctorProfileRequest;
+use Reliqui\Ambulatory\Http\Middleware\Doctor as ReliquiDoctor;
 
 class DoctorProfileController extends Controller
 {
     /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        $this->middleware(ReliquiDoctor::class);
+    }
+
+    /**
      * Get doctors' profile.
      *
-     * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show()
     {
-        $user = User::findOrFail($id);
-        $doctorExists = $user->doctorProfile()->first();
+        $user = auth('ambulatory')->user();
 
-        if (blank($doctorExists)) {
+        if ($user->isVerifiedDoctor()) {
             return response()->json([
-                'entry' => Doctor::make(['id' => Str::uuid()]),
+                'entry' => $user->doctorProfile->load('specializations'),
             ]);
         }
 
         return response()->json([
-            'entry' => $doctorExists->load('specializations'),
+            'entry' => [],
         ]);
     }
 
     /**
      * Store doctors' profile.
      *
-     * @param DoctorProfileRequest $request
-     * @param string $id
+     * @param  DoctorProfileRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(DoctorProfileRequest $request, $id)
+    public function store(DoctorProfileRequest $request)
     {
-        $entry = Doctor::updateOrCreate(['user_id' => $id], $request->validatedFields());
+        $doctor = Doctor::create($request->validatedFields() + ['user_id' => auth('ambulatory')->id()]);
 
-        $entry->specializations()->sync(
-            $this->collectSpecializations(request('specializations'))
-        );
+        $doctor->specializations()->sync(request('specializations'));
 
         return response()->json([
-            'entry' => $entry->fresh(),
+            'entry' => $doctor->fresh(),
         ]);
     }
 
     /**
-     * Specializations incoming from the request.
+     * Update doctors' profile.
      *
-     * @param array $requestSpecializations
-     * @return array
+     * @param  DoctorProfileRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    private function collectSpecializations($requestSpecializations)
+    public function update(DoctorProfileRequest $request)
     {
-        $allSpecializations = Specialization::all();
+        $user = auth('ambulatory')->user();
 
-        return collect($requestSpecializations)->map(function ($requestSpeciality) use ($allSpecializations) {
-            $speciality = $allSpecializations->where('id', $requestSpeciality['id'])->first();
+        tap($user->doctorProfile, function ($doctor) use ($request) {
+            $doctor->update($request->validatedFields());
 
-            return (string) $speciality->id;
-        })->toArray();
+            $doctor->specializations()->sync($request->get('specializations'));
+        });
+
+        return response()->json([
+            'entry' => $user->doctorProfile,
+        ]);
     }
 }

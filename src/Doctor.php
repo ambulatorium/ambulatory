@@ -18,7 +18,7 @@ class Doctor extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'ambulatory_doctors';
+    protected $table = 'reliqui_doctors';
 
     /**
      * The primary key for the model.

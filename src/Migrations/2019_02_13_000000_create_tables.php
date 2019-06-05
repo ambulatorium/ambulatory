@@ -24,9 +24,9 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ambulatory_doctors', function (Blueprint $table) {
+        Schema::create('reliqui_doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id')->index();
+            $table->uuid('user_id')->unique();
             $table->string('slug')->unique();
             $table->string('full_name');
             $table->string('qualification');

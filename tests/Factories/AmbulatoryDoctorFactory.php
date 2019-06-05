@@ -11,7 +11,7 @@ $factory->define(Doctor::class, function (Faker $faker) {
     return [
         'full_name' => $faker->name,
         'qualification' => $faker->randomElement($qualification),
-        'practicing_from' => $faker->date($max = 'now'),
+        'practicing_from' => $faker->date(),
         'professional_statement' => $faker->sentence(5),
         'user_id' => factory(User::class)->create(['type' => User::DOCTOR]),
     ];

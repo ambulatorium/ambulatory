@@ -41,8 +41,9 @@ Route::namespace('Settings')->group(function () {
     Route::post('/api/account/{id}', 'AccountController@update')->name('account.update');
 
     // Doctor profile.
-    Route::get('/api/doctor-profile/{id}', 'DoctorProfileController@show')->name('doctor-profile.show');
-    Route::post('/api/doctor-profile/{id}', 'DoctorProfileController@store')->name('doctor-profile.store');
+    Route::get('/api/doctor-profile', 'DoctorProfileController@show')->name('doctor-profile.show');
+    Route::post('/api/doctor-profile', 'DoctorProfileController@store')->name('doctor-profile.store');
+    Route::patch('/api/doctor-profile', 'DoctorProfileController@update')->name('doctor-profile.update');
 
     // User Avatar.
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
