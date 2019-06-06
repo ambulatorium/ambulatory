@@ -26,10 +26,10 @@ class DoctorProfileRequest extends FormRequest
         return [
             'full_name' => 'required|string|max:255',
             'qualification' => 'required|string|max:255',
-            'practicing_from' => 'nullable|date|max:255',
+            'practicing_from' => 'required|date|max:255',
             'professional_statement' => 'nullable|string|min:2|max:255',
             'specializations' => 'required|array',
-            'specializations.*.id' => 'exists:ambulatory_specializations,id',
+            'specializations.*id' => 'exists:reliqui_specializations,id',
         ];
     }
 
