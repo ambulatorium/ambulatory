@@ -11,23 +11,24 @@ class ManageHealthFacilityTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cannot_manage_health_faclity()
+    public function guests_cannot_manage_health_facilities()
     {
         $healthFacility = factory(HealthFacility::class)->create();
 
-        $this->getJson(route('ambulatory.health-facilities.index'))->assertStatus(401);
+        $this->getJson(route('ambulatory.health-facilities'))->assertStatus(401);
+        $this->postJson(route('ambulatory.health-facilities'), [])->assertStatus(401);
         $this->getJson(route('ambulatory.health-facilities.show', $healthFacility->id))->assertStatus(401);
-        $this->postJson(route('ambulatory.health-facilities.store', 'new'), $healthFacility->toArray())->assertStatus(401);
+        $this->patchJson(route('ambulatory.health-facilities.update', $healthFacility->id), [])->assertStatus(401);
     }
 
     /** @test */
     public function unauthorized_users_cannot_create_a_new_health_facility()
     {
         $this->signInAsDoctor();
-        $this->postJson(route('ambulatory.health-facilities.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.health-facilities.store'), [])->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.health-facilities.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.health-facilities.store'), [])->assertStatus(403);
     }
 
     /** @test */
@@ -37,15 +38,17 @@ class ManageHealthFacilityTest extends TestCase
 
         $attrributes = factory(HealthFacility::class)->raw();
 
-        $this->postJson(route('ambulatory.health-facilities.store', 'new'), $attrributes)
+        $this->postJson(route('ambulatory.health-facilities.store'), $attrributes)
             ->assertOk()
-            ->assertJson(['entry' => $attrributes]);
+            ->assertJson([
+                'entry' => $attrributes,
+            ]);
 
-        $this->assertDatabaseHas('ambulatory_health_facilities', $attrributes);
+        $this->assertDatabaseHas('reliqui_health_facilities', $attrributes);
     }
 
     /** @test */
-    public function admin_can_get_a_single_health_facility()
+    public function admin_can_get_the_details_of_health_facility()
     {
         $this->signInAsAdmin();
 
@@ -53,29 +56,32 @@ class ManageHealthFacilityTest extends TestCase
 
         $this->getJson(route('ambulatory.health-facilities.show', $healthFacility->id))
             ->assertOk()
-            ->assertJson(['entry' => $healthFacility->toArray()]);
+            ->assertJson([
+                'entry' => $healthFacility->toArray(),
+            ]);
     }
 
     /** @test */
-    public function unauthorized_users_cannot_update_a_health_facility()
+    public function unauthorized_users_can_not_update_a_health_facility()
     {
-        $healthFaclity = factory(HealthFacility::class)->create();
+        $healthFacility = factory(HealthFacility::class)->create();
 
         $this->signInAsDoctor();
-        $this->postJson(route('ambulatory.health-facilities.store', $healthFaclity->id), [])->assertStatus(403);
+        $this->patchJson(route('ambulatory.health-facilities.update', $healthFacility->id), [])->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.health-facilities.store', $healthFaclity->id), [])->assertStatus(403);
+        $this->patchJson(route('ambulatory.health-facilities.update', $healthFacility->id), [])->assertStatus(403);
     }
 
     /** @test */
     public function admin_can_update_a_health_facility()
     {
-        $healthFacility = factory(HealthFacility::class)->create();
-
         $this->signInAsAdmin();
 
-        $this->postJson(route('ambulatory.health-facilities.store', $healthFacility->id), $attributes = factory(HealthFacility::class)->raw([
+        $healthFacility = factory(HealthFacility::class)->create();
+
+        $this->patchJson(route('ambulatory.health-facilities.update', $healthFacility->id),
+            $attributes = factory(HealthFacility::class)->raw([
                 'name' => 'Name Changed',
                 'city' => 'City Changed',
             ]))
@@ -84,6 +90,6 @@ class ManageHealthFacilityTest extends TestCase
 
         $this->assertNotSame($healthFacility->slug, 'name-changed-city-changed');
 
-        $this->assertDatabaseHas('ambulatory_health_facilities', ['slug' => 'name-changed-city-changed']);
+        $this->assertDatabaseHas('reliqui_health_facilities', ['slug' => 'name-changed-city-changed']);
     }
 }

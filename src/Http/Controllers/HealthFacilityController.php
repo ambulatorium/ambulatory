@@ -17,7 +17,7 @@ class HealthFacilityController extends Controller
     }
 
     /**
-     * Get all health facilities.
+     * Display a listing of the health facilities.
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -31,14 +31,14 @@ class HealthFacilityController extends Controller
     }
 
     /**
-     * Show the health facility.
+     * Store a newly created health facility in storage.
      *
-     * @param string $id
+     * @param  HealthFacilityRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function store(HealthFacilityRequest $request)
     {
-        $entry = HealthFacility::findOrFail($id);
+        $entry = HealthFacility::create($request->validated());
 
         return response()->json([
             'entry' => $entry,
@@ -46,23 +46,31 @@ class HealthFacilityController extends Controller
     }
 
     /**
-     * Store the health facility.
+     * Display the specified medical form.
      *
-     * @param HealthFacilityRequest $request
-     * @param string $id
+     * @param  HealthFacility  $healthFacility
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(HealthFacilityRequest $request, $id)
+    public function show(HealthFacility $healthFacility)
     {
-        $entry = $id !== 'new'
-            ? HealthFacility::findOrFail($id)
-            : new HealthFacility();
+        return response()->json([
+            'entry' => $healthFacility,
+        ]);
+    }
 
-        $entry->fill($request->validated());
-        $entry->save();
+    /**
+     * Update the specified health facility in storage.
+     *
+     * @param  HealthFacilityRequest  $request
+     * @param  HealthFacility  $healthFacility
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(HealthFacilityRequest $request, HealthFacility $healthFacility)
+    {
+        $healthFacility->update($request->validated());
 
         return response()->json([
-            'entry' => $entry,
+            'entry' => $healthFacility,
         ]);
     }
 }

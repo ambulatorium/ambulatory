@@ -70,7 +70,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ambulatory_health_facilities', function (Blueprint $table) {
+        Schema::create('reliqui_health_facilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
@@ -128,7 +128,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('ambulatory_specializations');
         Schema::dropIfExists('ambulatory_doctors_specializations');
         Schema::dropIfExists('reliqui_medical_forms');
-        Schema::dropIfExists('ambulatory_health_facilities');
+        Schema::dropIfExists('reliqui_health_facilities');
         Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('reliqui_schedules');
         Schema::dropIfExists('ambulatory_bookings');

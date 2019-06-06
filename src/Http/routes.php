@@ -27,9 +27,10 @@ Route::patch('/api/invitations/{invitation}', 'InvitationController@update')->na
 Route::delete('/api/invitations/{invitation}', 'InvitationController@destroy')->name('invitations.destroy');
 
 // Health Facilities.
-Route::get('/api/health-facilities', 'HealthFacilityController@index')->name('health-facilities.index');
-Route::get('/api/health-facilities/{id}', 'HealthFacilityController@show')->name('health-facilities.show');
-Route::post('/api/health-facilities/{id}', 'HealthFacilityController@store')->name('health-facilities.store');
+Route::get('/api/health-facilities', 'HealthFacilityController@index')->name('health-facilities');
+Route::post('/api/health-facilities', 'HealthFacilityController@store')->name('health-facilities.store');
+Route::get('/api/health-facilities/{healthFacility}', 'HealthFacilityController@show')->name('health-facilities.show');
+Route::patch('/api/health-facilities/{healthFacility}', 'HealthFacilityController@update')->name('health-facilities.update');
 
 // Specializations.
 Route::get('/api/specializations', 'SpecializationController@index')->name('specializations.index');
