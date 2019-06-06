@@ -14,7 +14,7 @@ class NewPasswordTest extends TestCase
     /** @test */
     public function unauthenticated_users_cannot_update_the_password()
     {
-        $this->postJson(route('ambulatory.new-password'))->assertStatus(401);
+        $this->patchJson(route('ambulatory.new-password'))->assertStatus(401);
     }
 
     /** @test */
@@ -22,8 +22,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => '',
             ]))
             ->assertStatus(422)
@@ -39,8 +40,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => 'secr',
             ]))
             ->assertStatus(422)
@@ -59,8 +61,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'new_password' => '',
             ]))
             ->assertStatus(422)
@@ -76,8 +79,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'new_password' => 'secr',
             ]))
             ->assertStatus(422)
@@ -93,8 +97,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => '',
             ]))
             ->assertStatus(422)
@@ -110,8 +115,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => 'secr',
             ]))
             ->assertStatus(422)
@@ -127,8 +133,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => 'secretss',
             ]))
             ->assertStatus(422)
@@ -144,8 +151,9 @@ class NewPasswordTest extends TestCase
     {
         $user = factory(User::class)->create(['password' => Hash::make('low-secret')]);
 
-        $this->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.new-password'), $this->credentials([
+        $this
+            ->actingAs($user, 'ambulatory')
+            ->patchJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => 'low-secret',
             ]))
             ->assertOk();

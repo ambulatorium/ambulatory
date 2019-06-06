@@ -54,7 +54,7 @@ Route::namespace('Settings')->group(function () {
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
 
     // New password.
-    Route::post('/api/password/new', 'NewPasswordController@update')->name('new-password');
+    Route::patch('/api/new-password', 'NewPasswordController@update')->name('new-password');
 });
 
 // Logout Route.

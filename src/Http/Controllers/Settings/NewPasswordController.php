@@ -13,9 +13,8 @@ class NewPasswordController extends Controller
      */
     public function update(NewPasswordRequest $request)
     {
-        auth('ambulatory')->user()
-            ->update([
-                'password' => Hash::make($request->new_password),
-            ]);
+        auth('ambulatory')->user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
     }
 }
