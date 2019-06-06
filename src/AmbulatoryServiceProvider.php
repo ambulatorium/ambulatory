@@ -10,16 +10,18 @@ use Reliqui\Ambulatory\Http\Middleware\RedirectIfAuthenticated;
 class AmbulatoryServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap any package services.
      *
      * @return void
      */
-    public function boot()
+    public function boot(Ambulatory $ambulatory)
     {
         $this->registerRoutes();
         $this->registerMigrations();
         $this->registerAuthGuard();
         $this->registerPublishing();
+
+        $ambulatory->registerPolicies();
 
         $this->loadViewsFrom(
             __DIR__.'/../resources/views', 'ambulatory'
@@ -27,7 +29,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register ambulatory routes.
+     * Register package routes.
      *
      * @return void
      */
@@ -63,7 +65,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register ambulatory migrations.
+     * Register package migrations.
      *
      * @return void
      */
@@ -75,7 +77,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register ambulatory authentication guard.
+     * Register package authentication guard.
      *
      * @return void
      */
@@ -93,7 +95,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register ambulatory resources.
+     * Register package resources.
      *
      * @return void
      */
@@ -111,7 +113,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any application services.
+     * Register any package services.
      *
      * @return void
      */
