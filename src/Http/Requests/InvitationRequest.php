@@ -25,7 +25,7 @@ class InvitationRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|max:255|unique:ambulatory_invitations|unique:ambulatory_users',
+            'email' => 'required|string|email|max:255|unique:reliqui_invitations|unique:reliqui_users',
             'role' => 'required|string',
         ];
     }

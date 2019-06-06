@@ -36,7 +36,7 @@ class User extends AmbulatoryModel implements Authenticatable
      *
      * @var string
      */
-    protected $table = 'ambulatory_users';
+    protected $table = 'reliqui_users';
 
     /**
      * The primary key for the model.

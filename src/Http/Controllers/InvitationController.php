@@ -17,65 +17,71 @@ class InvitationController extends Controller
     }
 
     /**
-     * Get all invitations.
+     * Display a listing of the invitations.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = Invitation::latest()->paginate(25);
+        $invitations = Invitation::latest()->paginate(25);
 
         return response()->json([
-            'entries' => $entries,
+            'entries' => $invitations,
         ]);
     }
 
     /**
-     * Show the invitation.
+     * Store a newly created invitation in storage.
      *
-     * @param string $id
+     * @param  InvitationRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function store(InvitationRequest $request)
     {
-        $entry = Invitation::findOrFail($id);
+        $invitation = Invitation::create($request->validatedFields());
 
         return response()->json([
-            'entry' => $entry,
+            'entry' => $invitation,
         ]);
     }
 
     /**
-     * Store the invitation.
+     * Display the specified invitation.
      *
-     * @param InvitationRequest $request
-     * @param string $id
+     * @param  Invitation  $invitation
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(InvitationRequest $request, $id)
+    public function show(Invitation $invitation)
     {
-        $entry = $id !== 'new'
-            ? Invitation::findOrFail($id)
-            : new Invitation();
-
-        $entry->fill($request->validatedFields());
-        $entry->save();
-
         return response()->json([
-            'entry' => $entry,
+            'entry' => $invitation,
         ]);
     }
 
     /**
-     * Destroy the invitation.
+     * Update the specified invitation in storage.
      *
-     * @param string $id
+     * @param  InvitationRequest  $request
+     * @param  Invitation  $invitation
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function update(InvitationRequest $request, Invitation $invitation)
     {
-        $entry = Invitation::findOrFail($id);
+        $invitation->update($request->validatedFields());
 
-        $entry->delete();
+        return response()->json([
+            'entry' => $invitation,
+        ]);
+    }
+
+    /**
+     * Remove the specified invitation from storage.
+     *
+     * @param  Invitation  $invitation
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Invitation $invitation)
+    {
+        $invitation->delete();
     }
 }

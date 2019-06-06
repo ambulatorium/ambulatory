@@ -18,10 +18,11 @@ Route::post('/api/medical-form/{id}', 'MedicalFormController@store')->name('medi
 Route::get('/api/staff', 'StaffController@index')->name('staff.index');
 
 // Invitations.
-Route::get('/api/invitations', 'InvitationController@index')->name('invitations.index');
-Route::get('/api/invitations/{id}', 'InvitationController@show')->name('invitations.show');
-Route::post('/api/invitations/{id}', 'InvitationController@store')->name('invitations.store');
-Route::delete('/api/invitations/{id}', 'InvitationController@destroy')->name('invitations.destroy');
+Route::get('/api/invitations', 'InvitationController@index')->name('invitations');
+Route::post('/api/invitations', 'InvitationController@store')->name('invitations.store');
+Route::get('/api/invitations/{invitation}', 'InvitationController@show')->name('invitations.show');
+Route::patch('/api/invitations/{invitation}', 'InvitationController@update')->name('invitations.update');
+Route::delete('/api/invitations/{invitation}', 'InvitationController@destroy')->name('invitations.destroy');
 
 // Health Facilities.
 Route::get('/api/health-facilities', 'HealthFacilityController@index')->name('health-facilities.index');

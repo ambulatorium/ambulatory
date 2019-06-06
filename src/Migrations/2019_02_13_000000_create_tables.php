@@ -13,7 +13,7 @@ class CreateTables extends Migration
      */
     public function up()
     {
-        Schema::create('ambulatory_users', function (Blueprint $table) {
+        Schema::create('reliqui_users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
@@ -82,7 +82,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ambulatory_invitations', function (Blueprint $table) {
+        Schema::create('reliqui_invitations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('role');
@@ -123,13 +123,13 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ambulatory_users');
-        Schema::dropIfExists('ambulatory_doctors');
+        Schema::dropIfExists('reliqui_users');
+        Schema::dropIfExists('reliqui_doctors');
         Schema::dropIfExists('ambulatory_specializations');
         Schema::dropIfExists('ambulatory_doctors_specializations');
         Schema::dropIfExists('ambulatory_medical_forms');
         Schema::dropIfExists('ambulatory_health_facilities');
-        Schema::dropIfExists('ambulatory_invitations');
+        Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('ambulatory_schedules');
         Schema::dropIfExists('ambulatory_bookings');
     }

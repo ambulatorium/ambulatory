@@ -20,11 +20,18 @@ class Invitation extends AmbulatoryModel
     protected $guarded = [];
 
     /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['token'];
+
+    /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'ambulatory_invitations';
+    protected $table = 'reliqui_invitations';
 
     /**
      * The primary key for the model.
