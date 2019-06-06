@@ -67,6 +67,15 @@ class User extends AmbulatoryModel implements Authenticatable
     protected $rememberTokenName = 'remember_token';
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'type' => 'integer'
+    ];
+
+    /**
      * Type of user.
      *
      * @return int

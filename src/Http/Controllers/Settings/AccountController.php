@@ -2,7 +2,6 @@
 
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
-use Reliqui\Ambulatory\User;
 use Illuminate\Validation\Rule;
 
 class AccountController
@@ -10,25 +9,23 @@ class AccountController
     /**
      * Show the user account.
      *
-     * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show()
     {
-        $entry = User::findOrFail($id);
+        $entry = auth('ambulatory')->user()->only('id', 'name', 'email', 'avatar');
 
         return response()->json([
-            'entry' => $entry->only('id', 'name', 'email', 'avatar'),
+            'entry' => $entry,
         ]);
     }
 
     /**
      * Update the user account.
      *
-     * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id)
+    public function update()
     {
         $data = [
             'avatar' => request('avatar'),
@@ -38,16 +35,15 @@ class AccountController
 
         validator($data, [
             'name' => 'required|string|min:3',
-            'email' => 'required|email|'.Rule::unique(config('ambulatory.database_connection').'.ambulatory_users', 'email')->ignore(request('id')),
+            'email' => 'required|email|'.Rule::unique(config('ambulatory.database_connection').'.reliqui_users', 'email')->ignore(request('id')),
         ])->validate();
 
-        $entry = User::findOrFail($id);
+        $user = auth('ambulatory')->user();
 
-        $entry->fill($data);
-        $entry->save();
+        $user->update($data);
 
         return response()->json([
-            'entry' => $entry->fresh(),
+            'entry' => $user->fresh(),
         ]);
     }
 }

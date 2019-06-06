@@ -42,8 +42,8 @@ Route::delete('/api/specializations/{specialization}', 'SpecializationController
 // Settings.
 Route::namespace('Settings')->group(function () {
     // Account.
-    Route::get('/api/account/{id}', 'AccountController@show')->name('account.show');
-    Route::post('/api/account/{id}', 'AccountController@update')->name('account.update');
+    Route::get('/api/account', 'AccountController@show')->name('account.show');
+    Route::patch('/api/account', 'AccountController@update')->name('account.update');
 
     // Doctor profile.
     Route::get('/api/doctor-profile', 'DoctorProfileController@show')->name('doctor-profile.show');
