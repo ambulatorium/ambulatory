@@ -3,6 +3,7 @@
 namespace Reliqui\Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
+use Reliqui\Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
 {
@@ -11,7 +12,9 @@ class Ambulatory
      *
      * @var array
      */
-    protected $policies = [];
+    protected $policies = [
+        Schedule::class => DoctorSchedulePolicy::class,
+    ];
 
     /**
      * Register reliqui ambulatory policies.

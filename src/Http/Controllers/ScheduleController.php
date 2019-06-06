@@ -18,63 +18,67 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Get a doctors' schedules.
+     * Display a listing of the schedules.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = Schedule::with('healthFacility')
+        $schedules = Schedule::with('healthFacility')
             ->where('doctor_id', auth('ambulatory')->user()->doctorProfile->id)
             ->latest()
             ->paginate(25);
 
         return response()->json([
-            'entries' => $entries,
+            'entries' => $schedules,
         ]);
     }
 
     /**
-     * Show doctors' schedule.
+     * Store a newly created schedule in storage.
      *
-     * @param string $id
+     * @param  ScheduleRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function store(ScheduleRequest $request)
     {
-        $entry = auth('ambulatory')
-            ->user()
-            ->doctorProfile
-            ->schedules()
-            ->findOrFail($id);
+        $schedule = Schedule::create($request->validatedFields());
 
         return response()->json([
-            'entry' => $entry,
+            'entry' => $schedule,
         ]);
     }
 
     /**
-     * Store the doctors' schedule.
+     * Display the specified schedule.
      *
-     * @param ScheduleRequest $request
-     * @param string $id
+     * @param  Schedule  $schedule
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ScheduleRequest $request, $id)
+    public function show(Schedule $schedule)
     {
-        $entry = $id !== 'new'
-            ? auth('ambulatory')
-                ->user()
-                ->doctorProfile
-                ->schedules()
-                ->findOrFail($id)
-            : new Schedule();
-
-        $entry->fill($request->validatedFields());
-        $entry->save();
+        $this->authorize('manage', $schedule);
 
         return response()->json([
-            'entry' => $entry,
+            'entry' => $schedule,
+        ]);
+    }
+
+    /**
+     * Update the specified schedule in storage.
+     *
+     * @param  ScheduleRequest  $request
+     * @param  Schedule  $schedule
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(ScheduleRequest $request, Schedule $schedule)
+    {
+        $this->authorize('manage', $schedule);
+
+        $schedule->update($request->validatedFields());
+
+        return response()->json([
+            'entry' => $schedule,
         ]);
     }
 }

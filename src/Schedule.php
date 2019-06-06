@@ -20,7 +20,7 @@ class Schedule extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'ambulatory_schedules';
+    protected $table = 'reliqui_schedules';
 
     /**
      * The primary key for the model.
@@ -42,6 +42,25 @@ class Schedule extends AmbulatoryModel
      * @var bool
      */
     public $incrementing = false;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_date_time',
+        'end_date_time',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'estimated_service_time_in_minutes' => 'integer'
+    ];
 
     /**
      * Doctor location work.

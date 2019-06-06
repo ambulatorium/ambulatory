@@ -5,9 +5,10 @@ Route::get('/api/inbox', 'InboxController@index')->name('inbox');
 Route::get('/api/inbox/{id}', 'InboxController@show')->name('inbox.show');
 
 // Schedules.
-Route::get('/api/schedules', 'ScheduleController@index')->name('schedules.index');
-Route::get('/api/schedules/{id}', 'ScheduleController@show')->name('schedules.show');
-Route::post('/api/schedules/{id}', 'ScheduleController@store')->name('schedules.store');
+Route::get('/api/schedules', 'ScheduleController@index')->name('schedules');
+Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store');
+Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
+Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
 
 // Medical Form.
 Route::get('/api/medical-form', 'MedicalFormController@index')->name('medical-form.index');

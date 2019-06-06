@@ -17,43 +17,44 @@ class DoctorScheduleTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $this->getJson(route('ambulatory.schedules.index'))->assertStatus(401);
+        $this->getJson(route('ambulatory.schedules'))->assertStatus(401);
+        $this->postJson(route('ambulatory.schedules.store'), [])->assertStatus(401);
         $this->getJson(route('ambulatory.schedules.show', $schedule->id))->assertStatus(401);
-        $this->postJson(route('ambulatory.schedules.store', 'new'), $schedule->toArray())->assertStatus(401);
+        $this->patchJson(route('ambulatory.schedules.update', $schedule->id), [])->assertStatus(401);
     }
 
     /** @test */
     public function unauthorized_users_cannot_create_a_new_schedule()
     {
         $this->signInAsAdmin();
-        $this->postJson(route('ambulatory.schedules.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.schedules.store'), [])->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.schedules.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.schedules.store'), [])->assertStatus(403);
     }
 
     /** @test */
-    public function unverified_user_as_a_doctor_cannot_create_a_new_schedule()
+    public function unverified_doctor_cannot_create_a_new_schedule()
     {
         $user = factory(User::class)->create(['type' => User::DOCTOR]);
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.store', 'new'), [])
+            ->postJson(route('ambulatory.schedules.store'), [])
             ->assertStatus(403);
     }
 
     /** @test */
-    public function a_doctor_can_create_a_new_schedule()
+    public function verified_doctor_can_create_a_new_schedule()
     {
         $this->signInAsDoctor();
 
         tap(factory(HealthFacility::class)->create(), function ($location) {
             $attrributes = factory(Schedule::class)->raw(['location' => $location->id]);
 
-            $this->postJson(route('ambulatory.schedules.store', 'new'), $attrributes)->assertOk();
+            $this->postJson(route('ambulatory.schedules.store'), $attrributes)->assertOk();
 
-            $this->assertDatabaseHas('ambulatory_schedules', ['health_facility_id' => $attrributes['location']]);
+            $this->assertDatabaseHas('reliqui_schedules', ['health_facility_id' => $attrributes['location']]);
         });
     }
 
@@ -64,55 +65,66 @@ class DoctorScheduleTest extends TestCase
 
         $attrributes = factory(Schedule::class)->raw(['location' => 'not-a-location']);
 
-        $this->postJson(route('ambulatory.schedules.store', 'new'), $attrributes)
+        $this->postJson(route('ambulatory.schedules.store'), $attrributes)
             ->assertStatus(422)
-            ->assertJson([
+            ->assertExactJson([
                 'errors' => [
                     'location' => ['The selected location is invalid.'],
                 ],
+                'message' => 'The given data was invalid.',
             ]);
 
-        $this->assertDatabaseMissing('ambulatory_schedules', $attrributes);
+        $this->assertDatabaseMissing('reliqui_schedules', $attrributes);
     }
 
     /** @test */
-    public function a_doctor_and_health_facility_should_be_unique()
+    public function end_date_should_be_after_from_the_start_date()
+    {
+        $this->signInAsDoctor();
+
+        $location = factory(HealthFacility::class)->create();
+
+        $attributes = factory(Schedule::class)->raw([
+            'location' => $location->id,
+            'start_date_time' => now()->addDays(2)->toDateTimeString(),
+            'end_date_time' => now()->toDateTimeString(),
+        ]);
+
+        $this->postJson(route('ambulatory.schedules.store'), array_except($attributes, ['health_facility_id']))
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('end_date_time')
+            ->assertExactJson([
+                'errors' => [
+                    'end_date_time' => ['The end date time must be a date after start date time.'],
+                ],
+                'message' => 'The given data was invalid.',
+            ]);
+    }
+
+    /** @test */
+    public function a_doctor_can_get_their_details_of_schedule()
     {
         $user = $this->signInAsDoctor();
 
-        $attrributes = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
-
-        $this->postJson(route('ambulatory.schedules.store', 'new'), [
-            'location' => $attrributes->health_facility_id,
-        ])
-        ->assertStatus(422)
-        ->assertJson([
-            'errors' => [
-                'location' => ['The location has already been taken.'],
-            ],
+        $schedule = factory(Schedule::class)->create([
+            'doctor_id' => $user->doctorProfile->id
         ]);
+
+        $this->getJson(route('ambulatory.schedules.show', $schedule->id))
+            ->assertOk()
+            ->assertExactJson([
+                'entry' => $schedule->toArray(),
+            ]);
     }
 
     /** @test */
-    public function a_doctor_cannot_view_the_schedule_of_others()
+    public function a_doctor_can_not_get_the_details_schedule_of_others()
     {
         $this->signInAsDoctor();
 
         $schedule = factory(Schedule::class)->create();
 
-        $this->getJson(route('ambulatory.schedules.show', $schedule->id))->assertStatus(404);
-    }
-
-    /** @test */
-    public function a_doctor_can_view_their_schedule()
-    {
-        $user = $this->signInAsDoctor();
-
-        $schedule = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
-
-        $this->getJson(route('ambulatory.schedules.show', $schedule->id))
-            ->assertOk()
-            ->assertJson(['entry' => $schedule->toArray()]);
+        $this->getJson(route('ambulatory.schedules.show', $schedule->id))->assertStatus(403);
     }
 
     /** @test */
@@ -122,11 +134,11 @@ class DoctorScheduleTest extends TestCase
 
         $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedules.store', $schedule->id),
+        $this->patch(route('ambulatory.schedules.update', $schedule->id),
             factory(Schedule::class)->raw([
                 'location' => $schedule->health_facility_id,
             ])
-        )->assertStatus(404);
+        )->assertStatus(403);
     }
 
     /** @test */
@@ -136,7 +148,7 @@ class DoctorScheduleTest extends TestCase
 
         $schedule = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
 
-        $this->postJson(route('ambulatory.schedules.store', $schedule->id),
+        $this->patchJson(route('ambulatory.schedules.update', $schedule->id),
             $attributes = factory(Schedule::class)->raw([
                 'location' => $schedule->health_facility_id,
                 'start_date_time' => now()->addDays(2)->toDateTimeString(),
@@ -145,6 +157,6 @@ class DoctorScheduleTest extends TestCase
 
         $this->assertNotSame($schedule->start_date_time, $attributes['start_date_time']);
 
-        $this->assertDatabaseHas('ambulatory_schedules', ['start_date_time' => $attributes['start_date_time']]);
+        $this->assertDatabaseHas('reliqui_schedules', ['start_date_time' => $attributes['start_date_time']]);
     }
 }
