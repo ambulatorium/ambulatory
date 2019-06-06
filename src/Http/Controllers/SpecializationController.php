@@ -17,49 +17,28 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Get all specializations.
+     * Display a listing of the specializations.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = Specialization::latest()->paginate(25);
+        $specializations = Specialization::latest()->paginate(25);
 
         return response()->json([
-            'entries' => $entries,
+            'entries' => $specializations,
         ]);
     }
 
     /**
-     * Show the specialization.
+     * Store a newly created specialization in storage.
      *
-     * @param string $id
+     * @param  SpecializationRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function store(SpecializationRequest $request)
     {
-        $entry = Specialization::findOrFail($id);
-
-        return response()->json([
-            'entry' => $entry,
-        ]);
-    }
-
-    /**
-     * Store the specialization.
-     *
-     * @param SpecializationRequest $request
-     * @param string $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(SpecializationRequest $request, $id)
-    {
-        $entry = $id !== 'new'
-            ? Specialization::findOrFail($id)
-            : new Specialization();
-
-        $entry->fill($request->validated());
-        $entry->save();
+        $entry = Specialization::create($request->validated());
 
         return response()->json([
             'entry' => $entry,
@@ -67,15 +46,42 @@ class SpecializationController extends Controller
     }
 
     /**
-     * Destroy the specialization.
+     * Display the specified specialization.
      *
-     * @param string $id
+     * @param  Specialization  $specialization
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function show(Specialization $specialization)
     {
-        $entry = Specialization::findOrFail($id);
+        return response()->json([
+            'entry' => $specialization,
+        ]);
+    }
 
-        $entry->delete();
+    /**
+     * Update the specified specialization in storage.
+     *
+     * @param  SpecializationRequest  $request
+     * @param  Specialization  $specialization
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(SpecializationRequest $request, Specialization $specialization)
+    {
+        $specialization->update($request->validated());
+
+        return response()->json([
+            'entry' => $specialization,
+        ]);
+    }
+
+    /**
+     * Remove the specified specialization from storage.
+     *
+     * @param  Specialization  $specialization
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Specialization $specialization)
+    {
+        $specialization->delete();
     }
 }

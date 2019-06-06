@@ -33,10 +33,11 @@ Route::get('/api/health-facilities/{healthFacility}', 'HealthFacilityController@
 Route::patch('/api/health-facilities/{healthFacility}', 'HealthFacilityController@update')->name('health-facilities.update');
 
 // Specializations.
-Route::get('/api/specializations', 'SpecializationController@index')->name('specializations.index');
-Route::get('/api/specializations/{id}', 'SpecializationController@show')->name('specializations.show');
-Route::post('/api/specializations/{id}', 'SpecializationController@store')->name('specializations.store');
-Route::delete('/api/specializations/{id}', 'SpecializationController@destroy')->name('specializations.destroy');
+Route::get('/api/specializations', 'SpecializationController@index')->name('specializations');
+Route::post('/api/specializations', 'SpecializationController@store')->name('specializations.store');
+Route::get('/api/specializations/{specialization}', 'SpecializationController@show')->name('specializations.show');
+Route::patch('/api/specializations/{specialization}', 'SpecializationController@update')->name('specializations.update');
+Route::delete('/api/specializations/{specialization}', 'SpecializationController@destroy')->name('specializations.destroy');
 
 // Settings.
 Route::namespace('Settings')->group(function () {

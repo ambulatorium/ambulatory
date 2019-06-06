@@ -15,9 +15,10 @@ class ManageSpecializationsTest extends TestCase
     {
         $specializations = factory(Specialization::class)->create();
 
-        $this->getJson(route('ambulatory.specializations.index'))->assertStatus(401);
+        $this->getJson(route('ambulatory.specializations'))->assertStatus(401);
+        $this->postJson(route('ambulatory.specializations'), [])->assertStatus(401);
         $this->getJson(route('ambulatory.specializations.show', $specializations->id))->assertStatus(401);
-        $this->postJson(route('ambulatory.specializations.store', 'new'), $specializations->toArray())->assertStatus(401);
+        $this->patchJson(route('ambulatory.specializations.update', $specializations->id), [])->assertStatus(401);
         $this->deleteJson(route('ambulatory.specializations.destroy', $specializations->id))->assertStatus(401);
     }
 
@@ -25,10 +26,10 @@ class ManageSpecializationsTest extends TestCase
     public function unauthorized_users_cannot_create_a_new_specialization()
     {
         $this->signInAsDoctor();
-        $this->postJson(route('ambulatory.specializations.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.specializations'), [])->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.specializations.store', 'new'), [])->assertStatus(403);
+        $this->postJson(route('ambulatory.specializations'), [])->assertStatus(403);
     }
 
     /** @test */
@@ -38,11 +39,11 @@ class ManageSpecializationsTest extends TestCase
 
         $attrributes = factory(Specialization::class)->raw();
 
-        $this->postJson(route('ambulatory.specializations.store', 'new'), $attrributes)
+        $this->postJson(route('ambulatory.specializations.store'), $attrributes)
             ->assertOk()
             ->assertJson(['entry' => $attrributes]);
 
-        $this->assertDatabaseHas('ambulatory_specializations', $attrributes);
+        $this->assertDatabaseHas('reliqui_specializations', $attrributes);
     }
 
     /** @test */
@@ -52,18 +53,19 @@ class ManageSpecializationsTest extends TestCase
 
         $attributes = factory(Specialization::class)->raw(['name' => '']);
 
-        $this->postJson(route('ambulatory.specializations.store', 'new'), $attributes)
-            ->assertJson([
+        $this->postJson(route('ambulatory.specializations.store'), $attributes)
+            ->assertExactJson([
                 'errors' => [
                     'name' => ['The name field is required.'],
                 ],
+                'message' => 'The given data was invalid.',
             ]);
 
-        $this->assertDatabaseMissing('ambulatory_specializations', $attributes);
+        $this->assertDatabaseMissing('reliqui_specializations', $attributes);
     }
 
     /** @test */
-    public function admin_can_get_a_single_specialization()
+    public function admin_can_get_the_details_of_specialization()
     {
         $this->signInAsAdmin();
 
@@ -80,10 +82,10 @@ class ManageSpecializationsTest extends TestCase
         $specialization = factory(Specialization::class)->create();
 
         $this->signInAsDoctor();
-        $this->postJson(route('ambulatory.specializations.store', $specialization->id), [])->assertStatus(403);
+        $this->patchJson(route('ambulatory.specializations.update', $specialization->id), [])->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.specializations.store', $specialization->id), [])->assertStatus(403);
+        $this->patchJson(route('ambulatory.specializations.update', $specialization->id), [])->assertStatus(403);
     }
 
     /** @test */
@@ -93,13 +95,16 @@ class ManageSpecializationsTest extends TestCase
 
         $this->signInAsAdmin();
 
-        $this->postJson(route('ambulatory.specializations.store', $specialization->id), $attributes = factory(Specialization::class)->raw(['name' => 'Name Changed']))
+        $this->patchJson(route('ambulatory.specializations.update', $specialization->id),
+            $attributes = factory(Specialization::class)->raw([
+                'name' => 'Name Changed',
+            ]))
             ->assertOk()
             ->assertJson(['entry' => $attributes]);
 
         $this->assertNotSame($specialization->slug, 'name-changed');
 
-        $this->assertDatabaseHas('ambulatory_specializations', ['slug' => 'name-changed']);
+        $this->assertDatabaseHas('reliqui_specializations', ['slug' => 'name-changed']);
     }
 
     /** @test */
@@ -108,10 +113,10 @@ class ManageSpecializationsTest extends TestCase
         $specialization = factory(Specialization::class)->create();
 
         $this->signInAsDoctor();
-        $this->deleteJson(route('ambulatory.specializations.store', $specialization->id))->assertStatus(403);
+        $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))->assertStatus(403);
 
         $this->signInAsPatient();
-        $this->deleteJson(route('ambulatory.specializations.store', $specialization->id))->assertStatus(403);
+        $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))->assertStatus(403);
     }
 
     /** @test */
@@ -121,8 +126,8 @@ class ManageSpecializationsTest extends TestCase
 
         $this->signInAsAdmin();
 
-        $this->deleteJson(route('ambulatory.specializations.store', $specialization->id))->assertOk();
+        $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))->assertOk();
 
-        $this->assertDatabaseMissing('ambulatory_specializations', $specialization->toarray());
+        $this->assertDatabaseMissing('reliqui_specializations', $specialization->toarray());
     }
 }

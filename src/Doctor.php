@@ -55,7 +55,7 @@ class Doctor extends AmbulatoryModel
      */
     public function specializations()
     {
-        return $this->belongsToMany(Specialization::class, 'ambulatory_doctors_specializations', 'doctor_id', 'specialization_id');
+        return $this->belongsToMany(Specialization::class, 'reliqui_doctors_specializations', 'doctor_id', 'specialization_id');
     }
 
     /**

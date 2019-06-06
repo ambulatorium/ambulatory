@@ -36,7 +36,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ambulatory_specializations', function (Blueprint $table) {
+        Schema::create('reliqui_specializations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
@@ -44,7 +44,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ambulatory_doctors_specializations', function (Blueprint $table) {
+        Schema::create('reliqui_doctors_specializations', function (Blueprint $table) {
             $table->uuid('doctor_id');
             $table->uuid('specialization_id');
 
@@ -125,8 +125,8 @@ class CreateTables extends Migration
     {
         Schema::dropIfExists('reliqui_users');
         Schema::dropIfExists('reliqui_doctors');
-        Schema::dropIfExists('ambulatory_specializations');
-        Schema::dropIfExists('ambulatory_doctors_specializations');
+        Schema::dropIfExists('reliqui_specializations');
+        Schema::dropIfExists('reliqui_doctors_specializations');
         Schema::dropIfExists('reliqui_medical_forms');
         Schema::dropIfExists('reliqui_health_facilities');
         Schema::dropIfExists('reliqui_invitations');
