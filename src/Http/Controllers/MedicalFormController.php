@@ -5,19 +5,16 @@ namespace Reliqui\Ambulatory\Http\Controllers;
 use Reliqui\Ambulatory\MedicalForm;
 use Reliqui\Ambulatory\Http\Requests\MedicalFormRequest;
 
-class MedicalFormController
+class MedicalFormController extends Controller
 {
     /**
-     * Get all medical forms.
+     * Display a listing of the medical forms.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = auth('ambulatory')
-            ->user()
-            ->medicalForms()
-            ->paginate(25);
+        $entries = MedicalForm::where('user_id', auth('ambulatory')->id())->paginate(25);
 
         return response()->json([
             'entries' => $entries,
@@ -25,17 +22,14 @@ class MedicalFormController
     }
 
     /**
-     * Show the medical form.
+     * Store a newly created medical form in storage.
      *
-     * @param string $id
+     * @param  MedicalFormRequest  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function store(MedicalFormRequest $request)
     {
-        $entry = auth('ambulatory')
-            ->user()
-            ->medicalForms()
-            ->findOrFail($id);
+        $entry = MedicalForm::create($request->validated() + ['user_id' => auth('ambulatory')->id()]);
 
         return response()->json([
             'entry' => $entry,
@@ -43,26 +37,35 @@ class MedicalFormController
     }
 
     /**
-     * Store the medical form.
+     * Display the specified medical form.
      *
-     * @param MedicalFormRequest $request
-     * @param string $id
+     * @param  MedicalForm  $medicalForm
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(MedicalFormRequest $request, $id)
+    public function show(MedicalForm $medicalForm)
     {
-        $entry = $id !== 'new'
-            ? auth('ambulatory')
-                ->user()
-                ->medicalForms()
-                ->findOrFail($id)
-            : new MedicalForm();
-
-        $entry->fill($request->validated() + ['user_id' => auth('ambulatory')->id()]);
-        $entry->save();
+        $this->authorize('manage', $medicalForm);
 
         return response()->json([
-            'entry' => $entry,
+            'entry' => $medicalForm,
+        ]);
+    }
+
+    /**
+     * Update the specified medical form in storage.
+     *
+     * @param  MedicalFormRequest  $request
+     * @param  MedicalForm  $medicalForm
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(MedicalFormRequest $request, MedicalForm $medicalForm)
+    {
+        $this->authorize('manage', $medicalForm);
+
+        $medicalForm->update($request->validated());
+
+        return response()->json([
+            'entry' => $medicalForm,
         ]);
     }
 }

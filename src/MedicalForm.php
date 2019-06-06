@@ -18,7 +18,7 @@ class MedicalForm extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'ambulatory_medical_forms';
+    protected $table = 'reliqui_medical_forms';
 
     /**
      * The primary key for the model.

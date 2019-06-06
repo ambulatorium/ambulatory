@@ -10,10 +10,11 @@ Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store
 Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
 Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
 
-// Medical Form.
-Route::get('/api/medical-form', 'MedicalFormController@index')->name('medical-form.index');
-Route::get('/api/medical-form/{id}', 'MedicalFormController@show')->name('medical-form.show');
-Route::post('/api/medical-form/{id}', 'MedicalFormController@store')->name('medical-form.store');
+// Medical Forms.
+Route::get('/api/medical-forms', 'MedicalFormController@index')->name('medical-forms');
+Route::post('/api/medical-forms', 'MedicalFormController@store')->name('medical-forms.store');
+Route::get('/api/medical-forms/{medicalForm}', 'MedicalFormController@show')->name('medical-forms.show');
+Route::patch('/api/medical-forms/{medicalForm}', 'MedicalFormController@update')->name('medical-forms.update');
 
 // Staff.
 Route::get('/api/staff', 'StaffController@index')->name('staff.index');

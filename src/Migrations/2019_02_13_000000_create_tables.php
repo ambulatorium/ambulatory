@@ -51,7 +51,7 @@ class CreateTables extends Migration
             $table->unique(['doctor_id', 'specialization_id'], 'doctor_id_specialization_id_unique');
         });
 
-        Schema::create('ambulatory_medical_forms', function (Blueprint $table) {
+        Schema::create('reliqui_medical_forms', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->index();
             $table->string('slug')->unique();
@@ -127,7 +127,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('reliqui_doctors');
         Schema::dropIfExists('ambulatory_specializations');
         Schema::dropIfExists('ambulatory_doctors_specializations');
-        Schema::dropIfExists('ambulatory_medical_forms');
+        Schema::dropIfExists('reliqui_medical_forms');
         Schema::dropIfExists('ambulatory_health_facilities');
         Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('reliqui_schedules');
