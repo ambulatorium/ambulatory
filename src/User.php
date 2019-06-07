@@ -72,7 +72,7 @@ class User extends AmbulatoryModel implements Authenticatable
      * @var array
      */
     protected $casts = [
-        'type' => 'integer'
+        'type' => 'integer',
     ];
 
     /**

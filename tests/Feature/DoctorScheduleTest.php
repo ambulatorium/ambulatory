@@ -107,7 +107,7 @@ class DoctorScheduleTest extends TestCase
         $user = $this->signInAsDoctor();
 
         $schedule = factory(Schedule::class)->create([
-            'doctor_id' => $user->doctorProfile->id
+            'doctor_id' => $user->doctorProfile->id,
         ]);
 
         $this->getJson(route('ambulatory.schedules.show', $schedule->id))

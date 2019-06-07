@@ -59,7 +59,7 @@ class Schedule extends AmbulatoryModel
      * @var array
      */
     protected $casts = [
-        'estimated_service_time_in_minutes' => 'integer'
+        'estimated_service_time_in_minutes' => 'integer',
     ];
 
     /**

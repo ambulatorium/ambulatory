@@ -47,7 +47,7 @@ class UpdateAccountTest extends TestCase
         $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account.update'), factory(User::class)->raw([
-                'email' => ''
+                'email' => '',
             ]))
             ->assertStatus(422)
             ->assertExactJson([
@@ -64,7 +64,7 @@ class UpdateAccountTest extends TestCase
         $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account.update'), factory(User::class)->raw([
-                'name' => ''
+                'name' => '',
             ]))
             ->assertStatus(422)
             ->assertExactJson([

@@ -2,9 +2,8 @@
 
 namespace Reliqui\Ambulatory\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 use RRule\RRule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class DoctorProfileRequest extends FormRequest
 {
