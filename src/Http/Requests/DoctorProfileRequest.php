@@ -4,6 +4,8 @@ namespace Reliqui\Ambulatory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use RRule\RRule;
+
 class DoctorProfileRequest extends FormRequest
 {
     /**
@@ -45,6 +47,24 @@ class DoctorProfileRequest extends FormRequest
             'qualification' => $this->qualification,
             'practicing_from' => $this->practicing_from,
             'professional_statement' => $this->professional_statement,
+            'working_hours_rule' => $this->setDefaultWorkingHours(),
         ];
+    }
+
+    /**
+     * Set the default working hours rule.
+     *
+     * @return string
+     */
+    protected function setDefaultWorkingHours()
+    {
+        $rule = new RRule([
+            'freq' => 'daily',
+            'byday' => 'MO,TU,WE,TH,FR',
+            'dtstart' => today()->createFromTime(9, 0, 0),
+            'until' => today()->createFromTime(17, 00, 00),
+        ]);
+
+        return $rule->rfcString();
     }
 }

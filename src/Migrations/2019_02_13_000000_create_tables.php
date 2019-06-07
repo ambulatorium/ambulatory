@@ -33,6 +33,7 @@ class CreateTables extends Migration
             $table->date('practicing_from');
             $table->text('professional_statement')->nullable();
             $table->boolean('is_active')->default(1);
+            $table->text('working_hours_rule');
             $table->timestamps();
         });
 

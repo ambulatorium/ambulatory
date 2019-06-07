@@ -2,6 +2,8 @@
 
 namespace Reliqui\Ambulatory;
 
+use RRule\RRule;
+
 class Doctor extends AmbulatoryModel
 {
     use HasUuid, HasSlug;
@@ -40,6 +42,15 @@ class Doctor extends AmbulatoryModel
      * @var bool
      */
     public $incrementing = false;
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'working_hours_rule',
+    ];
 
     /**
      * Get the fields for generating the slug.
@@ -86,5 +97,28 @@ class Doctor extends AmbulatoryModel
     public function appointments()
     {
         return $this->hasManyThrough(Booking::class, Schedule::class);
+    }
+
+    /**
+     * Get the default working hours of doctor.
+     *
+     * @return array
+     */
+    public function getWorkingHours()
+    {
+        $rfc = new RRule($this->working_hours_rule);
+
+        $rule = $rfc->getRule();
+
+        return collect(explode(',', $rule['BYDAY']))->map(function ($day) use ($rule) {
+            return [
+                'type' => 'wday',
+                'intervals' => [
+                    'from' => date_format($rule['DTSTART'], 'H:i'),
+                    'to' => date_format($rule['UNTIL'], 'H:i'),
+                ],
+                'wday' => $day,
+            ];
+        })->toArray();
     }
 }
