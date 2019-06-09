@@ -257,8 +257,8 @@ class ScheduleAvailabilityTest extends TestCase
         $attributes = factory(Availability::class)->raw(array_merge([
             'intervals' => [
                 [
-                    'from' => $date->createFromTime(9,00)->format('H:i'),
-                    'to' => $date->createFromTime(17,00)->format('H:i'),
+                    'from' => $date->createFromTime(9, 00)->format('H:i'),
+                    'to' => $date->createFromTime(17, 00)->format('H:i'),
                 ],
             ],
             'date' => $date->format('Y-m-d'),
@@ -277,8 +277,8 @@ class ScheduleAvailabilityTest extends TestCase
      */
     protected function pickDateBeetwen($startDate, $endDate, $format = 'Y-m-d')
     {
-        $min   = strtotime($startDate);
-        $max   = strtotime($endDate);
+        $min = strtotime($startDate);
+        $max = strtotime($endDate);
         $value = mt_rand($min, $max);
 
         return date($format, $value);
