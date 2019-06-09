@@ -3,7 +3,6 @@
 namespace Reliqui\Ambulatory\Http\Controllers;
 
 use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\Http\Middleware\Doctor;
 use Reliqui\Ambulatory\Http\Requests\ScheduleRequest;
 use Reliqui\Ambulatory\Http\Middleware\VerifiedDoctor;
 
@@ -14,7 +13,7 @@ class ScheduleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware([Doctor::class, VerifiedDoctor::class]);
+        $this->middleware(VerifiedDoctor::class);
     }
 
     /**

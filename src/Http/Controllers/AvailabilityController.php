@@ -3,7 +3,6 @@
 namespace Reliqui\Ambulatory\Http\Controllers;
 
 use Reliqui\Ambulatory\Availability;
-use Reliqui\Ambulatory\Http\Middleware\Doctor;
 use Reliqui\Ambulatory\Http\Middleware\VerifiedDoctor;
 use Reliqui\Ambulatory\Http\Requests\AvailabilityRequest;
 
@@ -14,7 +13,7 @@ class AvailabilityController extends Controller
      */
     public function __construct()
     {
-        $this->middleware([Doctor::class, VerifiedDoctor::class]);
+        $this->middleware(VerifiedDoctor::class);
     }
 
     /**
