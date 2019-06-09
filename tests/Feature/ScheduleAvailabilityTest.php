@@ -51,7 +51,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -85,7 +85,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $availability = factory(Availability::class)->create();
 
-        $date = $this->pickDateBeetwen($availability->schedule->start_date_time, $availability->schedule->end_date_time);
+        $date = $this->pickDateBetween($availability->schedule->start_date_time, $availability->schedule->end_date_time);
 
         $this
             ->actingAs($availability->schedule->doctor->user, 'ambulatory')
@@ -112,7 +112,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -133,7 +133,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -154,7 +154,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -180,7 +180,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -206,7 +206,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -227,7 +227,7 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $schedule = factory(Schedule::class)->create();
 
-        $date = $this->pickDateBeetwen($schedule->start_date_time, $schedule->end_date_time);
+        $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
@@ -265,22 +265,5 @@ class ScheduleAvailabilityTest extends TestCase
         ], $overrides));
 
         return Arr::except($attributes, ['schedule_id']);
-    }
-
-    /**
-     * Just pick a random date beetwen two dates.
-     *
-     * @param  Carbon  $startDate
-     * @param  Carbon  $endDate
-     * @param  string  $format
-     * @return string
-     */
-    protected function pickDateBeetwen($startDate, $endDate, $format = 'Y-m-d')
-    {
-        $min   = strtotime($startDate);
-        $max   = strtotime($endDate);
-        $value = mt_rand($min, $max);
-
-        return date($format, $value);
     }
 }

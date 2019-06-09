@@ -62,4 +62,21 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         return $patient;
     }
+
+    /**
+     * Just pick a random date between two dates.
+     *
+     * @param  Carbon\Carbon  $startDate
+     * @param  Carbon\Carbon  $endDate
+     * @param  string  $format
+     * @return string
+     */
+    protected function pickDateBetween($startDate, $endDate, $format = 'Y-m-d')
+    {
+        $min   = strtotime($startDate);
+        $max   = strtotime($endDate);
+        $value = mt_rand($min, $max);
+
+        return date($format, $value);
+    }
 }
