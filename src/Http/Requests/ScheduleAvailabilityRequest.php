@@ -4,7 +4,7 @@ namespace Reliqui\Ambulatory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AvailabilityRequest extends FormRequest
+class ScheduleAvailabilityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class AvailabilityRequest extends FormRequest
     public function rules()
     {
         return [
-            'intervals' => 'nullable|array',
+            'intervals' => 'required|array',
+            'intervals.*.from' => 'required|string',
+            'intervals.*.to' => 'required|string',
             'date' => 'required|date',
         ];
     }

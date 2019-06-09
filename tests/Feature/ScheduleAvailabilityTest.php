@@ -38,12 +38,12 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $this->signInAsDoctor();
 
-        $schedule = factory(Schedule::class)->create();
+        $availability = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedules.availabilities', $schedule->id), factory(Availability::class)->raw())
+        $this->postJson(route('ambulatory.schedules.availabilities', $availability->id), factory(Availability::class)->raw())
             ->assertStatus(403);
 
-        $this->assertDatabaseMissing('reliqui_availabilities', ['schedule_id' => $schedule->id]);
+        $this->assertDatabaseMissing('reliqui_availabilities', ['schedule_id' => $availability->id]);
     }
 
     /** @test */
@@ -70,10 +70,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $availability = factory(Availability::class)->create();
 
-        $this->patchJson(route('ambulatory.schedules.availabilities.update', [
-            $availability->schedule->id,
-            $availability->id,
-        ]), factory(Availability::class)->raw())
+        $this->patchJson(route('ambulatory.availabilities.update', $availability->id), factory(Availability::class)->raw())
         ->assertStatus(403)
         ->assertExactJson([
             'message' => 'This action is unauthorized.',
@@ -89,10 +86,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($availability->schedule->doctor->user, 'ambulatory')
-            ->patchJson(route('ambulatory.schedules.availabilities.update', [
-                $availability->schedule->id,
-                $availability->id,
-            ]), $attributes = $this->dummyData($date, [
+            ->patchJson(route('ambulatory.availabilities.update', $availability->id), $attributes = $this->dummyData($date, [
                 'intervals' => [
                     [
                         'from' => '13:00',

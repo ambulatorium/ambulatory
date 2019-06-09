@@ -10,16 +10,12 @@ Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store
 Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
 Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
 Route::post('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@store')->name('schedules.availabilities');
-Route::patch('/api/schedules/{schedule}/availabilities/{availability}', 'ScheduleAvailabilityController@update')->name('schedules.availabilities.update');
 
 // Medical Forms.
 Route::get('/api/medical-forms', 'MedicalFormController@index')->name('medical-forms');
 Route::post('/api/medical-forms', 'MedicalFormController@store')->name('medical-forms.store');
 Route::get('/api/medical-forms/{medicalForm}', 'MedicalFormController@show')->name('medical-forms.show');
 Route::patch('/api/medical-forms/{medicalForm}', 'MedicalFormController@update')->name('medical-forms.update');
-
-// Staff.
-Route::get('/api/staff', 'StaffController@index')->name('staff.index');
 
 // Invitations.
 Route::get('/api/invitations', 'InvitationController@index')->name('invitations');
@@ -40,6 +36,12 @@ Route::post('/api/specializations', 'SpecializationController@store')->name('spe
 Route::get('/api/specializations/{specialization}', 'SpecializationController@show')->name('specializations.show');
 Route::patch('/api/specializations/{specialization}', 'SpecializationController@update')->name('specializations.update');
 Route::delete('/api/specializations/{specialization}', 'SpecializationController@destroy')->name('specializations.destroy');
+
+// Staff.
+Route::get('/api/staff', 'StaffController@index')->name('staff.index');
+
+// Availabilities.
+Route::patch('/api/availabilities/{availability}', 'AvailabilityController@update')->name('availabilities.update');
 
 // Settings.
 Route::namespace('Settings')->group(function () {

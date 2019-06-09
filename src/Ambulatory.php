@@ -4,6 +4,7 @@ namespace Reliqui\Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
 use Reliqui\Ambulatory\Policies\MedicalFormPolicy;
+use Reliqui\Ambulatory\Policies\AvailabilityPolicy;
 use Reliqui\Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
@@ -16,6 +17,7 @@ class Ambulatory
     protected $policies = [
         Schedule::class => DoctorSchedulePolicy::class,
         MedicalForm::class => MedicalFormPolicy::class,
+        Availability::class => AvailabilityPolicy::class,
     ];
 
     /**
