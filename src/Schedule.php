@@ -16,6 +16,13 @@ class Schedule extends AmbulatoryModel
     protected $guarded = [];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['availabilities'];
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -83,6 +90,27 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
+     * The availabilities of schedule.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function availabilities()
+    {
+        return $this->hasMany(Availability::class, 'schedule_id');
+    }
+
+    /**
+     * Add a availability to the schedule.
+     *
+     * @param  array  $attributes
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function addAvailability(array $attributes)
+    {
+        return $this->availabilities()->create($attributes);
+    }
+
+    /**
      * The bookings schedule.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -90,5 +118,25 @@ class Schedule extends AmbulatoryModel
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'schedule_id');
+    }
+
+    /**
+     * Get the schedule availabilities within the working hours.
+     *
+     * @return array
+     */
+    public function getAvailabilitiesAttribute()
+    {
+        return array_merge($this->availabilities()->get()->toArray(), $this->doctorWorkingHours());
+    }
+
+    /**
+     * The working hours of doctor.
+     *
+     * @return array
+     */
+    public function doctorWorkingHours()
+    {
+        return $this->doctor->getWorkingHours();
     }
 }

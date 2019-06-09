@@ -9,6 +9,8 @@ Route::get('/api/schedules', 'ScheduleController@index')->name('schedules');
 Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store');
 Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
 Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
+Route::post('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@store')->name('schedules.availabilities');
+Route::patch('/api/schedules/{schedule}/availabilities/{availability}', 'ScheduleAvailabilityController@update')->name('schedules.availabilities.update');
 
 // Medical Forms.
 Route::get('/api/medical-forms', 'MedicalFormController@index')->name('medical-forms');

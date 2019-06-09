@@ -2,9 +2,11 @@
 
 namespace Reliqui\Ambulatory\Tests\Unit;
 
+use Illuminate\Support\Arr;
 use Reliqui\Ambulatory\Doctor;
 use Reliqui\Ambulatory\Schedule;
 use Illuminate\Support\Collection;
+use Reliqui\Ambulatory\Availability;
 use Reliqui\Ambulatory\HealthFacility;
 use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -43,5 +45,20 @@ class ScheduleTest extends TestCase
         $schedule = factory(Schedule::class)->create();
 
         $this->assertInstanceOf(Collection::class, $schedule->bookings);
+    }
+
+    /** @test */
+    public function it_can_add_a_availability()
+    {
+        $schedule = factory(Schedule::class)->create();
+
+        $availability = $schedule->addAvailability(Arr::except(factory(Availability::class)->raw(), ['schedule_id']));
+
+        // included default working hours
+        $this->assertCount(6, $schedule->availabilities);
+
+        $this->assertDatabaseHas('reliqui_availabilities', [
+            'intervals' => json_encode($availability['intervals'])
+        ]);
     }
 }

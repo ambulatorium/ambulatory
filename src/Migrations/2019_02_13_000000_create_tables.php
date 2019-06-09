@@ -103,6 +103,15 @@ class CreateTables extends Migration
             $table->unique(['doctor_id', 'health_facility_id']);
         });
 
+        Schema::create('reliqui_availabilities', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('schedule_id')->index();
+            $table->string('type')->default('date');
+            $table->text('intervals');
+            $table->date('date');
+            $table->timestamps();
+        });
+
         Schema::create('reliqui_bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('schedule_id');
@@ -132,6 +141,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('reliqui_health_facilities');
         Schema::dropIfExists('reliqui_invitations');
         Schema::dropIfExists('reliqui_schedules');
+        Schema::dropIfExists('reliqui_availabilities');
         Schema::dropIfExists('reliqui_bookings');
     }
 }
