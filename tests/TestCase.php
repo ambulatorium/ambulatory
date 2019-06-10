@@ -73,8 +73,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function pickDateBetween($startDate, $endDate, $format = 'Y-m-d')
     {
-        $min   = strtotime($startDate);
-        $max   = strtotime($endDate);
+        $min = strtotime($startDate);
+        $max = strtotime($endDate);
         $value = mt_rand($min, $max);
 
         return date($format, $value);
