@@ -122,7 +122,7 @@ class User extends AmbulatoryModel implements Authenticatable
      */
     public function isVerifiedDoctor()
     {
-        return $this->doctorProfile != null;
+        return ! is_null($this->doctorProfile);
     }
 
     /**
