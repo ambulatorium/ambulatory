@@ -2,9 +2,9 @@
 
 namespace Reliqui\Ambulatory\Tests\Feature;
 
+use Reliqui\Ambulatory\Schedule;
 use Reliqui\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Reliqui\Ambulatory\Schedule;
 
 class BookingScheduleTest extends TestCase
 {
