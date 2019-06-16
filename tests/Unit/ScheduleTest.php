@@ -58,7 +58,7 @@ class ScheduleTest extends TestCase
         $this->assertCount(6, $schedule->availabilities);
 
         $this->assertDatabaseHas('reliqui_availabilities', [
-            'intervals' => json_encode($availability['intervals'])
+            'intervals' => json_encode($availability['intervals']),
         ]);
     }
 }

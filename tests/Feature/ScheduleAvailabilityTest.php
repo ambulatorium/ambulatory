@@ -251,8 +251,8 @@ class ScheduleAvailabilityTest extends TestCase
         $attributes = factory(Availability::class)->raw(array_merge([
             'intervals' => [
                 [
-                    'from' => $date->createFromTime(9,00)->format('H:i'),
-                    'to' => $date->createFromTime(17,00)->format('H:i'),
+                    'from' => $date->createFromTime(9, 00)->format('H:i'),
+                    'to' => $date->createFromTime(17, 00)->format('H:i'),
                 ],
             ],
             'date' => $date->format('Y-m-d'),
