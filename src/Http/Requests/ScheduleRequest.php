@@ -26,8 +26,8 @@ class ScheduleRequest extends FormRequest
     {
         return [
             'location' => 'required|string|exists:'.config('ambulatory.database_connection').'.reliqui_health_facilities,id',
-            'start_date_time' => 'required|date',
-            'end_date_time' => 'required|date|after:start_date_time',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
             'service_time' => 'nullable|integer',
         ];
     }
@@ -46,8 +46,8 @@ class ScheduleRequest extends FormRequest
         return [
             'doctor_id' => auth('ambulatory')->user()->doctorProfile->id,
             'health_facility_id' => $this->location,
-            'start_date_time' => $this->start_date_time,
-            'end_date_time' => $this->end_date_time,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
             'estimated_service_time_in_minutes' => $serviceTime,
         ];
     }

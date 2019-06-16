@@ -95,8 +95,8 @@ class CreateTables extends Migration
             $table->uuid('id')->primary();
             $table->uuid('doctor_id');
             $table->uuid('health_facility_id');
-            $table->dateTime('start_date_time');
-            $table->dateTime('end_date_time');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->integer('estimated_service_time_in_minutes')->nullable();
             $table->timestamps();
 

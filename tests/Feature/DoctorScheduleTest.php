@@ -86,16 +86,16 @@ class DoctorScheduleTest extends TestCase
 
         $attributes = factory(Schedule::class)->raw([
             'location' => $location->id,
-            'start_date_time' => now()->addDays(2)->toDateTimeString(),
-            'end_date_time' => now()->toDateTimeString(),
+            'start_date' => today()->addDays(2)->toDateTimeString(),
+            'end_date' => today()->toDateTimeString(),
         ]);
 
         $this->postJson(route('ambulatory.schedules.store'), array_except($attributes, ['health_facility_id']))
             ->assertStatus(422)
-            ->assertJsonValidationErrors('end_date_time')
+            ->assertJsonValidationErrors('end_date')
             ->assertExactJson([
                 'errors' => [
-                    'end_date_time' => ['The end date time must be a date after start date time.'],
+                    'end_date' => ['The end date must be a date after start date.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -128,7 +128,7 @@ class DoctorScheduleTest extends TestCase
     }
 
     /** @test */
-    public function a_doctor_cannot_update_the_schedule_of_others()
+    public function a_doctor_can_not_update_the_schedule_of_others()
     {
         $this->signInAsDoctor();
 
@@ -151,12 +151,12 @@ class DoctorScheduleTest extends TestCase
         $this->patchJson(route('ambulatory.schedules.update', $schedule->id),
             $attributes = factory(Schedule::class)->raw([
                 'location' => $schedule->health_facility_id,
-                'start_date_time' => now()->addDays(2)->toDateTimeString(),
+                'start_date' => now()->addDays(2)->toDateTimeString(),
             ])
         )->assertOk();
 
-        $this->assertNotSame($schedule->start_date_time, $attributes['start_date_time']);
+        $this->assertNotSame($schedule->start_date_time, $attributes['start_date']);
 
-        $this->assertDatabaseHas('reliqui_schedules', ['start_date_time' => $attributes['start_date_time']]);
+        $this->assertDatabaseHas('reliqui_schedules', ['start_date' => $attributes['start_date']]);
     }
 }
