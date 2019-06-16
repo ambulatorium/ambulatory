@@ -105,7 +105,7 @@ class Schedule extends AmbulatoryModel
     /**
      * Estimated service time in minutes of schedule.
      *
-     * @return integer
+     * @return int
      */
     public function estim()
     {
@@ -241,15 +241,15 @@ class Schedule extends AmbulatoryModel
     /**
      * Calculate availability time slots.
      *
-     * @param  integer  $startTime
-     * @param  integer  $endTime
+     * @param  int  $startTime
+     * @param  int  $endTime
      * @return array
      */
     protected function calculateTimeSlots($startTime, $endTime)
     {
         $duration = $this->estim() * 60;
 
-        $timeSlots = array();
+        $timeSlots = [];
 
         while ($startTime <= $endTime) {
             $timeSlots[] = date('H:i', $startTime);

@@ -122,7 +122,7 @@ class BookingScheduleTest extends TestCase
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time is not available.']
+                    'preferred_date_time' => ['The preferred date time is not available.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -144,7 +144,7 @@ class BookingScheduleTest extends TestCase
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time is not available.']
+                    'preferred_date_time' => ['The preferred date time is not available.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -211,7 +211,7 @@ class BookingScheduleTest extends TestCase
         // from 9:00-17:00 with estimated service time 15 minutes.
         $schedule = factory(Schedule::class)->create();
 
-       $this
+        $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Monday next week')->setTime(9, 30),
