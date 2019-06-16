@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 class BookingAvailabilityRule implements Rule
 {
     /**
-     * The schedule of doctor
+     * The schedule of doctor.
      *
      * @var \Reliqui\Ambulatory\Schedule
      */
