@@ -6,6 +6,7 @@ class Booking extends AmbulatoryModel
 {
     use HasUuid;
 
+    // Status of bookings
     const DONE = 1;
     const ACTIVE = 2;
     const EXPIRED = 3;
@@ -44,6 +45,15 @@ class Booking extends AmbulatoryModel
      * @var bool
      */
     public $incrementing = false;
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'integer',
+    ];
 
     /**
      * Status of booking.

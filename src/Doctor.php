@@ -3,6 +3,9 @@
 namespace Reliqui\Ambulatory;
 
 use RRule\RRule;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class Doctor extends AmbulatoryModel
 {
@@ -120,5 +123,22 @@ class Doctor extends AmbulatoryModel
                 'wday' => $day,
             ];
         })->toArray();
+    }
+
+    /**
+     * Get the default doctor availability.
+     *
+     * @param  string  $incomingDate
+     * @return array
+     */
+    public function getAvailability($incomingDate)
+    {
+        $date = Carbon::parse($incomingDate);
+
+        $availability = Arr::where($this->getWorkingHours(), function ($value) use ($date) {
+            return $value['wday'] === Str::upper(Str::limit($date->format('l'), 2, ''));
+        });
+
+        return Arr::collapse($availability);
     }
 }

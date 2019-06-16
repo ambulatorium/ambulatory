@@ -103,6 +103,7 @@ class CreateTables extends Migration
             $table->unique(['doctor_id', 'health_facility_id']);
         });
 
+        // to store custom availabilities of schedule.
         Schema::create('reliqui_availabilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('schedule_id')->index();
@@ -115,14 +116,14 @@ class CreateTables extends Migration
         Schema::create('reliqui_bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('schedule_id');
-            $table->uuid('medical_form_id');
+            $table->uuid('medical_form_id')->index();
             $table->dateTime('preferred_date_time');
             $table->dateTime('actual_end_date_time')->nullable();
             $table->string('description')->nullable();
             $table->smallInteger('status', false, true)->default(2);
             $table->timestamps();
 
-            $table->index(['schedule_id', 'medical_form_id']);
+            $table->unique(['schedule_id', 'preferred_date_time'], 'book_schedule_date_unique');
         });
     }
 

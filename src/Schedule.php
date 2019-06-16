@@ -2,6 +2,9 @@
 
 namespace Reliqui\Ambulatory;
 
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
+
 class Schedule extends AmbulatoryModel
 {
     use HasUuid;
@@ -56,8 +59,8 @@ class Schedule extends AmbulatoryModel
      * @var array
      */
     protected $dates = [
-        'start_date_time',
-        'end_date_time',
+        'start_date',
+        'end_date',
     ];
 
     /**
@@ -100,6 +103,16 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
+     * Estimated service time in minutes of schedule.
+     *
+     * @return integer
+     */
+    public function estim()
+    {
+        return $this->estimated_service_time_in_minutes;
+    }
+
+    /**
      * Add a availability to the schedule.
      *
      * @param  array  $attributes
@@ -121,11 +134,21 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
-     * Get the schedule availabilities within the working hours.
+     * Get the availabilities attribute.
      *
      * @return array
      */
     public function getAvailabilitiesAttribute()
+    {
+        return $this->getAvailabilities();
+    }
+
+    /**
+     * The schedule availabilities structure with the doctor working hours.
+     *
+     * @return array
+     */
+    public function getAvailabilities()
     {
         return array_merge($this->availabilities()->get()->toArray(), $this->doctorWorkingHours());
     }
@@ -138,5 +161,102 @@ class Schedule extends AmbulatoryModel
     public function doctorWorkingHours()
     {
         return $this->doctor->getWorkingHours();
+    }
+
+    /**
+     * Check the availability of schedule.
+     *
+     * @param  string  $incomingDate
+     * @return bool
+     */
+    public function checkAvailability($incomingDate)
+    {
+        $slots = $this->availabilitySlots($incomingDate);
+
+        $available = Arr::where($slots, function ($value) use ($incomingDate) {
+            return $value === date('H:i', strtotime($incomingDate));
+        });
+
+        return filled($available);
+    }
+
+    /**
+     * The schedule availability slots.
+     *
+     * @param  string  $incomingDate
+     * @return mixed
+     */
+    public function availabilitySlots($incomingDate)
+    {
+        $date = Carbon::parse($incomingDate)->toDateString();
+
+        $availability = $this->availabilities()->whereDate('date', $date);
+
+        if ($availability->exists()) {
+            return $this->customAvailabilitySlot($availability->first()->toArray());
+        }
+
+        return $this->defaultAvailabilitySlot($incomingDate);
+    }
+
+    /**
+     * Find the default availability slots of schedule.
+     *
+     * @param  string  $incomingDate
+     * @return mixed
+     */
+    protected function defaultAvailabilitySlot($incomingDate)
+    {
+        $startTime = 0;
+        $endTime = 0;
+
+        $doctorAvailability = $this->doctor->getAvailability($incomingDate);
+
+        if (filled($doctorAvailability)) {
+            $startTime = strtotime($doctorAvailability['intervals']['from']);
+            $endTime = strtotime($doctorAvailability['intervals']['to']);
+        }
+
+        return $this->calculateTimeSlots($startTime, $endTime);
+    }
+
+    /**
+     * Find the custom availability slots of schedule.
+     *
+     * @param  array  $availability
+     * @return mixed
+     */
+    protected function customAvailabilitySlot($availability)
+    {
+        $slots = collect($availability['intervals'])->map(function ($intervals) {
+            $startTime = strtotime($intervals['from']);
+            $endTime = strtotime($intervals['to']);
+
+            return $this->calculateTimeSlots($startTime, $endTime);
+        })->toArray();
+
+        return Arr::collapse($slots);
+    }
+
+    /**
+     * Calculate availability time slots.
+     *
+     * @param  integer  $startTime
+     * @param  integer  $endTime
+     * @return array
+     */
+    protected function calculateTimeSlots($startTime, $endTime)
+    {
+        $duration = $this->estim() * 60;
+
+        $timeSlots = array();
+
+        while ($startTime <= $endTime) {
+            $timeSlots[] = date('H:i', $startTime);
+
+            $startTime += $duration;
+        }
+
+        return $timeSlots;
     }
 }
