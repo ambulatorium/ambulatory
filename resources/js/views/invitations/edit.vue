@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <form-entry title="Invitation" resource="invitations" okToSave okToDelete>
+    <form-entry title="Invitation" resource="invitations" okToSave okToUpdate okToDelete>
         <template slot="entry-data" slot-scope="slotProps">
             <div class="form-group row">
                 <label for="role" class="col-sm-4 col-form-label text-md-right font-weight-bold">Role</label>
