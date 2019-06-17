@@ -59,7 +59,7 @@ class ScheduleController extends Controller
         $this->authorize('manage', $schedule);
 
         return response()->json([
-            'entry' => $schedule,
+            'entry' => $schedule->load('healthFacility'),
         ]);
     }
 

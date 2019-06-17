@@ -113,7 +113,7 @@ class DoctorScheduleTest extends TestCase
         $this->getJson(route('ambulatory.schedules.show', $schedule->id))
             ->assertOk()
             ->assertExactJson([
-                'entry' => $schedule->toArray(),
+                'entry' => $schedule->load('healthFacility')->toArray(),
             ]);
     }
 

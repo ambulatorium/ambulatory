@@ -15,7 +15,7 @@
 </script>
 
 <template>
-    <form-entry title="Schedule" resource="schedules" okToSave>
+    <form-entry title="Schedule" resource="schedules" okToSave okToUpdate>
         <template slot="entry-data" slot-scope="slotProps">
             <div class="form-group row">
                 <label for="location" class="col-md-4 font-weight-bold col-form-label text-md-right">
@@ -24,14 +24,14 @@
                 </label>
 
                 <div class="col-md-6">
-                    <select id="location" v-model="slotProps.formData.health_facility_id" class="custom-select custom-select-lg bg-light border-0">
+                    <select id="location" v-model="slotProps.formData.location" class="custom-select custom-select-lg bg-light border-0">
                         <option disabled value="">Please select one location</option>
                         <option v-for="location in locations" :key="location.id" :value="location.id">
                             {{location.name}}
                         </option>
                     </select>
 
-                    <form-errors :errors="slotProps.formErrors.health_facility_id"></form-errors>
+                    <form-errors :errors="slotProps.formErrors.location"></form-errors>
                 </div>
             </div>
 
@@ -44,9 +44,9 @@
                 </label>
 
                 <div class="col-md-6">
-                    <date-time-picker v-model="slotProps.formData.start_date_time"></date-time-picker>
+                    <date-time-picker v-model="slotProps.formData.start_date"></date-time-picker>
 
-                    <form-errors :errors="slotProps.formErrors.start_date_time"></form-errors>
+                    <form-errors :errors="slotProps.formErrors.start_date"></form-errors>
                 </div>
             </div>
 
@@ -59,9 +59,9 @@
                 </label>
 
                 <div class="col-md-6">
-                    <date-time-picker v-model="slotProps.formData.end_date_time"></date-time-picker>
+                    <date-time-picker v-model="slotProps.formData.end_date"></date-time-picker>
 
-                    <form-errors :errors="slotProps.formErrors.end_date_time"></form-errors>
+                    <form-errors :errors="slotProps.formErrors.end_date"></form-errors>
                 </div>
             </div>
 
