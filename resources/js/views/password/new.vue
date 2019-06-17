@@ -9,7 +9,7 @@
 </script>
 
 <template>
-    <form-entry title="Settings" resource="password" redirect-to="inbox" okToSave>
+    <form-entry title="Settings" resource="new-password" redirect-to="inbox" okToSave>
         <template slot="form-information">
             <setting-tabs activeTab="newPassword"></setting-tabs>
         </template>

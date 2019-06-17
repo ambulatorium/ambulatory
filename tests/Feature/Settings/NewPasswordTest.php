@@ -14,7 +14,7 @@ class NewPasswordTest extends TestCase
     /** @test */
     public function unauthenticated_users_cannot_update_the_password()
     {
-        $this->patchJson(route('ambulatory.new-password'))->assertStatus(401);
+        $this->postJson(route('ambulatory.new-password'))->assertStatus(401);
     }
 
     /** @test */
@@ -24,7 +24,7 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => '',
             ]))
             ->assertStatus(422)
@@ -42,14 +42,14 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => 'secr',
             ]))
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
                     'current_password' => [
-                        'The current password must be at least 6 characters.',
+                        'The current password must be at least 8 characters.',
                         'Your current password is incorrect.',
                     ],
                 ],
@@ -63,7 +63,7 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'new_password' => '',
             ]))
             ->assertStatus(422)
@@ -81,13 +81,13 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'new_password' => 'secr',
             ]))
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
-                    'new_password' => ['The new password must be at least 6 characters.'],
+                    'new_password' => ['The new password must be at least 8 characters.'],
                 ],
             ]);
     }
@@ -99,7 +99,7 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => '',
             ]))
             ->assertStatus(422)
@@ -117,13 +117,13 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => 'secr',
             ]))
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
-                    'confirm_new_password' => ['The confirm new password must be at least 6 characters.'],
+                    'confirm_new_password' => ['The confirm new password must be at least 8 characters.'],
                 ],
             ]);
     }
@@ -135,7 +135,7 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'confirm_new_password' => 'secretss',
             ]))
             ->assertStatus(422)
@@ -153,10 +153,13 @@ class NewPasswordTest extends TestCase
 
         $this
             ->actingAs($user, 'ambulatory')
-            ->patchJson(route('ambulatory.new-password'), $this->credentials([
+            ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => 'low-secret',
             ]))
-            ->assertOk();
+            ->assertOk()
+            ->assertExactJson([
+                'message' => 'Password successfully updated!',
+            ]);
 
         $this->assertTrue(auth('ambulatory')->check());
         $this->assertCount(1, User::all());
@@ -170,7 +173,7 @@ class NewPasswordTest extends TestCase
     protected function credentials($overrides = [])
     {
         return array_merge([
-            'current_password' => 'secret',
+            'current_password' => 'secretss',
             'new_password' => 'super-secrets',
             'confirm_new_password' => 'super-secrets',
         ], $overrides);

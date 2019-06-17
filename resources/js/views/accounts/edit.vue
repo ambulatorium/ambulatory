@@ -11,7 +11,7 @@
 </script>
 
 <template>
-    <form-entry title="Settings" resource="account" redirect-to="settings-account" okToSave>
+    <form-entry title="Settings" resource="account" redirect-to="settings-account" okToUpdate>
         <template slot="form-information">
             <setting-tabs activeTab="account"></setting-tabs>
         </template>

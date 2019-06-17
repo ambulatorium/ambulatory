@@ -47,7 +47,7 @@
                 this.http().post('/api/' + this.resource, this.formData).then(response => {
                     this.$router.push({name: this.routerName});
 
-                    this.alertSuccess('Entry saved successfully!', 3000);
+                    this.alertSuccess('Entry successfully saved!', 3000);
                 }).catch(error => {
                     this.formErrors = error.response.data.errors;
                 });
@@ -57,7 +57,7 @@
                 this.http().patch('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
                     this.$router.push({name: this.routerName});
 
-                    this.alertSuccess('Entry updated successfully!', 3000);
+                    this.alertSuccess('Entry successfully updated!', 3000);
                 }).catch(error => {
                     this.formErrors = error.response.data.errors;
                 });
@@ -68,7 +68,7 @@
                     this.http().delete('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
                         this.$router.push({name: this.routerName});
 
-                        this.alertSuccess('Enrty deleted successfully!', 3000);
+                        this.alertSuccess('Enrty successfully deleted!', 3000);
                     });
                 });
             },

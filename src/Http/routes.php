@@ -47,19 +47,19 @@ Route::patch('/api/availabilities/{availability}', 'AvailabilityController@updat
 // Settings.
 Route::namespace('Settings')->group(function () {
     // Account.
-    Route::get('/api/account', 'AccountController@show')->name('account.show');
-    Route::patch('/api/account', 'AccountController@update')->name('account.update');
+    Route::get('/api/account/{id}', 'AccountController@show')->name('account.show');
+    Route::patch('/api/account/{id}', 'AccountController@update')->name('account.update');
 
     // Doctor profile.
     Route::get('/api/doctor-profile', 'DoctorProfileController@show')->name('doctor-profile.show');
     Route::post('/api/doctor-profile', 'DoctorProfileController@store')->name('doctor-profile.store');
-    Route::patch('/api/doctor-profile', 'DoctorProfileController@update')->name('doctor-profile.update');
+    Route::patch('/api/doctor-profile/{doctor}', 'DoctorProfileController@update')->name('doctor-profile.update');
 
     // User Avatar.
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
 
     // New password.
-    Route::patch('/api/new-password', 'NewPasswordController@update')->name('new-password');
+    Route::post('/api/new-password', 'NewPasswordController@update')->name('new-password');
 });
 
 // Logout Route.
