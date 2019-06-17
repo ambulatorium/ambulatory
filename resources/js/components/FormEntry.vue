@@ -4,6 +4,7 @@
             title: String,
             resource: String,
             okToSave: Boolean,
+            okToUpdate: Boolean,
             okToDelete: Boolean,
             redirectTo: String,
         },
@@ -43,10 +44,20 @@
             },
 
             saveEntry() {
-                this.http().post('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
+                this.http().post('/api/' + this.resource, this.formData).then(response => {
                     this.$router.push({name: this.routerName});
 
                     this.alertSuccess('Entry saved successfully!', 3000);
+                }).catch(error => {
+                    this.formErrors = error.response.data.errors;
+                });
+            },
+
+            updateEntry() {
+                this.http().patch('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
+                    this.$router.push({name: this.routerName});
+
+                    this.alertSuccess('Entry updated successfully!', 3000);
                 }).catch(error => {
                     this.formErrors = error.response.data.errors;
                 });
@@ -95,12 +106,14 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
-                        <a href="#" class="btn btn-primary" v-if="okToSave" @click="saveEntry">
-                            Save
-                        </a>
-                        <a href="#" class="btn btn-danger" v-if="okToDelete && id != 'new'" @click="deleteEntry">
-                            Delete
-                        </a>
+                        <div v-if="id != 'new'">
+                            <a href="#" class="btn btn-info" v-if="okToUpdate" @click="updateEntry">Update</a>
+                            <a href="#" class="btn btn-danger" v-if="okToDelete" @click="deleteEntry">Delete</a>
+                        </div>
+
+                        <div v-else>
+                            <a href="#" class="btn btn-primary" v-if="okToSave" @click="saveEntry">Save</a>
+                        </div>
                     </div>
                 </div>
             </form>
