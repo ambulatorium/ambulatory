@@ -32,18 +32,18 @@ export default [
 
     // Medical form.
     {
-        path: '/medical-form',
-        name: 'medical-form',
+        path: '/medical-forms',
+        name: 'medical-forms',
         component: require('./views/medical/index').default
     },
     {
-        path: '/medical-form/new',
-        name: 'medical-form-new',
+        path: '/medical-forms/new',
+        name: 'medical-forms-new',
         component: require('./views/medical/edit').default
     },
     {
-        path: '/medical-form/:id',
-        name: 'medical-form-edit',
+        path: '/medical-forms/:id',
+        name: 'medical-forms-edit',
         component: require('./views/medical/edit').default
     },
 

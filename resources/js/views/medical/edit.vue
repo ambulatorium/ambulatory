@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <form-entry title="Medical Form" resource="medical-form" okToSave>
+    <form-entry title="Medical Form" resource="medical-forms" okToSave okToUpdate>
         <div slot="form-information" class="alert alert-info form-title-section d-flex rounded-0">
             <div class="mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-info">
