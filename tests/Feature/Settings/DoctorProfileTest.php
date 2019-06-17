@@ -83,13 +83,11 @@ class DoctorProfileTest extends TestCase
                 'entry' => $user->doctorProfile->fresh()->toArray(),
             ]);
 
-
         tap($user->doctorProfile->fresh(), function ($doctor) {
             $this->assertSame($doctor->slug, 'full-name-changed');
 
             $this->assertDatabaseHas('reliqui_doctors', $doctor->toArray());
         });
-
     }
 
     /** @test */

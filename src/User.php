@@ -24,7 +24,7 @@ class User extends AmbulatoryModel implements Authenticatable
      */
     protected $appends = [
         'role',
-        'doctorId'
+        'doctorId',
     ];
 
     /**
