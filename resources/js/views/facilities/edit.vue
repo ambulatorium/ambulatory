@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <form-entry title="Health Facility" resource="health-facilities" okToSave>
+    <form-entry title="Health Facility" resource="health-facilities" okToSave okToUpdate>
         <template slot="entry-data" slot-scope="slotProps">
             <div class="form-group row">
                 <label for="name" class="col-sm-4 col-form-label text-md-right font-weight-bold">Name</label>
