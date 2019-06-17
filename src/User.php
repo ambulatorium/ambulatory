@@ -165,7 +165,7 @@ class User extends AmbulatoryModel implements Authenticatable
      */
     public function inbox()
     {
-        if ($this->isDoctor()) {
+        if ($this->isVerifiedDoctor()) {
             return $this->doctorProfile->appointments();
         }
 
