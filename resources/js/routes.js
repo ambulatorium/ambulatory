@@ -107,7 +107,7 @@ export default [
 
     // Settings.
     {
-        path: '/settings/account/:id',
+        path: '/settings/account',
         name: 'settings-account',
         component: require('./views/accounts/edit').default
     },

@@ -48,6 +48,7 @@ class CreateTables extends Migration
         Schema::create('reliqui_doctors_specializations', function (Blueprint $table) {
             $table->uuid('doctor_id');
             $table->uuid('specialization_id');
+            // $table->timestamps();
 
             $table->unique(['doctor_id', 'specialization_id'], 'doctor_id_specialization_id_unique');
         });

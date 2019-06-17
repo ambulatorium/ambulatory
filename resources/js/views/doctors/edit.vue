@@ -36,7 +36,7 @@
 </script>
 
 <template>
-    <form-entry title="Settings" resource="doctor-profile" redirect-to="settings-doctor-profile" okToSave>
+    <form-entry title="Settings" resource="doctor-profile" redirect-to="settings-doctor-profile" okToSave okToUpdate>
         <template slot="form-information">
             <setting-tabs activeTab="doctorProfile"></setting-tabs>
         </template>

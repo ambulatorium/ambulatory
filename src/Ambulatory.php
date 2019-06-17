@@ -3,6 +3,7 @@
 namespace Reliqui\Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
+use Reliqui\Ambulatory\Policies\DoctorPolicy;
 use Reliqui\Ambulatory\Policies\MedicalFormPolicy;
 use Reliqui\Ambulatory\Policies\AvailabilityPolicy;
 use Reliqui\Ambulatory\Policies\DoctorSchedulePolicy;
@@ -15,6 +16,7 @@ class Ambulatory
      * @var array
      */
     protected $policies = [
+        Doctor::class => DoctorPolicy::class,
         Schedule::class => DoctorSchedulePolicy::class,
         MedicalForm::class => MedicalFormPolicy::class,
         Availability::class => AvailabilityPolicy::class,
@@ -42,7 +44,7 @@ class Ambulatory
         return [
             'path' => config('ambulatory.path'),
             'user' => auth('ambulatory')->check()
-                ? auth('ambulatory')->user()->only('name', 'avatar', 'role', 'id')
+                ? auth('ambulatory')->user()->only('name', 'avatar', 'role', 'doctorId', 'id')
                 : null,
         ];
     }

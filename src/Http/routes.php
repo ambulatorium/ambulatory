@@ -51,7 +51,7 @@ Route::namespace('Settings')->group(function () {
     Route::patch('/api/account/{id}', 'AccountController@update')->name('account.update');
 
     // Doctor profile.
-    Route::get('/api/doctor-profile', 'DoctorProfileController@show')->name('doctor-profile.show');
+    Route::get('/api/doctor-profile/{doctor}', 'DoctorProfileController@show')->name('doctor-profile.show');
     Route::post('/api/doctor-profile', 'DoctorProfileController@store')->name('doctor-profile.store');
     Route::patch('/api/doctor-profile/{doctor}', 'DoctorProfileController@update')->name('doctor-profile.update');
 

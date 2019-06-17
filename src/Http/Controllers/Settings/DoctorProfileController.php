@@ -6,6 +6,7 @@ use Reliqui\Ambulatory\Doctor;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
 use Reliqui\Ambulatory\Http\Requests\DoctorProfileRequest;
 use Reliqui\Ambulatory\Http\Middleware\Doctor as ReliquiDoctor;
+use Reliqui\Ambulatory\Specialization;
 
 class DoctorProfileController extends Controller
 {
@@ -22,18 +23,10 @@ class DoctorProfileController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show()
+    public function show(Doctor $doctor)
     {
-        $user = auth('ambulatory')->user();
-
-        if ($user->isVerifiedDoctor()) {
-            return response()->json([
-                'entry' => $user->doctorProfile->load('specializations'),
-            ]);
-        }
-
         return response()->json([
-            'entry' => [],
+            'entry' => $doctor->load('specializations'),
         ]);
     }
 
@@ -47,7 +40,9 @@ class DoctorProfileController extends Controller
     {
         $doctor = Doctor::create($request->validatedFields() + ['user_id' => auth('ambulatory')->id()]);
 
-        $doctor->specializations()->sync(request('specializations'));
+        $doctor->specializations()->sync(
+            $this->specializations(request('specializations'))
+        );
 
         return response()->json([
             'entry' => $doctor->fresh(),
@@ -58,20 +53,32 @@ class DoctorProfileController extends Controller
      * Update doctors' profile.
      *
      * @param  DoctorProfileRequest  $request
+     * @param  Doctor  $doctor
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(DoctorProfileRequest $request)
+    public function update(DoctorProfileRequest $request, Doctor $doctor)
     {
-        $user = auth('ambulatory')->user();
+        $this->authorize('update', $doctor);
 
-        tap($user->doctorProfile, function ($doctor) use ($request) {
-            $doctor->update($request->validatedFields());
+        $doctor->update($request->validatedFields());
 
-            $doctor->specializations()->sync($request->get('specializations'));
-        });
+        $doctor->specializations()->sync(
+            $this->specializations(request('specializations'))
+        );
 
         return response()->json([
-            'entry' => $user->doctorProfile,
+            'entry' => $doctor,
         ]);
+    }
+
+    protected function specializations($specializations)
+    {
+        $allSpecializations = Specialization::all();
+
+        return collect($specializations)->map(function ($specialization) use ($allSpecializations) {
+            $speciality = $allSpecializations->where('id', $specialization['id'])->first();
+
+            return (string) $speciality->id;
+        })->toArray();
     }
 }

@@ -3,6 +3,7 @@
 namespace Reliqui\Ambulatory\Http\Requests;
 
 use RRule\RRule;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DoctorProfileRequest extends FormRequest
@@ -30,7 +31,7 @@ class DoctorProfileRequest extends FormRequest
             'practicing_from' => 'required|date|max:255',
             'professional_statement' => 'nullable|string|min:2|max:255',
             'specializations' => 'required|array',
-            'specializations.*id' => 'exists:reliqui_specializations,id',
+            'specializations.*.id' => Rule::exists(config('ambulatory.database_connection').'.reliqui_specializations', 'id'),
         ];
     }
 

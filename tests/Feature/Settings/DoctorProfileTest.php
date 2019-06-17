@@ -15,42 +15,19 @@ class DoctorProfileTest extends TestCase
     /** @test */
     public function unauthorized_users_can_not_manage_the_doctor_profile()
     {
-        tap($this->signInAsAdmin(), function () {
-            $this->getJson(route('ambulatory.doctor-profile.show'))->assertStatus(403);
+        $doctor = factory(Doctor::class)->create();
+
+        tap($this->signInAsAdmin(), function () use ($doctor) {
+            $this->getJson(route('ambulatory.doctor-profile.show', $doctor->id))->assertStatus(403);
             $this->postJson(route('ambulatory.doctor-profile.store'), [])->assertStatus(403);
-            $this->patchJson(route('ambulatory.doctor-profile.update'), [])->assertStatus(403);
+            $this->patchJson(route('ambulatory.doctor-profile.update', $doctor->id), [])->assertStatus(403);
         });
 
-        tap($this->signInAsPatient(), function () {
-            $this->getJson(route('ambulatory.doctor-profile.show'))->assertStatus(403);
+        tap($this->signInAsPatient(), function () use ($doctor) {
+            $this->getJson(route('ambulatory.doctor-profile.show', $doctor->id))->assertStatus(403);
             $this->postJson(route('ambulatory.doctor-profile.store'), [])->assertStatus(403);
-            $this->patchJson(route('ambulatory.doctor-profile.update'), [])->assertStatus(403);
+            $this->patchJson(route('ambulatory.doctor-profile.update', $doctor->id), [])->assertStatus(403);
         });
-    }
-
-    /** @test */
-    public function unverified_doctor_just_get_their_empty_profile()
-    {
-        $user = factory(User::class)->create(['type' => User::DOCTOR]);
-
-        $this->actingAs($user, 'ambulatory')
-            ->getJson(route('ambulatory.doctor-profile.show'))
-            ->assertOk()
-            ->assertExactJson([
-                'entry' => [],
-            ]);
-    }
-
-    /** @test */
-    public function verified_doctor_can_get_their_entry_profile()
-    {
-        $this->signInAsDoctor();
-
-        $this->getJson(route('ambulatory.doctor-profile.show'))
-            ->assertOk()
-            ->assertExactJson([
-                'entry' => auth('ambulatory')->user()->doctorProfile->toArray(),
-            ]);
     }
 
     /** @test */
@@ -61,7 +38,7 @@ class DoctorProfileTest extends TestCase
         $this
             ->actingAs($user, 'ambulatory')
             ->postJson(route('ambulatory.doctor-profile.store'), factory(Doctor::class)->raw([
-                'specializations' => factory(Specialization::class)->create()->toArray(),
+                'specializations' => factory(Specialization::class, 1)->create(),
             ]))
             ->assertOk()
             ->assertExactJson([
@@ -74,25 +51,45 @@ class DoctorProfileTest extends TestCase
     }
 
     /** @test */
+    public function a_doctor_can_not_update_doctor_profile_of_others()
+    {
+        $this->signInAsDoctor();
+
+        $doctor = factory(Doctor::class)->create();
+
+        $this->patchJson(route('ambulatory.doctor-profile.update', $doctor->id), factory(Doctor::class)->raw([
+                'full_name' => 'Full Name Changed',
+                'specializations' => factory(Specialization::class, 1)->create(),
+            ]))
+            ->assertStatus(403)
+            ->assertExactJson([
+                'message' => 'This action is unauthorized.',
+            ]);
+    }
+
+    /** @test */
     public function a_doctor_can_update_their_profile()
     {
         $this->signInAsDoctor();
 
         $user = auth('ambulatory')->user();
 
-        $this->patchJson(route('ambulatory.doctor-profile.update'), factory(Doctor::class)->raw([
+        $this->patchJson(route('ambulatory.doctor-profile.update', $user->doctorProfile->id), factory(Doctor::class)->raw([
                 'full_name' => 'Full Name Changed',
-                'specializations' => factory(Specialization::class)->create()->toArray(),
-                'user_id' => $user->id,
+                'specializations' => factory(Specialization::class, 1)->create(),
             ]))
             ->assertOk()
             ->assertExactJson([
-                'entry' => $user->doctorProfile->toArray(),
+                'entry' => $user->doctorProfile->fresh()->toArray(),
             ]);
 
-        $this->assertSame($user->doctorProfile->slug, 'full-name-changed');
 
-        $this->assertDatabaseHas('reliqui_doctors', $user->doctorProfile->toArray());
+        tap($user->doctorProfile->fresh(), function ($doctor) {
+            $this->assertSame($doctor->slug, 'full-name-changed');
+
+            $this->assertDatabaseHas('reliqui_doctors', $doctor->toArray());
+        });
+
     }
 
     /** @test */
@@ -118,12 +115,12 @@ class DoctorProfileTest extends TestCase
 
         $this->actingAs($user, 'ambulatory')
             ->postJson(route('ambulatory.doctor-profile.store'), factory(Doctor::class)->raw([
-                'specializations' => factory(Specialization::class)->raw(['id' => 'fake-id']),
+                'specializations' => factory(Specialization::class, 1)->raw(['id' => 'fake-id']),
             ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'specializations.id' => ['The selected specializations.id is invalid.'],
+                    'specializations.0.id' => ['The selected specializations.0.id is invalid.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);

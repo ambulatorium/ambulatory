@@ -7,13 +7,24 @@
         data() {
             return {
                 userIsDoctor: false,
+                doctorId: 'new',
             }
         },
 
         mounted() {
-            if (this.Ambulatory.user.role == 'doctor') {
+            if (this.Ambulatory.user.role === 'doctor') {
+                this.doctor();
+            };
+        },
+
+        methods: {
+            doctor() {
                 this.userIsDoctor = true;
-            }
+
+                if (this.Ambulatory.user.doctorId != null) {
+                    this.doctorId = this.Ambulatory.user.doctorId;
+                }
+            },
         }
     }
 </script>
@@ -43,7 +54,7 @@
                 v-if="userIsDoctor"
                 active-class="active"
                 class="nav-link"
-                :to="{name:'settings-doctor-profile', params: {id: Ambulatory.user.id}}"
+                :to="{name:'settings-doctor-profile', params: {id: this.doctorId}}"
                 :class="{active: activeTab=='doctorProfile'}">
 
                 <span>Doctor Profile</span>

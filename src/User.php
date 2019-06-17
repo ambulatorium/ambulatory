@@ -22,7 +22,10 @@ class User extends AmbulatoryModel implements Authenticatable
      *
      * @var array
      */
-    protected $appends = ['role'];
+    protected $appends = [
+        'role',
+        'doctorId'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -170,7 +173,7 @@ class User extends AmbulatoryModel implements Authenticatable
     }
 
     /**
-     * Get user role.
+     * Get user role attribute.
      *
      * @return string
      */
@@ -185,6 +188,18 @@ class User extends AmbulatoryModel implements Authenticatable
         }
 
         return 'patient';
+    }
+
+    /**
+     * Get doctor id attribute.
+     *
+     * @return string|null
+     */
+    public function getDoctorIdAttribute()
+    {
+        return $this->isVerifiedDoctor()
+            ? $this->doctorProfile->id
+            : null;
     }
 
     /**
