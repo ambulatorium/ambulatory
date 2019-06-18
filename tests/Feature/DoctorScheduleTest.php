@@ -114,7 +114,7 @@ class DoctorScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         $this->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
-                'start_date' => today()->yesterday()->toDateString()
+                'start_date' => today()->yesterday()->toDateString(),
             ]))
             ->assertStatus(422)
             ->assertJsonValidationErrors('start_date')
@@ -132,7 +132,7 @@ class DoctorScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         $this->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
-                'end_date' => today()->yesterday()->toDateString()
+                'end_date' => today()->yesterday()->toDateString(),
             ]))
             ->assertStatus(422)
             ->assertJsonValidationErrors('end_date')
