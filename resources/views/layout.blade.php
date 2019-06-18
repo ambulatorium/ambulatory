@@ -28,7 +28,7 @@
                 <sidebar-menu></sidebar-menu>
             </div>
 
-            <div class="col-9 bg-white border p-0">
+            <div class="col-9 bg-white p-0">
                 <router-view></router-view>
             </div>
         </div>

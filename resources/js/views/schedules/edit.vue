@@ -1,16 +1,10 @@
 <script type="text/ecmascript-6">
-    export default {
-        data() {
-            return {
-                locations: [],
-            };
-        },
+    import HealthFacilities from './../../components/SelectHealthFacility';
 
-        mounted() {
-            this.http().get('/api/health-facilities').then(response => {
-                this.locations = response.data.entries.data;
-            }).catch(error => console(error));
-        },
+    export default {
+        components: {
+            'select-health-facility': HealthFacilities
+        }
     }
 </script>
 
@@ -18,48 +12,54 @@
     <form-entry title="Schedule" resource="schedules" okToSave okToUpdate>
         <template slot="entry-data" slot-scope="slotProps">
             <div class="form-group row">
-                <label for="location" class="col-md-4 font-weight-bold col-form-label text-md-right">
-                    Location
+                <label for="health_facility" class="col-md-4 font-weight-bold col-form-label text-md-right">
+                    Health facility
                     <small class="form-text text-muted mt-0"><em>required</em></small>
                 </label>
 
                 <div class="col-md-6">
-                    <select id="location" v-model="slotProps.formData.location" class="custom-select custom-select-lg bg-light border-0">
-                        <option disabled value="">Please select one location</option>
-                        <option v-for="location in locations" :key="location.id" :value="location.id">
-                            {{location.name}}
-                        </option>
-                    </select>
+                    <select-health-facility
+                        id="health_facility"
+                        v-model="slotProps.formData.health_facility">
+                    </select-health-facility>
 
-                    <form-errors :errors="slotProps.formErrors.location"></form-errors>
+                    <form-errors :errors="slotProps.formErrors.health_facility"></form-errors>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="start_date_time" class="col-md-4 font-weight-bold col-form-label text-md-right">
+                <label for="start_date" class="col-md-4 font-weight-bold col-form-label text-md-right">
                     Start date
                     <small class="form-text text-muted mt-0">
-                        <em>required (M/D/Y - H:M) UTC</em>
+                        <em>required</em>
                     </small>
                 </label>
 
                 <div class="col-md-6">
-                    <date-time-picker v-model="slotProps.formData.start_date"></date-time-picker>
+                    <input
+                        id="start_date"
+                        type="date"
+                        class="form-control form-control-lg bg-light border-0"
+                        v-model="slotProps.formData.start_date">
 
                     <form-errors :errors="slotProps.formErrors.start_date"></form-errors>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="end_date_time" class="col-md-4 font-weight-bold col-form-label text-md-right">
+                <label for="end_date" class="col-md-4 font-weight-bold col-form-label text-md-right">
                     End date
                     <small class="form-text text-muted mt-0">
-                        <em>required (M/D/Y - H:M) UTC</em>
+                        <em>required</em>
                     </small>
                 </label>
 
                 <div class="col-md-6">
-                    <date-time-picker v-model="slotProps.formData.end_date"></date-time-picker>
+                    <input
+                        id="end_date"
+                        type="date"
+                        class="form-control form-control-lg bg-light border-0"
+                        v-model="slotProps.formData.end_date">
 
                     <form-errors :errors="slotProps.formErrors.end_date"></form-errors>
                 </div>

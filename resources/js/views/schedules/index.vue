@@ -16,7 +16,7 @@
                 </div>
 
                 <p class="mb-1">
-                    {{localDate(slotProps.entry.start_date)}} - {{localDate(slotProps.entry.end_date)}}
+                    {{slotProps.entry.start_date}} - {{slotProps.entry.end_date}}
                 </p>
             </router-link>
         </template>

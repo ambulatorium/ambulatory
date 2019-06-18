@@ -126,8 +126,8 @@
     </form-entry>
 </template>
 
+// should we move this style to SCSS file?
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
 <style>
     .multiselect__tags {
         border: 0;
@@ -138,7 +138,8 @@
         background: #40a6c8a6;
     }
 
-    .multiselect__input {
+    .multiselect__input,
+    .multiselect__single {
         background: #f1f5f8;
     }
 
@@ -158,5 +159,14 @@
     .multiselect__spinner:after,
     .multiselect__spinner:before {
         border-color: #40a6c8;
+    }
+
+    .multiselect__content-wrapper {
+        border: 0px;
+        background: #f1f5f8;
+    }
+
+    .multiselect--above .multiselect__content-wrapper {
+        border-top: 0px;
     }
 </style>

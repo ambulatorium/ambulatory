@@ -68,7 +68,7 @@
                     this.http().delete('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
                         this.$router.push({name: this.routerName});
 
-                        this.alertSuccess('Enrty successfully deleted!', 3000);
+                        this.alertSuccess('Entry successfully deleted!', 3000);
                     });
                 });
             },
@@ -83,23 +83,26 @@
 </script>
 
 <template>
-    <div class="card">
+    <div class="card border-0">
+        <!-- header -->
         <div class="card-header">
             <h1>{{this.title}}</h1>
         </div>
 
-        <slot name="form-information"></slot>
-
+        <!-- loading -->
         <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-
         <div v-if="ready && !entry" class="p-5">
             <p class="text-center">No data were found</p>
         </div>
 
+        <!-- alert content -->
+        <slot name="form-information"></slot>
+
+        <!-- content -->
         <div class="card-body" v-if="ready && entry">
             <form>
                 <slot name="entry-data" :formData="formData" :formErrors="formErrors"></slot>

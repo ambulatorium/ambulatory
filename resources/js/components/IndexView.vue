@@ -51,23 +51,25 @@
 </script>
 
 <template>
-    <div class="card">
+    <div class="card border-0">
+        <!-- header -->
         <div class="card-header d-flex align-items-center justify-content-between sticky-top">
             <h1>{{this.title}}</h1>
 
             <slot name="btn-new-entry"></slot>
         </div>
 
+        <!-- loading -->
         <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-
         <div v-if="ready && entries.length == 0" class="p-5">
             <p class="text-center">No data were found</p>
         </div>
 
+        <!-- content -->
         <div class="list-group list-group-flush" v-if="ready && entries.length > 0">
             <transition-group name="list">
                 <div v-for="entry in entries" :key="entry.id">

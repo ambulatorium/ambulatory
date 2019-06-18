@@ -21,7 +21,6 @@ Vue.component('index-view', require('./components/IndexView.vue').default);
 Vue.component('form-entry', require('./components/FormEntry.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
 Vue.component('form-errors', require('./components/FormErrors.vue').default);
-Vue.component('date-time-picker', require('./components/DateTimePicker.vue').default);
 
 Vue.mixin(Base);
 

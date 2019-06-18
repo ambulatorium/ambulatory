@@ -1,5 +1,17 @@
 <script type="text/ecmascript-6">
-    export default {}
+    import Multiselect from 'vue-multiselect';
+
+    export default {
+        components: {
+            'select-role': Multiselect,
+        },
+
+        data() {
+            return {
+                roles: ['Doctor', 'Admin'],
+            }
+        }
+    }
 </script>
 
 <template>
@@ -9,13 +21,13 @@
                 <label for="role" class="col-sm-4 col-form-label text-md-right font-weight-bold">Role</label>
 
                 <div class="col-sm-6">
-                    <select id="role"
+                    <select-role
                         v-model="slotProps.formData.role"
-                        class="custom-select custom-select-lg bg-light border-0">
-                        <option disabled value="">Please select one role</option>
-                        <option>Doctor</option>
-                        <option>Admin</option>
-                    </select>
+                        placeholder="Select role"
+                        :options="roles"
+                        :show-labels="false"
+                        :searchable="false">
+                    </select-role>
 
                     <form-errors :errors="slotProps.formErrors.role"></form-errors>
                 </div>
@@ -27,7 +39,7 @@
                 <div class="col-sm-6">
                     <input id="email"
                         type="email"
-                        class="form-control form-control-lg bg-light border-0"
+                        class="form-control bg-light border-0"
                         v-model="slotProps.formData.email">
 
                     <form-errors :errors="slotProps.formErrors.email"></form-errors>
