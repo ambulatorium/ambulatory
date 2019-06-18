@@ -11,8 +11,8 @@ $factory->define(Schedule::class, function (Faker $faker) {
     $date = today()->parse('Monday next week');
 
     return [
-        'start_date' => $date->toDateTimeString(),
-        'end_date' => $date->addDays(4)->toDateTimeString(),
+        'start_date' => $date->toDateString(),
+        'end_date' => $date->addDays(4)->toDateString(),
         'estimated_service_time_in_minutes' => Schedule::ESTIMATED_SERVICE_TIME,
         'doctor_id' => factory(Doctor::class),
         'health_facility_id' => factory(HealthFacility::class),

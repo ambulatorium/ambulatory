@@ -19,13 +19,6 @@ class Schedule extends AmbulatoryModel
     protected $guarded = [];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['availabilities'];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -52,16 +45,6 @@ class Schedule extends AmbulatoryModel
      * @var bool
      */
     public $incrementing = false;
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'start_date',
-        'end_date',
-    ];
 
     /**
      * The attributes that should be cast to native types.

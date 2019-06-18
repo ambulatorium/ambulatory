@@ -41,11 +41,11 @@ class ScheduleController extends Controller
      */
     public function store(ScheduleRequest $request)
     {
-        $schedule = Schedule::create($request->validatedFields());
+        Schedule::create($request->validatedFields());
 
         return response()->json([
-            'entry' => $schedule,
-        ]);
+            'message' => 'Schedule successfully created!',
+        ], 200);
     }
 
     /**
@@ -77,7 +77,7 @@ class ScheduleController extends Controller
         $schedule->update($request->validatedFields());
 
         return response()->json([
-            'entry' => $schedule,
-        ]);
+            'message' => 'Schedule successfully updated!',
+        ], 200);
     }
 }
