@@ -3,10 +3,10 @@
 namespace Reliqui\Ambulatory\Http\Controllers\Settings;
 
 use Reliqui\Ambulatory\Doctor;
+use Reliqui\Ambulatory\Specialization;
 use Reliqui\Ambulatory\Http\Controllers\Controller;
 use Reliqui\Ambulatory\Http\Requests\DoctorProfileRequest;
 use Reliqui\Ambulatory\Http\Middleware\Doctor as ReliquiDoctor;
-use Reliqui\Ambulatory\Specialization;
 
 class DoctorProfileController extends Controller
 {
