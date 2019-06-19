@@ -1,5 +1,9 @@
 <script type="text/ecmascript-6">
+    import Modal from './Modal';
+
     export default {
+        components: { Modal },
+
         props: ['mode', 'type', 'message', 'autoClose', 'confirmationProceed', 'confirmationCancel'],
 
         data() {
@@ -55,22 +59,25 @@
 </script>
 
 <template>
-    <div v-show="$root.alert.type">
-        <div id="alert" v-if="mode == 'dialog'">
-            <div class="dialog rounded">
+    <modal v-show="$root.alert.type">
+        <!-- alert dialog -->
+        <div id="modal-dialog" v-if="mode == 'dialog'">
+            <div class="modal-container rounded">
                 <div class="text-center mb-4">
                     <h5 class="mt-3 mb-0 font-weight-bold">{{message}}</h5>
                 </div>
 
+                <!-- information -->
                 <div class="d-flex align-items-center justify-content-center">
+                    <!-- for errors -->
                     <button v-if="type == 'error'" class="btn btn-primary" @click="close">
                         OK
                     </button>
 
+                    <!-- for confirmation -->
                     <button v-if="type == 'confirmation'" class="btn btn-primary" @click="confirm">
                         YES
                     </button>
-
                     <button v-if="type == 'confirmation'" class="btn btn-light ml-1" @click="cancel">
                         NO
                     </button>
@@ -78,34 +85,11 @@
             </div>
         </div>
 
-        <div id="flash" v-if="mode == 'flash'">
+        <!-- alert notification -->
+        <div id="modal-flash" v-if="mode == 'flash'">
             <div class="alert alert-primary border-0 rounded shadow-sm">
                 <strong>{{message}}</strong>
             </div>
         </div>
-    </div>
+    </modal>
 </template>
-
-<style>
-    #alert {
-        position: absolute;
-        z-index: 99999;
-        width: 100%;
-        height: 100%;
-        background: #00000080;
-    }
-
-    #alert .dialog {
-        background: #fff;
-        width: 300px;
-        margin: 30px auto;
-        padding: 20px;
-    }
-
-    #flash {
-        z-index: 99999;
-        position: fixed;
-        bottom: 20px;
-        right: 10px;
-    }
-</style>

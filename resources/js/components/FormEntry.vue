@@ -85,9 +85,12 @@
 <template>
     <div class="card border-0">
         <!-- header -->
-        <div class="card-header">
+        <div id="card-header" class="card-header d-flex align-items-center justify-content-between sticky-top">
             <h1>{{this.title}}</h1>
         </div>
+
+        <!-- alert content -->
+        <slot name="form-information"></slot>
 
         <!-- loading -->
         <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
@@ -98,9 +101,6 @@
         <div v-if="ready && !entry" class="p-5">
             <p class="text-center">No data were found</p>
         </div>
-
-        <!-- alert content -->
-        <slot name="form-information"></slot>
 
         <!-- content -->
         <div class="card-body" v-if="ready && entry">
