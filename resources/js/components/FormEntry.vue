@@ -11,7 +11,7 @@
 
         data() {
             return {
-                routerName: null,
+                redirectName: this.redirectTo || this.resource,
                 entry: null,
                 ready: false,
                 formData: {},
@@ -26,8 +26,6 @@
             this.id != 'new'
                 ? this.getEntry()
                 : this.entry = [], this.ready = true;
-
-            this.redirect();
         },
 
         methods: {
@@ -45,7 +43,7 @@
 
             saveEntry() {
                 this.http().post('/api/' + this.resource, this.formData).then(response => {
-                    this.$router.push({name: this.routerName});
+                    this.$router.push({name: this.redirectName});
 
                     this.alertSuccess('Entry successfully saved!', 3000);
                 }).catch(error => {
@@ -55,7 +53,7 @@
 
             updateEntry() {
                 this.http().patch('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
-                    this.$router.push({name: this.routerName});
+                    this.$router.push({name: this.redirectName});
 
                     this.alertSuccess('Entry successfully updated!', 3000);
                 }).catch(error => {
@@ -66,17 +64,11 @@
             deleteEntry() {
                 this.alertConfirm("Are you sure you want to delete this entry?", () => {
                     this.http().delete('/api/' + this.resource + '/' + this.id, this.formData).then(response => {
-                        this.$router.push({name: this.routerName});
+                        this.$router.push({name: this.redirectName});
 
                         this.alertSuccess('Entry successfully deleted!', 3000);
                     });
                 });
-            },
-
-            redirect() {
-                this.redirectTo != null
-                    ? this.routerName = this.redirectTo
-                    : this.routerName = this.resource ;
             },
         }
     }

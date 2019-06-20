@@ -2,6 +2,7 @@
 
 namespace Reliqui\Ambulatory;
 
+use Illuminate\Support\Arr;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 class User extends AmbulatoryModel implements Authenticatable
@@ -18,21 +19,14 @@ class User extends AmbulatoryModel implements Authenticatable
     protected $guarded = [];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'role',
-        'doctorId',
-    ];
-
-    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
     /**
      * The table associated with the model.
@@ -191,15 +185,19 @@ class User extends AmbulatoryModel implements Authenticatable
     }
 
     /**
-     * Get doctor id attribute.
+     * Get the default user variables for Ambulatory.
      *
-     * @return string|null
+     * @return array
      */
-    public function getDoctorIdAttribute()
+    public function scriptVariables()
     {
-        return $this->isVerifiedDoctor()
-            ? $this->doctorProfile->id
-            : null;
+        $doctorId = '';
+
+        if ($this->isDoctor()) {
+            $doctorId = $this->isVerifiedDoctor() ? $this->doctorProfile->id : '';
+        }
+
+        return Arr::prepend($this->only('name', 'avatar', 'role', 'id'), $doctorId, 'doctorId');
     }
 
     /**

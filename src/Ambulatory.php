@@ -44,7 +44,7 @@ class Ambulatory
         return [
             'path' => config('ambulatory.path'),
             'user' => auth('ambulatory')->check()
-                ? auth('ambulatory')->user()->only('name', 'avatar', 'role', 'doctorId', 'id')
+                ? auth('ambulatory')->user()->scriptVariables()
                 : null,
         ];
     }

@@ -248,6 +248,14 @@ button:hover {
     }
 }
 
+.rounded-2 {
+    border-radius: 3rem;
+}
+
+.shadow-1 {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
+}
+
 .card-bg-light {
     background: $card-bg-light;
 }
@@ -259,21 +267,6 @@ button:hover {
         width: 1.7rem;
         height: 1.7rem;
     }
-}
-
-.form-input {
-    background-color: #F1F5F8;
-    color: $dark;
-    border: 0rem;
-}
-
-select::-ms-expand {
-    display: none;
-}
-
-select {
-    -webkit-appearance: none;
-    appearance: none;
 }
 
 .list-enter-active {
