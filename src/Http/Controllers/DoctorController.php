@@ -6,7 +6,6 @@ use Reliqui\Ambulatory\Doctor;
 
 class DoctorController extends Controller
 {
-
     /**
      * Display a listing of the doctors.
      *
