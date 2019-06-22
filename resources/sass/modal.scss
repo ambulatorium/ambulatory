@@ -5,13 +5,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #FFF;
     transition: opacity 0.3s ease;
 }
 
 #modal-full .modal-container {
-    background: #fff;
+    background: #FFF;
+    width: 100%;
+    overflow: scroll;
     transition: all 0.3s ease;
+    border-top: 0.6rem solid $primary;
 }
 
 #modal-dialog {
@@ -27,7 +30,7 @@
     width: 300px;
     margin: 30px auto;
     padding: 20px;
-    background: #fff;
+    background: #FFF;
     transition: all 0.3s ease;
 }
 

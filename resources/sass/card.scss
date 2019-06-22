@@ -1,0 +1,89 @@
+.card {
+    min-height: 100vh;
+    border-color: $border-color;
+
+    .bottom-radius {
+        border-bottom-left-radius: $card-border-radius;
+        border-bottom-right-radius: $card-border-radius;
+    }
+
+    .card-header {
+        border-color: $border-color;
+        background-color: $card-cap-bg;
+
+        .btn {
+            padding: 0.2rem 0.5rem;
+        }
+
+        h1 {
+            margin: 0;
+            color: $dark;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+    }
+
+    .card-body {
+        padding: 2rem 2rem;
+    }
+
+    .card-footer {
+        padding: 1rem 2rem;
+        border-color: $border-color;
+    }
+
+    .nav-pills {
+        border-bottom: solid 1px $border-color;
+    }
+
+    .nav-pills .nav-link.active {
+        background: none;
+        color: $pill-link-active;
+        border-bottom: solid 2px $primary;
+    }
+
+    .nav-pills .nav-link {
+        border-radius: 0;
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: $gray;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .table {
+        th,
+        td {
+            padding: 0.75rem 1.25rem;
+        }
+
+        &.table-sm {
+            th,
+            td {
+                padding: 0.9rem 1.2rem;
+            }
+        }
+
+        th {
+            border-bottom: 0;
+            font-weight: 400;
+            padding: .5rem 1.25rem;
+            background-color: $table-headers-color;
+        }
+
+        &:not(.table-borderless) {
+            td {
+                border-top: 1px solid $table-border-color;
+            }
+        }
+
+        th.table-fit,
+        td.table-fit {
+            width: 1%;
+            white-space: nowrap;
+        }
+    }
+}
+
+.card-bg-light {
+    background: $card-bg-light;
+}

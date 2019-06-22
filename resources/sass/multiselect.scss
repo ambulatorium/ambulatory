@@ -1,0 +1,42 @@
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
+
+.multiselect__tags {
+    border: 0;
+    background: $light;
+}
+
+.multiselect__tag {
+    background: $primary-light;
+}
+
+.multiselect__input,
+.multiselect__single {
+    background: $light;
+}
+
+.multiselect__option--highlight {
+    background: $primary-light;
+}
+
+.multiselect__tag-icon:after {
+    color: darken($primary-light, 15%);
+}
+
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+    background: $primary-light;
+}
+
+.multiselect__spinner:after,
+.multiselect__spinner:before {
+    border-color: $primary;
+}
+
+.multiselect__content-wrapper {
+    border: 0px;
+    background: $light;
+}
+
+.multiselect--above .multiselect__content-wrapper {
+    border-top: 0px;
+}

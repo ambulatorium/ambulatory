@@ -1,30 +1,10 @@
-@import "node_modules/bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import "multiselect";
+@import "~bootstrap/scss/bootstrap";
+
+// custom components.
+@import "card";
 @import "modal";
-
-.auth-body {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    height: 100%;
-}
-
-.form-auth {
-    width: 100%;
-    max-width: 420px;
-    padding: 15px;
-    margin: auto;
-}
-
-.form-card {
-    border-radius: 9px !important;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .12) !important;
-    padding: 40px 32px 12px;
-    background-color: #fff;
-}
+@import "sidebar";
 
 [v-cloak] {
     display: none;
@@ -35,54 +15,7 @@ svg.icon {
     height: 1rem;
 }
 
-.side-content {
-    border: 1px $border-color;
-    min-height: 100vh;
-    background-color: white;
-}
-
-.sidebar .nav-item {
-    a {
-        color: $sidebar-nav-color;
-        padding: 0.9rem 0.5rem;
-        font-size: 1.2rem;
-        font-weight: bold;
-
-        svg {
-            width: 1.3rem;
-            height: 1.3rem;
-            margin-right: 20px;
-            fill: $dark;
-        }
-
-        &.active {
-            color: $primary;
-
-            svg {
-                fill: $primary;
-            }
-        }
-    }
-}
-
-.list-group {
-    a {
-        svg {
-            width: 1.2rem;
-            height: 1.2rem;
-            margin-right: 9px;
-            fill: $dark;
-        }
-    }
-}
-
-.sidebar-heading {
-    font-size: .9rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $sidebar-heading-color;
-}
-
+// fill color
 .fill-text-color {
     fill: $body-color;
 }
@@ -107,9 +40,56 @@ svg.icon {
     fill: $primary;
 }
 
+// form auth
+.auth-body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 100%;
+}
+
+.form-auth {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-card {
+    border-radius: 9px !important;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .12) !important;
+    padding: 40px 32px 12px;
+    background-color: #fff;
+}
+
+// list group
+.list-group {
+    a {
+        svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 9px;
+            fill: $dark;
+        }
+    }
+}
+
+.list-enter-active {
+    transition: background 2s linear;
+}
+
+.list-enter,
+.list-leave-to {
+    background: $secondary;
+}
+
+// button behavior
 button:hover {
     .fill-primary {
-        fill: #fff;
+        fill: #FFF;
     }
 }
 
@@ -123,6 +103,7 @@ button:hover {
     box-shadow: none !important;
 }
 
+// custom utilities
 .paginator {
     .btn {
         text-decoration: none;
@@ -134,120 +115,6 @@ button:hover {
     }
 }
 
-.header {
-    border-bottom: solid 1px $header-border-color;
-
-    svg.logo {
-        width: 1.7rem;
-        height: 1.7rem;
-    }
-}
-
-.card {
-    // box-shadow: 0 16px 33px $card-shadow-color;
-    // border: none;
-    min-height: 100vh;
-
-    .bottom-radius {
-        border-bottom-left-radius: $card-border-radius;
-        border-bottom-right-radius: $card-border-radius;
-    }
-
-    .nav-pills {
-        border-bottom: solid 1px $border-color;
-    }
-
-    .nav-pills .nav-link.active {
-        background: none;
-        color: $pill-link-active;
-        border-bottom: solid 2px $primary;
-    }
-
-    .nav-pills .nav-link {
-        font-size: 0.9rem;
-        border-radius: 0;
-        padding: 0.75rem 1.25rem;
-        color: $body-color;
-    }
-
-    .card-header {
-        padding: 1rem 1rem;
-        background-color: $card-cap-bg;
-        border-color: $border-color;
-
-        .btn {
-            padding: 0.2rem 0.5rem;
-        }
-
-        h1 {
-            font-size: 1.3rem;
-            color: $dark;
-            // text-transform: uppercase;
-            font-weight: bold;
-            // letter-spacing: .1em;
-            margin: 0;
-        }
-    }
-
-    .card-body {
-        padding: 2rem 2rem;
-    }
-
-    .card-footer {
-        padding: 1rem 2rem;
-        border-color: $border-color;
-    }
-
-    .table {
-        th,
-        td {
-            padding: 0.75rem 1.25rem;
-        }
-
-        &.table-sm {
-            th,
-            td {
-                padding: 0.9rem 1.2rem;
-            }
-        }
-
-        th {
-            background-color: $table-headers-color;
-            font-weight: 400;
-            padding: .5rem 1.25rem;
-            border-bottom: 0;
-        }
-
-        &:not(.table-borderless) {
-            td {
-                border-top: 1px solid $table-border-color;
-            }
-        }
-
-        th.table-fit,
-        td.table-fit {
-            width: 1%;
-            white-space: nowrap;
-        }
-    }
-}
-
-.card {
-    .nav-pills .nav-link.active {
-        background: none;
-        color: $pill-link-active;
-        border-bottom: solid 2px $primary;
-    }
-
-    .nav-pills .nav-link {
-        font-size: 0.9rem;
-        font-weight: bold;
-        border-radius: 0;
-        padding: 0.75rem 1.25rem;
-        color: $body-color;
-    }
-}
-
 .rounded-2 {
     border-radius: 3rem;
 }
@@ -256,23 +123,11 @@ button:hover {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
 }
 
-.card-bg-light {
-    background: $card-bg-light;
-}
-
-.form-title-section {
+.form-info {
     padding: 2rem 2rem;
 
     svg {
         width: 1.7rem;
         height: 1.7rem;
     }
-}
-
-.list-enter-active {
-    transition: background 2s linear;
-}
-
-.list-enter, .list-leave-to {
-    background: $secondary;
 }

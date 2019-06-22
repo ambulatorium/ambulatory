@@ -22,7 +22,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $entries = User::whereNotIn('type', [User::PATIENT])->paginate(25);
+        $entries = User::whereNotIn('type', [User::PATIENT])->latest()->paginate(25);
 
         return response()->json([
             'entries' => $entries,

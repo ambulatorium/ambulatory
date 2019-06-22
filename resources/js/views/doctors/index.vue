@@ -15,7 +15,7 @@
                             width="54">
 
                         <div class="media-body">
-                            <h6 class="mt-0 mb-1">{{slotProps.entry.full_name}}, {{slotProps.entry.qualification}}</h6>
+                            <h6 class="mt-0 mb-1 font-weight-bold text-dark">{{slotProps.entry.full_name}}, {{slotProps.entry.qualification}}</h6>
                             <p class="mb-1">{{dateDuration(slotProps.entry.practicing_from)}} of experience</p>
 
                             <span class="badge badge-pill badge-light mr-2" v-for="specialization in slotProps.entry.specializations" :key="specialization.id">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <small class="text-muted">{{slotProps.entry.is_active ? 'Available' : 'Not available'}}</small>
+                    <small>{{slotProps.entry.is_active ? 'Available' : 'Not available'}}</small>
                 </div>
             </router-link>
         </template>

@@ -51,7 +51,7 @@
 </script>
 
 <template>
-    <div class="card border-0">
+    <div class="card">
         <!-- header -->
         <div id="card-header" class="card-header d-flex align-items-center justify-content-between sticky-top">
             <h1>{{this.title}}</h1>
@@ -59,7 +59,7 @@
             <slot name="btn-new-entry"></slot>
         </div>
 
-        <!-- loading -->
+        <!-- loader -->
         <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
@@ -79,7 +79,7 @@
 
             <div v-if="hasMoreEntries">
                 <div class="text-center">
-                    <a href="#" v-on:click.prevent="loadOlderEntries" v-if="!loadingMoreEntries" class="list-group-item list-group-item-action">
+                    <a href="#" @click.prevent="loadOlderEntries" v-if="!loadingMoreEntries" class="list-group-item list-group-item-action">
                         Load Older Entries
                     </a>
                 </div>

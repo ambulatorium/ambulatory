@@ -11,8 +11,8 @@
         <template slot="group-item" slot-scope="slotProps">
             <router-link :to="{name:'invitations-edit', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{slotProps.entry.email}}</h5>
-                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                    <h6 class="mb-1 font-weight-bold text-dark">{{slotProps.entry.email}}</h6>
+                    <small>{{timeAgo(slotProps.entry.created_at)}}</small>
                 </div>
 
                 <p class="mb-1">{{slotProps.entry.role}}</p>

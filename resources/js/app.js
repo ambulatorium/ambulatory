@@ -16,11 +16,12 @@ const router = new VueRouter({
     base: '/' + Ambulatory.path,
 });
 
-Vue.component('sidebar-menu', require('./components/SidebarMenu.vue').default);
-Vue.component('index-view', require('./components/IndexView.vue').default);
-Vue.component('form-entry', require('./components/FormEntry.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
+Vue.component('modal', require('./components/Modal.vue').default);
+Vue.component('form-entry', require('./components/FormEntry.vue').default);
+Vue.component('index-view', require('./components/IndexView.vue').default);
 Vue.component('form-errors', require('./components/FormErrors.vue').default);
+Vue.component('sidebar-menu', require('./components/SidebarMenu.vue').default);
 
 Vue.mixin(Base);
 

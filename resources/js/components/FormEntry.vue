@@ -75,7 +75,7 @@
 </script>
 
 <template>
-    <div class="card border-0">
+    <div class="card">
         <!-- header -->
         <div id="card-header" class="card-header d-flex align-items-center justify-content-between sticky-top">
             <h1>{{this.title}}</h1>
@@ -84,17 +84,18 @@
         <!-- alert content -->
         <slot name="form-information"></slot>
 
-        <!-- loading -->
+        <!-- loader -->
         <div v-if="!ready" class="d-flex align-items-center justify-content-center p-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
+
         <div v-if="ready && !entry" class="p-5">
             <p class="text-center">No data were found</p>
         </div>
 
-        <!-- content -->
+        <!-- data entry -->
         <div class="card-body" v-if="ready && entry">
             <form>
                 <slot name="entry-data" :formData="formData" :formErrors="formErrors"></slot>

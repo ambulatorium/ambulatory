@@ -1,9 +1,5 @@
 <script type="text/ecmascript-6">
-    import Modal from './Modal';
-
     export default {
-        components: { Modal },
-
         props: ['mode', 'type', 'message', 'autoClose', 'confirmationProceed', 'confirmationCancel'],
 
         data() {

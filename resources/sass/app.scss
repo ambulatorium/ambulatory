@@ -1,41 +1,38 @@
-$font-family-sans-serif: "Nunito", sans-serif;
-$font-family-base: Nunito;
-
+$body-bg: #FFF;
 $font-size-base: 1rem;
-$badge-font-size: 0.95rem;
+$badge-font-size: 0.7rem;
+$badge-font-weight: normal;
 
-$body-bg: #EDF1F3;
-
-$header-border-color: #d5dfe9;
-
-$primary: #40a6c8;
+$primary: #40A6C8;
+$primary-light: #40A6C8A6;
 $secondary: #DAE1E7;
 $success: #51D88A;
-$info: #BCDEFA;
+$info: #4090D1;
 $warning: #FFF382;
 $danger: #EF5753;
 $dark: #14171A;
-$light: #f1f5f8;
+$gray: #687785;
+$light: #E7ECF0;
 
-$sidebar-nav-color: #14171A;
-$sidebar-icon-color: #14171A;
+$sidebar-nav-color: $dark;
+$sidebar-icon-color: $dark;
 $sidebar-heading-color: #8795A1;
-
-$border-color: #f1f5f8;
 
 $table-headers-color: #F1F5F8;
 $table-border-color: #F8FAFC;
-$table-hover-bg: #f1f7fa;
+$table-hover-bg: #F1F7FA;
 
-$card-cap-bg: #fff;
-$card-bg-light: #f1f7fa;
-$card-shadow-color: #cdd8df;
+$card-cap-bg: #FFF;
+$card-bg-light: #F1F7FA;
+$card-shadow-color: #CDD8DF;
 $card-border-radius: 0rem;
 
-$control-action-icon-color: #ccd2df;
+$border-color: $light;
+
+$control-action-icon-color: #CCD2DF;
 
 $pill-link-active: $primary;
 
-$paginator-button-color: #9ea7ac;
+$paginator-button-color: #9EA7AC;
 
 @import "base";

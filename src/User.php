@@ -19,21 +19,31 @@ class User extends AmbulatoryModel implements Authenticatable
     protected $guarded = [];
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'reliqui_users';
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
+        'type',
     ];
 
     /**
-     * The table associated with the model.
+     * The accessors to append to the model's array form.
      *
-     * @var string
+     * @var array
      */
-    protected $table = 'reliqui_users';
+    protected $appends = [
+        'role',
+    ];
 
     /**
      * The primary key for the model.

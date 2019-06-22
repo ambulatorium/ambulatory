@@ -42,7 +42,6 @@
                 </div>
 
                 <a href="#" class="list-group-item list-group-item-action border-top-0" v-for="schedule in slotProps.formData.schedules" :key="schedule.id">
-
                     <div class="d-flex w-100 justify-content-between">
                         <h6 class="mb-1">{{schedule.health_facility.name}}</h6>
                         <small>{{schedule.health_facility.country}}</small>

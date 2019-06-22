@@ -11,10 +11,21 @@
         <template slot="group-item" slot-scope="slotProps">
             <div class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{slotProps.entry.name}}</h5>
-                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                    <div class="media">
+                        <img :src="slotProps.entry.avatar"
+                            :alt="slotProps.entry.name"
+                            class="rounded mr-4"
+                            height="54"
+                            width="54">
+
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-2 font-weight-bold text-dark">{{slotProps.entry.name}}</h6>
+                            <p class="mb-1">Joined {{timeAgo(slotProps.entry.created_at)}}</p>
+                        </div>
+                    </div>
+
+                    <small>{{slotProps.entry.role}}</small>
                 </div>
-                <p class="mb-1">{{slotProps.entry.role}}</p>
             </div>
         </template>
     </index-view>

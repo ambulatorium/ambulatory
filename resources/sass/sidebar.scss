@@ -1,0 +1,36 @@
+.sidebar .nav-item {
+    a {
+        color: $sidebar-nav-color;
+        padding: 0.9rem 0.5rem;
+        font-size: 1.2rem;
+        font-weight: bold;
+
+        svg {
+            width: 1.3rem;
+            height: 1.3rem;
+            margin-right: 20px;
+            fill: $dark;
+        }
+
+        &.active {
+            color: $primary;
+
+            svg {
+                fill: $primary;
+            }
+        }
+    }
+}
+
+.sidebar-heading {
+    font-size: .9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $sidebar-heading-color;
+}
+
+.side-content {
+    border: 1px $border-color;
+    min-height: 100vh;
+    background-color: white;
+}
