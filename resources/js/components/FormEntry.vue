@@ -103,7 +103,7 @@
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
                         <div v-if="id != 'new'">
-                            <a href="#" class="btn btn-info" v-if="okToUpdate" @click="updateEntry">Update</a>
+                            <a href="#" class="btn btn-primary" v-if="okToUpdate" @click="updateEntry">Save</a>
                             <a href="#" class="btn btn-danger" v-if="okToDelete" @click="deleteEntry">Delete</a>
                         </div>
 
