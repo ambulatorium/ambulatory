@@ -122,6 +122,17 @@ export default [
         component: require('./views/doctors/edit').default
     },
 
+    {
+        path: '/doctors',
+        name: 'doctors',
+        component: require('./views/doctors/index').default
+    },
+    {
+        path: '/doctors/:id',
+        name: 'doctors-preview',
+        component: require('./views/doctors/preview').default
+    },
+
     // Catch All.
     {
         path: '*',

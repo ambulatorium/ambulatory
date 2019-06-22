@@ -47,6 +47,15 @@ class Doctor extends AmbulatoryModel
     public $incrementing = false;
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'practicing_from',
+    ];
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array

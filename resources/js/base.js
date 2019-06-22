@@ -52,6 +52,16 @@ export default {
         },
 
         /**
+         * Show the duration format for the given date.
+         */
+        dateDuration(date) {
+            return moment(date + ' Z')
+                .utc()
+                .local()
+                .fromNow(true);
+        },
+
+        /**
          * Show a success message.
          */
         alertSuccess(message, autoClose) {

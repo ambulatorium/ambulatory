@@ -12,6 +12,10 @@ Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('sc
 Route::post('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@store')->name('schedules.availabilities');
 Route::post('/api/schedules/{schedule}/bookings', 'BookingScheduleController@store')->name('schedule.bookings');
 
+// Doctors.
+Route::get('/api/doctors', 'DoctorController@index')->name('doctors');
+Route::get('/api/doctors/{doctor}', 'DoctorController@show')->name('doctors.show');
+
 // Medical Forms.
 Route::get('/api/medical-forms', 'MedicalFormController@index')->name('medical-forms');
 Route::post('/api/medical-forms', 'MedicalFormController@store')->name('medical-forms.store');
