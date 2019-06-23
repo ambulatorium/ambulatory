@@ -79,7 +79,7 @@ class BookingScheduleTest extends TestCase
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time must be a date after or equal to '.today()->parse('Monday next week')->toDateString().'.'],
+                    'preferred_date_time' => ['The preferred date time must be a date after or equal to '.today()->parse('Monday next week').'.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -100,7 +100,7 @@ class BookingScheduleTest extends TestCase
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time must be a date before or equal to '.today()->parse('Friday next week')->toDateString().'.'],
+                    'preferred_date_time' => ['The preferred date time must be a date before or equal to '.today()->parse('Friday next week').'.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);

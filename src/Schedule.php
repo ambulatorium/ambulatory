@@ -47,6 +47,16 @@ class Schedule extends AmbulatoryModel
     public $incrementing = false;
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'start_date',
+        'end_date',
+    ];
+
+    /**
      * The attributes that should be cast to native types.
      *
      * @var array

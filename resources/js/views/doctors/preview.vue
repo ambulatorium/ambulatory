@@ -48,12 +48,14 @@
                     </div>
 
                     <p class="mb-1">
+                        {{localDate(schedule.start_date)}} - {{localDate(schedule.end_date)}}
+                    </p>
+                    <small>
                         {{schedule.health_facility.address}},
                         {{schedule.health_facility.city}},
                         {{schedule.health_facility.zip_code}}
                         {{schedule.health_facility.state}}
-                    </p>
-                    <small>{{schedule.start_date}} - {{schedule.end_date}}</small>
+                    </small>
                 </a>
             </div>
         </template>

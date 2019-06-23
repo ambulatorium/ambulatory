@@ -11,13 +11,19 @@
         <template slot="group-item" slot-scope="slotProps">
             <router-link :to="{name:'schedules-edit', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{slotProps.entry.health_facility.name}}</h5>
-                    <small class="text-muted">{{timeAgo(slotProps.entry.created_at)}}</small>
+                    <h6 class="mb-1 font-weight-bold text-dark">{{slotProps.entry.health_facility.name}}</h6>
+                    <small>{{timeAgo(slotProps.entry.created_at)}}</small>
                 </div>
 
                 <p class="mb-1">
-                    {{slotProps.entry.start_date}} - {{slotProps.entry.end_date}}
+                    {{localDate(slotProps.entry.start_date)}} - {{localDate(slotProps.entry.end_date)}}
                 </p>
+                <small>
+                    {{slotProps.entry.health_facility.address}},
+                    {{slotProps.entry.health_facility.city}},
+                    {{slotProps.entry.health_facility.zip_code}}
+                    {{slotProps.entry.health_facility.state}}
+                </small>
             </router-link>
         </template>
     </index-view>
