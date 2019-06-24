@@ -4,12 +4,12 @@
 
 <template>
     <index-view title="Staff" resource="staff">
-        <router-link slot="btn-new-entry" :to="{name:'invitations-new'}" class="btn btn-outline-primary">
+        <router-link slot="btn-new-entry" :to="{name:'invitations-new'}" class="btn btn-outline-primary rounded-full">
             Invite staff
         </router-link>
 
         <template slot="group-item" slot-scope="slotProps">
-            <div class="list-group-item list-group-item-action">
+            <div class="border-bottom list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="media">
                         <img :src="slotProps.entry.avatar"

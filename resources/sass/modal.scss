@@ -27,10 +27,15 @@
 }
 
 #modal-dialog .modal-container {
-    width: 300px;
+    max-width: 350px;
+    max-height: 100%;
     margin: 30px auto;
-    padding: 20px;
     background: #FFF;
+    border-radius: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     transition: all 0.3s ease;
 }
 

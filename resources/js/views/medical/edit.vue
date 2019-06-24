@@ -28,7 +28,7 @@
         <template slot="entry-data" slot-scope="slotProps">
             <div class="row border-bottom pb-4">
                 <div class="col-sm-4">
-                    <h5 class="text-dark">Medical form name</h5>
+                    <h6 class="font-weight-bold text-dark">Medical ID</h6>
                     <small>
                         Give this form a name. e.g <mark>My Form</mark>, <mark>My Grandpa</mark>
                         or whatever is appropriate.
@@ -48,7 +48,7 @@
 
             <div class="row mt-4 border-bottom">
                 <div class="col-sm-4">
-                    <h5 class="text-dark">Patient details</h5>
+                    <h6 class="font-weight-bold text-dark">Patient details</h6>
                     <small>All fields other than home phone ones are required.</small>
                 </div>
 

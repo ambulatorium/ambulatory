@@ -58,24 +58,24 @@
     <modal v-show="$root.alert.type">
         <!-- alert dialog -->
         <div id="modal-dialog" v-if="mode == 'dialog'">
-            <div class="modal-container rounded">
+            <div class="modal-container">
                 <div class="text-center mb-4">
-                    <h5 class="mt-3 mb-0 font-weight-bold">{{message}}</h5>
+                    <span class="mt-3 mb-0 font-weight-bold">{{message}}</span>
                 </div>
 
                 <!-- information -->
                 <div class="d-flex align-items-center justify-content-center">
                     <!-- for errors -->
-                    <button v-if="type == 'error'" class="btn btn-primary" @click="close">
+                    <button v-if="type == 'error'" class="btn btn-block btn-primary rounded-full font-weight-bold" @click="close">
                         OK
                     </button>
 
                     <!-- for confirmation -->
-                    <button v-if="type == 'confirmation'" class="btn btn-primary" @click="confirm">
-                        YES
-                    </button>
-                    <button v-if="type == 'confirmation'" class="btn btn-light ml-1" @click="cancel">
+                    <button v-if="type == 'confirmation'" class="btn btn-block btn-light rounded-full mt-2 mr-1 font-weight-bold" @click="cancel">
                         NO
+                    </button>
+                    <button v-if="type == 'confirmation'" class="btn btn-block btn-primary rounded-full ml-1 font-weight-bold" @click="confirm">
+                        YES
                     </button>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
         <!-- alert notification -->
         <div id="modal-flash" v-if="mode == 'flash'">
-            <div class="alert alert-primary border-0 rounded shadow-sm">
+            <div class="alert alert-primary border-0 rounded-lg shadow-xs">
                 <strong>{{message}}</strong>
             </div>
         </div>

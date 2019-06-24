@@ -5,7 +5,7 @@
 <template>
     <index-view title="Doctors" resource="doctors">
         <template slot="group-item" slot-scope="slotProps">
-            <router-link :to="{name:'doctors-preview', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
+            <router-link :to="{name:'doctors-preview', params:{id: slotProps.entry.id}}" class="border-bottom list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="media">
                         <img :src="slotProps.entry.user.avatar"

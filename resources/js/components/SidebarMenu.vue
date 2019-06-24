@@ -12,7 +12,7 @@
                 height="40"
                 width="40">
 
-            <div class="media-body d-none d-md-block">
+            <div class="media-body d-none d-lg-block">
                 <h6 class="mb-0 font-weight-bold text-dark">
                     {{Ambulatory.user.name}}
                 </h6>
@@ -29,7 +29,7 @@
                         <path d="M22 6l-10 7L2 6"/>
                     </svg>
 
-                    <span class="d-none d-md-block">Inbox</span>
+                    <span class="d-none d-lg-block">Inbox</span>
                 </router-link>
             </div>
 
@@ -42,7 +42,7 @@
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
 
-                    <span class="d-none d-md-block">Doctors</span>
+                    <span class="d-none d-lg-block">Doctors</span>
                 </router-link>
             </div>
 
@@ -53,7 +53,7 @@
                         <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
                     </svg>
 
-                    <span class="d-none d-md-block">Schedules</span>
+                    <span class="d-none d-lg-block">Schedules</span>
                 </router-link>
             </div>
 
@@ -65,7 +65,7 @@
                         <path d="M13 2v7h7"/>
                     </svg>
 
-                    <span class="d-none d-md-block">Medical forms</span>
+                    <span class="d-none d-lg-block">Medical forms</span>
                 </router-link>
             </div>
 
@@ -78,7 +78,7 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
                         </svg>
 
-                        <span class="d-none d-md-block">Staff</span>
+                        <span class="d-none d-lg-block">Staff</span>
                     </router-link>
                 </div>
 
@@ -89,7 +89,7 @@
                             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
 
-                        <span class="d-none d-md-block">Invitations</span>
+                        <span class="d-none d-lg-block">Invitations</span>
                     </router-link>
                 </div>
 
@@ -100,7 +100,7 @@
                             <circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/>
                         </svg>
 
-                        <span class="d-none d-md-block">Specializations</span>
+                        <span class="d-none d-lg-block">Specializations</span>
                     </router-link>
                 </div>
 
@@ -112,7 +112,7 @@
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
 
-                        <span class="d-none d-md-block">Health Facilities</span>
+                        <span class="d-none d-lg-block">Health Facilities</span>
                     </router-link>
                 </div>
             </span>
@@ -124,7 +124,7 @@
                         <circle cx="12" cy="12" r="3"/>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
 
-                    <span class="d-none d-md-block">Settings</span>
+                    <span class="d-none d-lg-block">Settings</span>
                 </router-link>
             </div>
         </nav>
