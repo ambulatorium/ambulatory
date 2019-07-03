@@ -27,7 +27,7 @@ class ScheduleAvailabilityController extends Controller
     {
         $this->authorize('manage', $schedule);
 
-        $schedule->addAvailability($request->validated());
+        $schedule->addCustomAvailability($request->validated());
 
         return response()->json([
             'entry' => $schedule,

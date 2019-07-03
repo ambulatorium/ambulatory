@@ -33,7 +33,7 @@ class BookingAvailabilityRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return $this->schedule->checkAvailability($value);
+        return $this->schedule->checkAvailabilitySlot($value);
     }
 
     /**

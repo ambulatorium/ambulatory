@@ -48,13 +48,13 @@ class ScheduleTest extends TestCase
     }
 
     /** @test */
-    public function it_can_add_a_availability()
+    public function it_can_add_a_custom_availability()
     {
         $schedule = factory(Schedule::class)->create();
 
-        $availability = $schedule->addAvailability(Arr::except(factory(Availability::class)->raw(), ['schedule_id']));
+        $availability = $schedule->addCustomAvailability(Arr::except(factory(Availability::class)->raw(), ['schedule_id']));
 
-        // included default working hours
+        // included default working hours.
         $this->assertCount(6, $schedule->availabilities);
 
         $this->assertDatabaseHas('reliqui_availabilities', [

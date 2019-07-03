@@ -56,6 +56,15 @@ class Doctor extends AmbulatoryModel
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
@@ -102,7 +111,7 @@ class Doctor extends AmbulatoryModel
     }
 
     /**
-     * Gett all the appointments for the doctor.
+     * Appointments for the doctor.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
@@ -112,11 +121,11 @@ class Doctor extends AmbulatoryModel
     }
 
     /**
-     * Get the default working hours of doctor.
+     * The working hours of a doctor.
      *
      * @return array
      */
-    public function getWorkingHours()
+    public function workingHours()
     {
         $rfc = new RRule($this->working_hours_rule);
 
@@ -135,16 +144,16 @@ class Doctor extends AmbulatoryModel
     }
 
     /**
-     * Get the default doctor availability.
+     * The working hour slot of a doctor.
      *
      * @param  string  $incomingDate
      * @return array
      */
-    public function getAvailability($incomingDate)
+    public function workingHourSlots($incomingDate)
     {
         $date = Carbon::parse($incomingDate);
 
-        $availability = Arr::where($this->getWorkingHours(), function ($value) use ($date) {
+        $availability = Arr::where($this->workingHours(), function ($value) use ($date) {
             return $value['wday'] === Str::upper(Str::limit($date->format('l'), 2, ''));
         });
 
