@@ -23,6 +23,35 @@ class BookingScheduleTest extends TestCase
     }
 
     /** @test */
+    public function only_get_available_time_slots_from_default_availability_with_preferred_date_in_the_schedule()
+    {
+        $this->signInAsPatient();
+
+        // the default availability is Monday to Friday next week,
+        // from 9:00-17:00 with estimated service time 15 minutes.
+        $schedule = factory(Schedule::class)->create();
+
+        // Request schedule availability time slots for today (default).
+        // expected no time slots available.
+        $this->getJson(route('ambulatory.schedules.availabilities', $schedule->id))
+            ->assertOk()
+            ->assertExactJson([
+                'entries' => [],
+            ]);
+
+        // Request schedule availability time slots for monday next week.
+        // expected the time slots available.
+        $this->getJson(route('ambulatory.schedules.availabilities', [
+                $schedule->id,
+                'date='.$date = today()->parse('Monday next week'),
+            ]))
+            ->assertOk()
+            ->assertExactJson([
+                'entries' => $schedule->availabilitySlots($date),
+            ]);
+    }
+
+    /** @test */
     public function preferred_date_time_is_required()
     {
         $medicalForm = factory(MedicalForm::class)->create();
@@ -111,7 +140,7 @@ class BookingScheduleTest extends TestCase
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the default availability is Monday to Friday next week,
-        // from 9:00-17:00 with estimated service time 15 minutes.
+        // interval time 9:00-17:00 with with estimated service time 15 minutes.
         $schedule = factory(Schedule::class)->create();
 
         $this
@@ -133,7 +162,7 @@ class BookingScheduleTest extends TestCase
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the custom availability is Monday next week,
-        // from 9:00-11:00 and 15:00-19:00 with estimated service time 15 minutes.
+        // interval time 9:00-11:00 and 15:00-19:00 with default estimated service time 15 minutes.
         $customAvailability = factory(Availability::class)->create();
 
         $this
@@ -208,7 +237,7 @@ class BookingScheduleTest extends TestCase
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the default availability is Monday to Friday next week,
-        // from 9:00-17:00 with estimated service time 15 minutes.
+        // interval time 9:00-17:00 with default estimated service time 15 minutes.
         $schedule = factory(Schedule::class)->create();
 
         $this
@@ -232,7 +261,7 @@ class BookingScheduleTest extends TestCase
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the custom availability is Monday next week,
-        // from 9:00-11:00 and 15:00-19:00 with estimated service time 15 minutes.
+        // interval time 9:00-11:00 and 15:00-19:00 with default estimated service time 15 minutes.
         $customAvailability = factory(Availability::class)->create();
 
         $this

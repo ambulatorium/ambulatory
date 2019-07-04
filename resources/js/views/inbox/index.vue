@@ -5,13 +5,15 @@
 <template>
     <index-view title="Inbox" resource="inbox">
         <template slot="group-item" slot-scope="slotProps">
-            <router-link :to="{name:'inbox-preview', params:{id: slotProps.entry.id}}" class="list-group-item list-group-item-action">
+            <router-link :to="{name:'inbox-preview', params:{id: slotProps.entry.id}}" class="border-bottom list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1 font-weight-bold text-dark">physical appointment</h6>
+                    <h6 class="mb-1 font-weight-bold text-dark">Physical appointment</h6>
                     <small>{{timeAgo(slotProps.entry.created_at)}}</small>
                 </div>
-                <p class="mb-1">preferred date time: {{localDateTime(slotProps.entry.preferred_date_time)}}</p>
+
+                <p class="mb-1">Visit time: {{localDateTime(slotProps.entry.preferred_date_time)}}</p>
                 <small>
+                    Location:
                     {{slotProps.entry.schedule.health_facility.name}},
                     {{slotProps.entry.schedule.health_facility.address}},
                     {{slotProps.entry.schedule.health_facility.city}},

@@ -9,7 +9,10 @@ Route::get('/api/schedules', 'ScheduleController@index')->name('schedules');
 Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store');
 Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
 Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
+// schedule availabilities.
+Route::get('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@index')->name('schedules.availabilities');
 Route::post('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@store')->name('schedules.availabilities');
+// book schedule.
 Route::post('/api/schedules/{schedule}/bookings', 'BookingScheduleController@store')->name('schedule.bookings');
 
 // Doctors.

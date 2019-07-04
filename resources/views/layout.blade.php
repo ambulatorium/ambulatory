@@ -12,15 +12,18 @@
 </head>
 <body>
 <div id="ambulatory" v-cloak>
-    <alert
+    <alert v-if="alert.type"
         :message="alert.message"
         :mode="alert.mode"
         :type="alert.type"
         :auto-close="alert.autoClose"
         :confirmation-proceed="alert.confirmationProceed"
-        :confirmation-cancel="alert.confirmationCancel"
-        v-if="alert.type">
+        :confirmation-cancel="alert.confirmationCancel">
     </alert>
+
+    <booking v-if="booking.schedule"
+        :schedule="booking.schedule">
+    </booking>
 
     <div class="container">
         <div class="row">

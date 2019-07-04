@@ -1,5 +1,11 @@
 <script type="text/ecmascript-6">
-    export default {}
+    export default {
+        methods: {
+            openBooking(value) {
+                this.bookAppointment(value);
+            }
+        }
+    }
 </script>
 
 <template>
@@ -28,7 +34,7 @@
                     </div>
                 </div>
 
-                <small>{{slotProps.formData.is_active ? 'Available' : 'Not available'}}</small>
+                <small>{{slotProps.formData.is_active ? 'Active' : 'Not active'}}</small>
             </div>
 
             <ul class="nav nav-pills mt-3">
@@ -41,22 +47,24 @@
                     don't have any schedules yet.
                 </div>
 
-                <a href="#" class="list-group-item list-group-item-action border-top-0" v-for="schedule in slotProps.formData.schedules" :key="schedule.id">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h6 class="mb-1 font-weight-bold text-dark">{{schedule.health_facility.name}}</h6>
-                        <small>{{schedule.health_facility.country}}</small>
-                    </div>
+                <div v-else v-for="schedule in slotProps.formData.schedules" :key="schedule.id">
+                    <a href="#" @click.prevent="openBooking(schedule.id)" class="border-0 list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 font-weight-bold text-dark">{{schedule.health_facility.name}}</h6>
+                            <small>{{schedule.health_facility.country}}</small>
+                        </div>
 
-                    <p class="mb-1">
-                        {{localDate(schedule.start_date)}} - {{localDate(schedule.end_date)}}
-                    </p>
-                    <small>
-                        {{schedule.health_facility.address}},
-                        {{schedule.health_facility.city}},
-                        {{schedule.health_facility.zip_code}}
-                        {{schedule.health_facility.state}}
-                    </small>
-                </a>
+                        <p class="mb-1">
+                            {{localDate(schedule.start_date)}} - {{localDate(schedule.end_date)}}
+                        </p>
+                        <small>
+                            {{schedule.health_facility.address}},
+                            {{schedule.health_facility.city}},
+                            {{schedule.health_facility.zip_code}}
+                            {{schedule.health_facility.state}}
+                        </small>
+                    </a>
+                </div>
             </div>
         </template>
     </form-entry>

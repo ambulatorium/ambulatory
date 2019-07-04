@@ -106,7 +106,7 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
-     * Add a availability to the schedule.
+     * Add a custom availability to the schedule.
      *
      * @param  array  $attributes
      * @return \Illuminate\Database\Eloquent\Model
@@ -117,7 +117,7 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
-     * The bookings schedule.
+     * The bookings of schedule.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -149,7 +149,7 @@ class Schedule extends AmbulatoryModel
     /**
      * Check the availability slot of schedule.
      *
-     * @param  string  $dateTime
+     * @param  string|Carbon  $dateTime
      * @return bool
      */
     public function checkAvailabilitySlot($dateTime)
@@ -164,10 +164,10 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
-     * The schedule availability slots.
+     * Get the schedule availability slots.
      *
-     * @param  string  $dateTime
-     * @return mixed
+     * @param  string|Carbon  $dateTime
+     * @return array
      */
     public function availabilitySlots($dateTime)
     {
@@ -179,35 +179,37 @@ class Schedule extends AmbulatoryModel
             return $this->customAvailabilitySlots($customAvailability->first()->toArray());
         }
 
-        return $this->defaultAvailabilitySlots($dateTime);
+        return $this->defaultAvailabilitySlots($date);
     }
 
     /**
      * Get the default availability slots of schedule.
      *
-     * @param  string  $dateTime
-     * @return mixed
+     * @param  string|Carbon  $date
+     * @return array
      */
-    protected function defaultAvailabilitySlots($dateTime)
+    protected function defaultAvailabilitySlots($date)
     {
-        $startTime = 0;
-        $endTime = 0;
+        // check the available schedule
+        $scheduleAvailable = $date >= $this->start_date->toDateString() && $date <= $this->end_date->toDateString();
+        // get time slots from doctor working hours.
+        $doctorAvailability = $this->doctor->workingHourSlots($date);
 
-        $doctorAvailability = $this->doctor->workingHourSlots($dateTime);
-
-        if (filled($doctorAvailability)) {
+        if ($scheduleAvailable && filled($doctorAvailability)) {
             $startTime = strtotime($doctorAvailability['intervals']['from']);
             $endTime = strtotime($doctorAvailability['intervals']['to']);
+
+            return $this->calculateTimeSlots($startTime, $endTime);
         }
 
-        return $this->calculateTimeSlots($startTime, $endTime);
+        return [];
     }
 
     /**
      * Get the custom availability slots of schedule.
      *
      * @param  array  $availability
-     * @return mixed
+     * @return array
      */
     protected function customAvailabilitySlots(array $availability)
     {

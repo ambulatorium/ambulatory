@@ -9,7 +9,7 @@
         },
 
         mounted() {
-            document.title = "Inbox — Reliqui Ambulatory";
+            document.title = "Inbox — Ambulatory";
 
             this.http().get('/api/inbox/' + this.id).then(response => {
                 this.entry = response.data.entry;
@@ -75,9 +75,10 @@
 
                 <!-- Inbox menu -->
                 <ul class="nav nav-pills">
-                    <a class="nav-link active" href="#">Medical form</a>
+                    <a class="nav-link active">Patient</a>
                 </ul>
 
+                <!-- patient -->
                 <div class="table-responsive">
                     <table v-if="ready && entry" class="table-borderless table mb-0 card-bg-light">
                         <tbody>
@@ -109,12 +110,6 @@
                                 <td class="table-fit font-weight-bold">Marital Status</td>
                                 <td>
                                     {{entry.medical_form.marital_status}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="table-fit font-weight-bold">Address</td>
-                                <td>
-                                    {{entry.medical_form.address}}
                                 </td>
                             </tr>
                             <tr>

@@ -13,7 +13,22 @@ class ScheduleAvailabilityController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(VerifiedDoctor::class);
+        $this->middleware(VerifiedDoctor::class)->except('index');
+    }
+
+    /**
+     * Display a listing of the medical forms.
+     *
+     * @param  Schedule  $schedule
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(Schedule $schedule)
+    {
+        $date = request('date') ?: today();
+
+        return response()->json([
+            'entries' => $schedule->availabilitySlots($date),
+        ]);
     }
 
     /**
