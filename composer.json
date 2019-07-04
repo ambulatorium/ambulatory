@@ -15,7 +15,6 @@
         "rlanvin/php-rrule": "^2.0"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.3.15",
         "orchestra/testbench": "^3.7"
     },
     "autoload": {
