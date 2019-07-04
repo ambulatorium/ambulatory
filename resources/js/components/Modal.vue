@@ -1,14 +1,12 @@
 <script type="text/ecmascript-6">
     export default {
-        // created() {
-        //     document.body.classList.add('overflow-hidden');
-        //     document.getElementById('card-header').classList.remove('sticky-top');
-        // },
+        created() {
+            document.body.classList.add('overflow-hidden');
+        },
 
-        // destroyed() {
-        //     document.body.classList.remove('overflow-hidden');
-        //     document.getElementById('card-header').classList.add('sticky-top');
-        // },
+        destroyed() {
+            document.body.classList.remove('overflow-hidden');
+        },
     }
 </script>
 

@@ -22,6 +22,7 @@ Vue.component('form-entry', require('./components/FormEntry.vue').default);
 Vue.component('index-view', require('./components/IndexView.vue').default);
 Vue.component('form-errors', require('./components/FormErrors.vue').default);
 Vue.component('sidebar-menu', require('./components/SidebarMenu.vue').default);
+Vue.component('booking', require('./components/Booking.vue').default);
 
 Vue.mixin(Base);
 
@@ -39,6 +40,10 @@ new Vue({
                 message: '',
                 confirmationProceed: null,
                 confirmationCancel: null,
+            },
+
+            booking: {
+                schedule: null,
             }
         }
     },

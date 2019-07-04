@@ -4,7 +4,7 @@
 
 <template>
     <index-view title="Medical Forms" resource="medical-forms">
-        <router-link slot="btn-new-entry" :to="{name:'medical-forms-new'}" class="btn btn-outline-primary rounded-full">
+        <router-link slot="btn-new-entry" :to="{name:'medical-forms-new'}" class="btn btn-outline-primary rounded-full font-weight-bold">
             New
         </router-link>
 

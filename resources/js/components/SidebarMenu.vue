@@ -33,6 +33,17 @@
                 </router-link>
             </div>
 
+            <!-- schedules -->
+            <div class="nav-item" v-if="Ambulatory.user.role === 'doctor'">
+                <router-link active-class="active" to="/schedules" class="nav-link d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                    </svg>
+
+                    <span class="d-none d-lg-block">Schedules</span>
+                </router-link>
+            </div>
+
             <!-- doctors -->
             <div class="nav-item">
                 <router-link active-class="active" to="/doctors" class="nav-link d-flex align-items-center">
@@ -43,17 +54,6 @@
                     </svg>
 
                     <span class="d-none d-lg-block">Doctors</span>
-                </router-link>
-            </div>
-
-            <!-- schedules -->
-            <div class="nav-item" v-if="Ambulatory.user.role === 'doctor'">
-                <router-link active-class="active" to="/schedules" class="nav-link d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-                    </svg>
-
-                    <span class="d-none d-lg-block">Schedules</span>
                 </router-link>
             </div>
 

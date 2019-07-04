@@ -55,7 +55,9 @@
                         </div>
 
                         <p class="mb-1">
-                            {{localDate(schedule.start_date)}} - {{localDate(schedule.end_date)}}
+                            {{localDateTime(schedule.start_date).format('MMMM Do YYYY')}}
+                            -
+                            {{localDateTime(schedule.end_date).format('MMMM Do YYYY')}}
                         </p>
                         <small>
                             {{schedule.health_facility.address}},

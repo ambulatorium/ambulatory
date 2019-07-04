@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <small>{{slotProps.entry.is_active ? 'Available' : 'Not available'}}</small>
+                    <small>{{slotProps.entry.is_active ? 'Active' : 'Not active'}}</small>
                 </div>
             </router-link>
         </template>

@@ -115,8 +115,16 @@ button:hover {
     }
 }
 
+.font-weight-bold {
+    font-weight: $font-weight-semibold !important;
+}
+
 .rounded-full {
     border-radius: 9999px;
+}
+
+.rounded-xl {
+    border-radius: 14px;
 }
 
 .shadow-xs {

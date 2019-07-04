@@ -11,7 +11,7 @@
                     <small>{{timeAgo(slotProps.entry.created_at)}}</small>
                 </div>
 
-                <p class="mb-1">Visit time: {{localDateTime(slotProps.entry.preferred_date_time)}}</p>
+                <p class="mb-1">Visit time: {{localDateTime(slotProps.entry.preferred_date_time).format('MMMM Do YYYY h:mm:ss A')}}</p>
                 <small>
                     Location:
                     {{slotProps.entry.schedule.health_facility.name}},

@@ -4,7 +4,7 @@
 
 <template>
     <index-view title="Staff" resource="staff">
-        <router-link slot="btn-new-entry" :to="{name:'invitations-new'}" class="btn btn-outline-primary rounded-full">
+        <router-link slot="btn-new-entry" :to="{name:'invitations-new'}" class="btn btn-outline-primary rounded-full font-weight-bold">
             Invite staff
         </router-link>
 

@@ -4,7 +4,7 @@
 
 <template>
     <index-view title="Schedules" resource="schedules">
-        <router-link slot="btn-new-entry" :to="{name:'schedules-new'}" class="btn btn-outline-primary">
+        <router-link slot="btn-new-entry" :to="{name:'schedules-new'}" class="btn btn-outline-primary rounded-full font-weight-bold">
             New
         </router-link>
 
@@ -16,7 +16,9 @@
                 </div>
 
                 <p class="mb-1">
-                    {{localDate(slotProps.entry.start_date)}} - {{localDate(slotProps.entry.end_date)}}
+                    {{localDateTime(slotProps.entry.start_date).format('MMMM Do YYYY')}}
+                    -
+                    {{localDateTime(slotProps.entry.end_date).format('MMMM Do YYYY')}}
                 </p>
                 <small>
                     {{slotProps.entry.health_facility.address}},

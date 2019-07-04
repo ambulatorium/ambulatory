@@ -12,33 +12,17 @@ export default {
 
     methods: {
         /**
-         * Show the time in local time.
+         * Show the local date for today.
          */
-        localTime(time) {
-            return moment(time + ' Z')
-                .utc()
-                .local()
-                .format('h:mm:ss A');
+        localToday() {
+            return moment().local();
         },
 
         /**
-         * Show the date in local date.
-         */
-        localDate(date) {
-            return moment(date + ' Z')
-                .utc()
-                .local()
-                .format('MMMM Do YYYY');
-        },
-
-        /**
-         * Show the date time in local date time.
+         * Show the local date time.
          */
         localDateTime(dateTime) {
-            return moment(dateTime + ' Z')
-                .utc()
-                .local()
-                .format('MMMM Do YYYY, h:mm:ss A');
+            return moment(dateTime).local();
         },
 
         /**
@@ -91,6 +75,11 @@ export default {
             this.$root.alert.message = message;
             this.$root.alert.confirmationProceed = success;
             this.$root.alert.confirmationCancel = failure;
+        },
+
+        // Show a bookings dialog.
+        bookAppointment(schedule) {
+            this.$root.booking.schedule = schedule;
         },
 
         /**

@@ -4,7 +4,7 @@
 
 <template>
     <index-view title="Health Facilities" resource="health-facilities">
-        <router-link slot="btn-new-entry" :to="{name:'health-facilities-new'}" class="btn btn-outline-primary rounded-full">
+        <router-link slot="btn-new-entry" :to="{name:'health-facilities-new'}" class="btn btn-outline-primary rounded-full font-weight-bold">
             New
         </router-link>
 

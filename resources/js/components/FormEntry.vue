@@ -103,12 +103,12 @@
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
                         <div v-if="id != 'new'">
-                            <a href="#" class="btn btn-primary rounded-full" v-if="okToUpdate" @click="updateEntry">Save</a>
-                            <a href="#" class="btn btn-danger rounded-full" v-if="okToDelete" @click="deleteEntry">Delete</a>
+                            <a href="#" class="btn btn-primary font-weight-bold rounded-full" v-if="okToUpdate" @click="updateEntry">Save</a>
+                            <a href="#" class="btn btn-danger font-weight-bold rounded-full" v-if="okToDelete" @click="deleteEntry">Delete</a>
                         </div>
 
                         <div v-else>
-                            <a href="#" class="btn btn-primary rounded-full" v-if="okToSave" @click="saveEntry">Save</a>
+                            <a href="#" class="btn btn-primary font-weight-bold rounded-full" v-if="okToSave" @click="saveEntry">Save</a>
                         </div>
                     </div>
                 </div>
