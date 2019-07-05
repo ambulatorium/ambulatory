@@ -3,8 +3,8 @@
 namespace Ambulatory\Ambulatory\Tests\Feature;
 
 use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Invitation;
 use Illuminate\Support\Facades\Mail;
+use Ambulatory\Ambulatory\Invitation;
 use Ambulatory\Ambulatory\Tests\TestCase;
 use Ambulatory\Ambulatory\Mail\CredentialEmail;
 use Ambulatory\Ambulatory\Mail\InvitationEmail;

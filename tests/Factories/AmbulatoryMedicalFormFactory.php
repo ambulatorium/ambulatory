@@ -1,7 +1,7 @@
 <?php
 
-use Ambulatory\Ambulatory\User;
 use Faker\Generator as Faker;
+use Ambulatory\Ambulatory\User;
 use Ambulatory\Ambulatory\MedicalForm;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
