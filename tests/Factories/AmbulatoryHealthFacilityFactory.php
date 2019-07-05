@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use Reliqui\Ambulatory\HealthFacility;
+use Ambulatory\Ambulatory\HealthFacility;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(HealthFacility::class, function (Faker $faker) {

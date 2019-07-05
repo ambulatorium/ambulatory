@@ -1,14 +1,14 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Ambulatory\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
@@ -43,7 +43,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return \Reliqui\Ambulatory\User
+     * @return \Ambulatory\Ambulatory\User
      */
     protected function create(array $data)
     {

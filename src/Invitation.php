@@ -1,12 +1,12 @@
 <?php
 
-namespace Reliqui\Ambulatory;
+namespace Ambulatory\Ambulatory;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Reliqui\Ambulatory\Mail\CredentialEmail;
-use Reliqui\Ambulatory\Mail\InvitationEmail;
+use Ambulatory\Ambulatory\Mail\CredentialEmail;
+use Ambulatory\Ambulatory\Mail\InvitationEmail;
 
 class Invitation extends AmbulatoryModel
 {

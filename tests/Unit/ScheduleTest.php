@@ -1,14 +1,14 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Unit;
+namespace Ambulatory\Ambulatory\Tests\Unit;
 
 use Illuminate\Support\Arr;
-use Reliqui\Ambulatory\Doctor;
-use Reliqui\Ambulatory\Schedule;
+use Ambulatory\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\Schedule;
 use Illuminate\Support\Collection;
-use Reliqui\Ambulatory\Availability;
-use Reliqui\Ambulatory\HealthFacility;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Availability;
+use Ambulatory\Ambulatory\HealthFacility;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ScheduleTest extends TestCase

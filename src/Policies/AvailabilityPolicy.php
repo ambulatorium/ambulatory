@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Policies;
+namespace Ambulatory\Ambulatory\Policies;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Availability;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Availability;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AvailabilityPolicy

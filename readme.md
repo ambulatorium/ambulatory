@@ -1,17 +1,17 @@
 ## Introduction
 
-Reliqui ambulatory is outpatient care platform carefully designed to meet the needs of outpatient services in health facilities. [Learn more about ambulatory care](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
+**Ambulatory is outpatient care platform for your website.** Carefully designed to be consistent, fast, easy to use, and meet the needs of outpatient services in health facilities. [Learn more about ambulatory care >>>](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
 
 <p align="center"><img src="https://res.cloudinary.com/dave24hwj8/image/upload/v1552329523/Screen_Shot_2019-03-12_at_01.21.34.png"></p>
 
 ## Installation
 
-Reliqui ambulatory runs on any Laravel application, it uses a separate database connection and authentication system so that you don't have to modify any of your project code.
+Ambulatory runs on any Laravel application, it uses a separate database connection and authentication system so that you don't have to modify any of your project code.
 
-Install Reliqui ambulatory via Composer:
+Install Ambulatory via Composer:
 
 ```
-composer require reliqui/ambulatory
+composer require ambulatory/ambulatory
 ```
 
 Once Composer is done, run the following command.
@@ -26,7 +26,7 @@ Create a symbolic link to ensure file uploads are publicly accessible from the w
 php artisan storage:link
 ```
 
-Check `config/ambulatory.php` and configure the database connection Reliqui ambulatory is going to be using, after that go run:
+Check `config/ambulatory.php` and configure the database connection ambulatory is going to be using, after that go run:
 
 ```
 php artisan ambulatory:migrate
@@ -36,29 +36,12 @@ Head to `yourproject.test/ambulatory` and use the provided email and password to
 
 ## Road map
 
-Reliqui ambulatory is still under heavy development, I decided to ship it in this early stage so you can help me make it better.
+Ambulatory is still under heavy development, I decided to ship it in this early stage so you can help me make it better. [See the road map >>>](https://)
 
-Here's the plan for what's coming:
+## Security Vulnerabilities
 
-- [x] Add tests.
-- [ ] Design a better logo. @davidhsianturi
-- [ ] Optimize CSS, move to TailwindCSS ?
-- [ ] Health check services. @davidhsianturi
-- [ ] Add text search inside listings.
-- [ ] Enhance date-time picker component.
-- [ ] Add markdown mail template.
-
-Ideas that need to be discussed:
-
-- [ ] Consult online services
-- [ ] Home care services
-
-And here are some ideas I'm still not sure about:
-
-- [ ] Localization
-- [ ] Health records
-
+If you discover a security vulnerability within Ambulatory, please send an e-mail to [davidhsianturi@gmail.com](mailto:davidhsianturi@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
-Reliqui ambulatory is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ambulatory is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

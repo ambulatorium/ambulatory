@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Requests;
+namespace Ambulatory\Ambulatory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Reliqui\Ambulatory\Rules\CurrentPassRule;
+use Ambulatory\Ambulatory\Rules\CurrentPassRule;
 
 class NewPasswordRequest extends FormRequest
 {

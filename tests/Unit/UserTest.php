@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Unit;
+namespace Ambulatory\Ambulatory\Tests\Unit;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature\Settings;
+namespace Ambulatory\Ambulatory\Tests\Feature\Settings;
 
 use Illuminate\Support\Arr;
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateAccountTest extends TestCase

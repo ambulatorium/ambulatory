@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature\Settings;
+namespace Ambulatory\Ambulatory\Tests\Feature\Settings;
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class NewPasswordTest extends TestCase

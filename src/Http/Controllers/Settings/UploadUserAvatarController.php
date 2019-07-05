@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
 
 class UploadUserAvatarController
 {

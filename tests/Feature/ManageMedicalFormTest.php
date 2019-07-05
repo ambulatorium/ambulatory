@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature;
+namespace Ambulatory\Ambulatory\Tests\Feature;
 
-use Reliqui\Ambulatory\MedicalForm;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageMedicalFormTest extends TestCase

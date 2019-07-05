@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature\Auth;
+namespace Ambulatory\Ambulatory\Tests\Feature\Auth;
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationTest extends TestCase

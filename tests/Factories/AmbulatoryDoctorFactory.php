@@ -1,8 +1,8 @@
 <?php
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Faker\Generator as Faker;
-use Reliqui\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\Doctor;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Doctor::class, function (Faker $faker) {

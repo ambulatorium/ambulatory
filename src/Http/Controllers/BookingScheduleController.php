@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\Http\Requests\BookingScheduleRequest;
+use Ambulatory\Ambulatory\Schedule;
+use Ambulatory\Ambulatory\Http\Requests\BookingScheduleRequest;
 
 class BookingScheduleController extends Controller
 {

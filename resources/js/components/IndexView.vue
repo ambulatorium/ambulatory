@@ -15,7 +15,7 @@
         },
 
         mounted() {
-            document.title = this.title + " — Reliqui Ambulatory";
+            document.title = this.title + " — Ambulatory";
 
             this.loadEntries();
         },

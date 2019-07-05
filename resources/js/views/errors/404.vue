@@ -1,7 +1,7 @@
 <script type="text/ecmascript-6">
     export default {
         mounted() {
-            document.title = "404 — Reliqui Ambulatory";
+            document.title = "404 — Ambulatory";
         },
     }
 </script>

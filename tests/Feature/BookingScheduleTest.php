@@ -1,13 +1,13 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature;
+namespace Ambulatory\Ambulatory\Tests\Feature;
 
 use Illuminate\Support\Arr;
-use Reliqui\Ambulatory\Booking;
-use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\MedicalForm;
-use Reliqui\Ambulatory\Availability;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Booking;
+use Ambulatory\Ambulatory\Schedule;
+use Ambulatory\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\Availability;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookingScheduleTest extends TestCase

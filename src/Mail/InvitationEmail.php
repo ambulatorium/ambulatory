@@ -1,14 +1,14 @@
 <?php
 
-namespace Reliqui\Ambulatory\Mail;
+namespace Ambulatory\Ambulatory\Mail;
 
 use Illuminate\Mail\Mailable;
-use Reliqui\Ambulatory\Invitation;
+use Ambulatory\Ambulatory\Invitation;
 
 class InvitationEmail extends Mailable
 {
     /**
-     * @var \Reliqui\Ambulatory\Invitation
+     * @var \Ambulatory\Ambulatory\Invitation
      */
     public $invitation;
 

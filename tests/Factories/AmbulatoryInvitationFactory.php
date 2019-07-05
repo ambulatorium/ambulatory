@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-use Reliqui\Ambulatory\Invitation;
+use Ambulatory\Ambulatory\Invitation;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Invitation::class, function (Faker $faker) {

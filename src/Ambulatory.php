@@ -1,17 +1,17 @@
 <?php
 
-namespace Reliqui\Ambulatory;
+namespace Ambulatory\Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
-use Reliqui\Ambulatory\Policies\DoctorPolicy;
-use Reliqui\Ambulatory\Policies\MedicalFormPolicy;
-use Reliqui\Ambulatory\Policies\AvailabilityPolicy;
-use Reliqui\Ambulatory\Policies\DoctorSchedulePolicy;
+use Ambulatory\Ambulatory\Policies\DoctorPolicy;
+use Ambulatory\Ambulatory\Policies\MedicalFormPolicy;
+use Ambulatory\Ambulatory\Policies\AvailabilityPolicy;
+use Ambulatory\Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
 {
     /**
-     * The policy mappings for reliqui ambulatory.
+     * The policy mappings for ambulatory.
      *
      * @var array
      */
@@ -23,7 +23,7 @@ class Ambulatory
     ];
 
     /**
-     * Register reliqui ambulatory policies.
+     * Register ambulatory policies.
      *
      * @return void
      */

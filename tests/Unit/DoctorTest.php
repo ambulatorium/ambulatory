@@ -1,11 +1,11 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Unit;
+namespace Ambulatory\Ambulatory\Tests\Unit;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Doctor;
 use Illuminate\Support\Collection;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorTest extends TestCase

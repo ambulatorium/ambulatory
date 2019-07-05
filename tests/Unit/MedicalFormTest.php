@@ -1,11 +1,11 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Unit;
+namespace Ambulatory\Ambulatory\Tests\Unit;
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Support\Collection;
-use Reliqui\Ambulatory\MedicalForm;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MedicalFormTest extends TestCase

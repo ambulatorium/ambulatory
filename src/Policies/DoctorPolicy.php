@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Policies;
+namespace Ambulatory\Ambulatory\Policies;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Doctor;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DoctorPolicy

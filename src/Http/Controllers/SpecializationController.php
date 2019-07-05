@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Specialization;
-use Reliqui\Ambulatory\Http\Middleware\Admin;
-use Reliqui\Ambulatory\Http\Requests\SpecializationRequest;
+use Ambulatory\Ambulatory\Specialization;
+use Ambulatory\Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Ambulatory\Http\Requests\SpecializationRequest;
 
 class SpecializationController extends Controller
 {

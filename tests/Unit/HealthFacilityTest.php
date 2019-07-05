@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Unit;
+namespace Ambulatory\Ambulatory\Tests\Unit;
 
-use Reliqui\Ambulatory\HealthFacility;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\HealthFacility;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HealthFacilityTest extends TestCase
@@ -21,24 +21,24 @@ class HealthFacilityTest extends TestCase
     /** @test */
     public function it_generate_the_slug_when_saving_a_new_health_facility()
     {
-        $healthFacility = factory(HealthFacility::class)->create(['name' => 'Reliqui Ambulatory', 'city' => 'Bali']);
+        $healthFacility = factory(HealthFacility::class)->create(['name' => 'Clinic Ambulatory', 'city' => 'Kuta']);
 
-        $this->assertSame('reliqui-ambulatory-bali', $healthFacility->slug);
+        $this->assertSame('clinic-ambulatory-kuta', $healthFacility->slug);
 
-        $healthFacility = factory(HealthFacility::class)->create(['name' => 'Reliqui Ambulatory', 'city' => 'Bali']);
+        $healthFacility = factory(HealthFacility::class)->create(['name' => 'Clinic Ambulatory', 'city' => 'Kuta']);
 
-        $this->assertSame('reliqui-ambulatory-bali-0', $healthFacility->slug);
+        $this->assertSame('clinic-ambulatory-kuta-0', $healthFacility->slug);
     }
 
     /** @test */
     public function it_generate_the_slug_with_a_name_or_city_that_ends_in_a_number()
     {
-        $healthFacility = factory(HealthFacility::class)->create(['name' => 'RELIQUI 01', 'city' => 'Bali']);
+        $healthFacility = factory(HealthFacility::class)->create(['name' => 'AMBULATORY 01', 'city' => 'Kuta']);
 
-        $this->assertSame('reliqui-01-bali', $healthFacility->slug);
+        $this->assertSame('ambulatory-01-kuta', $healthFacility->slug);
 
-        $healthFacility = factory(HealthFacility::class)->create(['name' => 'RELIQUI 01', 'city' => 'Bali']);
+        $healthFacility = factory(HealthFacility::class)->create(['name' => 'AMBULATORY 01', 'city' => 'Kuta']);
 
-        $this->assertSame('reliqui-01-bali-0', $healthFacility->slug);
+        $this->assertSame('ambulatory-01-kuta-0', $healthFacility->slug);
     }
 }

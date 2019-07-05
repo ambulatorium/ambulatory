@@ -33,4 +33,4 @@ mix
      .js('resources/js/app.js', 'public')
      .sass('resources/sass/app.scss', 'public')
      .version()
-     .copy('public', '../reliquitest/public/vendor/ambulatory');
+     .copy('public', '../ambulatorytest/public/vendor/ambulatory');

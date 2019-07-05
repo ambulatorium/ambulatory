@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Availability;
-use Reliqui\Ambulatory\Http\Middleware\VerifiedDoctor;
-use Reliqui\Ambulatory\Http\Requests\AvailabilityRequest;
+use Ambulatory\Ambulatory\Availability;
+use Ambulatory\Ambulatory\Http\Middleware\VerifiedDoctor;
+use Ambulatory\Ambulatory\Http\Requests\AvailabilityRequest;
 
 class AvailabilityController extends Controller
 {

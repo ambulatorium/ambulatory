@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Console;
+namespace Ambulatory\Ambulatory\Console;
 
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -37,7 +37,7 @@ class MigrateCommand extends Command
 
         $this->call('migrate', [
             '--database' => config('ambulatory.database_connection'),
-            '--path' => 'vendor/reliqui/ambulatory/src/Migrations',
+            '--path' => 'vendor/ambulatory/ambulatory/src/Migrations',
         ]);
 
         if ($shouldCreateNewUser) {
@@ -50,7 +50,7 @@ class MigrateCommand extends Command
             ]);
 
             $this->line('');
-            $this->line('Ambulatory is ready for use');
+            $this->line('Database migrations installed successfully.');
             $this->line('You may log in using <info>admin@mail.com</info> and password: <info>'.$password.'</info>');
         }
     }

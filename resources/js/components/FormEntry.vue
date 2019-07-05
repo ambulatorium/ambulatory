@@ -21,7 +21,7 @@
         },
 
         mounted() {
-            document.title = this.title + " — Reliqui Ambulatory";
+            document.title = this.title + " — Ambulatory";
 
             this.id != 'new'
                 ? this.getEntry()

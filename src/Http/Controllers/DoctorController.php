@@ -1,8 +1,8 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\Doctor;
 
 class DoctorController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliqui\Ambulatory;
+namespace Ambulatory\Ambulatory;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Auth\Authenticatable;

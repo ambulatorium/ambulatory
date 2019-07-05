@@ -1,11 +1,11 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Ambulatory\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

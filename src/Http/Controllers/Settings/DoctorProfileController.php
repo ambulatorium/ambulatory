@@ -1,12 +1,12 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
 
-use Reliqui\Ambulatory\Doctor;
-use Reliqui\Ambulatory\Specialization;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
-use Reliqui\Ambulatory\Http\Requests\DoctorProfileRequest;
-use Reliqui\Ambulatory\Http\Middleware\Doctor as ReliquiDoctor;
+use Ambulatory\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\Specialization;
+use Ambulatory\Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Ambulatory\Http\Requests\DoctorProfileRequest;
+use Ambulatory\Ambulatory\Http\Middleware\Doctor as AmbulatoryDoctor;
 
 class DoctorProfileController extends Controller
 {
@@ -15,7 +15,7 @@ class DoctorProfileController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(ReliquiDoctor::class);
+        $this->middleware(AmbulatoryDoctor::class);
     }
 
     /**

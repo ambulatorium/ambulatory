@@ -1,14 +1,14 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
 
 use Throwable;
 use Illuminate\Support\Str;
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Reliqui\Ambulatory\Mail\ResetPasswordEmail;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Ambulatory\Mail\ResetPasswordEmail;
+use Ambulatory\Ambulatory\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Policies;
+namespace Ambulatory\Ambulatory\Policies;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\MedicalForm;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MedicalFormPolicy

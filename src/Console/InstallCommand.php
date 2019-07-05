@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliqui\Ambulatory\Console;
+namespace Ambulatory\Ambulatory\Console;
 
 use Illuminate\Console\Command;
 
@@ -18,7 +18,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install all of the reliqui ambulatory resources';
+    protected $description = 'Install all of the Ambulatory resources';
 
     /**
      * Execute the console command.
@@ -27,12 +27,12 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->comment('Publishing Reliqui Ambulatory Assets...');
+        $this->comment('Publishing Ambulatory Assets...');
         $this->callSilent('vendor:publish', ['--tag' => 'ambulatory-assets']);
 
-        $this->comment('Publishing Reliqui Ambulatory Configuration...');
+        $this->comment('Publishing Ambulatory Configuration...');
         $this->callSilent('vendor:publish', ['--tag' => 'ambulatory-config']);
 
-        $this->info('Reliqui ambulatory was installed successfully.');
+        $this->info('Ambulatory was installed successfully.');
     }
 }

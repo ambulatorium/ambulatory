@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests;
+namespace Ambulatory\Ambulatory\Tests;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Doctor;
-use Reliqui\Ambulatory\AmbulatoryServiceProvider;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Doctor;
+use Ambulatory\Ambulatory\AmbulatoryServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
-use Reliqui\Ambulatory\Booking;
-use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\Booking;
+use Ambulatory\Ambulatory\Schedule;
+use Ambulatory\Ambulatory\MedicalForm;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Booking::class, function (Faker $faker) {

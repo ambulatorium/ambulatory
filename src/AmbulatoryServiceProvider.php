@@ -1,11 +1,11 @@
 <?php
 
-namespace Reliqui\Ambulatory;
+namespace Ambulatory\Ambulatory;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Reliqui\Ambulatory\Http\Middleware\Authenticate;
-use Reliqui\Ambulatory\Http\Middleware\RedirectIfAuthenticated;
+use Ambulatory\Ambulatory\Http\Middleware\Authenticate;
+use Ambulatory\Ambulatory\Http\Middleware\RedirectIfAuthenticated;
 
 class AmbulatoryServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     {
         $path = config('ambulatory.path');
 
-        Route::namespace('Reliqui\Ambulatory\Http\Controllers\Auth')
+        Route::namespace('Ambulatory\Ambulatory\Http\Controllers\Auth')
             ->middleware(['web', RedirectIfAuthenticated::class])
             ->as('ambulatory.')
             ->prefix($path)
@@ -55,7 +55,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
                 Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation');
             });
 
-        Route::namespace('Reliqui\Ambulatory\Http\Controllers')
+        Route::namespace('Ambulatory\Ambulatory\Http\Controllers')
             ->middleware(['web', Authenticate::class])
             ->as('ambulatory.')
             ->prefix($path)

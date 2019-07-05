@@ -1,8 +1,8 @@
 <?php
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Faker\Generator as Faker;
-use Reliqui\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\MedicalForm;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(MedicalForm::class, function (Faker $faker) {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature;
+namespace Ambulatory\Ambulatory\Tests\Feature;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Invitation;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Invitation;
 use Illuminate\Support\Facades\Mail;
-use Reliqui\Ambulatory\Tests\TestCase;
-use Reliqui\Ambulatory\Mail\CredentialEmail;
-use Reliqui\Ambulatory\Mail\InvitationEmail;
+use Ambulatory\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Mail\CredentialEmail;
+use Ambulatory\Ambulatory\Mail\InvitationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageInvitationTest extends TestCase

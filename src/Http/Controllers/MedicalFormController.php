@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\MedicalForm;
-use Reliqui\Ambulatory\Http\Requests\MedicalFormRequest;
+use Ambulatory\Ambulatory\MedicalForm;
+use Ambulatory\Ambulatory\Http\Requests\MedicalFormRequest;
 
 class MedicalFormController extends Controller
 {

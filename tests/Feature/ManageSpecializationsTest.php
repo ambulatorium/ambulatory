@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature;
+namespace Ambulatory\Ambulatory\Tests\Feature;
 
-use Reliqui\Ambulatory\Specialization;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Specialization;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageSpecializationsTest extends TestCase

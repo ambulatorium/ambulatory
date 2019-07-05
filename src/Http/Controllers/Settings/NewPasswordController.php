@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Hash;
-use Reliqui\Ambulatory\Http\Controllers\Controller;
-use Reliqui\Ambulatory\Http\Requests\NewPasswordRequest;
+use Ambulatory\Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Ambulatory\Http\Requests\NewPasswordRequest;
 
 class NewPasswordController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Reliqui\Ambulatory\Tests\Feature;
+namespace Ambulatory\Ambulatory\Tests\Feature;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Reliqui\Ambulatory\Schedule;
-use Reliqui\Ambulatory\Availability;
-use Reliqui\Ambulatory\Tests\TestCase;
+use Ambulatory\Ambulatory\Schedule;
+use Ambulatory\Ambulatory\Availability;
+use Ambulatory\Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ScheduleAvailabilityTest extends TestCase

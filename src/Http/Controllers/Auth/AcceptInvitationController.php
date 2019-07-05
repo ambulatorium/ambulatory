@@ -1,8 +1,8 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
 
-use Reliqui\Ambulatory\Invitation;
+use Ambulatory\Ambulatory\Invitation;
 
 class AcceptInvitationController
 {

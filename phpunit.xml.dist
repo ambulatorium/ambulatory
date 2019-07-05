@@ -13,7 +13,7 @@
          stopOnFailure="false"
 >
     <testsuites>
-        <testsuite name="Reliqui Ambulatory Test Suite">
+        <testsuite name="Ambulatory Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

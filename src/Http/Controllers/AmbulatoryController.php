@@ -1,8 +1,8 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Ambulatory;
+use Ambulatory\Ambulatory\Ambulatory;
 
 class AmbulatoryController
 {

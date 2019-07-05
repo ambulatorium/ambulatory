@@ -1,9 +1,9 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\User;
-use Reliqui\Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Ambulatory\User;
+use Ambulatory\Ambulatory\Http\Middleware\Admin;
 
 class StaffController extends Controller
 {

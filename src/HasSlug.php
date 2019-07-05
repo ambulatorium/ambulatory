@@ -1,6 +1,6 @@
 <?php
 
-namespace Reliqui\Ambulatory;
+namespace Ambulatory\Ambulatory;
 
 use Illuminate\Support\Str;
 

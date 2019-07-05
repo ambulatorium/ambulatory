@@ -1,8 +1,8 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
 
-use Reliqui\Ambulatory\Http\Requests\AccountRequest;
+use Ambulatory\Ambulatory\Http\Requests\AccountRequest;
 
 class AccountController
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Reliqui\Ambulatory\Http\Controllers;
+namespace Ambulatory\Ambulatory\Http\Controllers;
 
-use Reliqui\Ambulatory\Invitation;
-use Reliqui\Ambulatory\Http\Middleware\Admin;
-use Reliqui\Ambulatory\Http\Requests\InvitationRequest;
+use Ambulatory\Ambulatory\Invitation;
+use Ambulatory\Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Ambulatory\Http\Requests\InvitationRequest;
 
 class InvitationController extends Controller
 {

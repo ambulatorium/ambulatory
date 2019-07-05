@@ -1,6 +1,6 @@
 <?php
 
-use Reliqui\Ambulatory\User;
+use Ambulatory\Ambulatory\User;
 use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
