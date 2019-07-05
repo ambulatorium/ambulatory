@@ -4,8 +4,8 @@ namespace Ambulatory\Ambulatory\Tests\Unit;
 
 use Illuminate\Support\Arr;
 use Ambulatory\Ambulatory\Doctor;
-use Ambulatory\Ambulatory\Schedule;
 use Illuminate\Support\Collection;
+use Ambulatory\Ambulatory\Schedule;
 use Ambulatory\Ambulatory\Availability;
 use Ambulatory\Ambulatory\HealthFacility;
 use Ambulatory\Ambulatory\Tests\TestCase;
