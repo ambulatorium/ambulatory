@@ -23,7 +23,7 @@ class Schedule extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_schedules';
+    protected $table = 'ambulatory_schedules';
 
     /**
      * The primary key for the model.

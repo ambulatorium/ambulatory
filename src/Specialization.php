@@ -18,7 +18,7 @@ class Specialization extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_specializations';
+    protected $table = 'ambulatory_specializations';
 
     /**
      * The primary key for the model.
@@ -55,7 +55,7 @@ class Specialization extends AmbulatoryModel
      */
     public function doctors()
     {
-        return $this->belongsToMany(Doctor::class, 'reliqui_doctors_specializations', 'specialization_id', 'doctor_id');
+        return $this->belongsToMany(Doctor::class, 'ambulatory_doctors_specializations', 'specialization_id', 'doctor_id');
     }
 
     /**

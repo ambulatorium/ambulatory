@@ -57,7 +57,7 @@ class DoctorScheduleTest extends TestCase
                 'message' => 'Schedule successfully created!',
             ]);
 
-        $this->assertDatabaseHas('reliqui_schedules', [
+        $this->assertDatabaseHas('ambulatory_schedules', [
             'start_date' => $attributes['start_date'],
             'end_date' => $attributes['end_date'],
         ]);
@@ -81,7 +81,7 @@ class DoctorScheduleTest extends TestCase
                 'message' => 'The given data was invalid.',
             ]);
 
-        $this->assertDatabaseMissing('reliqui_schedules', [
+        $this->assertDatabaseMissing('ambulatory_schedules', [
             'start_date' => $attributes['start_date'],
             'end_date' => $attributes['end_date'],
         ]);
@@ -199,7 +199,7 @@ class DoctorScheduleTest extends TestCase
 
         $this->assertNotSame($schedule->health_facility_id, $attributes['health_facility']['id']);
 
-        $this->assertDatabaseHas('reliqui_schedules', [
+        $this->assertDatabaseHas('ambulatory_schedules', [
             'health_facility_id' => $attributes['health_facility']['id'],
         ]);
     }

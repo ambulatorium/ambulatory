@@ -54,7 +54,7 @@ class UpdateAccountTest extends TestCase
             ]))
             ->assertOk();
 
-        $this->assertDatabaseHas('reliqui_users', Arr::except($attributes, ['id', 'password']));
+        $this->assertDatabaseHas('ambulatory_users', Arr::except($attributes, ['id', 'password']));
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class UpdateAccountTest extends TestCase
                 'message' => '',
             ]);
 
-        $this->assertDatabaseMissing('reliqui_users', Arr::except($attributes, ['id', 'password']));
+        $this->assertDatabaseMissing('ambulatory_users', Arr::except($attributes, ['id', 'password']));
     }
 
     /** @test */

@@ -22,7 +22,7 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Run database migrations for reliqui ambulatory';
+    protected $description = 'Run database migrations for ambulatory';
 
     /**
      * Execute the console command.
@@ -32,7 +32,7 @@ class MigrateCommand extends Command
     public function handle()
     {
         $shouldCreateNewUser =
-            ! Schema::connection(config('ambulatory.database_connection'))->hasTable('reliqui_users') ||
+            ! Schema::connection(config('ambulatory.database_connection'))->hasTable('ambulatory_users') ||
             ! User::count();
 
         $this->call('migrate', [
@@ -50,7 +50,7 @@ class MigrateCommand extends Command
             ]);
 
             $this->line('');
-            $this->line('Reliqui ambulatory is ready for use');
+            $this->line('Ambulatory is ready for use');
             $this->line('You may log in using <info>admin@mail.com</info> and password: <info>'.$password.'</info>');
         }
     }

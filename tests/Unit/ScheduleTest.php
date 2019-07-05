@@ -57,7 +57,7 @@ class ScheduleTest extends TestCase
         // included default working hours.
         $this->assertCount(6, $schedule->availabilities);
 
-        $this->assertDatabaseHas('reliqui_availabilities', [
+        $this->assertDatabaseHas('ambulatory_availabilities', [
             'intervals' => json_encode($availability['intervals']),
         ]);
     }

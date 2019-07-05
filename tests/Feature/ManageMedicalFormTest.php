@@ -32,7 +32,7 @@ class ManageMedicalFormTest extends TestCase
             ->assertOk()
             ->assertJson(['entry' => $medicalForm]);
 
-        $this->assertDatabaseHas('reliqui_medical_forms', $medicalForm);
+        $this->assertDatabaseHas('ambulatory_medical_forms', $medicalForm);
     }
 
     /** @test */
@@ -87,6 +87,6 @@ class ManageMedicalFormTest extends TestCase
 
         $this->assertNotSame($medicalForm->slug, 'form-name-changed-full-name-changed');
 
-        $this->assertDatabaseHas('reliqui_medical_forms', $attributes);
+        $this->assertDatabaseHas('ambulatory_medical_forms', $attributes);
     }
 }

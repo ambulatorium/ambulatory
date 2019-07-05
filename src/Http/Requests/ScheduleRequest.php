@@ -30,8 +30,8 @@ class ScheduleRequest extends FormRequest
             'health_facility.*id' => [
                 'bail',
                 'required',
-                Rule::exists(config('ambulatory.database_connection').'.reliqui_health_facilities', 'id'),
-                Rule::unique(config('ambulatory.database_connection').'.reliqui_schedules', 'health_facility_id')
+                Rule::exists(config('ambulatory.database_connection').'.ambulatory_health_facilities', 'id'),
+                Rule::unique(config('ambulatory.database_connection').'.ambulatory_schedules', 'health_facility_id')
                     ->ignore($this->id)
                     ->where('doctor_id', auth('ambulatory')->user()->doctorProfile->id),
             ],

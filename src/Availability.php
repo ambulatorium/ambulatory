@@ -18,7 +18,7 @@ class Availability extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_availabilities';
+    protected $table = 'ambulatory_availabilities';
 
     /**
      * The primary key for the model.

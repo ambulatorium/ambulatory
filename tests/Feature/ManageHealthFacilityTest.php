@@ -44,7 +44,7 @@ class ManageHealthFacilityTest extends TestCase
                 'entry' => $attrributes,
             ]);
 
-        $this->assertDatabaseHas('reliqui_health_facilities', $attrributes);
+        $this->assertDatabaseHas('ambulatory_health_facilities', $attrributes);
     }
 
     /** @test */
@@ -90,6 +90,6 @@ class ManageHealthFacilityTest extends TestCase
 
         $this->assertNotSame($healthFacility->slug, 'name-changed-city-changed');
 
-        $this->assertDatabaseHas('reliqui_health_facilities', ['slug' => 'name-changed-city-changed']);
+        $this->assertDatabaseHas('ambulatory_health_facilities', ['slug' => 'name-changed-city-changed']);
     }
 }

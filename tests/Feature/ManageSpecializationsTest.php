@@ -43,7 +43,7 @@ class ManageSpecializationsTest extends TestCase
             ->assertOk()
             ->assertJson(['entry' => $attrributes]);
 
-        $this->assertDatabaseHas('reliqui_specializations', $attrributes);
+        $this->assertDatabaseHas('ambulatory_specializations', $attrributes);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ class ManageSpecializationsTest extends TestCase
                 'message' => 'The given data was invalid.',
             ]);
 
-        $this->assertDatabaseMissing('reliqui_specializations', $attributes);
+        $this->assertDatabaseMissing('ambulatory_specializations', $attributes);
     }
 
     /** @test */
@@ -104,7 +104,7 @@ class ManageSpecializationsTest extends TestCase
 
         $this->assertNotSame($specialization->slug, 'name-changed');
 
-        $this->assertDatabaseHas('reliqui_specializations', ['slug' => 'name-changed']);
+        $this->assertDatabaseHas('ambulatory_specializations', ['slug' => 'name-changed']);
     }
 
     /** @test */
@@ -128,6 +128,6 @@ class ManageSpecializationsTest extends TestCase
 
         $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))->assertOk();
 
-        $this->assertDatabaseMissing('reliqui_specializations', $specialization->toarray());
+        $this->assertDatabaseMissing('ambulatory_specializations', $specialization->toarray());
     }
 }

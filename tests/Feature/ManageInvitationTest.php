@@ -105,7 +105,7 @@ class ManageInvitationTest extends TestCase
                 'entry' => array_except($attributes, ['token']),
             ]);
 
-        $this->assertDatabaseHas('reliqui_invitations', ['email' => $attributes['email']]);
+        $this->assertDatabaseHas('ambulatory_invitations', ['email' => $attributes['email']]);
 
         Mail::assertSent(InvitationEmail::class, function ($mail) use ($attributes) {
             return $mail->hasTo($attributes['email']);
@@ -184,11 +184,11 @@ class ManageInvitationTest extends TestCase
 
         $invitation = factory(Invitation::class)->create();
 
-        $this->assertDatabaseHas('reliqui_invitations', $invitation->toArray());
+        $this->assertDatabaseHas('ambulatory_invitations', $invitation->toArray());
 
         $this->deleteJson(route('ambulatory.invitations.destroy', $invitation->id))->assertOk();
 
-        $this->assertDatabaseMissing('reliqui_invitations', $invitation->toArray());
+        $this->assertDatabaseMissing('ambulatory_invitations', $invitation->toArray());
     }
 
     /** @test */
@@ -214,8 +214,8 @@ class ManageInvitationTest extends TestCase
             ->assertRedirect(route('ambulatory.login'))
             ->assertSessionHas('invitationAccepted', true);
 
-        $this->assertDatabaseHas('reliqui_users', ['email' => $invitation->email]);
-        $this->assertDatabaseMissing('reliqui_invitations', $invitation->toArray());
+        $this->assertDatabaseHas('ambulatory_users', ['email' => $invitation->email]);
+        $this->assertDatabaseMissing('ambulatory_invitations', $invitation->toArray());
 
         Mail::assertSent(CredentialEmail::class, function ($mail) use ($invitation) {
             return $mail->hasTo($invitation->email);

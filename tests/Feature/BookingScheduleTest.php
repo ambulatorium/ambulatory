@@ -250,7 +250,7 @@ class BookingScheduleTest extends TestCase
                 'message' => 'Schedule successfully booked',
             ]);
 
-        $this->assertDatabaseHas('reliqui_bookings', [
+        $this->assertDatabaseHas('ambulatory_bookings', [
             'schedule_id' => $schedule->id,
             'medical_form_id' => $medicalForm->id,
         ]);
@@ -274,7 +274,7 @@ class BookingScheduleTest extends TestCase
                 'message' => 'Schedule successfully booked',
             ]);
 
-        $this->assertDatabaseHas('reliqui_bookings', [
+        $this->assertDatabaseHas('ambulatory_bookings', [
             'schedule_id' => $customAvailability->schedule->id,
             'medical_form_id' => $medicalForm->id,
         ]);

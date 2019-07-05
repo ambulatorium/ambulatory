@@ -34,7 +34,7 @@ class BookingScheduleRequest extends FormRequest
                 'date',
                 'after_or_equal:'.$schedule->start_date,
                 'before_or_equal:'.$schedule->end_date,
-                Rule::unique(config('ambulatory.database_connection').'.reliqui_bookings', 'preferred_date_time')
+                Rule::unique(config('ambulatory.database_connection').'.ambulatory_bookings', 'preferred_date_time')
                     ->where('schedule_id', $schedule->id),
                 new BookingAvailabilityRule($schedule),
             ],
@@ -42,7 +42,7 @@ class BookingScheduleRequest extends FormRequest
                 'bail',
                 'required',
                 'string',
-                Rule::exists(config('ambulatory.database_connection').'.reliqui_medical_forms', 'id')
+                Rule::exists(config('ambulatory.database_connection').'.ambulatory_medical_forms', 'id')
                     ->where('user_id', auth('ambulatory')->id()),
             ],
             'description' => 'nullable|string',

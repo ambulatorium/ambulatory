@@ -30,7 +30,7 @@ class AccountRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique(config('ambulatory.database_connection').'.reliqui_users', 'email')
+                Rule::unique(config('ambulatory.database_connection').'.ambulatory_users', 'email')
                     ->ignore(auth('ambulatory')->id()),
             ],
         ];

@@ -23,7 +23,7 @@ class User extends AmbulatoryModel implements Authenticatable
      *
      * @var string
      */
-    protected $table = 'reliqui_users';
+    protected $table = 'ambulatory_users';
 
     /**
      * The attributes excluded from the model's JSON form.

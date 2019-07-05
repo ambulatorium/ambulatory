@@ -13,7 +13,7 @@ class CreateTables extends Migration
      */
     public function up()
     {
-        Schema::create('reliqui_users', function (Blueprint $table) {
+        Schema::create('ambulatory_users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
@@ -24,7 +24,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_doctors', function (Blueprint $table) {
+        Schema::create('ambulatory_doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->unique();
             $table->string('slug')->unique();
@@ -37,7 +37,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_specializations', function (Blueprint $table) {
+        Schema::create('ambulatory_specializations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
@@ -45,7 +45,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_doctors_specializations', function (Blueprint $table) {
+        Schema::create('ambulatory_doctors_specializations', function (Blueprint $table) {
             $table->uuid('doctor_id');
             $table->uuid('specialization_id');
             // $table->timestamps();
@@ -53,7 +53,7 @@ class CreateTables extends Migration
             $table->unique(['doctor_id', 'specialization_id'], 'doctor_id_specialization_id_unique');
         });
 
-        Schema::create('reliqui_medical_forms', function (Blueprint $table) {
+        Schema::create('ambulatory_medical_forms', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->index();
             $table->string('slug')->unique();
@@ -72,7 +72,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_health_facilities', function (Blueprint $table) {
+        Schema::create('ambulatory_health_facilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
@@ -84,7 +84,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_invitations', function (Blueprint $table) {
+        Schema::create('ambulatory_invitations', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('role');
@@ -92,7 +92,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_schedules', function (Blueprint $table) {
+        Schema::create('ambulatory_schedules', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('doctor_id');
             $table->uuid('health_facility_id');
@@ -105,7 +105,7 @@ class CreateTables extends Migration
         });
 
         // to store custom availabilities of schedule.
-        Schema::create('reliqui_availabilities', function (Blueprint $table) {
+        Schema::create('ambulatory_availabilities', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('schedule_id')->index();
             $table->string('type')->default('date');
@@ -114,7 +114,7 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create('reliqui_bookings', function (Blueprint $table) {
+        Schema::create('ambulatory_bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('schedule_id');
             $table->uuid('medical_form_id')->index();
@@ -135,15 +135,15 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reliqui_users');
-        Schema::dropIfExists('reliqui_doctors');
-        Schema::dropIfExists('reliqui_specializations');
-        Schema::dropIfExists('reliqui_doctors_specializations');
-        Schema::dropIfExists('reliqui_medical_forms');
-        Schema::dropIfExists('reliqui_health_facilities');
-        Schema::dropIfExists('reliqui_invitations');
-        Schema::dropIfExists('reliqui_schedules');
-        Schema::dropIfExists('reliqui_availabilities');
-        Schema::dropIfExists('reliqui_bookings');
+        Schema::dropIfExists('ambulatory_users');
+        Schema::dropIfExists('ambulatory_doctors');
+        Schema::dropIfExists('ambulatory_specializations');
+        Schema::dropIfExists('ambulatory_doctors_specializations');
+        Schema::dropIfExists('ambulatory_medical_forms');
+        Schema::dropIfExists('ambulatory_health_facilities');
+        Schema::dropIfExists('ambulatory_invitations');
+        Schema::dropIfExists('ambulatory_schedules');
+        Schema::dropIfExists('ambulatory_availabilities');
+        Schema::dropIfExists('ambulatory_bookings');
     }
 }

@@ -18,7 +18,7 @@ class HealthFacility extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_health_facilities';
+    protected $table = 'ambulatory_health_facilities';
 
     /**
      * The primary key for the model.

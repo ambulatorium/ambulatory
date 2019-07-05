@@ -23,7 +23,7 @@ class Booking extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_bookings';
+    protected $table = 'ambulatory_bookings';
 
     /**
      * The primary key for the model.

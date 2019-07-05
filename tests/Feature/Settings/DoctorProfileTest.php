@@ -47,7 +47,7 @@ class DoctorProfileTest extends TestCase
 
         $this->assertTrue($user->isVerifiedDoctor());
 
-        $this->assertDatabaseHas('reliqui_doctors', $user->doctorProfile->toArray());
+        $this->assertDatabaseHas('ambulatory_doctors', $user->doctorProfile->toArray());
     }
 
     /** @test */
@@ -86,7 +86,7 @@ class DoctorProfileTest extends TestCase
         tap($user->doctorProfile->fresh(), function ($doctor) {
             $this->assertSame($doctor->slug, 'full-name-changed');
 
-            $this->assertDatabaseHas('reliqui_doctors', $doctor->toArray());
+            $this->assertDatabaseHas('ambulatory_doctors', $doctor->toArray());
         });
     }
 

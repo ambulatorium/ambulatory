@@ -43,7 +43,7 @@ class ScheduleAvailabilityTest extends TestCase
         $this->postJson(route('ambulatory.schedules.availabilities', $availability->id), factory(Availability::class)->raw())
             ->assertStatus(403);
 
-        $this->assertDatabaseMissing('reliqui_availabilities', ['schedule_id' => $availability->id]);
+        $this->assertDatabaseMissing('ambulatory_availabilities', ['schedule_id' => $availability->id]);
     }
 
     /** @test */
@@ -58,7 +58,7 @@ class ScheduleAvailabilityTest extends TestCase
             ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $attributes = $this->dummyData($date))
             ->assertOk();
 
-        $this->assertDatabaseHas('reliqui_availabilities', [
+        $this->assertDatabaseHas('ambulatory_availabilities', [
             'intervals' => json_encode($attributes['intervals']),
         ]);
     }
@@ -96,7 +96,7 @@ class ScheduleAvailabilityTest extends TestCase
             ]))
             ->assertOk();
 
-        $this->assertDatabaseHas('reliqui_availabilities', [
+        $this->assertDatabaseHas('ambulatory_availabilities', [
             'intervals' => json_encode($attributes['intervals']),
         ]);
     }

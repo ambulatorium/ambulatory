@@ -31,7 +31,7 @@ class Invitation extends AmbulatoryModel
      *
      * @var string
      */
-    protected $table = 'reliqui_invitations';
+    protected $table = 'ambulatory_invitations';
 
     /**
      * The primary key for the model.
