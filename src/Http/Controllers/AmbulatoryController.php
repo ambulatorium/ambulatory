@@ -7,13 +7,13 @@ use Reliqui\Ambulatory\Ambulatory;
 class AmbulatoryController
 {
     /**
-     * Display the Ambulatory view.
+     * Display the Ambulatory dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function __invoke()
     {
-        return view('ambulatory::layout', [
+        return view('ambulatory::layouts.dashboard', [
             'ambulatoryScriptVariables' => Ambulatory::scriptVariables(),
         ]);
     }

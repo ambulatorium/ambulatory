@@ -39,18 +39,18 @@
 
             <div class="card-body pt-0 pr-0 pl-0 pb-1 rounded-bottom">
                 <div class="table-responsive">
-                    <table v-if="ready && entry" class="table-borderless table mb-0 card-bg-light">
+                    <table v-if="ready && entry" class="table-borderless table mb-0">
                         <tbody>
                             <tr>
                                 <td class="table-fit font-weight-bold">Type</td>
                                 <td>
-                                    Physical Appointment
+                                    Physical appointment
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-fit font-weight-bold">Date Time</td>
+                                <td class="table-fit font-weight-bold">Date time</td>
                                 <td>
-                                    {{localDateTime(entry.preferred_date_time)}}
+                                    {{localDateTime(entry.preferred_date_time).format('MMMM Do YYYY h:mm:ss A')}}
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +64,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-fit font-weight-bold">Doctor Name</td>
+                                <td class="table-fit font-weight-bold">Doctor name</td>
                                 <td>
                                     {{entry.schedule.doctor.full_name}}
                                 </td>
@@ -80,24 +80,24 @@
 
                 <!-- patient -->
                 <div class="table-responsive">
-                    <table v-if="ready && entry" class="table-borderless table mb-0 card-bg-light">
+                    <table v-if="ready && entry" class="table-borderless table mb-0">
                         <tbody>
                             <tr>
-                                <td class="table-fit font-weight-bold">Form Name</td>
+                                <td class="table-fit font-weight-bold">Medical ID</td>
                                 <td>
                                     {{entry.medical_form.form_name}}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-fit font-weight-bold">Patient Name</td>
+                                <td class="table-fit font-weight-bold">Patient name</td>
                                 <td>
                                     {{entry.medical_form.full_name}}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-fit font-weight-bold">Date of Birth</td>
+                                <td class="table-fit font-weight-bold">Age</td>
                                 <td>
-                                    {{localDate(entry.medical_form.dob)}}
+                                    {{dateDuration(entry.medical_form.dob)}}
                                 </td>
                             </tr>
                             <tr>
@@ -107,7 +107,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-fit font-weight-bold">Marital Status</td>
+                                <td class="table-fit font-weight-bold">Marital status</td>
                                 <td>
                                     {{entry.medical_form.marital_status}}
                                 </td>
