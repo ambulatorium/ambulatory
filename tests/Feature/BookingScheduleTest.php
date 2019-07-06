@@ -42,9 +42,9 @@ class BookingScheduleTest extends TestCase
         // Request schedule availability time slots for monday next week.
         // expected the time slots available.
         $this->getJson(route('ambulatory.schedules.availabilities', [
-                $schedule->id,
-                'date='.$date = today()->parse('Monday next week'),
-            ]))
+            $schedule->id,
+            'date='.$date = today()->parse('Monday next week'),
+        ]))
             ->assertOk()
             ->assertExactJson([
                 'entries' => $schedule->availabilitySlots($date),
@@ -103,12 +103,12 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today(),
+                'preferred_date_time' => today()->toDateTimeString(),
             ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time must be a date after or equal to '.today()->parse('Monday next week').'.'],
+                    'preferred_date_time' => ['The preferred date time must be a date after or equal to '.today()->parse('Monday next week') . '.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -124,12 +124,12 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today()->parse('Saturday next week'),
+                'preferred_date_time' => today()->parse('Saturday next week')->toDateTimeString(),
             ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
-                    'preferred_date_time' => ['The preferred date time must be a date before or equal to '.today()->parse('Friday next week').'.'],
+                    'preferred_date_time' => ['The preferred date time must be a date before or equal to '.today()->parse('Friday next week') . '.'],
                 ],
                 'message' => 'The given data was invalid.',
             ]);
@@ -146,7 +146,7 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today()->parse('Monday next week')->setTime(10, 27), // change default time
+                'preferred_date_time' => today()->parse('Monday next week')->setTime(10, 27)->toDateTimeString(), // change default time
             ]))
             ->assertStatus(422)
             ->assertExactJson([
@@ -168,7 +168,7 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today()->parse('Monday next week')->setTime(13, 00),
+                'preferred_date_time' => today()->parse('Monday next week')->setTime(13, 00)->toDateTimeString(),
             ]))
             ->assertStatus(422)
             ->assertExactJson([
@@ -243,7 +243,7 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today()->parse('Monday next week')->setTime(9, 30),
+                'preferred_date_time' => today()->parse('Monday next week')->setTime(9, 30)->toDateTimeString(),
             ]))
             ->assertOk()
             ->assertExactJson([
@@ -267,7 +267,7 @@ class BookingScheduleTest extends TestCase
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
             ->postJson(route('ambulatory.schedule.bookings', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
-                'preferred_date_time' => today()->parse('Monday next week')->setTime(15, 00),
+                'preferred_date_time' => today()->parse('Monday next week')->setTime(15, 00)->toDateTimeString(),
             ]))
             ->assertOk()
             ->assertExactJson([

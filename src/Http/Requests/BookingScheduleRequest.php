@@ -32,8 +32,8 @@ class BookingScheduleRequest extends FormRequest
                 'bail',
                 'required',
                 'date',
-                'after_or_equal:'.$schedule->start_date,
-                'before_or_equal:'.$schedule->end_date,
+                'after_or_equal:'.$schedule->start_date->toDateTimeString(),
+                'before_or_equal:'.$schedule->end_date->toDateTimeString(),
                 Rule::unique(config('ambulatory.database_connection').'.ambulatory_bookings', 'preferred_date_time')
                     ->where('schedule_id', $schedule->id),
                 new BookingAvailabilityRule($schedule),
