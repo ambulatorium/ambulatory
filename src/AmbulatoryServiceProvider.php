@@ -20,16 +20,13 @@ class AmbulatoryServiceProvider extends ServiceProvider
         $this->registerMigrations();
         $this->registerAuthGuard();
         $this->registerPublishing();
+        $this->registerResourceViews();
 
         $ambulatory->registerPolicies();
-
-        $this->loadViewsFrom(
-            __DIR__.'/../resources/views', 'ambulatory'
-        );
     }
 
     /**
-     * Register package routes.
+     * Register the package routes.
      *
      * @return void
      */
@@ -65,19 +62,17 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register package migrations.
+     * Register the package's migrations.
      *
      * @return void
      */
     private function registerMigrations()
     {
-        $this->loadMigrationsFrom(
-            __DIR__.'/Migrations'
-        );
+        $this->loadMigrationsFrom(__DIR__.'/Migrations');
     }
 
     /**
-     * Register package authentication guard.
+     * Register the package's authentication guard.
      *
      * @return void
      */
@@ -95,7 +90,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register package resources.
+     * Register the package's publishable resources.
      *
      * @return void
      */
@@ -113,15 +108,23 @@ class AmbulatoryServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the package resource views.
+     *
+     * @return void
+     */
+    public function registerResourceViews()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'ambulatory');
+    }
+
+    /**
      * Register any package services.
      *
      * @return void
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/ambulatory.php', 'ambulatory'
-        );
+        $this->mergeConfigFrom(__DIR__.'/../config/ambulatory.php', 'ambulatory');
 
         $this->commands([
             Console\InstallCommand::class,
