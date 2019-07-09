@@ -36,7 +36,7 @@ Head to `yourproject.test/ambulatory` and use the provided email and password to
 
 ## Road map
 
-Ambulatory is still under heavy development, I decided to ship it in this early stage so you can help me make it better. [See the road map >>>](https://)
+Ambulatory is still under heavy development, I decided to ship it in this early stage so you can help me make it better. [See the road map >>>](https://github.com/ambulatorycare/ambulatory/projects/1)
 
 ## Security Vulnerabilities
 
