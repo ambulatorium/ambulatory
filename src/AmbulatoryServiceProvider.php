@@ -39,17 +39,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
             ->as('ambulatory.')
             ->prefix($path)
             ->group(function () {
-                Route::get('/login', 'LoginController@showLoginForm')->name('login');
-                Route::post('/login', 'LoginController@login')->name('login.attempt');
-
-                Route::get('/register', 'RegisterController@showRegistrationForm')->name('register');
-                Route::post('/register', 'RegisterController@register')->name('register.attempt');
-
-                Route::get('/password/forgot', 'ForgotPasswordController@showResetRequestForm')->name('password.forgot');
-                Route::post('/password/forgot', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-                Route::get('/password/reset/{token}', 'ForgotPasswordController@showNewPassword')->name('password.reset');
-
-                Route::get('/invitation/{token}', 'AcceptInvitationController@show')->name('accept.invitation');
+                $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             });
 
         Route::namespace('Ambulatory\Ambulatory\Http\Controllers')
@@ -57,7 +47,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
             ->as('ambulatory.')
             ->prefix($path)
             ->group(function () {
-                $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+                $this->loadRoutesFrom(__DIR__.'/../routes/dashboard.php');
             });
     }
 
