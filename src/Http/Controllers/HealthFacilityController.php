@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\HealthFacility;
-Use Ambulatory\Http\Middleware\Admin;
-Use Ambulatory\Http\Requests\HealthFacilityRequest;
+use Ambulatory\HealthFacility;
+use Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Http\Requests\HealthFacilityRequest;
 
 class HealthFacilityController extends Controller
 {

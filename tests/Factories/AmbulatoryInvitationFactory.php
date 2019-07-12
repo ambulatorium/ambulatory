@@ -1,8 +1,8 @@
 <?php
 
+use Ambulatory\Invitation;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
-Use Ambulatory\Invitation;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Invitation::class, function (Faker $faker) {

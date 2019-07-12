@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Unit;
 
-Use Ambulatory\User;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

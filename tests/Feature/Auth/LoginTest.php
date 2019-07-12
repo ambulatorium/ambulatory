@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Tests\Feature\Auth;
 
-Use Ambulatory\User;
+use Ambulatory\User;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
-Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginTest extends TestCase

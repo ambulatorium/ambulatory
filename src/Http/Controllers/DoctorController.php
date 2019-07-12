@@ -2,7 +2,7 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Doctor;
+use Ambulatory\Doctor;
 
 class DoctorController extends Controller
 {

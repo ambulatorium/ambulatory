@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Console;
 
+use Ambulatory\User;
 use Illuminate\Support\Str;
-Use Ambulatory\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;

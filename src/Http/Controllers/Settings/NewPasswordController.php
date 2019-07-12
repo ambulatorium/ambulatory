@@ -3,8 +3,8 @@
 namespace Ambulatory\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Hash;
-Use Ambulatory\Http\Controllers\Controller;
-Use Ambulatory\Http\Requests\NewPasswordRequest;
+use Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Http\Requests\NewPasswordRequest;
 
 class NewPasswordController extends Controller
 {

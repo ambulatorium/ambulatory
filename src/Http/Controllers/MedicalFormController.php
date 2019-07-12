@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\MedicalForm;
-Use Ambulatory\Http\Requests\MedicalFormRequest;
+use Ambulatory\MedicalForm;
+use Ambulatory\Http\Requests\MedicalFormRequest;
 
 class MedicalFormController extends Controller
 {

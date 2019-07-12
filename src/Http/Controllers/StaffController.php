@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\User;
-Use Ambulatory\Http\Middleware\Admin;
+use Ambulatory\User;
+use Ambulatory\Http\Middleware\Admin;
 
 class StaffController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Feature;
 
-Use Ambulatory\HealthFacility;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\HealthFacility;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageHealthFacilityTest extends TestCase

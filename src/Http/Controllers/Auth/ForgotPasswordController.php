@@ -3,12 +3,12 @@
 namespace Ambulatory\Http\Controllers\Auth;
 
 use Throwable;
+use Ambulatory\User;
 use Illuminate\Support\Str;
-Use Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-Use Ambulatory\Mail\ResetPasswordEmail;
-Use Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Mail\ResetPasswordEmail;
+use Ambulatory\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

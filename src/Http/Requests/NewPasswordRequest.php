@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Http\Requests;
 
+use Ambulatory\Rules\CurrentPassRule;
 use Illuminate\Foundation\Http\FormRequest;
-Use Ambulatory\Rules\CurrentPassRule;
 
 class NewPasswordRequest extends FormRequest
 {

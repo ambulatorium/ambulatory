@@ -3,10 +3,10 @@
 namespace Ambulatory;
 
 use Illuminate\Support\Str;
+use Ambulatory\Mail\CredentialEmail;
+use Ambulatory\Mail\InvitationEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-Use Ambulatory\Mail\CredentialEmail;
-Use Ambulatory\Mail\InvitationEmail;
 
 class Invitation extends AmbulatoryModel
 {

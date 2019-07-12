@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Schedule;
-Use Ambulatory\Http\Requests\BookingScheduleRequest;
+use Ambulatory\Schedule;
+use Ambulatory\Http\Requests\BookingScheduleRequest;
 
 class BookingScheduleController extends Controller
 {

@@ -4,8 +4,8 @@ namespace Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Ambulatory\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-Use Ambulatory\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

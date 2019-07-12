@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Policies;
 
-Use Ambulatory\User;
-Use Ambulatory\Doctor;
+use Ambulatory\User;
+use Ambulatory\Doctor;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DoctorPolicy

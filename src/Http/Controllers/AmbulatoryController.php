@@ -2,7 +2,7 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Ambulatory;
+use Ambulatory\Ambulatory;
 
 class AmbulatoryController
 {

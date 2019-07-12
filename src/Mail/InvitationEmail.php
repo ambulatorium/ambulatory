@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Mail;
 
+use Ambulatory\Invitation;
 use Illuminate\Mail\Mailable;
-Use Ambulatory\Invitation;
 
 class InvitationEmail extends Mailable
 {

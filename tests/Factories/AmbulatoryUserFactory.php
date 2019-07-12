@@ -1,7 +1,7 @@
 <?php
 
+use Ambulatory\User;
 use Faker\Generator as Faker;
-Use Ambulatory\User;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(User::class, function (Faker $faker) {
