@@ -2,12 +2,12 @@
 
 namespace Ambulatory\Tests\Feature;
 
+use Ambulatory\Booking;
+use Ambulatory\Schedule;
+use Ambulatory\MedicalForm;
 use Illuminate\Support\Arr;
-Use Ambulatory\Booking;
-Use Ambulatory\Schedule;
-Use Ambulatory\MedicalForm;
-Use Ambulatory\Availability;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\Availability;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookingScheduleTest extends TestCase

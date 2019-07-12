@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Feature;
 
-Use Ambulatory\Specialization;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\Specialization;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageSpecializationsTest extends TestCase

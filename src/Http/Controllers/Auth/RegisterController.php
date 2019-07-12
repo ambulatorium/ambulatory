@@ -2,13 +2,13 @@
 
 namespace Ambulatory\Http\Controllers\Auth;
 
+use Ambulatory\User;
 use Illuminate\Support\Str;
-Use Ambulatory\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Ambulatory\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-Use Ambulatory\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {

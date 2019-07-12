@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Availability;
-Use Ambulatory\Http\Middleware\VerifiedDoctor;
-Use Ambulatory\Http\Requests\AvailabilityRequest;
+use Ambulatory\Availability;
+use Ambulatory\Http\Middleware\VerifiedDoctor;
+use Ambulatory\Http\Requests\AvailabilityRequest;
 
 class AvailabilityController extends Controller
 {

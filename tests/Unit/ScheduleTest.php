@@ -2,13 +2,13 @@
 
 namespace Ambulatory\Tests\Unit;
 
+use Ambulatory\Doctor;
+use Ambulatory\Schedule;
 use Illuminate\Support\Arr;
-Use Ambulatory\Doctor;
+use Ambulatory\Availability;
+use Ambulatory\HealthFacility;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Support\Collection;
-Use Ambulatory\Schedule;
-Use Ambulatory\Availability;
-Use Ambulatory\HealthFacility;
-Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ScheduleTest extends TestCase

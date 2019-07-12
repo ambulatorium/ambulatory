@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Schedule;
-Use Ambulatory\Http\Requests\ScheduleRequest;
-Use Ambulatory\Http\Middleware\VerifiedDoctor;
+use Ambulatory\Schedule;
+use Ambulatory\Http\Requests\ScheduleRequest;
+use Ambulatory\Http\Middleware\VerifiedDoctor;
 
 class ScheduleController extends Controller
 {

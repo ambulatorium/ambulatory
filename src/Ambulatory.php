@@ -3,10 +3,10 @@
 namespace Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
-Use Ambulatory\Policies\DoctorPolicy;
-Use Ambulatory\Policies\MedicalFormPolicy;
-Use Ambulatory\Policies\AvailabilityPolicy;
-Use Ambulatory\Policies\DoctorSchedulePolicy;
+use Ambulatory\Policies\DoctorPolicy;
+use Ambulatory\Policies\MedicalFormPolicy;
+use Ambulatory\Policies\AvailabilityPolicy;
+use Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
 {

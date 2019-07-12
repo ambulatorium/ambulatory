@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-Use Ambulatory\Specialization;
+use Ambulatory\Specialization;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Specialization::class, function (Faker $faker) {

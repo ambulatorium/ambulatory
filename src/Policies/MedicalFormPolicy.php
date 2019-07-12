@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Policies;
 
-Use Ambulatory\User;
-Use Ambulatory\MedicalForm;
+use Ambulatory\User;
+use Ambulatory\MedicalForm;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MedicalFormPolicy

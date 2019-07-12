@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Invitation;
-Use Ambulatory\Http\Middleware\Admin;
-Use Ambulatory\Http\Requests\InvitationRequest;
+use Ambulatory\Invitation;
+use Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Http\Requests\InvitationRequest;
 
 class InvitationController extends Controller
 {

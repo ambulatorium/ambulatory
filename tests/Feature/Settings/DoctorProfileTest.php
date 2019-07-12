@@ -2,10 +2,10 @@
 
 namespace Ambulatory\Tests\Feature\Settings;
 
-Use Ambulatory\User;
-Use Ambulatory\Doctor;
-Use Ambulatory\Specialization;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
+use Ambulatory\Doctor;
+use Ambulatory\Specialization;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorProfileTest extends TestCase

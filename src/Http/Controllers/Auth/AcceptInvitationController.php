@@ -2,7 +2,7 @@
 
 namespace Ambulatory\Http\Controllers\Auth;
 
-Use Ambulatory\Invitation;
+use Ambulatory\Invitation;
 
 class AcceptInvitationController
 {

@@ -4,7 +4,7 @@ namespace Ambulatory\Tests;
 
 use Ambulatory\User;
 use Ambulatory\Doctor;
-Use Ambulatory\AmbulatoryServiceProvider;
+use Ambulatory\AmbulatoryServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

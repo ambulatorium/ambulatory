@@ -2,10 +2,10 @@
 
 namespace Ambulatory\Tests\Unit;
 
-Use Ambulatory\User;
-Use Ambulatory\Doctor;
+use Ambulatory\User;
+use Ambulatory\Doctor;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Support\Collection;
-Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorTest extends TestCase

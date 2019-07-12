@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Tests\Unit;
 
+use Ambulatory\Specialization;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Support\Collection;
-Use Ambulatory\Specialization;
-Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpecializationTest extends TestCase

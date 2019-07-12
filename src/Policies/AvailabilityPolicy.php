@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Policies;
 
-Use Ambulatory\User;
-Use Ambulatory\Availability;
+use Ambulatory\User;
+use Ambulatory\Availability;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AvailabilityPolicy

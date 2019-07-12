@@ -4,8 +4,8 @@ namespace Ambulatory;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-Use Ambulatory\Http\Middleware\Authenticate;
-Use Ambulatory\Http\Middleware\RedirectIfAuthenticated;
+use Ambulatory\Http\Middleware\Authenticate;
+use Ambulatory\Http\Middleware\RedirectIfAuthenticated;
 
 class AmbulatoryServiceProvider extends ServiceProvider
 {

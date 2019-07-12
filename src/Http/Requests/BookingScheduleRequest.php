@@ -4,7 +4,7 @@ namespace Ambulatory\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-Use Ambulatory\Rules\BookingAvailabilityRule;
+use Ambulatory\Rules\BookingAvailabilityRule;
 
 class BookingScheduleRequest extends FormRequest
 {

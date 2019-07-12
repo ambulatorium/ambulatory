@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-Use Ambulatory\Specialization;
-Use Ambulatory\Http\Middleware\Admin;
-Use Ambulatory\Http\Requests\SpecializationRequest;
+use Ambulatory\Specialization;
+use Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Http\Requests\SpecializationRequest;
 
 class SpecializationController extends Controller
 {

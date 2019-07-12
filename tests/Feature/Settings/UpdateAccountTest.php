@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Tests\Feature\Settings;
 
+use Ambulatory\User;
 use Illuminate\Support\Arr;
-Use Ambulatory\User;
-Use Ambulatory\Tests\TestCase;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateAccountTest extends TestCase

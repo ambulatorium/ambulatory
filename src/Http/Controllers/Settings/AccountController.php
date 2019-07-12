@@ -2,7 +2,7 @@
 
 namespace Ambulatory\Http\Controllers\Settings;
 
-Use Ambulatory\Http\Requests\AccountRequest;
+use Ambulatory\Http\Requests\AccountRequest;
 
 class AccountController
 {
