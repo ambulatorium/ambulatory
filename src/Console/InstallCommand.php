@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Console;
+namespace Ambulatory\Console;
 
 use Illuminate\Console\Command;
 

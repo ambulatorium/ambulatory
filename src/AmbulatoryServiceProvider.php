@@ -1,11 +1,11 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Ambulatory\Ambulatory\Http\Middleware\Authenticate;
-use Ambulatory\Ambulatory\Http\Middleware\RedirectIfAuthenticated;
+Use Ambulatory\Http\Middleware\Authenticate;
+Use Ambulatory\Http\Middleware\RedirectIfAuthenticated;
 
 class AmbulatoryServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
     {
         $path = config('ambulatory.path');
 
-        Route::namespace('Ambulatory\Ambulatory\Http\Controllers\Auth')
+        Route::namespace('Ambulatory\Http\Controllers\Auth')
             ->middleware(['web', RedirectIfAuthenticated::class])
             ->as('ambulatory.')
             ->prefix($path)
@@ -42,7 +42,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom(__DIR__.'/../routes/auth.php');
             });
 
-        Route::namespace('Ambulatory\Ambulatory\Http\Controllers')
+        Route::namespace('Ambulatory\Http\Controllers')
             ->middleware(['web', Authenticate::class])
             ->as('ambulatory.')
             ->prefix($path)

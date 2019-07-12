@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\MedicalForm;
-use Ambulatory\Ambulatory\Http\Requests\MedicalFormRequest;
+Use Ambulatory\MedicalForm;
+Use Ambulatory\Http\Requests\MedicalFormRequest;
 
 class MedicalFormController extends Controller
 {

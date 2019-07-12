@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Unit;
+namespace Ambulatory\Tests\Unit;
 
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\User;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

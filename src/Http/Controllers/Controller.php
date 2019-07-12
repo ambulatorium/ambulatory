@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;

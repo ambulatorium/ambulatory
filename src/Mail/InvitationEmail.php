@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Mail;
+namespace Ambulatory\Mail;
 
 use Illuminate\Mail\Mailable;
-use Ambulatory\Ambulatory\Invitation;
+Use Ambulatory\Invitation;
 
 class InvitationEmail extends Mailable
 {

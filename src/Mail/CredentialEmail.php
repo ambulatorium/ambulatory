@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Mail;
+namespace Ambulatory\Mail;
 
 use Illuminate\Mail\Mailable;
 

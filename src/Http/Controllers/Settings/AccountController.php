@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Http\Controllers\Settings;
 
-use Ambulatory\Ambulatory\Http\Requests\AccountRequest;
+Use Ambulatory\Http\Requests\AccountRequest;
 
 class AccountController
 {

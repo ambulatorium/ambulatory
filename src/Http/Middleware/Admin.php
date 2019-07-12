@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Middleware;
+namespace Ambulatory\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

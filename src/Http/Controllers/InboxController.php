@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
 class InboxController extends Controller
 {

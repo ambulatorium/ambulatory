@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Policies;
+namespace Ambulatory\Policies;
 
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Availability;
+Use Ambulatory\User;
+Use Ambulatory\Availability;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AvailabilityPolicy

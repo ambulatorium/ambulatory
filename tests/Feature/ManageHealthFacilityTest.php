@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature;
+namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\Ambulatory\HealthFacility;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\HealthFacility;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageHealthFacilityTest extends TestCase

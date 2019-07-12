@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ambulatory\\Ambulatory\\": "src/"
+            "Ambulatory\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ambulatory\\Ambulatory\\Tests\\": "tests/"
+            "Ambulatory\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -33,7 +33,7 @@
         },
         "laravel": {
             "providers": [
-                "Ambulatory\\Ambulatory\\AmbulatoryServiceProvider"
+                "Ambulatory\\AmbulatoryServiceProvider"
             ]
         }
     },

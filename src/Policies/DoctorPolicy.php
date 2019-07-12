@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Policies;
+namespace Ambulatory\Policies;
 
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Doctor;
+Use Ambulatory\User;
+Use Ambulatory\Doctor;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DoctorPolicy

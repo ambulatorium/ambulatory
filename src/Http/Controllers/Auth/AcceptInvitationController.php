@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Http\Controllers\Auth;
 
-use Ambulatory\Ambulatory\Invitation;
+Use Ambulatory\Invitation;
 
 class AcceptInvitationController
 {

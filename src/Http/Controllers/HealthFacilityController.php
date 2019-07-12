@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\HealthFacility;
-use Ambulatory\Ambulatory\Http\Middleware\Admin;
-use Ambulatory\Ambulatory\Http\Requests\HealthFacilityRequest;
+Use Ambulatory\HealthFacility;
+Use Ambulatory\Http\Middleware\Admin;
+Use Ambulatory\Http\Requests\HealthFacilityRequest;
 
 class HealthFacilityController extends Controller
 {

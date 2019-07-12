@@ -1,12 +1,12 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Http\Controllers\Settings;
 
-use Ambulatory\Ambulatory\Doctor;
-use Ambulatory\Ambulatory\Specialization;
-use Ambulatory\Ambulatory\Http\Controllers\Controller;
-use Ambulatory\Ambulatory\Http\Requests\DoctorProfileRequest;
-use Ambulatory\Ambulatory\Http\Middleware\Doctor as AmbulatoryDoctor;
+Use Ambulatory\Doctor;
+Use Ambulatory\Specialization;
+Use Ambulatory\Http\Controllers\Controller;
+Use Ambulatory\Http\Requests\DoctorProfileRequest;
+Use Ambulatory\Http\Middleware\Doctor as AmbulatoryDoctor;
 
 class DoctorProfileController extends Controller
 {

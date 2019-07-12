@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;

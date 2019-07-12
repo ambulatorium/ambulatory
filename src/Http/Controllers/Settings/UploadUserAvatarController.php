@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Http\Controllers\Settings;
 
 class UploadUserAvatarController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Requests;
+namespace Ambulatory\Http\Requests;
 
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\Schedule;
-use Ambulatory\Ambulatory\Http\Requests\BookingScheduleRequest;
+Use Ambulatory\Schedule;
+Use Ambulatory\Http\Requests\BookingScheduleRequest;
 
 class BookingScheduleController extends Controller
 {

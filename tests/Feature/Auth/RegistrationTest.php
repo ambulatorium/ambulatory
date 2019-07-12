@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature\Auth;
+namespace Ambulatory\Tests\Feature\Auth;
 
-use Ambulatory\Ambulatory\User;
+Use Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationTest extends TestCase

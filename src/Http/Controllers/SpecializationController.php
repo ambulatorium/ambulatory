@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\Specialization;
-use Ambulatory\Ambulatory\Http\Middleware\Admin;
-use Ambulatory\Ambulatory\Http\Requests\SpecializationRequest;
+Use Ambulatory\Specialization;
+Use Ambulatory\Http\Middleware\Admin;
+Use Ambulatory\Http\Requests\SpecializationRequest;
 
 class SpecializationController extends Controller
 {

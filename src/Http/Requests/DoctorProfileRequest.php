@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Requests;
+namespace Ambulatory\Http\Requests;
 
 use RRule\RRule;
 use Illuminate\Validation\Rule;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature;
+namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\Ambulatory\User;
+Use Ambulatory\User;
 use Illuminate\Support\Facades\Mail;
-use Ambulatory\Ambulatory\Invitation;
-use Ambulatory\Ambulatory\Tests\TestCase;
-use Ambulatory\Ambulatory\Mail\CredentialEmail;
-use Ambulatory\Ambulatory\Mail\InvitationEmail;
+Use Ambulatory\Invitation;
+Use Ambulatory\Tests\TestCase;
+Use Ambulatory\Mail\CredentialEmail;
+Use Ambulatory\Mail\InvitationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageInvitationTest extends TestCase

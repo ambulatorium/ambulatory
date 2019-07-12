@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Http\Middleware\Admin;
+Use Ambulatory\User;
+Use Ambulatory\Http\Middleware\Admin;
 
 class StaffController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Ambulatory\Ambulatory\Http\Controllers\Controller;
+Use Ambulatory\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use Illuminate\Support\Facades\Gate;
-use Ambulatory\Ambulatory\Policies\DoctorPolicy;
-use Ambulatory\Ambulatory\Policies\MedicalFormPolicy;
-use Ambulatory\Ambulatory\Policies\AvailabilityPolicy;
-use Ambulatory\Ambulatory\Policies\DoctorSchedulePolicy;
+Use Ambulatory\Policies\DoctorPolicy;
+Use Ambulatory\Policies\MedicalFormPolicy;
+Use Ambulatory\Policies\AvailabilityPolicy;
+Use Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
 {

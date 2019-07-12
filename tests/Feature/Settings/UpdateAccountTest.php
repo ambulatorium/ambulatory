@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature\Settings;
+namespace Ambulatory\Tests\Feature\Settings;
 
 use Illuminate\Support\Arr;
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\User;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateAccountTest extends TestCase

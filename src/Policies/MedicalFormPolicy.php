@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Policies;
+namespace Ambulatory\Policies;
 
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\MedicalForm;
+Use Ambulatory\User;
+Use Ambulatory\MedicalForm;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MedicalFormPolicy

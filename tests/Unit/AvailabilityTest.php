@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Unit;
+namespace Ambulatory\Tests\Unit;
 
-use Ambulatory\Ambulatory\Schedule;
-use Ambulatory\Ambulatory\Availability;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\Schedule;
+Use Ambulatory\Availability;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AvailabilityTest extends TestCase

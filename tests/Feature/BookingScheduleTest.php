@@ -1,13 +1,13 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature;
+namespace Ambulatory\Tests\Feature;
 
 use Illuminate\Support\Arr;
-use Ambulatory\Ambulatory\Booking;
-use Ambulatory\Ambulatory\Schedule;
-use Ambulatory\Ambulatory\MedicalForm;
-use Ambulatory\Ambulatory\Availability;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\Booking;
+Use Ambulatory\Schedule;
+Use Ambulatory\MedicalForm;
+Use Ambulatory\Availability;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookingScheduleTest extends TestCase

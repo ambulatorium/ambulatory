@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Console;
+namespace Ambulatory\Console;
 
 use Illuminate\Support\Str;
-use Ambulatory\Ambulatory\User;
+Use Ambulatory\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;

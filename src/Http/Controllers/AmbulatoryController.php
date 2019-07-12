@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\Ambulatory;
+Use Ambulatory\Ambulatory;
 
 class AmbulatoryController
 {

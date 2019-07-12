@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Auth\Authenticatable;

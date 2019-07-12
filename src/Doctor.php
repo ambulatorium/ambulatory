@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use RRule\RRule;
 use Carbon\Carbon;

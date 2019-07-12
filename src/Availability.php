@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 class Availability extends AmbulatoryModel
 {

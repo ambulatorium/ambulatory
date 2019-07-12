@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Unit;
+namespace Ambulatory\Tests\Unit;
 
 use Illuminate\Support\Collection;
-use Ambulatory\Ambulatory\Specialization;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\Specialization;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpecializationTest extends TestCase

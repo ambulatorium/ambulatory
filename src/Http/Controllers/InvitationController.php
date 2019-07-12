@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\Invitation;
-use Ambulatory\Ambulatory\Http\Middleware\Admin;
-use Ambulatory\Ambulatory\Http\Requests\InvitationRequest;
+Use Ambulatory\Invitation;
+Use Ambulatory\Http\Middleware\Admin;
+Use Ambulatory\Http\Requests\InvitationRequest;
 
 class InvitationController extends Controller
 {

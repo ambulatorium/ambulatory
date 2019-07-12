@@ -1,9 +1,9 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Requests;
+namespace Ambulatory\Http\Requests;
 
 use Illuminate\Validation\Rule;
-use Ambulatory\Ambulatory\Schedule;
+Use Ambulatory\Schedule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ScheduleRequest extends FormRequest

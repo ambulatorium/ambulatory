@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory;
+namespace Ambulatory;
 
 use Illuminate\Database\Eloquent\Model;
 

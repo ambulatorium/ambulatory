@@ -1,13 +1,13 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature;
+namespace Ambulatory\Tests\Feature;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Ambulatory\Ambulatory\User;
-use Ambulatory\Ambulatory\Schedule;
-use Ambulatory\Ambulatory\HealthFacility;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\User;
+Use Ambulatory\Schedule;
+Use Ambulatory\HealthFacility;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorScheduleTest extends TestCase

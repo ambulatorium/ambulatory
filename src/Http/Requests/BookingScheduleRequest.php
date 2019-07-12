@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Requests;
+namespace Ambulatory\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use Ambulatory\Ambulatory\Rules\BookingAvailabilityRule;
+Use Ambulatory\Rules\BookingAvailabilityRule;
 
 class BookingScheduleRequest extends FormRequest
 {

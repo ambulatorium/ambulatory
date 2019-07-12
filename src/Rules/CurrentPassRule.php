@@ -1,6 +1,6 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Rules;
+namespace Ambulatory\Rules;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Validation\Rule;

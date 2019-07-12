@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Tests\Feature\Settings;
+namespace Ambulatory\Tests\Feature\Settings;
 
-use Ambulatory\Ambulatory\User;
+Use Ambulatory\User;
 use Illuminate\Support\Facades\Hash;
-use Ambulatory\Ambulatory\Tests\TestCase;
+Use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class NewPasswordTest extends TestCase

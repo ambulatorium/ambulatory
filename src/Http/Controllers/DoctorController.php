@@ -1,8 +1,8 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers;
+namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Ambulatory\Doctor;
+Use Ambulatory\Doctor;
 
 class DoctorController extends Controller
 {

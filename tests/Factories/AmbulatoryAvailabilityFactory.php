@@ -1,8 +1,8 @@
 <?php
 
 use Faker\Generator as Faker;
-use Ambulatory\Ambulatory\Schedule;
-use Ambulatory\Ambulatory\Availability;
+Use Ambulatory\Schedule;
+Use Ambulatory\Availability;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Availability::class, function (Faker $faker) {

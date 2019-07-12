@@ -1,14 +1,14 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Auth;
+namespace Ambulatory\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
-use Ambulatory\Ambulatory\User;
+Use Ambulatory\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Ambulatory\Ambulatory\Http\Controllers\Controller;
+Use Ambulatory\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {

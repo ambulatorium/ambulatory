@@ -1,10 +1,10 @@
 <?php
 
-namespace Ambulatory\Ambulatory\Http\Controllers\Settings;
+namespace Ambulatory\Http\Controllers\Settings;
 
 use Illuminate\Support\Facades\Hash;
-use Ambulatory\Ambulatory\Http\Controllers\Controller;
-use Ambulatory\Ambulatory\Http\Requests\NewPasswordRequest;
+Use Ambulatory\Http\Controllers\Controller;
+Use Ambulatory\Http\Requests\NewPasswordRequest;
 
 class NewPasswordController extends Controller
 {
