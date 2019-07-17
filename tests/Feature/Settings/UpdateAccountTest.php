@@ -23,13 +23,11 @@ class UpdateAccountTest extends TestCase
 
         $this->getJson(route('ambulatory.account'))
             ->assertOk()
-            ->assertExactJson([
+            ->assertJson([
                 'id' => $auth->id,
                 'name' => $auth->name,
                 'avatar' => $auth->avatar,
                 'role' => $auth->role,
-                'created_at' => $auth->created_at,
-                'updated_at' => $auth->updated_at,
             ]);
     }
 
