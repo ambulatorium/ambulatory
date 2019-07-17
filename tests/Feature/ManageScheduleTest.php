@@ -62,7 +62,7 @@ class ManageScheduleTest extends TestCase
                         'health_facility' => [
                             'id' => $schedule->healthFacility->id,
                         ],
-                    ]
+                    ],
                 ],
             ]);
     }
