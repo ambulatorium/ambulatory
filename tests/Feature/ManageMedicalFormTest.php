@@ -3,7 +3,9 @@
 namespace Ambulatory\Tests\Feature;
 
 use Ambulatory\MedicalForm;
+use Illuminate\Support\Arr;
 use Ambulatory\Tests\TestCase;
+use Ambulatory\Http\Resources\MedicalFormResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageMedicalFormTest extends TestCase
@@ -11,7 +13,7 @@ class ManageMedicalFormTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cannot_manage_medical_form()
+    public function guests_cannot_manage_the_medical_form()
     {
         $medicalForm = factory(MedicalForm::class)->create();
 
@@ -22,39 +24,81 @@ class ManageMedicalFormTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_create_a_new_medical_form()
+    public function an_authenticated_user_can_get_a_list_of_their_medical_forms()
     {
-        $user = $this->signInAsPatient();
+        $medicalForm = factory(MedicalForm::class)->create();
 
-        $medicalForm = factory(MedicalForm::class)->raw(['user_id' => $user->id]);
-
-        $this->post(route('ambulatory.medical-forms.store'), $medicalForm)
+        $this->actingAs($medicalForm->user, 'ambulatory')
+            ->getJson(route('ambulatory.medical-forms'))
             ->assertOk()
-            ->assertJson(['entry' => $medicalForm]);
-
-        $this->assertDatabaseHas('ambulatory_medical_forms', $medicalForm);
+            ->assertJson([
+                'data' => [
+                    [
+                        'id' => $medicalForm->id
+                    ],
+                ],
+                'links' => [],
+                'meta' => [],
+            ])
+            ->assertJsonCount(3); // data, links, meta;
     }
 
     /** @test */
-    public function an_authenticated_user_can_get_the_details_about_their_medical_forms()
-    {
-        $user = $this->signInAsPatient();
-
-        $medicalForm = factory(MedicalForm::class)->create(['user_id' => $user->id]);
-
-        $this->getJson(route('ambulatory.medical-forms.show', $medicalForm->id))
-            ->assertOk()
-            ->assertJson(['entry' => $medicalForm->toArray()]);
-    }
-
-    /** @test */
-    public function an_authenticated_user_can_not_get_the_details_about_medical_form_of_others()
+    public function an_authenticated_user_cannot_get_a_list_of_medical_forms_of_others()
     {
         $this->signInAsPatient();
 
         $medicalForm = factory(MedicalForm::class)->create();
 
-        $this->getJson(route('ambulatory.medical-forms.show', $medicalForm->id))->assertStatus(403);
+        $this->getJson(route('ambulatory.medical-forms'))
+            ->assertOk()
+            ->assertJsonMissing([
+                'data' => [
+                    [
+                        'id' => $medicalForm->id
+                    ],
+                ],
+                'links' => [],
+                'meta' => [],
+            ])
+            ->assertJsonCount(3); // data, links, meta
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_create_a_new_medical_form()
+    {
+        $this->signInAsPatient();
+
+        $attributes = Arr::except(factory(MedicalForm::class)->raw(), ['user_id']);
+
+        $this->post(route('ambulatory.medical-forms.store'), $attributes)
+            ->assertStatus(201)
+            ->assertJson($attributes);
+
+        $this->assertDatabaseHas('ambulatory_medical_forms', Arr::prepend($attributes, auth('ambulatory')->id(), 'user_id'));
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_get_the_details_of_their_medical_forms()
+    {
+        $resource = (new MedicalFormResource($medicalForm = factory(MedicalForm::class)->create()));
+
+        $this->actingAs($medicalForm->user, 'ambulatory')
+            ->getJson(route('ambulatory.medical-forms.show', $medicalForm->id))
+            ->assertOk()
+            ->assertExactJson($resource->response()->getData(true));
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_not_get_the_details_of_medical_form_of_others()
+    {
+        $this->signInAsPatient();
+
+        $resource = (new MedicalFormResource($medicalForm = factory(MedicalForm::class)->create()));
+
+        $this->getJson(route('ambulatory.medical-forms.show', $medicalForm->id))
+            ->assertStatus(403)
+            ->assertJsonMissing($resource->response()->getData(true));
     }
 
     /** @test */
@@ -64,8 +108,7 @@ class ManageMedicalFormTest extends TestCase
 
         $medicalForm = factory(MedicalForm::class)->create();
 
-        $this->patchJson(route('ambulatory.medical-forms.update', $medicalForm->id),
-            factory(MedicalForm::class)->raw())
+        $this->patchJson(route('ambulatory.medical-forms.update', $medicalForm->id), factory(MedicalForm::class)->raw())
             ->assertStatus(403);
     }
 
@@ -83,7 +126,7 @@ class ManageMedicalFormTest extends TestCase
                 'full_name' => 'Full Name Changed',
             ]))
             ->assertOk()
-            ->assertJson(['entry' => $attributes]);
+            ->assertJson(Arr::except($attributes, ['user_id']));
 
         $this->assertNotSame($medicalForm->slug, 'form-name-changed-full-name-changed');
 

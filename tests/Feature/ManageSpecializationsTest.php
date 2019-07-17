@@ -11,7 +11,7 @@ class ManageSpecializationsTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cannot_manage_specializations()
+    public function guests_can_not_manage_specializations()
     {
         $specializations = factory(Specialization::class)->create();
 
@@ -23,7 +23,7 @@ class ManageSpecializationsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_create_a_new_specialization()
+    public function unauthorized_users_can_not_create_a_new_specialization()
     {
         $this->signInAsDoctor();
         $this->postJson(route('ambulatory.specializations'), [])->assertStatus(403);
@@ -40,8 +40,8 @@ class ManageSpecializationsTest extends TestCase
         $attrributes = factory(Specialization::class)->raw();
 
         $this->postJson(route('ambulatory.specializations.store'), $attrributes)
-            ->assertOk()
-            ->assertJson(['entry' => $attrributes]);
+            ->assertStatus(201)
+            ->assertJson($attrributes);
 
         $this->assertDatabaseHas('ambulatory_specializations', $attrributes);
     }
@@ -65,19 +65,7 @@ class ManageSpecializationsTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_get_the_details_of_specialization()
-    {
-        $this->signInAsAdmin();
-
-        $specialization = factory(Specialization::class)->create();
-
-        $this->getJson(route('ambulatory.specializations.show', $specialization->id))
-            ->assertOk()
-            ->assertJson(['entry' => $specialization->toArray()]);
-    }
-
-    /** @test */
-    public function unauthorized_users_cannot_update_a_specialization()
+    public function unauthorized_users_can_not_update_a_specialization()
     {
         $specialization = factory(Specialization::class)->create();
 
@@ -100,7 +88,7 @@ class ManageSpecializationsTest extends TestCase
                 'name' => 'Name Changed',
             ]))
             ->assertOk()
-            ->assertJson(['entry' => $attributes]);
+            ->assertJson($attributes);
 
         $this->assertNotSame($specialization->slug, 'name-changed');
 
@@ -108,7 +96,7 @@ class ManageSpecializationsTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_delete_a_specialization()
+    public function unauthorized_users_can_not_delete_a_specialization()
     {
         $specialization = factory(Specialization::class)->create();
 
@@ -122,11 +110,12 @@ class ManageSpecializationsTest extends TestCase
     /** @test */
     public function admin_can_delete_a_specialization()
     {
-        $specialization = factory(Specialization::class)->create();
-
         $this->signInAsAdmin();
 
-        $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))->assertOk();
+        $specialization = factory(Specialization::class)->create();
+
+        $this->deleteJson(route('ambulatory.specializations.destroy', $specialization->id))
+            ->assertStatus(204);
 
         $this->assertDatabaseMissing('ambulatory_specializations', $specialization->toarray());
     }

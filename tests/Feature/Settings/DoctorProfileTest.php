@@ -6,6 +6,7 @@ use Ambulatory\User;
 use Ambulatory\Doctor;
 use Ambulatory\Specialization;
 use Ambulatory\Tests\TestCase;
+use Ambulatory\Http\Resources\DoctorResource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorProfileTest extends TestCase
@@ -40,10 +41,7 @@ class DoctorProfileTest extends TestCase
             ->postJson(route('ambulatory.doctor-profile.store'), factory(Doctor::class)->raw([
                 'specializations' => factory(Specialization::class, 1)->create(),
             ]))
-            ->assertOk()
-            ->assertExactJson([
-                'entry' => $user->doctorProfile->toArray(),
-            ]);
+            ->assertStatus(201);
 
         $this->assertTrue($user->isVerifiedDoctor());
 
@@ -51,7 +49,33 @@ class DoctorProfileTest extends TestCase
     }
 
     /** @test */
-    public function a_doctor_can_not_update_doctor_profile_of_others()
+    public function a_user_cannot_get_the_details_of_doctor_profile_of_others()
+    {
+        $this->signInAsDoctor();
+
+        $doctor = factory(Doctor::class)->create();
+
+        $this->getJson(route('ambulatory.doctor-profile.show', $doctor->id))
+            ->assertStatus(403)
+            ->assertExactJson([
+                'message' => 'This action is unauthorized.',
+            ]);
+    }
+
+    /** @test */
+    public function a_user_can_get_the_details_of_their_doctor_profile()
+    {
+        $user = $this->signInAsDoctor();
+
+        $resource = (new DoctorResource($user->doctorProfile->load('specializations')));
+
+        $this->getJson(route('ambulatory.doctor-profile.show', $user->doctorProfile->id))
+            ->assertOk()
+            ->assertExactJson($resource->response()->getData(true));
+    }
+
+    /** @test */
+    public function a_doctor_cannot_update_doctor_profile_of_others()
     {
         $this->signInAsDoctor();
 
@@ -70,18 +94,13 @@ class DoctorProfileTest extends TestCase
     /** @test */
     public function a_doctor_can_update_their_profile()
     {
-        $this->signInAsDoctor();
-
-        $user = auth('ambulatory')->user();
+        $user = $this->signInAsDoctor();
 
         $this->patchJson(route('ambulatory.doctor-profile.update', $user->doctorProfile->id), factory(Doctor::class)->raw([
                 'full_name' => 'Full Name Changed',
                 'specializations' => factory(Specialization::class, 1)->create(),
             ]))
-            ->assertOk()
-            ->assertExactJson([
-                'entry' => $user->doctorProfile->fresh()->toArray(),
-            ]);
+            ->assertOk();
 
         tap($user->doctorProfile->fresh(), function ($doctor) {
             $this->assertSame($doctor->slug, 'full-name-changed');
