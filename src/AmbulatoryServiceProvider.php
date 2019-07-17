@@ -23,6 +23,7 @@ class AmbulatoryServiceProvider extends ServiceProvider
         $this->registerResourceViews();
 
         $ambulatory->registerPolicies();
+        $ambulatory->wrapResource();
     }
 
     /**

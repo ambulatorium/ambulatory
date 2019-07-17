@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers\Settings;
 use Ambulatory\Doctor;
 use Ambulatory\Specialization;
 use Ambulatory\Http\Controllers\Controller;
+use Ambulatory\Http\Resources\DoctorResource;
 use Ambulatory\Http\Requests\DoctorProfileRequest;
 use Ambulatory\Http\Middleware\Doctor as AmbulatoryDoctor;
 
@@ -21,20 +22,20 @@ class DoctorProfileController extends Controller
     /**
      * Get doctors' profile.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function show(Doctor $doctor)
     {
-        return response()->json([
-            'entry' => $doctor->load('specializations'),
-        ]);
+        $this->authorize('update', $doctor);
+
+        return new DoctorResource($doctor->load('specializations'));
     }
 
     /**
      * Store doctors' profile.
      *
      * @param  DoctorProfileRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(DoctorProfileRequest $request)
     {
@@ -44,9 +45,7 @@ class DoctorProfileController extends Controller
             $this->specializations(request('specializations'))
         );
 
-        return response()->json([
-            'entry' => $doctor->fresh(),
-        ]);
+        return new DoctorResource($doctor->load('specializations'));
     }
 
     /**
@@ -54,7 +53,7 @@ class DoctorProfileController extends Controller
      *
      * @param  DoctorProfileRequest  $request
      * @param  Doctor  $doctor
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(DoctorProfileRequest $request, Doctor $doctor)
     {
@@ -66,9 +65,7 @@ class DoctorProfileController extends Controller
             $this->specializations(request('specializations'))
         );
 
-        return response()->json([
-            'entry' => $doctor,
-        ]);
+        return new DoctorResource($doctor->load('specializations'));
     }
 
     protected function specializations($specializations)

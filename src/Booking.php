@@ -52,48 +52,8 @@ class Booking extends AmbulatoryModel
      * @var array
      */
     protected $casts = [
-        'status' => 'integer',
+        'is_active' => 'boolean',
     ];
-
-    /**
-     * Status of booking.
-     *
-     * @return int
-     */
-    public function status()
-    {
-        return (int) $this->status;
-    }
-
-    /**
-     * Status of booking is done.
-     *
-     * @return bool
-     */
-    public function isDone()
-    {
-        return $this->status() === self::DONE;
-    }
-
-    /**
-     * Status of booking is active.
-     *
-     * @return bool
-     */
-    public function isActive()
-    {
-        return $this->status() === self::ACTIVE;
-    }
-
-    /**
-     * Status of booking is expired.
-     *
-     * @return bool
-     */
-    public function isExpired()
-    {
-        return $this->status() === self::EXPIRED;
-    }
 
     /**
      * The booking schedule.

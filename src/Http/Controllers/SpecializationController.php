@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers;
 use Ambulatory\Specialization;
 use Ambulatory\Http\Middleware\Admin;
 use Ambulatory\Http\Requests\SpecializationRequest;
+use Ambulatory\Http\Resources\SpecializationResource;
 
 class SpecializationController extends Controller
 {
@@ -19,43 +20,37 @@ class SpecializationController extends Controller
     /**
      * Display a listing of the specializations.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $specializations = Specialization::latest()->paginate(25);
 
-        return response()->json([
-            'entries' => $specializations,
-        ]);
+        return SpecializationResource::collection($specializations);
     }
 
     /**
      * Store a newly created specialization in storage.
      *
      * @param  SpecializationRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(SpecializationRequest $request)
     {
-        $entry = Specialization::create($request->validated());
+        $specialization = Specialization::create($request->validated());
 
-        return response()->json([
-            'entry' => $entry,
-        ]);
+        return new SpecializationResource($specialization);
     }
 
     /**
      * Display the specified specialization.
      *
      * @param  Specialization  $specialization
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function show(Specialization $specialization)
     {
-        return response()->json([
-            'entry' => $specialization,
-        ]);
+        return new SpecializationResource($specialization);
     }
 
     /**
@@ -63,15 +58,13 @@ class SpecializationController extends Controller
      *
      * @param  SpecializationRequest  $request
      * @param  Specialization  $specialization
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(SpecializationRequest $request, Specialization $specialization)
     {
         $specialization->update($request->validated());
 
-        return response()->json([
-            'entry' => $specialization,
-        ]);
+        return new SpecializationResource($specialization);
     }
 
     /**
@@ -83,5 +76,7 @@ class SpecializationController extends Controller
     public function destroy(Specialization $specialization)
     {
         $specialization->delete();
+
+        return response()->json(null, 204);
     }
 }

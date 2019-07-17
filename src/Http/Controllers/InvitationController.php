@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers;
 use Ambulatory\Invitation;
 use Ambulatory\Http\Middleware\Admin;
 use Ambulatory\Http\Requests\InvitationRequest;
+use Ambulatory\Http\Resources\InvitationResource;
 
 class InvitationController extends Controller
 {
@@ -19,43 +20,37 @@ class InvitationController extends Controller
     /**
      * Display a listing of the invitations.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $invitations = Invitation::latest()->paginate(25);
 
-        return response()->json([
-            'entries' => $invitations,
-        ]);
+        return InvitationResource::collection($invitations);
     }
 
     /**
      * Store a newly created invitation in storage.
      *
      * @param  InvitationRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(InvitationRequest $request)
     {
         $invitation = Invitation::create($request->validatedFields());
 
-        return response()->json([
-            'entry' => $invitation,
-        ]);
+        return new InvitationResource($invitation);
     }
 
     /**
      * Display the specified invitation.
      *
      * @param  Invitation  $invitation
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function show(Invitation $invitation)
     {
-        return response()->json([
-            'entry' => $invitation,
-        ]);
+        return new InvitationResource($invitation);
     }
 
     /**
@@ -63,15 +58,13 @@ class InvitationController extends Controller
      *
      * @param  InvitationRequest  $request
      * @param  Invitation  $invitation
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(InvitationRequest $request, Invitation $invitation)
     {
         $invitation->update($request->validatedFields());
 
-        return response()->json([
-            'entry' => $invitation,
-        ]);
+        return new InvitationResource($invitation);
     }
 
     /**
@@ -83,5 +76,7 @@ class InvitationController extends Controller
     public function destroy(Invitation $invitation)
     {
         $invitation->delete();
+
+        return response()->json(null, 204);
     }
 }

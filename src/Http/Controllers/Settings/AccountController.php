@@ -2,6 +2,7 @@
 
 namespace Ambulatory\Http\Controllers\Settings;
 
+use Ambulatory\Http\Resources\UserResource;
 use Ambulatory\Http\Requests\AccountRequest;
 
 class AccountController
@@ -9,39 +10,23 @@ class AccountController
     /**
      * Show the user account.
      *
-     * @param  string  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show()
     {
-        if ($id !== auth('ambulatory')->id()) {
-            return abort(404);
-        }
-
-        return response()->json([
-            'entry' => auth('ambulatory')->user()->only('id', 'name', 'email', 'avatar'),
-        ]);
+        return new UserResource(auth('ambulatory')->user());
     }
 
     /**
      * Update the user account.
      *
      * @param  AccountRequest  $request
-     * @param  string  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
-    public function update(AccountRequest $request, $id)
+    public function update(AccountRequest $request)
     {
-        if ($id !== auth('ambulatory')->id()) {
-            return abort(404);
-        }
+        auth('ambulatory')->user()->update($request->validated());
 
-        $user = auth('ambulatory')->user();
-
-        $user->update($request->validated());
-
-        return response()->json([
-            'entry' => $user->fresh(),
-        ]);
+        return new UserResource(auth('ambulatory')->user());
     }
 }

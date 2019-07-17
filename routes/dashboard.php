@@ -9,11 +9,12 @@ Route::get('/api/schedules', 'ScheduleController@index')->name('schedules');
 Route::post('/api/schedules', 'ScheduleController@store')->name('schedules.store');
 Route::get('/api/schedules/{schedule}', 'ScheduleController@show')->name('schedules.show');
 Route::patch('/api/schedules/{schedule}', 'ScheduleController@update')->name('schedules.update');
-// schedule availabilities.
-Route::get('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@index')->name('schedules.availabilities');
-Route::post('/api/schedules/{schedule}/availabilities', 'ScheduleAvailabilityController@store')->name('schedules.availabilities');
-// book schedule.
-Route::post('/api/schedules/{schedule}/bookings', 'BookingScheduleController@store')->name('schedule.bookings');
+// schedule availability.
+Route::post('/api/schedules/{schedule}/availability', 'ScheduleAvailabilityController@store')->name('schedules.availability');
+
+// book an appointment.
+Route::get('/api/booking/{schedule}/availability-slots', 'BookAppointmentController@index')->name('book.appointment');
+Route::post('/api/booking/{schedule}/availability-slots', 'BookAppointmentController@store')->name('book.appointment');
 
 // Doctors.
 Route::get('/api/doctors', 'DoctorController@index')->name('doctors');
@@ -46,31 +47,26 @@ Route::patch('/api/specializations/{specialization}', 'SpecializationController@
 Route::delete('/api/specializations/{specialization}', 'SpecializationController@destroy')->name('specializations.destroy');
 
 // Staff.
-Route::get('/api/staff', 'StaffController@index')->name('staff.index');
-
+Route::get('/api/staff', 'StaffController@index')->name('staff');
 // Availabilities.
 Route::patch('/api/availabilities/{availability}', 'AvailabilityController@update')->name('availabilities.update');
 
 // Settings.
 Route::namespace('Settings')->group(function () {
     // Account.
-    Route::get('/api/account/{id}', 'AccountController@show')->name('account.show');
-    Route::patch('/api/account/{id}', 'AccountController@update')->name('account.update');
-
+    Route::get('/api/account', 'AccountController@show')->name('account');
+    Route::patch('/api/account', 'AccountController@update')->name('account');
     // Doctor profile.
     Route::get('/api/doctor-profile/{doctor}', 'DoctorProfileController@show')->name('doctor-profile.show');
     Route::post('/api/doctor-profile', 'DoctorProfileController@store')->name('doctor-profile.store');
     Route::patch('/api/doctor-profile/{doctor}', 'DoctorProfileController@update')->name('doctor-profile.update');
-
     // User Avatar.
     Route::post('/api/uploads-user-avatar', 'UploadUserAvatarController@create')->name('upload-user-avatar');
-
     // New password.
     Route::post('/api/new-password', 'NewPasswordController@update')->name('new-password');
 });
 
 // Logout Route.
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
 // Catch-all Route.
 Route::get('/{view?}', 'AmbulatoryController')->where('view', '(.*)')->name('ambulatory');

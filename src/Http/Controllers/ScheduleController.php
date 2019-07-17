@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers;
 use Ambulatory\Schedule;
 use Ambulatory\Http\Requests\ScheduleRequest;
 use Ambulatory\Http\Middleware\VerifiedDoctor;
+use Ambulatory\Http\Resources\ScheduleResource;
 
 class ScheduleController extends Controller
 {
@@ -19,7 +20,7 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the schedules.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -28,39 +29,33 @@ class ScheduleController extends Controller
             ->latest()
             ->paginate(25);
 
-        return response()->json([
-            'entries' => $schedules,
-        ]);
+        return ScheduleResource::collection($schedules);
     }
 
     /**
      * Store a newly created schedule in storage.
      *
      * @param  ScheduleRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(ScheduleRequest $request)
     {
-        Schedule::create($request->validatedFields());
+        $schedule = Schedule::create($request->validatedFields());
 
-        return response()->json([
-            'message' => 'Schedule successfully created!',
-        ], 200);
+        return new ScheduleResource($schedule);
     }
 
     /**
      * Display the specified schedule.
      *
      * @param  Schedule  $schedule
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function show(Schedule $schedule)
     {
         $this->authorize('manage', $schedule);
 
-        return response()->json([
-            'entry' => $schedule->load('healthFacility'),
-        ]);
+        return new ScheduleResource($schedule->load('healthFacility'));
     }
 
     /**
@@ -68,7 +63,7 @@ class ScheduleController extends Controller
      *
      * @param  ScheduleRequest  $request
      * @param  Schedule  $schedule
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(ScheduleRequest $request, Schedule $schedule)
     {
@@ -76,8 +71,6 @@ class ScheduleController extends Controller
 
         $schedule->update($request->validatedFields());
 
-        return response()->json([
-            'message' => 'Schedule successfully updated!',
-        ], 200);
+        return new ScheduleResource($schedule);
     }
 }

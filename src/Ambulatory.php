@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Ambulatory\Policies\DoctorPolicy;
 use Ambulatory\Policies\MedicalFormPolicy;
 use Ambulatory\Policies\AvailabilityPolicy;
+use Illuminate\Http\Resources\Json\Resource;
 use Ambulatory\Policies\DoctorSchedulePolicy;
 
 class Ambulatory
@@ -47,5 +48,15 @@ class Ambulatory
                 ? auth('ambulatory')->user()->scriptVariables()
                 : null,
         ];
+    }
+
+    /**
+     * Disable wrapping of the outer-most resource by default.
+     *
+     * @return void
+     */
+    public function wrapResource()
+    {
+        Resource::withoutWrapping();
     }
 }
