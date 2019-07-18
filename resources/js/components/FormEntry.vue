@@ -31,9 +31,9 @@
         methods: {
             getEntry() {
                 this.http().get('/api/' + this.resource + '/' + this.id).then(response => {
-                    this.entry = response.data.entry;
+                    this.entry = response.data;
 
-                    this.formData = response.data.entry;
+                    this.formData = response.data;
 
                     this.ready = true;
                 }).catch(error => {

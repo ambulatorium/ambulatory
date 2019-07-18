@@ -14,11 +14,11 @@
                 <p class="mb-1">Visit time: {{localDateTime(slotProps.entry.preferred_date_time).format('MMMM Do YYYY h:mm:ss A')}}</p>
                 <small>
                     Location:
-                    {{slotProps.entry.schedule.health_facility.name}},
-                    {{slotProps.entry.schedule.health_facility.address}},
-                    {{slotProps.entry.schedule.health_facility.city}},
-                    {{slotProps.entry.schedule.health_facility.state}},
-                    {{slotProps.entry.schedule.health_facility.country}}
+                    {{slotProps.entry.doctor_schedule.health_facility.name}},
+                    {{slotProps.entry.doctor_schedule.health_facility.address}},
+                    {{slotProps.entry.doctor_schedule.health_facility.city}},
+                    {{slotProps.entry.doctor_schedule.health_facility.state}},
+                    {{slotProps.entry.doctor_schedule.health_facility.country}}
                 </small>
             </router-link>
         </template>

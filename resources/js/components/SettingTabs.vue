@@ -35,7 +35,7 @@
             <router-link
                 active-class="active"
                 class="nav-link"
-                :to="{name:'settings-account', params: {id: Ambulatory.user.id}}"
+                :to="{name:'settings-account'}"
                 :class="{active: activeTab=='account'}">
 
                 <span>Account</span>
