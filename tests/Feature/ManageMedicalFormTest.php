@@ -34,7 +34,7 @@ class ManageMedicalFormTest extends TestCase
             ->assertJson([
                 'data' => [
                     [
-                        'id' => $medicalForm->id
+                        'id' => $medicalForm->id,
                     ],
                 ],
                 'links' => [],
@@ -55,7 +55,7 @@ class ManageMedicalFormTest extends TestCase
             ->assertJsonMissing([
                 'data' => [
                     [
-                        'id' => $medicalForm->id
+                        'id' => $medicalForm->id,
                     ],
                 ],
                 'links' => [],

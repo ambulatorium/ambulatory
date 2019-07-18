@@ -4,7 +4,6 @@ namespace Ambulatory\Tests\Feature;
 
 use Ambulatory\User;
 use Ambulatory\Invitation;
-use Illuminate\Support\Arr;
 use Ambulatory\Tests\TestCase;
 use Ambulatory\Mail\CredentialEmail;
 use Ambulatory\Mail\InvitationEmail;
