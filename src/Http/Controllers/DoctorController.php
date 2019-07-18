@@ -27,6 +27,6 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        return new DoctorResource($doctor->load('user', 'specializations', 'schedules'));
+        return new DoctorResource($doctor->load('user', 'specializations', 'schedules.healthFacility'));
     }
 }

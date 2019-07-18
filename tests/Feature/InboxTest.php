@@ -30,11 +30,14 @@ class InboxTest extends TestCase
                 'data' => [
                     [
                         'id' => $booking->id,
-                        'doctor' => [
-                            'id' => $booking->schedule->doctor->id,
-                        ],
-                        'health_facility' => [
-                            'id' => $booking->schedule->healthFacility->id,
+                        'doctor_schedule' => [
+                            'id' => $booking->schedule->id,
+                            'doctor' => [
+                                'id' => $booking->schedule->doctor->id,
+                            ],
+                            'health_facility' => [
+                                'id' => $booking->schedule->healthFacility->id,
+                            ],
                         ],
                     ],
                 ],
@@ -42,12 +45,15 @@ class InboxTest extends TestCase
             ->assertJsonMissing([
                 'data' => [
                     [
-                        'id' => $otherBooking->id,
-                        'doctor' => [
-                            'id' => $otherBooking->schedule->doctor->id,
-                        ],
-                        'health_facility' => [
-                            'id' => $otherBooking->schedule->healthFacility->id,
+                        'id' => $booking->id,
+                        'doctor_schedule' => [
+                            'id' => $booking->schedule->id,
+                            'doctor' => [
+                                'id' => $booking->schedule->doctor->id,
+                            ],
+                            'health_facility' => [
+                                'id' => $booking->schedule->healthFacility->id,
+                            ],
                         ],
                     ],
                 ],
@@ -67,14 +73,14 @@ class InboxTest extends TestCase
             ->assertOk()
             ->assertJson([
                 'id' => $booking->id,
-                'medical_form' => [
-                    'id' => $booking->medicalForm->id,
-                ],
-                'doctor' => [
-                    'id' => $booking->schedule->doctor->id,
-                ],
-                'health_facility' => [
-                    'id' => $booking->schedule->healthFacility->id,
+                'doctor_schedule' => [
+                    'id' => $booking->schedule->id,
+                    'doctor' => [
+                        'id' => $booking->schedule->doctor->id,
+                    ],
+                    'health_facility' => [
+                        'id' => $booking->schedule->healthFacility->id,
+                    ],
                 ],
             ]);
 
