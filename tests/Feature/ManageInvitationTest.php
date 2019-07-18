@@ -41,17 +41,20 @@ class ManageInvitationTest extends TestCase
     {
         $this->signInAsAdmin();
 
-        factory(Invitation::class)->create();
+        $invitation = factory(Invitation::class)->create();
 
         $this->getJson(route('ambulatory.invitations'))
             ->assertOk()
-            ->assertJsonStructure([
-                'entries' => [
-                    'current_page',
-                    'data' => [],
-                    'total',
+            ->assertJson([
+                'data' => [
+                    [
+                        'id' => $invitation->id,
+                    ],
                 ],
-            ]);
+                'links' => [],
+                'meta' => [],
+            ])
+            ->assertJsonCount(3); //data,links,meta
     }
 
     /** @test */
@@ -100,9 +103,10 @@ class ManageInvitationTest extends TestCase
         $attributes = factory(Invitation::class)->raw();
 
         $this->postJson(route('ambulatory.invitations.store'), $attributes)
-            ->assertOk()
+            ->assertStatus(201)
             ->assertJson([
-                'entry' => array_except($attributes, ['token']),
+                'email' => $attributes['email'],
+                'role' => $attributes['role'],
             ]);
 
         $this->assertDatabaseHas('ambulatory_invitations', ['email' => $attributes['email']]);
@@ -136,7 +140,7 @@ class ManageInvitationTest extends TestCase
     }
 
     /** @test */
-    public function admin_can_get_details_about_the_invitation()
+    public function admin_can_get_details_of_the_invitation()
     {
         $this->signInAsAdmin();
 
@@ -144,8 +148,13 @@ class ManageInvitationTest extends TestCase
 
         $this->getJson(route('ambulatory.invitations.show', $invitation->id))
             ->assertOk()
-            ->assertExactJson([
-                'entry' => array_except($invitation->toArray(), ['token']),
+            ->assertJson([
+                'id' => $invitation->id,
+                'email' => $invitation->email,
+                'role' => $invitation->role,
+            ])
+            ->assertJsonMissing([
+                'token' => $invitation->token,
             ]);
     }
 
@@ -154,7 +163,7 @@ class ManageInvitationTest extends TestCase
     {
         $this->signInAsAdmin();
 
-        $oldInvitation = factory(Invitation::class)->create();
+        $invitation = factory(Invitation::class)->create();
 
         $newAttributes = factory(Invitation::class)->raw([
             'email' => 'janedoe@example.com',
@@ -162,18 +171,22 @@ class ManageInvitationTest extends TestCase
 
         Mail::fake();
 
-        $this->patchJson(route('ambulatory.invitations.update', $oldInvitation->id), $newAttributes)
+        $this->patchJson(route('ambulatory.invitations.update', $invitation->id), $newAttributes)
             ->assertOk()
+            ->assertJson([
+                'email' => $newAttributes['email'],
+            ])
             ->assertSessionDoesntHaveErrors();
 
-        $this->assertNotSame($oldInvitation->email, $newAttributes['email']);
+        $this->assertNotSame($invitation->token, $newAttributes['token']);
+        $this->assertNotSame($invitation->email, $newAttributes['email']);
 
         Mail::assertSent(InvitationEmail::class, function ($mail) use ($newAttributes) {
             return $mail->hasTo($newAttributes['email']);
         });
 
-        Mail::assertNotSent(InvitationEmail::class, function ($mail) use ($oldInvitation) {
-            return $mail->hasTo($oldInvitation->email);
+        Mail::assertNotSent(InvitationEmail::class, function ($mail) use ($invitation) {
+            return $mail->hasTo($invitation->email);
         });
     }
 
@@ -186,7 +199,8 @@ class ManageInvitationTest extends TestCase
 
         $this->assertDatabaseHas('ambulatory_invitations', $invitation->toArray());
 
-        $this->deleteJson(route('ambulatory.invitations.destroy', $invitation->id))->assertOk();
+        $this->deleteJson(route('ambulatory.invitations.destroy', $invitation->id))
+            ->assertStatus(204);
 
         $this->assertDatabaseMissing('ambulatory_invitations', $invitation->toArray());
     }

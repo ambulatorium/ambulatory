@@ -20,7 +20,7 @@
                 this.isLoading = true;
 
                 this.http().get('/api/specializations').then(response => {
-                    this.specializations = response.data.entries.data;
+                    this.specializations = response.data.data;
 
                     this.isLoading = false;
                 }).catch(error => {

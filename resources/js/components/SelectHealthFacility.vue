@@ -23,7 +23,7 @@
                 this.isLoading = true;
 
                 this.http().get('/api/health-facilities').then(response => {
-                    this.facilities = response.data.entries.data;
+                    this.facilities = response.data.data;
 
                     this.isLoading = false;
                 }).catch(error => console.error(error));

@@ -32,7 +32,7 @@ class CreateTables extends Migration
             $table->string('qualification');
             $table->date('practicing_from');
             $table->text('professional_statement')->nullable();
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->default(true);
             $table->text('working_hours_rule');
             $table->timestamps();
         });
@@ -121,7 +121,7 @@ class CreateTables extends Migration
             $table->dateTime('preferred_date_time');
             $table->dateTime('actual_end_date_time')->nullable();
             $table->string('description')->nullable();
-            $table->smallInteger('status', false, true)->default(2);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
 
             $table->unique(['schedule_id', 'preferred_date_time'], 'book_schedule_date_unique');

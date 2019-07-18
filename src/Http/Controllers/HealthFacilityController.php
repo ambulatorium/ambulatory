@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers;
 use Ambulatory\HealthFacility;
 use Ambulatory\Http\Middleware\Admin;
 use Ambulatory\Http\Requests\HealthFacilityRequest;
+use Ambulatory\Http\Resources\HealthFacilityResource;
 
 class HealthFacilityController extends Controller
 {
@@ -19,43 +20,37 @@ class HealthFacilityController extends Controller
     /**
      * Display a listing of the health facilities.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = HealthFacility::latest()->paginate(25);
+        $healthFacilities = HealthFacility::latest()->paginate(25);
 
-        return response()->json([
-            'entries' => $entries,
-        ]);
+        return HealthFacilityResource::collection($healthFacilities);
     }
 
     /**
      * Store a newly created health facility in storage.
      *
      * @param  HealthFacilityRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(HealthFacilityRequest $request)
     {
-        $entry = HealthFacility::create($request->validated());
+        $healthFacility = HealthFacility::create($request->validated());
 
-        return response()->json([
-            'entry' => $entry,
-        ]);
+        return new HealthFacilityResource($healthFacility);
     }
 
     /**
      * Display the specified medical form.
      *
      * @param  HealthFacility  $healthFacility
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function show(HealthFacility $healthFacility)
     {
-        return response()->json([
-            'entry' => $healthFacility,
-        ]);
+        return new HealthFacilityResource($healthFacility);
     }
 
     /**
@@ -63,14 +58,12 @@ class HealthFacilityController extends Controller
      *
      * @param  HealthFacilityRequest  $request
      * @param  HealthFacility  $healthFacility
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(HealthFacilityRequest $request, HealthFacility $healthFacility)
     {
         $healthFacility->update($request->validated());
 
-        return response()->json([
-            'entry' => $healthFacility,
-        ]);
+        return new HealthFacilityResource($healthFacility);
     }
 }

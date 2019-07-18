@@ -13,7 +13,7 @@
         <template slot="entry-data" slot-scope="slotProps" class="bg-light">
             <div class="d-flex w-100 justify-content-between">
                 <div class="media">
-                    <img :src="slotProps.formData.user.avatar"
+                    <img :src="slotProps.formData.account.avatar"
                         :alt="slotProps.formData.full_name"
                         class="rounded mr-4"
                         height="84"

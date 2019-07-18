@@ -34,8 +34,8 @@
 
         methods: {
             getTimeSlots() {
-                this.http().get('/api/schedules/' + this.schedule + '/availabilities').then(response => {
-                    this.timeSlots = response.data.entries;
+                this.http().get('/api/booking/' + this.schedule + '/availability-slots').then(response => {
+                    this.timeSlots = response.data.data;
 
                     this.ready = true;
                 });
@@ -45,7 +45,7 @@
                 this.loadMedicalForms = true;
 
                 this.http().get('/api/medical-forms').then(response => {
-                    this.medicalForms = response.data.entries.data;
+                    this.medicalForms = response.data.data;
 
                     this.loadMedicalForms = false;
                 })
@@ -60,7 +60,7 @@
             },
 
             booking() {
-                this.http().post('/api/schedules/' + this.schedule + '/bookings', this.formEntry).then(response => {
+                this.http().post('/api/booking/' + this.schedule + '/availability-slots', this.formEntry).then(response => {
                     this.close();
 
                     this.$router.push({name: 'inbox'});
@@ -85,25 +85,6 @@
                 <div class="col-sm-4 my-3 p-4 bg-white rounded-xl">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="medicalForm" class="font-weight-bold">Medical form</label>
-
-                            <multi-select
-                                v-model="selectedMedicalForm"
-                                id="medicalForm"
-                                label="form_name"
-                                track-by="id"
-                                placeholder="Select one your medical form"
-                                :options="medicalForms"
-                                :loading="loadMedicalForms"
-                                :allow-empty="false"
-                                @search-change="getMedicalForms"
-                                @input="medicalFormId">
-                            </multi-select>
-
-                            <form-errors :errors="formErrors.medical_form_id"></form-errors>
-                        </div>
-
-                        <div class="form-group">
                             <label class="font-weight-bold">Today {{ today.format('MMMM Do YYYY') }}</label>
 
                             <div v-if="!ready" class="spinner-border text-primary" role="status">
@@ -121,6 +102,25 @@
                             </div>
 
                             <form-errors :errors="formErrors.preferred_date_time"></form-errors>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="medicalForm" class="font-weight-bold">Medical form</label>
+
+                            <multi-select
+                                v-model="selectedMedicalForm"
+                                id="medicalForm"
+                                label="form_name"
+                                track-by="id"
+                                placeholder="Select one your medical form"
+                                :options="medicalForms"
+                                :loading="loadMedicalForms"
+                                :allow-empty="false"
+                                @search-change="getMedicalForms"
+                                @input="medicalFormId">
+                            </multi-select>
+
+                            <form-errors :errors="formErrors.medical_form_id"></form-errors>
                         </div>
 
                         <div class="form-group">

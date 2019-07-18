@@ -11,7 +11,7 @@ class DoctorPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine if the user may update doctor profile.
+     * Determine if the given doctor profile can be updated by the user.
      *
      * @param  User  $user
      * @param  Doctor  $doctor

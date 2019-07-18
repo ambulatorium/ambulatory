@@ -3,7 +3,6 @@
 namespace Ambulatory\Tests\Feature\Settings;
 
 use Ambulatory\User;
-use Illuminate\Support\Arr;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -12,9 +11,9 @@ class UpdateAccountTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guest_may_can_not_update_the_account()
+    public function guest_may_cannot_update_the_account()
     {
-        $this->patchJson(route('ambulatory.account.update', 'fake-id'), [])->assertStatus(401);
+        $this->patchJson(route('ambulatory.account'), [])->assertStatus(401);
     }
 
     /** @test */
@@ -22,58 +21,50 @@ class UpdateAccountTest extends TestCase
     {
         $auth = $this->signInAsPatient();
 
-        $this->getJson(route('ambulatory.account.show', $auth->id))
+        $this->getJson(route('ambulatory.account'))
             ->assertOk()
-            ->assertExactJson([
-                'entry' => Arr::only($auth->toArray(), ['id', 'name', 'email', 'avatar']),
+            ->assertJson([
+                'id' => $auth->id,
+                'name' => $auth->name,
+                'avatar' => $auth->avatar,
+                'role' => $auth->role,
             ]);
     }
 
     /** @test */
-    public function a_user_can_not_get_the_details_account_of_others()
+    public function a_user_cannot_get_the_details_account_of_others()
     {
         $this->signInAsPatient();
 
         $otherUser = factory(User::class)->create();
 
-        $this->getJson(route('ambulatory.account.show', $otherUser->id))
-            ->assertStatus(404)
-            ->assertExactJson([
-                'message' => '',
+        $this->getJson(route('ambulatory.account'))
+            ->assertOk()
+            ->assertJsonMissing([
+                'id' => $otherUser->id,
+                'name' => $otherUser->name,
+                'avatar' => $otherUser->avatar,
             ]);
     }
 
     /** @test */
     public function a_user_can_update_their_account()
     {
-        $this->signInAsPatient();
+        $user = $this->signInAsPatient();
 
-        $this->patchJson(route('ambulatory.account.update', auth('ambulatory')->id()),
-            $attributes = factory(User::class)->raw([
+        $this->patchJson(route('ambulatory.account'), $attributes = [
                 'name' => 'name changed',
-            ]))
-            ->assertOk();
-
-        $this->assertDatabaseHas('ambulatory_users', Arr::except($attributes, ['id', 'password']));
-    }
-
-    /** @test */
-    public function a_user_can_not_update_account_of_others()
-    {
-        $this->signInAsPatient();
-
-        $otherUser = factory(User::class)->create();
-
-        $this->patchJson(route('ambulatory.account.update', $otherUser->id),
-            $attributes = factory(User::class)->raw([
+                'email' => $user->email,
+                'avatar' => $user->avatar,
+            ])
+            ->assertOk()
+            ->assertJson([
+                'id' => $user->id,
                 'name' => 'name changed',
-            ]))
-            ->assertStatus(404)
-            ->assertExactJson([
-                'message' => '',
+                'avatar' => $user->avatar,
             ]);
 
-        $this->assertDatabaseMissing('ambulatory_users', Arr::except($attributes, ['id', 'password']));
+        $this->assertDatabaseHas('ambulatory_users', $attributes);
     }
 
     /** @test */
@@ -81,7 +72,7 @@ class UpdateAccountTest extends TestCase
     {
         $this->signInAsPatient();
 
-        $this->patchJson(route('ambulatory.account.update', auth('ambulatory')->id()), factory(User::class)->raw([
+        $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
                 'email' => '',
             ]))
             ->assertStatus(422)
@@ -98,7 +89,7 @@ class UpdateAccountTest extends TestCase
     {
         $this->signInAsPatient();
 
-        $this->patchJson(route('ambulatory.account.update', auth('ambulatory')->id()), factory(User::class)->raw([
+        $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
                 'name' => '',
             ]))
             ->assertStatus(422)
@@ -115,7 +106,7 @@ class UpdateAccountTest extends TestCase
     {
         $this->signInAsPatient();
 
-        $this->patchJson(route('ambulatory.account.update', auth('ambulatory')->id()), factory(User::class)->raw([
+        $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
                 'avatar' => '',
             ]))
             ->assertStatus(422)

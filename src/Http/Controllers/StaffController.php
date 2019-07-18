@@ -4,6 +4,7 @@ namespace Ambulatory\Http\Controllers;
 
 use Ambulatory\User;
 use Ambulatory\Http\Middleware\Admin;
+use Ambulatory\Http\Resources\UserResource;
 
 class StaffController extends Controller
 {
@@ -16,16 +17,14 @@ class StaffController extends Controller
     }
 
     /**
-     * Get staff.
+     * Display a listing of the staff.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $entries = User::whereNotIn('type', [User::PATIENT])->latest()->paginate(25);
+        $staff = User::whereNotIn('type', [User::PATIENT])->latest()->paginate(25);
 
-        return response()->json([
-            'entries' => $entries,
-        ]);
+        return UserResource::collection($staff);
     }
 }

@@ -23,11 +23,11 @@
         methods: {
             loadEntries() {
                 this.http().get('/api/' + this.resource).then(response => {
-                    this.entries = response.data.entries.data;
+                    this.entries = response.data.data;
 
-                    this.hasMoreEntries = !!response.data.entries.next_page_url;
+                    this.hasMoreEntries = !!response.data.links.next;
 
-                    this.nextPageUrl = response.data.entries.next_page_url;
+                    this.nextPageUrl = response.data.links.next;
 
                     this.ready = true;
                 });
@@ -37,11 +37,11 @@
                 this.loadingMoreEntries = true;
 
                 this.http().get(this.nextPageUrl).then(response => {
-                    this.entries.push(...response.data.entries.data);
+                    this.entries.push(...response.data.data);
 
-                    this.hasMoreEntries = !!response.data.entries.next_page_url;
+                    this.hasMoreEntries = !!response.data.links.next;
 
-                    this.nextPageUrl = response.data.entries.next_page_url;
+                    this.nextPageUrl = response.data.links.next;
 
                     this.loadingMoreEntries = false;
                 });

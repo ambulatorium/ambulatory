@@ -5,6 +5,7 @@ namespace Ambulatory\Http\Controllers;
 use Ambulatory\Availability;
 use Ambulatory\Http\Middleware\VerifiedDoctor;
 use Ambulatory\Http\Requests\AvailabilityRequest;
+use Ambulatory\Http\Resources\AvailabilityResource;
 
 class AvailabilityController extends Controller
 {
@@ -20,7 +21,7 @@ class AvailabilityController extends Controller
      * Update the specified availability in storage.
      *
      * @param  Availability  $availability
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function update(AvailabilityRequest $request, Availability $availability)
     {
@@ -28,8 +29,6 @@ class AvailabilityController extends Controller
 
         $availability->update($request->validated());
 
-        return response()->json([
-            'entry' => $availability,
-        ]);
+        return new AvailabilityResource($availability);
     }
 }

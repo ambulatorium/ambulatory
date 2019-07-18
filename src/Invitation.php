@@ -83,7 +83,7 @@ class Invitation extends AmbulatoryModel
     /**
      * Create a new user.
      *
-     * @param string $credential
+     * @param  string  $credential
      * @return User
      */
     protected function createNewUser(string $credential)

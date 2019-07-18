@@ -2,6 +2,7 @@
 
 namespace Ambulatory\Tests\Feature;
 
+use Carbon\Carbon;
 use Ambulatory\User;
 use Ambulatory\Schedule;
 use Illuminate\Support\Arr;
@@ -10,7 +11,7 @@ use Ambulatory\HealthFacility;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class DoctorScheduleTest extends TestCase
+class ManageScheduleTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -36,14 +37,48 @@ class DoctorScheduleTest extends TestCase
     }
 
     /** @test */
-    public function unverified_doctor_cannot_create_a_new_schedule()
+    public function a_doctor_only_get_their_schedules()
+    {
+        $this->signInAsDoctor();
+
+        $schedule = factory(Schedule::class)->create();
+
+        $this->getJson(route('ambulatory.schedules'))
+            ->assertOk()
+            ->assertJson([
+                'data' => [],
+            ]);
+
+        $this
+            ->actingAs($schedule->doctor->user)
+            ->getJson(route('ambulatory.schedules'))
+            ->assertOk()
+            ->assertJson([
+                'data' => [
+                    [
+                        'start_date' => $schedule->start_date->jsonSerialize(),
+                        'end_date' => $schedule->end_date->jsonSerialize(),
+                        'estimated_service_time_in_minutes' => $schedule->estimated_service_time_in_minutes,
+                        'health_facility' => [
+                            'id' => $schedule->healthFacility->id,
+                        ],
+                    ],
+                ],
+            ]);
+    }
+
+    /** @test */
+    public function unverified_doctor_can_not_create_a_new_schedule()
     {
         $user = factory(User::class)->create(['type' => User::DOCTOR]);
 
         $this
             ->actingAs($user, 'ambulatory')
             ->postJson(route('ambulatory.schedules.store'), [])
-            ->assertStatus(403);
+            ->assertStatus(403)
+            ->assertExactJson([
+                'message' => 'Please verify your doctor profile first',
+            ]);
     }
 
     /** @test */
@@ -52,14 +87,15 @@ class DoctorScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         $this->postJson(route('ambulatory.schedules.store'), $attributes = $this->scheduleAttributes())
-            ->assertOk()
-            ->assertExactJson([
-                'message' => 'Schedule successfully created!',
+            ->assertStatus(201)
+            ->assertJson([
+                'start_date' => Carbon::parse($attributes['start_date'])->jsonSerialize(),
+                'end_date' => Carbon::parse($attributes['end_date'])->jsonSerialize(),
             ]);
 
         $this->assertDatabaseHas('ambulatory_schedules', [
-            'start_date' => $attributes['start_date'],
-            'end_date' => $attributes['end_date'],
+            'doctor_id' => auth('ambulatory')->user()->doctorProfile->id,
+            'health_facility_id' => $attributes['health_facility']['id'],
         ]);
     }
 
@@ -90,14 +126,12 @@ class DoctorScheduleTest extends TestCase
     /** @test */
     public function included_a_health_facility_is_unique_with_doctor()
     {
-        $user = $this->signInAsDoctor();
+        $schedule = factory(Schedule::class)->create();
 
-        $schedule = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
-
-        $health = $schedule->healthFacility->toArray();
-
-        $this->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
-                'health_facility' => $health,
+        $this
+            ->actingAs($schedule->doctor->user, 'ambulatory')
+            ->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
+                'health_facility' => $schedule->healthFacility->toArray(),
             ]))
             ->assertStatus(422)
             ->assertExactJson([
@@ -147,16 +181,19 @@ class DoctorScheduleTest extends TestCase
     /** @test */
     public function a_doctor_can_get_their_details_of_schedule()
     {
-        $user = $this->signInAsDoctor();
+        $schedule = factory(Schedule::class)->create();
 
-        $schedule = factory(Schedule::class)->create([
-            'doctor_id' => $user->doctorProfile->id,
-        ]);
-
-        $this->getJson(route('ambulatory.schedules.show', $schedule->id))
+        $this
+            ->actingAs($schedule->doctor->user, 'ambulatory')
+            ->getJson(route('ambulatory.schedules.show', $schedule->id))
             ->assertOk()
-            ->assertExactJson([
-                'entry' => $schedule->load('healthFacility')->toArray(),
+            ->assertJson([
+                'start_date' => $schedule->start_date->jsonSerialize(),
+                'end_date' => $schedule->end_date->jsonSerialize(),
+                'estimated_service_time_in_minutes' => $schedule->estimated_service_time_in_minutes,
+                'health_facility' => [
+                    'id' => $schedule->healthFacility->id,
+                ],
             ]);
     }
 
@@ -187,14 +224,14 @@ class DoctorScheduleTest extends TestCase
     /** @test */
     public function a_doctor_can_update_their_schedule()
     {
-        $user = $this->signInAsDoctor();
+        $schedule = factory(Schedule::class)->create();
 
-        $schedule = factory(Schedule::class)->create(['doctor_id' => $user->doctorProfile->id]);
-
-        $this->patchJson(route('ambulatory.schedules.update', $schedule->id), $attributes = $this->scheduleAttributes())
+        $this
+            ->actingAs($schedule->doctor->user, 'ambulatory')
+            ->patchJson(route('ambulatory.schedules.update', $schedule->id), $attributes = $this->scheduleAttributes())
             ->assertOk()
-            ->assertExactJson([
-                'message' => 'Schedule successfully updated!',
+            ->assertJson([
+                'id' => $schedule->id,
             ]);
 
         $this->assertNotSame($schedule->health_facility_id, $attributes['health_facility']['id']);

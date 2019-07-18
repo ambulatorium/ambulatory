@@ -8,7 +8,7 @@
             <router-link :to="{name:'doctors-preview', params:{id: slotProps.entry.id}}" class="border-bottom list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="media">
-                        <img :src="slotProps.entry.user.avatar"
+                        <img :src="slotProps.entry.account.avatar"
                             :alt="slotProps.entry.full_name"
                             class="rounded mr-4"
                             height="54"

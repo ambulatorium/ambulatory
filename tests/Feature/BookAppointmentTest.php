@@ -10,20 +10,20 @@ use Ambulatory\Availability;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class BookingScheduleTest extends TestCase
+class BookAppointmentTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function guest_can_not_book_a_schedule_of_doctor()
+    public function guest_can_not_book_an_appointment()
     {
         $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedule.bookings', $schedule->id), [])->assertStatus(401);
+        $this->postJson(route('ambulatory.book.appointment', $schedule->id), [])->assertStatus(401);
     }
 
     /** @test */
-    public function only_get_available_time_slots_from_default_availability_with_preferred_date_in_the_schedule()
+    public function get_available_time_slots_from_default_availability_with_preferred_date_in_the_schedule()
     {
         $this->signInAsPatient();
 
@@ -33,21 +33,50 @@ class BookingScheduleTest extends TestCase
 
         // Request schedule availability time slots for today (default).
         // expected no time slots available.
-        $this->getJson(route('ambulatory.schedules.availabilities', $schedule->id))
+        $this->getJson(route('ambulatory.book.appointment', $schedule->id))
             ->assertOk()
             ->assertExactJson([
-                'entries' => [],
+                'data' => [],
             ]);
 
         // Request schedule availability time slots for monday next week.
         // expected the time slots available.
-        $this->getJson(route('ambulatory.schedules.availabilities', [
-            $schedule->id,
-            'date='.$date = today()->parse('Monday next week'),
-        ]))
+        $this->getJson(route('ambulatory.book.appointment', [
+                $schedule->id,
+                'date='.$date = today()->parse('Monday next week'),
+            ]))
             ->assertOk()
             ->assertExactJson([
-                'entries' => $schedule->availabilitySlots($date),
+                'data' => $schedule->availabilitySlots($date),
+            ]);
+    }
+
+    /** @test */
+    public function get_available_time_slots_from_custom_availability_with_preferred_date_in_the_schedule()
+    {
+        $this->signInAsPatient();
+
+        // the custom availability is Monday next week,
+        // interval time 9:00-11:00 and 15:00-19:00 with default estimated service time 15 minutes.
+        $customAvailability = factory(Availability::class)->create();
+
+        // Request schedule availability time slots for today (default).
+        // expected no time slots available.
+        $this->getJson(route('ambulatory.book.appointment', $customAvailability->schedule->id))
+            ->assertOk()
+            ->assertExactJson([
+                'data' => [],
+            ]);
+
+        // Request schedule availability time slots for monday next week.
+        // expected the time slots available.
+        $this->getJson(route('ambulatory.book.appointment', [
+                $customAvailability->schedule->id,
+                'date='.$date = today()->parse('Monday next week'),
+            ]))
+            ->assertOk()
+            ->assertExactJson([
+                'data' => $customAvailability->schedule->availabilitySlots($date),
             ]);
     }
 
@@ -60,7 +89,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => '',
             ]))
             ->assertStatus(422)
@@ -81,7 +110,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => 'not-a-date',
             ]))
             ->assertStatus(422)
@@ -102,7 +131,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->toDateTimeString(),
             ]))
             ->assertStatus(422)
@@ -123,7 +152,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Saturday next week')->toDateTimeString(),
             ]))
             ->assertStatus(422)
@@ -145,7 +174,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Monday next week')->setTime(10, 27)->toDateTimeString(), // change default time
             ]))
             ->assertStatus(422)
@@ -167,7 +196,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Monday next week')->setTime(13, 00)->toDateTimeString(),
             ]))
             ->assertStatus(422)
@@ -186,7 +215,7 @@ class BookingScheduleTest extends TestCase
 
         $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes(''))
+        $this->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes(''))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -205,7 +234,7 @@ class BookingScheduleTest extends TestCase
 
         $medicalForm = factory(MedicalForm::class)->create();
 
-        $this->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id))
+        $this->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -222,7 +251,7 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($booking->medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $booking->schedule_id), $this->bookingAttributes($booking->medicalForm->id))
+            ->postJson(route('ambulatory.book.appointment', $booking->schedule_id), $this->bookingAttributes($booking->medicalForm->id))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -233,7 +262,7 @@ class BookingScheduleTest extends TestCase
     }
 
     /** @test */
-    public function user_can_book_a_schedule_with_the_default_availability_of_doctor()
+    public function user_can_book_an_appointment_with_the_default_availability_of_doctor()
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the default availability is Monday to Friday next week,
@@ -242,22 +271,20 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Monday next week')->setTime(9, 30)->toDateTimeString(),
             ]))
-            ->assertOk()
-            ->assertExactJson([
-                'message' => 'Schedule successfully booked',
-            ]);
+            ->assertStatus(201);
 
         $this->assertDatabaseHas('ambulatory_bookings', [
+            'is_active' => true,
             'schedule_id' => $schedule->id,
             'medical_form_id' => $medicalForm->id,
         ]);
     }
 
     /** @test */
-    public function user_can_book_a_schedule_with_the_custom_availability_of_doctor()
+    public function user_can_book_an_appointment_with_the_custom_availability_of_doctor()
     {
         $medicalForm = factory(MedicalForm::class)->create();
         // the custom availability is Monday next week,
@@ -266,20 +293,25 @@ class BookingScheduleTest extends TestCase
 
         $this
             ->actingAs($medicalForm->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedule.bookings', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
+            ->postJson(route('ambulatory.book.appointment', $customAvailability->schedule->id), $this->bookingAttributes($medicalForm->id, [
                 'preferred_date_time' => today()->parse('Monday next week')->setTime(15, 00)->toDateTimeString(),
             ]))
-            ->assertOk()
-            ->assertExactJson([
-                'message' => 'Schedule successfully booked',
-            ]);
+            ->assertStatus(201);
 
         $this->assertDatabaseHas('ambulatory_bookings', [
+            'is_active' => true,
             'schedule_id' => $customAvailability->schedule->id,
             'medical_form_id' => $medicalForm->id,
         ]);
     }
 
+    /**
+     * Booking attributes.
+     *
+     * @param  string  $medicalForm
+     * @param  array  $overrides
+     * @return array
+     */
     protected function bookingAttributes($medicalForm, $overrides = [])
     {
         $attributes = factory(Booking::class)->raw(array_merge([

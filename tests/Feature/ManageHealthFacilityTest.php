@@ -11,7 +11,7 @@ class ManageHealthFacilityTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cannot_manage_health_facilities()
+    public function guests_can_not_manage_health_facilities()
     {
         $healthFacility = factory(HealthFacility::class)->create();
 
@@ -22,7 +22,7 @@ class ManageHealthFacilityTest extends TestCase
     }
 
     /** @test */
-    public function unauthorized_users_cannot_create_a_new_health_facility()
+    public function unauthorized_users_can_not_create_a_new_health_facility()
     {
         $this->signInAsDoctor();
         $this->postJson(route('ambulatory.health-facilities.store'), [])->assertStatus(403);
@@ -39,26 +39,10 @@ class ManageHealthFacilityTest extends TestCase
         $attrributes = factory(HealthFacility::class)->raw();
 
         $this->postJson(route('ambulatory.health-facilities.store'), $attrributes)
-            ->assertOk()
-            ->assertJson([
-                'entry' => $attrributes,
-            ]);
+            ->assertStatus(201)
+            ->assertJson($attrributes);
 
         $this->assertDatabaseHas('ambulatory_health_facilities', $attrributes);
-    }
-
-    /** @test */
-    public function admin_can_get_the_details_of_health_facility()
-    {
-        $this->signInAsAdmin();
-
-        $healthFacility = factory(HealthFacility::class)->create();
-
-        $this->getJson(route('ambulatory.health-facilities.show', $healthFacility->id))
-            ->assertOk()
-            ->assertJson([
-                'entry' => $healthFacility->toArray(),
-            ]);
     }
 
     /** @test */
@@ -86,7 +70,7 @@ class ManageHealthFacilityTest extends TestCase
                 'city' => 'City Changed',
             ]))
             ->assertOk()
-            ->assertJson(['entry' => $attributes]);
+            ->assertJson($attributes);
 
         $this->assertNotSame($healthFacility->slug, 'name-changed-city-changed');
 

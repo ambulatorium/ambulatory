@@ -137,12 +137,18 @@ class Schedule extends AmbulatoryModel
     }
 
     /**
-     * Get all schedule availabilities.
+     * Get all availability of schedule.
      *
      * @return array
      */
     public function availabilities()
     {
+        // $workingHours = $this->doctor->workingHours();
+
+        // return collect($workingHours)->map(function ($defaultAvailability) {
+        //     return $this->customAvailabilities()->get()->push($defaultAvailability);
+        // })->collapse();
+
         return array_merge($this->customAvailabilities()->get()->toArray(), $this->doctor->workingHours());
     }
 

@@ -22,14 +22,16 @@ export default {
          * Show the local date time.
          */
         localDateTime(dateTime) {
-            return moment(dateTime).local();
+            return moment(dateTime)
+                .utc()
+                .local();
         },
 
         /**
          * Show the time ago format for the given time.
          */
         timeAgo(time) {
-            return moment(time + ' Z')
+            return moment(time)
                 .utc()
                 .local()
                 .fromNow();
@@ -39,7 +41,7 @@ export default {
          * Show the duration format for the given date.
          */
         dateDuration(date) {
-            return moment(date + ' Z')
+            return moment(date)
                 .utc()
                 .local()
                 .fromNow(true);
@@ -77,7 +79,9 @@ export default {
             this.$root.alert.confirmationCancel = failure;
         },
 
-        // Show a bookings dialog.
+        /**
+         * Show a booking dialog.
+         */
         bookAppointment(schedule) {
             this.$root.booking.schedule = schedule;
         },

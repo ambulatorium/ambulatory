@@ -156,10 +156,7 @@ class NewPasswordTest extends TestCase
             ->postJson(route('ambulatory.new-password'), $this->credentials([
                 'current_password' => 'low-secret',
             ]))
-            ->assertOk()
-            ->assertExactJson([
-                'message' => 'Password successfully updated!',
-            ]);
+            ->assertStatus(204);
 
         $this->assertTrue(auth('ambulatory')->check());
         $this->assertCount(1, User::all());

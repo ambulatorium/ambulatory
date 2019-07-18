@@ -4,6 +4,7 @@ namespace Ambulatory\Http\Controllers;
 
 use Ambulatory\Schedule;
 use Ambulatory\Http\Middleware\VerifiedDoctor;
+use Ambulatory\Http\Resources\AvailabilityResource;
 use Ambulatory\Http\Requests\ScheduleAvailabilityRequest;
 
 class ScheduleAvailabilityController extends Controller
@@ -17,18 +18,14 @@ class ScheduleAvailabilityController extends Controller
     }
 
     /**
-     * Display a listing of the medical forms.
+     * Display a listing of the availability of schedule.
      *
      * @param  Schedule  $schedule
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Schedule $schedule)
     {
-        $date = request('date') ?: today();
-
-        return response()->json([
-            'entries' => $schedule->availabilitySlots($date),
-        ]);
+        // @todo Custom schedule availability.
     }
 
     /**
@@ -36,16 +33,14 @@ class ScheduleAvailabilityController extends Controller
      *
      * @param  ScheduleAvailabilityRequest  $request
      * @param  Schedule  $schedule
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Resources\Json\JsonResource|\Illuminate\Http\JsonResponse
      */
     public function store(ScheduleAvailabilityRequest $request, Schedule $schedule)
     {
         $this->authorize('manage', $schedule);
 
-        $schedule->addCustomAvailability($request->validated());
+        $availability = $schedule->addCustomAvailability($request->validated());
 
-        return response()->json([
-            'entry' => $schedule,
-        ]);
+        return new AvailabilityResource($availability);
     }
 }

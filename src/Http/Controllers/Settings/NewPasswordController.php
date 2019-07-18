@@ -20,8 +20,6 @@ class NewPasswordController extends Controller
             'password' => Hash::make($request->new_password),
         ]);
 
-        return response()->json([
-            'message' => 'Password successfully updated!',
-        ]);
+        return response()->json(null, 204);
     }
 }

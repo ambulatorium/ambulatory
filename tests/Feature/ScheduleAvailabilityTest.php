@@ -14,11 +14,11 @@ class ScheduleAvailabilityTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function guests_cannot_add_availabilities_to_schedules()
+    public function guests_cannot_add_availabilities_to_schedule()
     {
         $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedules.availabilities', $schedule->id))->assertStatus(401);
+        $this->postJson(route('ambulatory.schedules.availability', $schedule->id))->assertStatus(401);
     }
 
     /** @test */
@@ -27,10 +27,10 @@ class ScheduleAvailabilityTest extends TestCase
         $schedule = factory(Schedule::class)->create();
 
         $this->signInAsPatient();
-        $this->postJson(route('ambulatory.schedules.availabilities', $schedule->id))->assertStatus(403);
+        $this->postJson(route('ambulatory.schedules.availability', $schedule->id))->assertStatus(403);
 
         $this->signInAsAdmin();
-        $this->postJson(route('ambulatory.schedules.availabilities', $schedule->id))->assertStatus(403);
+        $this->postJson(route('ambulatory.schedules.availability', $schedule->id))->assertStatus(403);
     }
 
     /** @test */
@@ -38,12 +38,12 @@ class ScheduleAvailabilityTest extends TestCase
     {
         $this->signInAsDoctor();
 
-        $availability = factory(Schedule::class)->create();
+        $schedule = factory(Schedule::class)->create();
 
-        $this->postJson(route('ambulatory.schedules.availabilities', $availability->id), factory(Availability::class)->raw())
+        $this->postJson(route('ambulatory.schedules.availability', $schedule->id), factory(Availability::class)->raw())
             ->assertStatus(403);
 
-        $this->assertDatabaseMissing('ambulatory_availabilities', ['schedule_id' => $availability->id]);
+        $this->assertDatabaseMissing('ambulatory_availabilities', ['schedule_id' => $schedule->id]);
     }
 
     /** @test */
@@ -53,18 +53,18 @@ class ScheduleAvailabilityTest extends TestCase
 
         $date = $this->pickDateBetween($schedule->start_date_time, $schedule->end_date_time);
 
-        $this
-            ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $attributes = $this->dummyData($date))
-            ->assertOk();
+        $this->actingAs($schedule->doctor->user, 'ambulatory')
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $attributes = $this->dummyData($date))
+            ->assertStatus(201);
 
         $this->assertDatabaseHas('ambulatory_availabilities', [
+            'type' => 'date',
             'intervals' => json_encode($attributes['intervals']),
         ]);
     }
 
     /** @test */
-    public function a_doctor_cannot_update_availability_schedule_of_others()
+    public function a_doctor_can_not_update_availability_schedule_of_others()
     {
         $this->signInAsDoctor();
 
@@ -97,6 +97,7 @@ class ScheduleAvailabilityTest extends TestCase
             ->assertOk();
 
         $this->assertDatabaseHas('ambulatory_availabilities', [
+            'type' => 'date',
             'intervals' => json_encode($attributes['intervals']),
         ]);
     }
@@ -110,7 +111,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'intervals' => [],
             ]))
             ->assertStatus(422)
@@ -131,7 +132,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'intervals' => 'not-an-array',
             ]))
             ->assertStatus(422)
@@ -152,7 +153,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'intervals' => [
                     [
                         'from' => '',
@@ -178,7 +179,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'intervals' => [
                     [
                         'from' => today()->format('H:i'),
@@ -204,7 +205,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'date' => '',
             ]))
             ->assertStatus(422)
@@ -225,7 +226,7 @@ class ScheduleAvailabilityTest extends TestCase
 
         $this
             ->actingAs($schedule->doctor->user, 'ambulatory')
-            ->postJson(route('ambulatory.schedules.availabilities', $schedule->id), $this->dummyData($date, [
+            ->postJson(route('ambulatory.schedules.availability', $schedule->id), $this->dummyData($date, [
                 'date' => 'not-a-date',
             ]))
             ->assertStatus(422)
@@ -258,6 +259,6 @@ class ScheduleAvailabilityTest extends TestCase
             'date' => $date->format('Y-m-d'),
         ], $overrides));
 
-        return Arr::except($attributes, ['schedule_id']);
+        return Arr::except($attributes, ['schedule_id', 'type']);
     }
 }
