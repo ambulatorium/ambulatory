@@ -2,8 +2,6 @@
 
 **Ambulatory is outpatient care platform for your website.** Carefully designed to be consistent, fast, easy to use, and meet the needs of outpatient services in health facilities. [Learn more about ambulatory care >>>](https://www.rasmussen.edu/degrees/nursing/blog/what-is-ambulatory-care/)
 
-<p align="center"><img src="https://res.cloudinary.com/dave24hwj8/image/upload/v1552329523/Screen_Shot_2019-03-12_at_01.21.34.png"></p>
-
 ## Installation
 
 Ambulatory runs on any Laravel application, it uses a separate database connection and authentication system so that you don't have to modify any of your project code.
