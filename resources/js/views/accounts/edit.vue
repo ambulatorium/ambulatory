@@ -1,15 +1,16 @@
 <script type="text/ecmascript-6">
     import SettingTabs from './../../components/SettingTabs';
-    import AvatarUpload from './../../components/AvatarUpload';
+    import ImageInput from './../../components/ImageInput';
 
     export default {
         components: {
             'setting-tabs': SettingTabs,
-            'avatar-upload': AvatarUpload,
+            'image-input': ImageInput,
         },
 
         data() {
             return {
+                image: null,
                 ready: false,
                 formData: {},
                 formErrors: [],
@@ -36,6 +37,20 @@
                     this.formErrors = error.response.data.errors;
                 });
             },
+
+            loadImage(avatar) {
+                this.formData.avatar = avatar.src;
+
+                this.persist(avatar.file);
+            },
+
+            persist(avatar) {
+                let data = new FormData();
+
+                data.append('avatar', avatar);
+
+                this.image = data;
+            }
         }
     }
 </script>
@@ -57,8 +72,16 @@
         </div>
 
         <div class="card-body" v-if="ready && formData">
-            <form>
-                <avatar-upload v-model="formData.avatar"></avatar-upload>
+            <form @submit.prevent="updateAccount" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <div class="col-md-4 col-form-label text-md-right">
+                        <img height="50" width="50" class="align-self-center rounded-circle" :src="formData.avatar">
+                    </div>
+
+                    <image-input v-model="formData.avatar" @loaded="loadImage" class="mt-3"></image-input>
+
+                    <form-errors :errors="formErrors.avatar"></form-errors>
+                </div>
 
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label text-md-right font-weight-bold">Display name</label>
@@ -88,7 +111,7 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
-                        <a href="#" class="btn btn-primary font-weight-bold rounded-full" @click.prevent="updateAccount">Save</a>
+                        <button type="submit" class="btn btn-primary font-weight-bold rounded-full">Save</button>
                     </div>
                 </div>
             </form>

@@ -49,9 +49,9 @@
             </div>
         </div>
 
-        <label for="user_avatar" class="col-md-auto align-self-center uploadLabel font-weight-bold">Upload an avatar</label>
+        <label for="avatar" class="col-md-auto align-self-center uploadLabel font-weight-bold">Upload an avatar</label>
 
-        <input type="file" class="d-none" id="user_avatar" accept="image/*" @change="uploadSelectedImage">
+        <input type="file" class="d-none" id="avatar" accept="image/*" @change="uploadSelectedImage">
     </div>
 </template>
 
