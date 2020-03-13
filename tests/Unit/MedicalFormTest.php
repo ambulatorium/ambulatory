@@ -2,11 +2,11 @@
 
 namespace Ambulatory\Tests\Unit;
 
-use Ambulatory\User;
 use Ambulatory\MedicalForm;
 use Ambulatory\Tests\TestCase;
-use Illuminate\Support\Collection;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 
 class MedicalFormTest extends TestCase
 {

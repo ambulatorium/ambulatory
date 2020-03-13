@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Http\Controllers\Settings;
 
-use Ambulatory\Http\Resources\UserResource;
 use Ambulatory\Http\Requests\AccountRequest;
+use Ambulatory\Http\Resources\UserResource;
 
 class AccountController
 {

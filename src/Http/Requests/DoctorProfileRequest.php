@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Requests;
 
-use RRule\RRule;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use RRule\RRule;
 
 class DoctorProfileRequest extends FormRequest
 {

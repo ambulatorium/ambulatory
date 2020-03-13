@@ -2,10 +2,10 @@
 
 namespace Ambulatory;
 
-use RRule\RRule;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use RRule\RRule;
 
 class Doctor extends AmbulatoryModel
 {

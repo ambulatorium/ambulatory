@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\User;
 use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StaffListTest extends TestCase

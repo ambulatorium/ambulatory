@@ -2,10 +2,10 @@
 
 namespace Ambulatory;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider;
 use Ambulatory\Http\Middleware\Authenticate;
 use Ambulatory\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class AmbulatoryServiceProvider extends ServiceProvider
 {

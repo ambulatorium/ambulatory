@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Requests;
 
-use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 use Ambulatory\Rules\BookingAvailabilityRule;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BookAppointmentRequest extends FormRequest
 {

@@ -3,8 +3,8 @@
 namespace Ambulatory\Http\Requests;
 
 use Ambulatory\Schedule;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ScheduleRequest extends FormRequest
 {

@@ -3,10 +3,10 @@
 namespace Ambulatory\Console;
 
 use Ambulatory\User;
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class MigrateCommand extends Command
 {
@@ -42,11 +42,11 @@ class MigrateCommand extends Command
 
         if ($shouldCreateNewUser) {
             User::create([
-               'id'       => (string) Str::uuid(),
-               'name'     => 'John Doe',
-               'email'    => 'admin@mail.com',
-               'type'     => User::ADMIN,
-               'password' => Hash::make($password = Str::random()),
+                'id'       => (string) Str::uuid(),
+                'name'     => 'John Doe',
+                'email'    => 'admin@mail.com',
+                'type'     => User::ADMIN,
+                'password' => Hash::make($password = Str::random()),
             ]);
 
             $this->line('');

@@ -4,8 +4,8 @@ namespace Ambulatory\Tests\Unit;
 
 use Ambulatory\Specialization;
 use Ambulatory\Tests\TestCase;
-use Illuminate\Support\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 
 class SpecializationTest extends TestCase
 {

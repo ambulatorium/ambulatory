@@ -1,7 +1,7 @@
 <?php
 
-use Ambulatory\Schedule;
 use Ambulatory\Availability;
+use Ambulatory\Schedule;
 use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */

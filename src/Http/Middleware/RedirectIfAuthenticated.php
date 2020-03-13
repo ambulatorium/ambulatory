@@ -3,8 +3,8 @@
 namespace Ambulatory\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
 
 class RedirectIfAuthenticated
 {

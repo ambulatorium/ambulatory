@@ -2,12 +2,12 @@
 
 namespace Ambulatory;
 
-use Illuminate\Support\Facades\Gate;
-use Ambulatory\Policies\DoctorPolicy;
-use Ambulatory\Policies\MedicalFormPolicy;
 use Ambulatory\Policies\AvailabilityPolicy;
-use Illuminate\Http\Resources\Json\Resource;
+use Ambulatory\Policies\DoctorPolicy;
 use Ambulatory\Policies\DoctorSchedulePolicy;
+use Ambulatory\Policies\MedicalFormPolicy;
+use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Gate;
 
 class Ambulatory
 {

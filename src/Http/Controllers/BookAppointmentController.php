@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Schedule;
-use Ambulatory\Http\Resources\BookingResource;
 use Ambulatory\Http\Requests\BookAppointmentRequest;
+use Ambulatory\Http\Resources\BookingResource;
+use Ambulatory\Schedule;
 
 class BookAppointmentController extends Controller
 {

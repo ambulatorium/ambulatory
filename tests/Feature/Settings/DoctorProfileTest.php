@@ -2,11 +2,11 @@
 
 namespace Ambulatory\Tests\Feature\Settings;
 
-use Ambulatory\User;
 use Ambulatory\Doctor;
+use Ambulatory\Http\Resources\DoctorResource;
 use Ambulatory\Specialization;
 use Ambulatory\Tests\TestCase;
-use Ambulatory\Http\Resources\DoctorResource;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DoctorProfileTest extends TestCase
@@ -82,9 +82,9 @@ class DoctorProfileTest extends TestCase
         $doctor = factory(Doctor::class)->create();
 
         $this->patchJson(route('ambulatory.doctor-profile.update', $doctor->id), factory(Doctor::class)->raw([
-                'full_name' => 'Full Name Changed',
-                'specializations' => factory(Specialization::class, 1)->create(),
-            ]))
+            'full_name' => 'Full Name Changed',
+            'specializations' => factory(Specialization::class, 1)->create(),
+        ]))
             ->assertStatus(403)
             ->assertExactJson([
                 'message' => 'This action is unauthorized.',
@@ -97,9 +97,9 @@ class DoctorProfileTest extends TestCase
         $user = $this->signInAsDoctor();
 
         $this->patchJson(route('ambulatory.doctor-profile.update', $user->doctorProfile->id), factory(Doctor::class)->raw([
-                'full_name' => 'Full Name Changed',
-                'specializations' => factory(Specialization::class, 1)->create(),
-            ]))
+            'full_name' => 'Full Name Changed',
+            'specializations' => factory(Specialization::class, 1)->create(),
+        ]))
             ->assertOk();
 
         tap($user->doctorProfile->fresh(), function ($doctor) {

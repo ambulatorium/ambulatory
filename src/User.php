@@ -2,8 +2,8 @@
 
 namespace Ambulatory;
 
-use Illuminate\Support\Arr;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Arr;
 
 class User extends AmbulatoryModel implements Authenticatable
 {

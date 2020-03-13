@@ -1,8 +1,8 @@
 <?php
 
 use Ambulatory\Booking;
-use Ambulatory\Schedule;
 use Ambulatory\MedicalForm;
+use Ambulatory\Schedule;
 use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */

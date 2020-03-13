@@ -2,14 +2,14 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Carbon\Carbon;
-use Ambulatory\User;
+use Ambulatory\HealthFacility;
 use Ambulatory\Schedule;
+use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
+use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Ambulatory\HealthFacility;
-use Ambulatory\Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageScheduleTest extends TestCase
 {
@@ -107,8 +107,8 @@ class ManageScheduleTest extends TestCase
         $healthFacility = factory(HealthFacility::class)->raw(['id' => (string) Str::uuid()]);
 
         $this->postJson(route('ambulatory.schedules.store'), $attributes = $this->scheduleAttributes([
-                'health_facility' => $healthFacility,
-            ]))
+            'health_facility' => $healthFacility,
+        ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -148,8 +148,8 @@ class ManageScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         $this->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
-                'start_date' => today()->yesterday()->toDateString(),
-            ]))
+            'start_date' => today()->yesterday()->toDateString(),
+        ]))
             ->assertStatus(422)
             ->assertJsonValidationErrors('start_date')
             ->assertExactJson([
@@ -166,8 +166,8 @@ class ManageScheduleTest extends TestCase
         $this->signInAsDoctor();
 
         $this->postJson(route('ambulatory.schedules.store'), $this->scheduleAttributes([
-                'end_date' => today()->yesterday()->toDateString(),
-            ]))
+            'end_date' => today()->yesterday()->toDateString(),
+        ]))
             ->assertStatus(422)
             ->assertJsonValidationErrors('end_date')
             ->assertExactJson([

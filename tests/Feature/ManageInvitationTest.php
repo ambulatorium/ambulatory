@@ -2,13 +2,13 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\User;
 use Ambulatory\Invitation;
-use Ambulatory\Tests\TestCase;
 use Ambulatory\Mail\CredentialEmail;
 use Ambulatory\Mail\InvitationEmail;
-use Illuminate\Support\Facades\Mail;
+use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 
 class ManageInvitationTest extends TestCase
 {

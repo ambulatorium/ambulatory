@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Feature\Settings;
 
-use Ambulatory\User;
 use Ambulatory\Tests\TestCase;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateAccountTest extends TestCase
@@ -53,10 +53,10 @@ class UpdateAccountTest extends TestCase
         $user = $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account'), $attributes = [
-                'name' => 'name changed',
-                'email' => $user->email,
-                'avatar' => $user->avatar,
-            ])
+            'name' => 'name changed',
+            'email' => $user->email,
+            'avatar' => $user->avatar,
+        ])
             ->assertOk()
             ->assertJson([
                 'id' => $user->id,
@@ -73,8 +73,8 @@ class UpdateAccountTest extends TestCase
         $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
-                'email' => '',
-            ]))
+            'email' => '',
+        ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -90,8 +90,8 @@ class UpdateAccountTest extends TestCase
         $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
-                'name' => '',
-            ]))
+            'name' => '',
+        ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
@@ -107,8 +107,8 @@ class UpdateAccountTest extends TestCase
         $this->signInAsPatient();
 
         $this->patchJson(route('ambulatory.account'), factory(User::class)->raw([
-                'avatar' => '',
-            ]))
+            'avatar' => '',
+        ]))
             ->assertStatus(422)
             ->assertExactJson([
                 'errors' => [
