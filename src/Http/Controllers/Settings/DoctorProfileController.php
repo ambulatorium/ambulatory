@@ -3,11 +3,11 @@
 namespace Ambulatory\Http\Controllers\Settings;
 
 use Ambulatory\Doctor;
-use Ambulatory\Specialization;
 use Ambulatory\Http\Controllers\Controller;
-use Ambulatory\Http\Resources\DoctorResource;
-use Ambulatory\Http\Requests\DoctorProfileRequest;
 use Ambulatory\Http\Middleware\Doctor as AmbulatoryDoctor;
+use Ambulatory\Http\Requests\DoctorProfileRequest;
+use Ambulatory\Http\Resources\DoctorResource;
+use Ambulatory\Specialization;
 
 class DoctorProfileController extends Controller
 {

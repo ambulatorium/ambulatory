@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Tests\Unit;
 
-use Ambulatory\Schedule;
 use Ambulatory\Availability;
+use Ambulatory\Schedule;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

@@ -2,13 +2,13 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\Booking;
-use Ambulatory\Schedule;
-use Ambulatory\MedicalForm;
-use Illuminate\Support\Arr;
 use Ambulatory\Availability;
+use Ambulatory\Booking;
+use Ambulatory\MedicalForm;
+use Ambulatory\Schedule;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 
 class BookAppointmentTest extends TestCase
 {
@@ -42,9 +42,9 @@ class BookAppointmentTest extends TestCase
         // Request schedule availability time slots for monday next week.
         // expected the time slots available.
         $this->getJson(route('ambulatory.book.appointment', [
-                $schedule->id,
-                'date='.$date = today()->parse('Monday next week'),
-            ]))
+            $schedule->id,
+            'date='.$date = today()->parse('Monday next week'),
+        ]))
             ->assertOk()
             ->assertExactJson([
                 'data' => $schedule->availabilitySlots($date),
@@ -71,9 +71,9 @@ class BookAppointmentTest extends TestCase
         // Request schedule availability time slots for monday next week.
         // expected the time slots available.
         $this->getJson(route('ambulatory.book.appointment', [
-                $customAvailability->schedule->id,
-                'date='.$date = today()->parse('Monday next week'),
-            ]))
+            $customAvailability->schedule->id,
+            'date='.$date = today()->parse('Monday next week'),
+        ]))
             ->assertOk()
             ->assertExactJson([
                 'data' => $customAvailability->schedule->availabilitySlots($date),

@@ -2,10 +2,10 @@
 
 namespace Ambulatory\Tests\Feature\Settings;
 
-use Ambulatory\User;
 use Ambulatory\Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
+use Ambulatory\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 
 class NewPasswordTest extends TestCase
 {

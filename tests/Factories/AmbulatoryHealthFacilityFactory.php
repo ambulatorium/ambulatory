@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use Ambulatory\HealthFacility;
+use Faker\Generator as Faker;
 
 /* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(HealthFacility::class, function (Faker $faker) {

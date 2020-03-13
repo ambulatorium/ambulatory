@@ -2,8 +2,8 @@
 
 namespace Ambulatory\Rules;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class CurrentPassRule implements Rule
 {

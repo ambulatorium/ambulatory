@@ -2,9 +2,9 @@
 
 namespace Ambulatory\Http\Controllers\Settings;
 
-use Illuminate\Support\Facades\Hash;
 use Ambulatory\Http\Controllers\Controller;
 use Ambulatory\Http\Requests\NewPasswordRequest;
+use Illuminate\Support\Facades\Hash;
 
 class NewPasswordController extends Controller
 {

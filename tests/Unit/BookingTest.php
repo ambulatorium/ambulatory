@@ -3,8 +3,8 @@
 namespace Ambulatory\Tests\Unit;
 
 use Ambulatory\Booking;
-use Ambulatory\Schedule;
 use Ambulatory\MedicalForm;
+use Ambulatory\Schedule;
 use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

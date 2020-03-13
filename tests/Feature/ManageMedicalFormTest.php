@@ -2,11 +2,11 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Ambulatory\MedicalForm;
-use Illuminate\Support\Arr;
-use Ambulatory\Tests\TestCase;
 use Ambulatory\Http\Resources\MedicalFormResource;
+use Ambulatory\MedicalForm;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 
 class ManageMedicalFormTest extends TestCase
 {

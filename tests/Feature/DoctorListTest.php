@@ -3,10 +3,10 @@
 namespace Ambulatory\Tests\Feature;
 
 use Ambulatory\Doctor;
-use Illuminate\Support\Arr;
-use Ambulatory\Tests\TestCase;
 use Ambulatory\Http\Resources\DoctorResource;
+use Ambulatory\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 
 // @todo complete the resource test.
 class DoctorListTest extends TestCase

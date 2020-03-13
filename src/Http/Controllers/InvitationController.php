@@ -2,10 +2,10 @@
 
 namespace Ambulatory\Http\Controllers;
 
-use Ambulatory\Invitation;
 use Ambulatory\Http\Middleware\Admin;
 use Ambulatory\Http\Requests\InvitationRequest;
 use Ambulatory\Http\Resources\InvitationResource;
+use Ambulatory\Invitation;
 
 class InvitationController extends Controller
 {

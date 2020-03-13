@@ -2,12 +2,12 @@
 
 namespace Ambulatory\Tests\Feature;
 
-use Carbon\Carbon;
-use Ambulatory\Schedule;
-use Illuminate\Support\Arr;
 use Ambulatory\Availability;
+use Ambulatory\Schedule;
 use Ambulatory\Tests\TestCase;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 
 class ScheduleAvailabilityTest extends TestCase
 {
